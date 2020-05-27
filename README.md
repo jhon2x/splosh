@@ -17,8 +17,9 @@ Clone the project
  
 ```
 #!bash
-$ git clone git@bitbucket.org:acidgreen/splosh.git
+$ git clone git@github.com:jhon2x/splosh.git
 ```
+
  
 Install dependencies via composer
  
