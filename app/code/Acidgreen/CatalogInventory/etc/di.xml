@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\CatalogInventory\Model\StockStateProvider" type="Acidgreen\CatalogInventory\Model\StockStateProvider" />
+    <preference for="Magento\CatalogInventory\Model\Quote\Item\QuantityValidator" type="Acidgreen\CatalogInventory\Model\Quote\Item\QuantityValidator" />
+    <type name="Magento\Quote\Model\Quote">
+        <plugin name="Acidgreen_CatalogInventory::QuotePlugin" type="Acidgreen\CatalogInventory\Plugin\QuotePlugin" />
+    </type>
+    <type name="Magento\CatalogInventory\Model\Stock\Item">
+        <plugin name="Acidgreen_CatalogInventory::MinSaleQtyB2C" type="Acidgreen\CatalogInventory\Plugin\Item" />
+    </type>
+</config>

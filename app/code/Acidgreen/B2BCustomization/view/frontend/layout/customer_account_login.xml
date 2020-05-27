@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="form.additional.info">
+            <block class="Acidgreen\B2BCustomization\Block\Customer\Account\Login\Cookie" name="login_redirect_cookie" template="Acidgreen_B2BCustomization::login_redirect_cookie.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

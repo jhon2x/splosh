@@ -1,0 +1,17 @@
+& when (@media-common = true) {
+  .limiter {
+    display: none;
+    .products.wrapper .toolbar & {
+      display: none;
+    }
+    .control {
+      display: inline-block;
+    }
+  }
+
+  .sorter {
+    .products.wrapper ~ .toolbar & {
+      display: none;
+    }
+  }
+}

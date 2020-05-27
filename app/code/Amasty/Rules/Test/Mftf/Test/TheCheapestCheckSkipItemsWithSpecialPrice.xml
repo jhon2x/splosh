@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="TheCheapestCheckSkipItemsWithSpecialPrice">
+        <annotations>
+            <features value="Rule Creation"/>
+            <stories value="Create a Rule via the Admin"/>
+            <title value="The Cheapest Check Skip Items With Special Price"/>
+            <description value="The Cheapest Check Skip Items With Special Price"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="SP-MFTF-9"/>
+            <group value="Amasty"/>
+            <group value="Rules"/>
+            <group value="Rule"/>
+            <group value="Shipping"/>
+            <group value="SkipItemsWithSpecialPrice"/>
+        </annotations>
+
+        <before>
+            <!--Login as admin -->
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
+            <!--Open Product for input special price -->
+            <actionGroup ref="AdminFindAndOpenProduct" stepKey="OpenProductForSpecialPrice">
+                <argument name="products" value="_theBagWayfarerMessenger"/>
+            </actionGroup>
+            <actionGroup ref="AddSpecialPriceProduct" stepKey="AddSpecialPriceForProduct">
+                <argument name="cartRule" value="_theCheapestCheckSkipItemsWithSpecialPrice"/>
+            </actionGroup>
+            <actionGroup ref="SaveAfterChangeProduct" stepKey="SaveProductWithSpecialPrice"/>
+        </before>
+
+        <after>
+            <!--Open Product for return origin price -->
+            <actionGroup ref="AdminFindAndOpenProduct" stepKey="OpenProductForReturnPrice">
+                <argument name="products" value="_theBagWayfarerMessenger"/>
+            </actionGroup>
+            <actionGroup ref="ReturnOriginPriceProduct" stepKey="ReturnOriginPriceForProduct">
+                <argument name="cartRule" value="_theCheapestCheckSkipItemsWithSpecialPrice"/>
+            </actionGroup>
+            <actionGroup ref="SaveAfterChangeProduct" stepKey="SaveProductWithOriginPrice"/>
+            <!--Delete Rules -->
+            <actionGroup ref="DeleteAllCartRules" stepKey="DeleteAllRules1"/>
+            <amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>
+        </after>
+
+        <!--Create new Price Rule -->
+        <actionGroup ref="CreateCartRule" stepKey="CreateCartRule">
+            <argument name="actionsRule" value="_applyTheCheapestAlsoForBuy1Get1Free"/>
+            <argument name="cartRule" value="_theCheapestCheckSkipItemsWithSpecialPrice"/>
+        </actionGroup>
+
+        <!--Edit Rule-->
+        <actionGroup ref="OpenRuleForEdit" stepKey="OpenFirstCartRule">
+            <argument name="cartRule" value="_theCheapestCheckSkipItemsWithSpecialPrice"/>
+        </actionGroup>
+        <actionGroup ref="EditRuleSkipItemsWithSpecialPriceYes" stepKey="ActivateDiscardInFirstCartRule"/>
+        <actionGroup ref="SaveRuleAfterEdit" stepKey="SaveFirstCartRuleAfterChange"/>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddBagWithSpecialPrice">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagWayfarerMessenger"/>
+        </actionGroup>
+
+        <!--Check No discount-->
+        <actionGroup ref="CheckNoDiscountAmount" stepKey="CheckNoDiscountFromTheSecondRule">
+            <argument name="cartRule" value="_theCheapestCheckSkipItemsWithSpecialPrice"/>
+        </actionGroup>
+
+        <!--Delete Product from Cart-->
+        <actionGroup ref="DeleteProductFromTheCart" stepKey="DeleteBagWMFromCart">
+            <argument name="products" value="_theBagWayfarerMessenger"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddBagWithoutSpecialPrice">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+        </actionGroup>
+
+        <!--Check discount-->
+        <actionGroup ref="CheckDiscountAmount" stepKey="CheckDiscountOne">
+            <argument name="cartRule" value="_theCheapestCheckSkipItemsWithSpecialPrice"/>
+            <argument name="discountAmount" value="_theCheapestCheckSkipItemsWithSpecialPrice.discountAmountOne"/>
+        </actionGroup>
+
+        <!--Delete Product from Cart-->
+        <actionGroup ref="DeleteProductFromTheCart" stepKey="DeleteBagSSPFromCart">
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddBagWithSpecialPriceSecondTime">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagWayfarerMessenger"/>
+        </actionGroup>
+        <actionGroup ref="AddProductToCart" stepKey="AddBagWithoutSpecialPriceSecondTime">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+        </actionGroup>
+
+        <!--Check discount-->
+        <actionGroup ref="CheckDiscountAmount" stepKey="CheckDiscountTwo">
+            <argument name="cartRule" value="_theCheapestCheckSkipItemsWithSpecialPrice"/>
+            <argument name="discountAmount" value="_theCheapestCheckSkipItemsWithSpecialPrice.discountAmountOne"/>
+        </actionGroup>
+
+    </test>
+</tests>

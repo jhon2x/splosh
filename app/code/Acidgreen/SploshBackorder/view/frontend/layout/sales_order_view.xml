@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="additional.product.info" class="Acidgreen\SploshBackorder\Block\Product\Additional\Info"><!-- template="Acidgreen_SploshBackorder::order/items/additional/info.phtml">-->
+            <block class="Magento\Framework\View\Element\Template" name="backorder.product.info" template="Acidgreen_SploshBackorder::order/items/backorder/additional/info.phtml"/>
+        </referenceBlock>
+    </body>
+</page>

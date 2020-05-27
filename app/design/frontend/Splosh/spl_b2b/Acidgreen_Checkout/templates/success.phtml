@@ -1,0 +1,62 @@
+<?php
+/**
+ * Copyright © 2018 Splosh. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php /** @var $block \Acidgreen\Checkout\Block\Onepage\Success */ ?>
+<div class="checkout-success">
+    <?php if ($block->getOrderId()):?>
+        <?php if ($block->getCanViewOrder()) :?>
+            <p><?php echo __('Your order number is: %1.', sprintf('<a href="%s" class="order-number"><strong>%s</strong></a>', $block->escapeHtml($block->getViewOrderUrl()), $block->escapeHtml($block->getOrderId()))) ?></p>
+        <?php  else :?>
+            <p><?php echo __('Your order # is: <span>%1</span>.', $block->escapeHtml($block->getOrderId())) ?></p>
+        <?php endif;?>
+    <?php endif;?>
+
+    <?php echo $block->getAdditionalInfoHtml() ?>
+
+    <div class="actions-toolbar">
+        <div class="primary">
+            <a class="action primary continue" href="<?php /* @escapeNotVerified */ echo $block->getUrl() ?>"><span><?php /* @escapeNotVerified */ echo __('Continue Shopping') ?></span></a>
+        </div>
+    </div>
+</div>
+
+<!-- Checkout Optimise Tracking -->
+<script type="text/javascript">
+    var _fo = _fo || [];
+    _fo.push(["orderTotal","<?php echo $block->escapeHtml($block->getOrderGrandTotal()); ?>"]);
+    _fo.push(["orderId","<?php echo $block->escapeHtml($block->getOrderId()); ?>"]);
+</script>
+<script async="async" type="text/javascript" src="//cdn.feedoptimise.com/fo.js#876"></script>
+<!-- Checkout Optimise Tracking End -->
+
+<!-- SPL-454 -->
+<?php // $customerReviewsViewModel = $block->getData('view_model_customer_reviews'); ?>
+<?php if ($block->isCustomerReviewsEnabled()): ?>
+<script src="<?php echo $block->getApiUrl() ?>" async defer></script>
+<script>
+window.renderOptIn = function() {
+    window.gapi.load('surveyoptin', function() {
+        window.gapi.surveyoptin.render(
+        {
+            // REQUIRED FIELDS
+            "merchant_id": <?php echo $block->getMerchantId(); ?>,
+            "order_id": "<?php echo $block->getOrderId() ?>",
+            "email": "<?php echo $block->getEmail() ?>",
+            "delivery_country": "<?php echo $block->getDeliveryCountry() ?>",
+            "estimated_delivery_date": "<?php echo $block->getEstimatedDeliveryDate() ?>",
+
+            // OPTIONAL FIELDS
+            // "products": [{"gtin":"GTIN1"}, {"gtin":"GTIN2"}]
+            "products": <?php echo $block->getOrderProducts() ?>
+        });
+    });
+}
+</script>
+<?php endif; ?>
+<!-- SPL-454 End -->

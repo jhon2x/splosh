@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Sales\Block\Order\Email\Items" type="Acidgreen\SploshBackorder\Block\Order\Email\Items" />
+    <preference for="Magento\Sales\Block\Order\Email\Items\Order\DefaultOrder" type="Acidgreen\SploshBackorder\Block\Order\Email\Items\Order\DefaultOrder" />
+    <!-- SPL-232 -->
+    <preference for="Magento\Catalog\Block\Product\View\Type\Simple" type="Acidgreen\SploshBackorder\Block\Product\View\Type\Simple" />
+    <preference for="Magento\Sales\Block\Order\Items" type="Acidgreen\SploshBackorder\Block\Sales\Order\Items" />
+    <preference for="Magento\Sales\Block\Order\PrintShipment" type="Acidgreen\SploshBackorder\Block\Sales\Order\PrintShipment" />
+    <!--<preference for="Magento\Catalog\Block\Product\ListProduct" type="Acidgreen\SploshBackorder\Block\Product\ListProduct" />-->
+    <!--<preference for="Magento\CatalogSearch\Block\SearchResult\ListProduct" type="Acidgreen\SploshBackorder\Block\Product\ListProduct" />-->
+    <!-- SPL-285 -->
+    <preference for="Magento\Catalog\Model\Product" type="Acidgreen\SploshBackorder\Model\Catalog\Product" />
+
+    <!--<preference for="Magento\CatalogSearch\Model\Search\IndexBuilder" type="Acidgreen\SploshBackorder\Model\CatalogSearch\Search\IndexBuilder" />-->
+    <!--
+    <preference for="Magento\CatalogInventory\Model\Adminhtml\Stock\Item" type="Acidgreen\SploshBackorder\Model\CatalogInventory\Adminhtml\Stock\Item" />
+    -->
+
+	<virtualType name="Acidgreen\SploshBackorder\Model\ResourceModel\Stockzone\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">splosh_inventory_stockzone</argument>
+			<argument name="resourceModel" xsi:type="string">Acidgreen\SploshBackorder\Model\ResourceModel\Stockzone\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="stockzone_grid_data_source" xsi:type="string">Acidgreen\SploshBackorder\Model\ResourceModel\Stockzone\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+    <!-- SPL-232-->
+   <type name="Magento\Sales\Block\Order\Item\Renderer\DefaultRenderer">
+       <plugin name="Acidgreen_SploshBackorder::OrderItemRendererDefaultRendererPlugin" type="Acidgreen\SploshBackorder\Block\Plugin\Order\Item\Renderer\DefaultRenderer" />
+   </type>
+
+   <!-- SPL-285 -->
+   <type name="Magento\CatalogInventory\Api\Data\StockItemInterface">
+       <plugin name="Acidgreen_SploshBackorder::GetIsInStock" type="Acidgreen\SploshBackorder\Model\Plugin\CatalogInventory\Stock\Item" />
+   </type>
+   <type name="Magento\CatalogImportExport\Model\Import\Product\Type\Simple">
+       <plugin name="Acidgreen_SploshBackorder::ProductTypeSimpleClearEmptyData" type="Acidgreen\SploshBackorder\Model\Plugin\CatalogImportExport\Import\Product\Type\Simple" />
+   </type>
+   <!--<type name="Magento\Framework\Console\CommandList">-->
+       <!--<arguments>-->
+           <!--<argument name="commands" xsi:type="array">-->
+               <!--<item name="sploshbackorderSetForceBackorder" xsi:type="object">Acidgreen\SploshBackorder\Console\SetForceBackorder</item>-->
+               <!--<item name="sploshCronTest" xsi:type="object">Acidgreen\SploshBackorder\Console\CronTest</item>-->
+           <!--</argument>-->
+       <!--</arguments>-->
+   <!--</type>-->
+   <!-- SPL-372 -->
+   <type name="Magento\Catalog\Model\Product">
+       <plugin name="Acidgreen_SploshBackorder::populateDefaultScope" type="Acidgreen\SploshBackorder\Plugin\Model\Product" />
+   </type>
+
+    <!-- SPL-502 -->
+    <type name="\Magento\CatalogInventory\Helper\Stock">
+        <plugin name="b2b_backorder_stock" type="Acidgreen\SploshBackorder\Plugin\StockPlugin" />
+    </type>
+</config>

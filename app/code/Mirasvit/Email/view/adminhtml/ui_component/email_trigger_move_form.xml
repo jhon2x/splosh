@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">email_trigger_move_form.email_trigger_move_form_data_source</item>
+            <item name="deps" xsi:type="string">email_trigger_move_form.email_trigger_move_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">email_trigger_move_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="cancel" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Cancel</item>
+                <item name="sort_order" xsi:type="string">10</item>
+                <item name="on_click" xsi:type="string"/>
+                <item name="data_attribute" xsi:type="array">
+                    <item name="mage-init" xsi:type="array">
+                        <item name="buttonAdapter" xsi:type="array">
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">email_campaign_view.email_campaign_view.modals.trigger_move_edit_form_modal</item>
+                                    <item name="actionName" xsi:type="string">actionCancel</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </item>
+            <item name="copy" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Copy</item>
+                <item name="class" xsi:type="string">secondary</item>
+                <item name="on_click" xsi:type="string"/>
+                <item name="data_attribute" xsi:type="array">
+                    <item name="mage-init" xsi:type="array">
+                        <item name="buttonAdapter" xsi:type="array">
+                            <item name="actions" xsi:type="array">
+                                <item name="1" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">email_trigger_move_form.email_trigger_move_form</item>
+                                    <item name="actionName" xsi:type="string">save</item>
+                                    <item name="params" xsi:type="array">
+                                        <item name="0" xsi:type="boolean">true</item>
+                                        <item name="1" xsi:type="array">
+                                            <item name="move" xsi:type="number">0</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+                <item name="sort_order" xsi:type="string">2</item>
+            </item>
+            <item name="move" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Move</item>
+                <item name="class" xsi:type="string">action-default primary</item>
+                <item name="on_click" xsi:type="string"/>
+                <item name="sort_order" xsi:type="string">1</item>
+                <item name="data_attribute" xsi:type="array">
+                    <item name="mage-init" xsi:type="array">
+                        <item name="buttonAdapter" xsi:type="array">
+                            <item name="actions" xsi:type="array">
+                                <item name="1" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">email_trigger_move_form.email_trigger_move_form</item>
+                                    <item name="actionName" xsi:type="string">save</item>
+                                    <item name="params" xsi:type="array">
+                                        <item name="0" xsi:type="boolean">true</item>
+                                        <item name="1" xsi:type="array">
+                                            <item name="move" xsi:type="number">1</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </item>
+        </item>
+    </argument>
+
+    <dataSource name="email_trigger_move_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Mirasvit\Email\Ui\Trigger\Form\DataProvider</argument>
+            <argument name="name" xsi:type="string">email_trigger_move_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">trigger_id</argument>
+            <argument name="requestFieldName" xsi:type="string">trigger_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="email/trigger/move">
+                        <param name="_current">1</param>
+                        <!--<param name="move">1</param>-->
+                    </item>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" />
+                <item name="collapsible" xsi:type="boolean">false</item>
+                <item name="opened" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+
+        <field name="trigger_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">trigger_id</item>
+                    <item name="source" xsi:type="string">trigger</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="campaigns">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Mirasvit\Email\Model\ResourceModel\Campaign\Collection</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Campaign(s) to move the trigger to</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="showCheckbox" xsi:type="boolean">false</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="multiple" xsi:type="boolean">true</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

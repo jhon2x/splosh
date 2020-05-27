@@ -1,0 +1,20 @@
+<?php
+/**
+* DueDate render template
+* See \Acidgreen\Catalog\Block\Product\View\DueDate
+*/
+
+?>
+<?php 
+
+/** @var \Acidgreen\Catalog\Block\Product\View\DueDate $block */
+/** @var \Magento\Catalog\Model\Product $_product */
+$_product = $block->getProduct();
+
+?>
+
+<?php if ($block->showDueDate()): ?>
+<div class="product attribute due-date">
+    <span>Due Date: <?php echo $block->getDueDate() ?></span>
+</div>
+<?php endif; ?>

@@ -1,0 +1,26 @@
+title: Complementary offer
+description:
+store_ids:
+    - 0
+is_active: 0
+campaign_id: 4
+event: order_status|pending
+chain:
+    new_0:
+        template_id: 12
+        day: 0
+        hour: 0
+        minute: 30
+        cross_sells_enabled: 1
+        cross_sells_type_id: mage_cross
+    new_0:
+        template_id: 13
+        day: 5
+        hour: 0
+        minute: 0
+        cross_sells_enabled: 1
+        cross_sells_type_id: mage_related
+ga_source: "follow-up-email"
+ga_medium: email
+ga_name: complementary offer
+trigger_type: ''

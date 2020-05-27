@@ -1,0 +1,26 @@
+{
+  "name": "mageplaza/module-search",
+  "description": "Magento 2 Search extension",
+  "require": {
+    "mageplaza/module-core": ">=1.3.5"
+  },
+  "type": "magento2-module",
+  "version": "2.0.0",
+  "license": "Mageplaza License",
+  "authors": [
+    {
+      "name": "Mageplaza",
+      "email": "hi@mageplaza.com",
+      "homepage": "https://www.mageplaza.com",
+      "role": "Leader"
+    }
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Mageplaza\\Search\\": ""
+    }
+  }
+}

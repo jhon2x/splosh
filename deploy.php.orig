@@ -1,0 +1,29 @@
+<?php
+
+namespace Deployer;
+require_once __DIR__ . '/vendor/rafaelstz/deployer-magento2/deploy.php';
+
+// Project
+set('application', 'SPLOSH');
+set('repository', 'git@bitbucket.org:sploshAU/splosh.git');
+set('default_stage', 'staging');
+
+// Env Configurations
+set('bin/php', '/usr/bin/php70');
+set('php', '/usr/bin/php70');
+set('composer', '{{php}} {{release_path}}{{magento_dir}}composer.phar');
+
+// Project Configurations
+host('13.211.72.211')
+    ->hostname('13.211.72.211')
+    ->user('splosh')
+    ->port(22)
+    ->set('deploy_path', '~/public_html')
+    ->set('branch', 'develop')
+    ->set('verbose', '')
+    ->stage('staging')
+    ->roles('master')
+    // ->configFile('~/.ssh/config')
+    //->identityFile('/root/.ssh/id_rsa.pub')
+    ->addSshOption('UserKnownHostsFile', '/dev/null')
+    ->addSshOption('StrictHostKeyChecking', 'no');

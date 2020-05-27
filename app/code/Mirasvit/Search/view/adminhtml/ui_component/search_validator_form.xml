@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">search_validator_form.search_validator_form_data_source</item>
+            <item name="deps" xsi:type="string">search_validator_form.search_validator_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Validation tests</item>
+        <item name="layout" xsi:type="array">
+            <item name="type" xsi:type="string">tabs</item>
+            <item name="navContainerName" xsi:type="string">left</item>
+        </item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">search_validator_form</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="array">
+                <item name="name" xsi:type="string">back</item>
+                <item name="label" xsi:type="string" translate="true">Back</item>
+                <item name="class" xsi:type="string">back</item>
+                <item name="url" xsi:type="url" path="*/*/"/>
+            </item>
+        </item>
+    </argument>
+    
+    <dataSource name="search_validator_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Mirasvit\Search\Ui\Validator\DataProvider</argument>
+            <argument name="name" xsi:type="string">search_validator_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string">Base information</item>
+            </item>
+        </argument>
+
+        <field name="limit">
+            <argument name="data" xsi:type="array">
+               <item name="config" xsi:type="array">
+                   <item name="disabled" xsi:type="boolean">true</item>
+                   <item name="visible" xsi:type="boolean">true</item>
+                   <item name="dataType" xsi:type="string">text</item>
+                   <item name="formElement" xsi:type="string">input</item>
+                   <item name="label" xsi:type="string" translate="true">Regular search limit</item>
+               </item>
+            </argument>
+        </field>
+
+        <field name="engine">
+            <argument name="data" xsi:type="array">
+               <item name="config" xsi:type="array">
+                   <item name="disabled" xsi:type="boolean">true</item>
+                   <item name="visible" xsi:type="boolean">true</item>
+                   <item name="dataType" xsi:type="string">text</item>
+                   <item name="formElement" xsi:type="string">input</item>
+
+                   <item name="label" xsi:type="string" translate="true">Search engine</item>
+
+               </item>
+            </argument>
+        </field>
+
+    </fieldset>
+
+    <fieldset name="regular_speed">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string">Test Regular Search Speed</item>
+            </item>
+        </argument>
+        <container name="test_name">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Test Regular Search Speed</item>
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                </item>
+            </argument>
+
+            <field name="search_term">
+                <argument name="data" xsi:type="array">
+                   <item name="config" xsi:type="array">
+                       <item name="visible" xsi:type="boolean">true</item>
+                       <item name="dataType" xsi:type="string">text</item>
+                       <item name="formElement" xsi:type="string">input</item>
+                       <!-- <item name="source" xsi:type="string">customer</item> -->
+                       <item name="label" xsi:type="string" translate="true">Search term</item>
+                       <item name="parameter" xsi:type="string">q</item>
+                   </item>
+                </argument>
+            </field>
+
+            <field name="test_button">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="title" xsi:type="string"><![CDATA[Run Test]]></item>
+                            <item name="label" xsi:type="string"><![CDATA[Run Test]]></item>
+                            <item name="formElement" xsi:type="string">container</item>
+                            <item name="componentType" xsi:type="string">container</item>
+                            <item name="visible" xsi:type="boolean">true</item>
+                            <item name="component" xsi:type="string">Mirasvit_Search/js/form/element/button_validate</item>
+                            <item name="template" xsi:type="string">ui/form/components/button/container</item>
+                            <item name="displayArea" xsi:type="string">insideGroup</item>
+                            <item name="additionalClasses" xsi:type="string">admin__field-small</item>
+                            <item name="additionalForGroup" xsi:type="boolean">true</item>
+                            <item name="sourceNames" xsi:type="array">
+                                <item name="sourceName" xsi:type="string">search_validator_form.areas.regular_speed.regular_speed.test_name.search_term</item>
+                            </item>
+                            <item name="bindTo" xsi:type="string">regular_speed</item>
+                            <item name="testUrl" xsi:type="url" path="*/*/validateSearchSpeed"/>
+                            <item name="tooltip" xsi:type="array">
+                                <item name="description" xsi:type="string" translate="true">Test</item>
+                            </item>
+                             <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">search_validator_form.areas.regular_speed.regular_speed.test_name.test_button</item>
+                                    <item name="actionName" xsi:type="string">runTest</item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+            </field>
+        </container>
+    </fieldset>
+
+    <fieldset name="autocomplete_speed">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string">Test Autocomplete Search Speed</item>
+            </item>
+        </argument>
+
+         <container name="autocomplete_speed_container">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Test Autocomplete Search Speed</item>
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                </item>
+            </argument>
+
+            <field name="search_term">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="label" xsi:type="string" translate="true">Search term</item>
+                        <item name="parameter" xsi:type="string">q</item>
+                    </item>
+                </argument>
+            </field>
+
+            <field name="test_button">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="title" xsi:type="string"><![CDATA[Run Test]]></item>
+                            <item name="label" xsi:type="string"><![CDATA[Run Test]]></item>
+                            <item name="formElement" xsi:type="string">container</item>
+                            <item name="componentType" xsi:type="string">container</item>
+                            <item name="visible" xsi:type="boolean">true</item>
+                            <item name="component" xsi:type="string">Mirasvit_Search/js/form/element/button_validate</item>
+                            <item name="template" xsi:type="string">ui/form/components/button/container</item>
+                            <item name="displayArea" xsi:type="string">insideGroup</item>
+                            <item name="additionalClasses" xsi:type="string">admin__field-small</item>
+                            <item name="additionalForGroup" xsi:type="boolean">true</item>
+                            <item name="sourceNames" xsi:type="array">
+                                <item name="sourceName" xsi:type="string">search_validator_form.areas.autocomplete_speed.autocomplete_speed.autocomplete_speed_container.search_term</item>
+                            </item>
+                            <item name="bindTo" xsi:type="string">autocomplete_speed</item>
+                            <item name="testUrl" xsi:type="url" path="*/*/validateAutocompleteSpeed"/>
+                            <item name="tooltip" xsi:type="array">
+                                <item name="description" xsi:type="string" translate="true">Test autocomplete speed</item>
+                            </item>
+
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">search_validator_form.areas.autocomplete_speed.autocomplete_speed.autocomplete_speed_container.test_button</item>
+                                    <item name="actionName" xsi:type="string">runTest</item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+            </field>
+        </container>
+    </fieldset>
+
+    <fieldset name="results">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string">Validate Search Results</item>
+            </item>
+        </argument>
+
+        <field name="search_term">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string" translate="true">Search term</item>
+                    <item name="parameter" xsi:type="string">q</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="product_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string" translate="true">Product ID</item>
+                    <item name="parameter" xsi:type="string">product_id</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="product_exist">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="title" xsi:type="string"><![CDATA[Validate search results]]></item>
+                            <item name="label" xsi:type="string"><![CDATA[Validate search results]]></item>
+                            <item name="formElement" xsi:type="string">container</item>
+                            <item name="componentType" xsi:type="string">container</item>
+                            <item name="visible" xsi:type="boolean">true</item>
+                            <item name="component" xsi:type="string">Mirasvit_Search/js/form/element/button_validate</item>
+                            <item name="template" xsi:type="string">ui/form/components/button/container</item>
+                            <item name="displayArea" xsi:type="string">insideGroup</item>
+                            <!-- <item name="additionalClasses" xsi:type="string">admin__field-small</item> -->
+                            <item name="additionalForGroup" xsi:type="boolean">true</item>
+                            <item name="sourceNames" xsi:type="array">
+                                <item name="searchTerm" xsi:type="string">search_validator_form.areas.results.results.search_term</item>
+                                <item name="productId" xsi:type="string">search_validator_form.areas.results.results.product_id</item>
+                            </item>
+                            <item name="bindTo" xsi:type="string">results</item>
+                            <item name="testUrl" xsi:type="url" path="*/*/validateSearchResults"/>
+                            <item name="tooltip" xsi:type="array">
+                                <item name="description" xsi:type="string" translate="true">Validate search results</item>
+                            </item>
+
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">search_validator_form.areas.results.results.product_exist</item>
+                                    <item name="actionName" xsi:type="string">runTest</item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+            </field>
+
+            <field name="describe_weighting">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="title" xsi:type="string"><![CDATA[Describe search results weighting]]></item>
+                            <item name="label" xsi:type="string"><![CDATA[Describe search results weighting]]></item>
+                            <item name="formElement" xsi:type="string">container</item>
+                            <item name="componentType" xsi:type="string">container</item>
+                            <item name="visible" xsi:type="boolean">true</item>
+                            <item name="component" xsi:type="string">Mirasvit_Search/js/form/element/button_validate</item>
+                            <item name="template" xsi:type="string">ui/form/components/button/container</item>
+                            <item name="displayArea" xsi:type="string">insideGroup</item>
+                            <item name="additionalForGroup" xsi:type="boolean">true</item>
+                            <item name="sourceNames" xsi:type="array">
+                                <item name="searchTerm" xsi:type="string">search_validator_form.areas.results.results.search_term</item>
+                                <item name="productId" xsi:type="string">search_validator_form.areas.results.results.product_id</item>
+                            </item>
+                            <item name="bindTo" xsi:type="string">results</item>
+                            <item name="testUrl" xsi:type="url" path="*/*/validateSearchWeighting"/>
+                            <item name="tooltip" xsi:type="array">
+                                <item name="description" xsi:type="string" translate="true">Test autocomplete speed</item>
+                            </item>
+
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">search_validator_form.areas.results.results.describe_weighting</item>
+                                    <item name="actionName" xsi:type="string">runTest</item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+            </field>
+    </fieldset>
+
+</form>

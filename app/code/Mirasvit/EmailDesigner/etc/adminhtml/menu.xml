@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Mirasvit_EmailDesigner::email_designer" module="Mirasvit_EmailDesigner"
+             resource="Mirasvit_EmailDesigner::email_designer" title="Email Designer" parent="Magento_Backend::marketing"
+             sortOrder="110"/>
+
+        <add id="Mirasvit_EmailDesigner::email_designer_theme" title="Manage Themes"
+             module="Mirasvit_EmailDesigner" sortOrder="10" action="email_designer/theme/index"
+             resource="Mirasvit_EmailDesigner::email_designer_theme" parent="Mirasvit_EmailDesigner::email_designer"/>
+
+        <add id="Mirasvit_EmailDesigner::email_designer_template" title="Manage Templates"
+             module="Mirasvit_EmailDesigner" sortOrder="20" action="email_designer/template/index"
+             resource="Mirasvit_EmailDesigner::email_designer_template" parent="Mirasvit_EmailDesigner::email_designer"/>
+    </menu>
+</config>

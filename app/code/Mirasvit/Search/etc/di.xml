@@ -1,0 +1,384 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Mirasvit\Search\Api\Data\IndexInterface" type="Mirasvit\Search\Model\Index"/>
+    <preference for="Mirasvit\Search\Api\Data\StopwordInterface" type="Mirasvit\Search\Model\Stopword"/>
+    <preference for="Mirasvit\Search\Api\Data\SynonymInterface" type="Mirasvit\Search\Model\Synonym"/>
+    <preference for="Mirasvit\Search\Api\Data\ScoreRuleInterface" type="Mirasvit\Search\Model\ScoreRule"/>
+
+    <preference for="Mirasvit\Search\Api\Repository\IndexRepositoryInterface" type="Mirasvit\Search\Repository\IndexRepository"/>
+    <preference for="Mirasvit\Search\Api\Repository\StopwordRepositoryInterface" type="Mirasvit\Search\Repository\StopwordRepository"/>
+    <preference for="Mirasvit\Search\Api\Repository\SynonymRepositoryInterface" type="Mirasvit\Search\Repository\SynonymRepository"/>
+    <preference for="Mirasvit\Search\Api\Repository\ScoreRuleRepositoryInterface" type="Mirasvit\Search\Repository\ScoreRuleRepository"/>
+
+    <preference for="Mirasvit\Search\Api\Service\IndexServiceInterface" type="Mirasvit\Search\Service\IndexService"/>
+    <preference for="Mirasvit\Search\Api\Service\QueryServiceInterface" type="Mirasvit\Search\Service\QueryService"/>
+    <preference for="Mirasvit\Search\Api\Service\StopwordServiceInterface" type="Mirasvit\Search\Service\StopwordService"/>
+    <preference for="Mirasvit\Search\Api\Service\SynonymServiceInterface" type="Mirasvit\Search\Service\SynonymService"/>
+    <preference for="Mirasvit\Search\Api\Service\StemmingServiceInterface" type="Mirasvit\Search\Service\StemmingService"/>
+    <preference for="Mirasvit\Search\Api\Service\CloudServiceInterface" type="Mirasvit\Search\Service\CloudService"/>
+    <preference for="Magento\Framework\Search\Request\IndexScopeResolverInterface" type="Magento\Framework\Indexer\ScopeResolver\IndexScopeResolver" />
+    <preference for="TemplateMonster\AjaxCatalog\Plugin\CatalogSearch\Result"
+        type="Mirasvit\Search\Preference\TemplateMonster\AjaxCatalog\Plugin\CatalogSearch\Result" />
+    <preference for="TemplateMonster\AjaxCatalog\Helper\Catalog\View\ContentAjaxResponse"
+        type="Mirasvit\Search\Preference\TemplateMonster\AjaxCatalog\Helper\Catalog\View\ContentAjaxResponse"/>
+
+    <preference for="Manadev\ProductCollection\Resources\Filters\SearchFilterResource" 
+        type="Mirasvit\Search\Plugin\Manadev\ProductCollection\Contracts\FilterResource\ApplyPlugin"/>
+    <!-- register default data mapper for indexation -->
+    <type name="Mirasvit\Search\Api\Data\Index\InstanceInterface">
+        <arguments>
+            <argument name="dataMappers" xsi:type="array">
+                <item name="1default" xsi:type="object">Mirasvit\Search\Model\Index\DataMapper</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Mirasvit\Search\Index\Magento\Catalog\Product\Index">
+        <arguments>
+            <argument name="dataMappers" xsi:type="array">
+                <item name="0product" xsi:type="object">Mirasvit\Search\Index\Magento\Catalog\Product\DataMapper</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Mirasvit\Search\Index\Magento\Cms\Page\Index">
+        <arguments>
+            <argument name="dataMappers" xsi:type="array">
+                <item name="0page" xsi:type="object">Mirasvit\Search\Index\Magento\Cms\Page\DataMapper</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Mirasvit\Search\Index\Aheadworks\Blog\Post\Index">
+        <arguments>
+            <argument name="dataMappers" xsi:type="array">
+                <item name="0post" xsi:type="object">Mirasvit\Search\Index\Aheadworks\Blog\Post\DataMapper</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Mirasvit\Search\Api\Repository\IndexRepositoryInterface">
+        <arguments>
+            <argument name="indices" xsi:type="array">
+                <item name="magento_catalog_product" xsi:type="string">Mirasvit\Search\Index\Magento\Catalog\Product\Index</item>
+                <item name="magento_catalog_category" xsi:type="string">Mirasvit\Search\Index\Magento\Catalog\Category\Index</item>
+                <item name="magento_cms_page" xsi:type="string">Mirasvit\Search\Index\Magento\Cms\Page\Index</item>
+                <item name="external_wordpress_post" xsi:type="string">Mirasvit\Search\Index\External\Wordpress\Post\Index</item>
+                <item name="mirasvit_blog_post" xsi:type="string">Mirasvit\Search\Index\Mirasvit\Blog\Post\Index</item>
+                <item name="mirasvit_kb_article" xsi:type="string">Mirasvit\Search\Index\Mirasvit\Kb\Article\Index</item>
+                <item name="mirasvit_gry_registry" xsi:type="string">Mirasvit\Search\Index\Mirasvit\Gry\Registry\Index</item>
+                <item name="magefan_blog_post" xsi:type="string">Mirasvit\Search\Index\Magefan\Blog\Post\Index</item>
+                <item name="aheadworks_blog_post" xsi:type="string">Mirasvit\Search\Index\Aheadworks\Blog\Post\Index</item>
+                <item name="mageplaza_blog_post" xsi:type="string">Mirasvit\Search\Index\Mageplaza\Blog\Post\Index</item>
+                <item name="ves_blog_post" xsi:type="string">Mirasvit\Search\Index\Ves\Blog\Post\Index</item>
+                <item name="ves_brand_brand" xsi:type="string">Mirasvit\Search\Index\Ves\Brand\Brand\Index</item>
+                <item name="magento_catalog_attribute" xsi:type="string">Mirasvit\Search\Index\Magento\Catalog\Attribute\Index</item>
+                <item name="amasty_faq_question" xsi:type="string">Mirasvit\Search\Index\Amasty\Faq\Question\Index</item>
+                <item name="amasty_blog_post" xsi:type="string">Mirasvit\Search\Index\Amasty\Blog\Post\Index</item>
+                <item name="blackbird_contentmanager_content" xsi:type="string">Mirasvit\Search\Index\Blackbird\ContentManager\Content\Index</item>
+                <item name="fishpig_glossary_word" xsi:type="string">Mirasvit\Search\Index\Fishpig\Glossary\Word\Index</item>
+            </argument>
+        </arguments>
+
+        <plugin name="mstSearchSyncWeights" type="Mirasvit\Search\Index\Magento\Catalog\Product\WeightSynchronizationPlugin"/>
+    </type>
+
+    <type name="Magento\Framework\Search\Adapter\Mysql\TemporaryStorage">
+        <plugin name="mstSearchScoreRule" type="Mirasvit\Search\Index\Magento\Catalog\Product\ScoreRulePlugin"/>
+    </type>
+
+    <type name="Magento\Framework\Search\SearchEngineInterface">
+        <plugin name="emptySearchQueryPlugin" type="Mirasvit\Search\Plugin\EmptySearchQueryPlugin"/>
+    </type>
+
+    <!--Compatibility-->
+    <type name="Mageplaza\LayeredNavigation\Controller\Search\Result\Index">
+        <plugin name="mstMageplazaSearchResultIndex" type="Mirasvit\Search\Plugin\Mageplaza\LayeredNavigation\Controller\Search\Result\IndexPlugin"/>
+    </type>
+
+    <type name="Manadev\LayeredNavigationAjax\Blocks\Intercept">
+        <plugin name="mstManadevBlocksIntercept" type="Mirasvit\Search\Plugin\Manadev\LayeredNavigationAjax\Blocks\InterceptPlugin"/>
+    </type>
+
+    <!--register index providers for NATIVE magento mysql search-->
+    <!--Extension can work without SearchMysql, SearchSphinx, SearchElastic-->
+    <type name="Magento\Framework\Search\Adapter\Mysql\Mapper">
+        <arguments>
+            <argument name="indexProviders" xsi:type="array">
+                <item name="magento_catalog_category" xsi:type="object">Mirasvit\Search\Model\Adapter\Mapper\IndexBuilder</item>
+                <item name="magento_cms_page" xsi:type="object">Mirasvit\Search\Model\Adapter\Mapper\IndexBuilder</item>
+                <item name="external_wordpress_post" xsi:type="object">Mirasvit\Search\Model\Adapter\Mapper\IndexBuilder</item>
+                <item name="mirasvit_blog_post" xsi:type="object">Mirasvit\Search\Model\Adapter\Mapper\IndexBuilder</item>
+                <item name="mirasvit_kb_article" xsi:type="object">Mirasvit\Search\Model\Adapter\Mapper\IndexBuilder</item>
+                <item name="mirasvit_gry_registry" xsi:type="object">Mirasvit\Search\Model\Adapter\Mapper\IndexBuilder</item>
+                <item name="magefan_blog_post" xsi:type="object">Mirasvit\Search\Model\Adapter\Mapper\IndexBuilder</item>
+                <item name="aheadworks_blog_post" xsi:type="object">Mirasvit\Search\Model\Adapter\Mapper\IndexBuilder</item>
+                <item name="mageplaza_blog_post" xsi:type="object">Mirasvit\Search\Model\Adapter\Mapper\IndexBuilder</item>
+                <item name="ves_blog_post" xsi:type="object">Mirasvit\Search\Model\Adapter\Mapper\IndexBuilder</item>
+                <item name="ves_brand_brand" xsi:type="object">Mirasvit\Search\Model\Adapter\Mapper\IndexBuilder</item>
+                <item name="magento_catalog_attribute" xsi:type="object">Mirasvit\Search\Model\Adapter\Mapper\IndexBuilder</item>
+                <item name="amasty_faq_question" xsi:type="object">Mirasvit\Search\Model\Adapter\Mapper\IndexBuilder</item>
+                <item name="amasty_blog_post" xsi:type="object">Mirasvit\Search\Model\Adapter\Mapper\IndexBuilder</item>
+                <item name="blackbird_contentmanager_content" xsi:type="object">Mirasvit\Search\Model\Adapter\Mapper\IndexBuilder</item>
+                <item name="fishpig_glossary_word" xsi:type="object">Mirasvit\Search\Model\Adapter\Mapper\IndexBuilder</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--registering data providers for NATIVE magento mysql search-->
+    <type name="Magento\Framework\Search\Adapter\Mysql\Aggregation\DataProviderContainer">
+        <arguments>
+            <argument name="dataProviders" xsi:type="array">
+                <item name="magento_catalog_category" xsi:type="object">Mirasvit\Search\Model\Adapter\Aggregation\DataProvider</item>
+                <item name="magento_cms_page" xsi:type="object">Mirasvit\Search\Model\Adapter\Aggregation\DataProvider</item>
+                <item name="external_wordpress_post" xsi:type="object">Mirasvit\Search\Model\Adapter\Aggregation\DataProvider</item>
+                <item name="mirasvit_blog_post" xsi:type="object">Mirasvit\Search\Model\Adapter\Aggregation\DataProvider</item>
+                <item name="mirasvit_kb_article" xsi:type="object">Mirasvit\Search\Model\Adapter\Aggregation\DataProvider</item>
+                <item name="mirasvit_gry_registry" xsi:type="object">Mirasvit\Search\Model\Adapter\Aggregation\DataProvider</item>
+                <item name="magefan_blog_post" xsi:type="object">Mirasvit\Search\Model\Adapter\Aggregation\DataProvider</item>
+                <item name="aheadworks_blog_post" xsi:type="object">Mirasvit\Search\Model\Adapter\Aggregation\DataProvider</item>
+                <item name="mageplaza_blog_post" xsi:type="object">Mirasvit\Search\Model\Adapter\Aggregation\DataProvider</item>
+                <item name="ves_blog_post" xsi:type="object">Mirasvit\Search\Model\Adapter\Aggregation\DataProvider</item>
+                <item name="ves_brand_brand" xsi:type="object">Mirasvit\Search\Model\Adapter\Aggregation\DataProvider</item>
+                <item name="magento_catalog_attribute" xsi:type="object">Mirasvit\Search\Model\Adapter\Aggregation\DataProvider</item>
+                <item name="amasty_faq_question" xsi:type="object">Mirasvit\Search\Model\Adapter\Aggregation\DataProvider</item>
+                <item name="amasty_blog_post" xsi:type="object">Mirasvit\Search\Model\Adapter\Aggregation\DataProvider</item>
+                <item name="blackbird_contentmanager_content" xsi:type="object">Mirasvit\Search\Model\Adapter\Aggregation\DataProvider</item>
+                <item name="fishpig_glossary_word" xsi:type="object">Mirasvit\Search\Model\Adapter\Aggregation\DataProvider</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--Read adapter/engine from our config-->
+    <type name="Magento\Search\Model\AdapterFactory">
+        <arguments>
+            <argument name="path" xsi:type="const">Mirasvit\Search\Model\Config::CONFIG_ENGINE_PATH</argument>
+            <argument name="scopeType" xsi:type="const">Magento\Store\Model\ScopeInterface::SCOPE_STORE</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Search\Model\EngineResolver">
+        <arguments>
+            <argument name="path" xsi:type="const">Mirasvit\Search\Model\Config::CONFIG_ENGINE_PATH</argument>
+            <argument name="scopeType" xsi:type="const">Magento\Store\Model\ScopeInterface::SCOPE_STORE</argument>
+        </arguments>
+    </type>
+    <type name="Magento\CatalogSearch\Model\Indexer\IndexerHandlerFactory">
+        <arguments>
+            <argument name="configPath" xsi:type="const">Mirasvit\Search\Model\Config::CONFIG_ENGINE_PATH</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\CatalogSearch\Model\ResourceModel\EngineProvider">
+        <plugin name="mstSearchSyncEngine" type="Mirasvit\Search\Plugin\SyncEngineConfigPlugin"/>
+    </type>
+
+    <!--register requests for all search indices-->
+    <type name="Magento\Framework\Search\Request\Config\FilesystemReader">
+        <plugin name="mstSearchSearchIndices" type="Mirasvit\Search\Plugin\RequestConfigPlugin"/>
+    </type>
+
+    <!--register console commands-->
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="mstSearchSynonym" xsi:type="object">Mirasvit\Search\Console\Command\SynonymCommand</item>
+                <item name="mstSearchStopword" xsi:type="object">Mirasvit\Search\Console\Command\StopwordCommand</item>
+                <item name="mstSearchReindex" xsi:type="object">Mirasvit\Search\Console\Command\ReindexCommand</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--register inflects -->
+    <type name="Mirasvit\Search\Api\Service\StemmingServiceInterface">
+        <arguments>
+            <argument name="stemmers" xsi:type="array">
+                <item name="en" xsi:type="object">Mirasvit\Search\Service\Stemming\En</item>
+                <item name="nl" xsi:type="object">Mirasvit\Search\Service\Stemming\Nl</item>
+                <item name="ru" xsi:type="object">Mirasvit\Search\Service\Stemming\Ru</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- register indices provider for autocomplete -->
+    <type name="Mirasvit\SearchAutocomplete\Api\Repository\IndexRepositoryInterface">
+        <arguments>
+            <argument name="additionalProviders" xsi:type="array">
+                <item name="provider" xsi:type="object">Mirasvit\Search\Model\AutocompleteProvider</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--after full reindex-->
+    <type name="Magento\CatalogSearch\Model\Indexer\Fulltext">
+        <plugin name="mstSearchFullReindex" type="Mirasvit\Search\Plugin\FullReindexPlugin"/>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Mirasvit\Search\Api\Data\IndexInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\Search\Api\Data\IndexInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\Search\Api\Data\IndexInterface::ID</item>
+                </item>
+                <item name="Mirasvit\Search\Api\Data\ScoreRuleInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\Search\Api\Data\ScoreRuleInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\Search\Api\Data\ScoreRuleInterface::ID</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Mirasvit\Search\Api\Data\IndexInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Mirasvit\Search\Api\Data\ScoreRuleInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--UI-->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="search_index_listing_data_source" xsi:type="string">Mirasvit\Search\Model\ResourceModel\Index\Grid</item>
+                <item name="search_stopword_listing_data_source" xsi:type="string">Mirasvit\Search\Model\ResourceModel\Stopword\Grid</item>
+                <item name="search_synonym_listing_data_source" xsi:type="string">Mirasvit\Search\Model\ResourceModel\Synonym\Grid</item>
+                <item name="search_scorerule_listing_data_source" xsi:type="string">Mirasvit\Search\Model\ResourceModel\ScoreRule\Grid</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Mirasvit\Core\Api\Service\ValidationServiceInterface">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="search" xsi:type="object">Mirasvit\Search\Service\ValidationService</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\App\DeploymentConfig\Writer">
+        <plugin name="mstSearchModuleStatus" type="Mirasvit\Search\Plugin\ModuleStatusPlugin"/>
+    </type>
+
+    <type name="Magento\CatalogSearch\Model\Indexer\Fulltext\Action\DataProvider">
+        <plugin name="mstSearchIndexer" type="Mirasvit\Search\Plugin\SearchIndexerPlugin"/>
+    </type>
+
+    <!-- Score Rule Indexation -->
+    <type name="Magento\Catalog\Model\ResourceModel\Product">
+        <plugin name="mstSearchScoreRuleProduct" type="Mirasvit\Search\Model\ScoreRule\Indexer\Plugin\ProductPlugin"/>
+    </type>
+
+    <type name="Magento\Catalog\Model\Product\Action">
+        <plugin name="mstSearchScoreRuleMassAction" type="Mirasvit\Search\Model\ScoreRule\Indexer\Plugin\ProductActionPlugin"/>
+    </type>
+
+    <type name="Magento\CatalogSearch\Model\Search\ItemCollectionProvider">
+        <arguments>
+            <argument name="factories" xsi:type="array">
+                <item name="mysql" xsi:type="object">Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Elasticsearch\Model\Layer\Category\ItemCollectionProvider">
+        <arguments>
+            <argument name="factories" xsi:type="array">
+                <item name="mysql" xsi:type="object">Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="mst_LayerSearchItemCollectionProvider" type="Magento\Elasticsearch\Model\Layer\Search\ItemCollectionProvider">
+        <arguments>
+            <argument name="factories" xsi:type="array">
+                <item name="mysql" xsi:type="object">Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="mst_LayerCategoryItemCollectionProvider" type="Magento\Elasticsearch\Model\Layer\Category\ItemCollectionProvider">
+        <arguments>
+            <argument name="factories" xsi:type="array">
+                <item name="mysql" xsi:type="object">Magento\CatalogSearch\Model\ResourceModel\Fulltext\CollectionFactory</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="mst_SearchCriteriaResolverFactory" type="Mirasvit\Search\Model\ResourceModel\Fulltext\Collection\SearchCriteriaResolverFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Mirasvit\Search\Model\ResourceModel\Fulltext\Collection\SearchCriteriaResolver</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="mst_SearchResultApplier\Factory" type="Mirasvit\Search\Model\ResourceModel\Fulltext\Collection\SearchResultApplierFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Mirasvit\Search\Model\ResourceModel\Fulltext\Collection\SearchResultApplier</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="mst_TotalRecordsResolver\Factory" type="Mirasvit\Search\Model\ResourceModel\Fulltext\Collection\TotalRecordsResolverFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Mirasvit\Search\Model\ResourceModel\Fulltext\Collection\TotalRecordsResolver</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="mst_FulltextSearchCollectionFactory" type="Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">mst_FulltextSearchCollection</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="mst_FulltextSearchCollection" type="Magento\CatalogSearch\Model\ResourceModel\Fulltext\Collection">
+        <arguments>
+            <argument name="searchRequestName" xsi:type="string">quick_search_container</argument>
+            <argument name="searchCriteriaResolverFactory" xsi:type="object">mst_SearchCriteriaResolverFactory</argument>
+            <argument name="searchResultApplierFactory" xsi:type="object">mst_SearchResultApplier\Factory</argument>
+            <argument name="totalRecordsResolverFactory" xsi:type="object">mst_TotalRecordsResolver\Factory</argument>
+            <argument name="defaultFilterStrategyApplyChecker" xsi:type="object">Magento\Elasticsearch\Model\ResourceModel\Fulltext\Collection\DefaultFilterStrategyApplyChecker</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="mst_CategoryCollection" type="Magento\CatalogSearch\Model\ResourceModel\Fulltext\Collection">
+        <arguments>
+            <argument name="searchRequestName" xsi:type="string">catalog_view_container</argument>
+            <argument name="searchCriteriaResolverFactory" xsi:type="object">mst_SearchCriteriaResolverFactory</argument>
+            <argument name="searchResultApplierFactory" xsi:type="object">mst_SearchResultApplier\Factory</argument>
+            <argument name="totalRecordsResolverFactory" xsi:type="object">mst_TotalRecordsResolver\Factory</argument>
+            <argument name="defaultFilterStrategyApplyChecker" xsi:type="object">Magento\Elasticsearch\Model\ResourceModel\Fulltext\Collection\DefaultFilterStrategyApplyChecker</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="mst_CategoryCollectionFactory" type="Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">mst_CategoryCollection</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magento\CatalogSearch\Model\Advanced\ItemCollectionProvider" type="Magento\Catalog\Model\Layer\Search\ItemCollectionProvider">
+        <arguments>
+            <argument name="collectionFactory" xsi:type="object">Magento\CatalogSearch\Model\ResourceModel\Advanced\CollectionFactory</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magento\CatalogSearch\Model\ResourceModel\Advanced\CollectionFactory" 
+        type="Magento\Catalog\Model\ResourceModel\Product\CollectionFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Magento\CatalogSearch\Model\ResourceModel\Advanced\Collection</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\CatalogSearch\Model\Advanced">
+        <arguments>
+            <argument name="productCollectionFactory" xsi:type="object">Magento\CatalogSearch\Model\ResourceModel\Advanced\CollectionFactory</argument>
+            <argument name="collectionProvider" xsi:type="object">Magento\CatalogSearch\Model\Search\ItemCollectionProviderInterface</argument>
+        </arguments>
+    </type>
+    <type name="Magento\CatalogSearch\Model\Search\ItemCollectionProvider">
+        <arguments>
+            <argument name="factories" xsi:type="array">
+                <item name="mysql" xsi:type="object">Magento\CatalogSearch\Model\ResourceModel\Advanced\CollectionFactory</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\CatalogSearch\Model\Advanced\ProductCollectionPrepareStrategyProvider">
+        <arguments>
+            <argument name="strategies" xsi:type="array">
+                <item name="mysql" xsi:type="object">Magento\CatalogSearch\Model\Advanced\ProductCollectionPrepareStrategy</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,14 @@
+diff --git a/app/code/Afterpay/Afterpay/Block/Catalog/Installments.php b/app/code/Afterpay/Afterpay/Block/Catalog/Installments.php
+index 6935535..c16dffa 100644
+--- a/app/code/Afterpay/Afterpay/Block/Catalog/Installments.php
++++ b/app/code/Afterpay/Afterpay/Block/Catalog/Installments.php
+@@ -64,7 +64,8 @@ class Installments extends Template
+         $product = $this->registry->registry('product');
+
+         // set if final price is exist
+-        if ($price = $product->getFinalPrice()) {
++        // if ($price = $product->getFinalPrice()) {
++        if ($price = $product->getPriceInfo()->getPrice('final_price')->getAmount()->getValue()) {
+             return $this->currency->getCurrencySymbol() . number_format($price / 4, 2);
+         }
+     }

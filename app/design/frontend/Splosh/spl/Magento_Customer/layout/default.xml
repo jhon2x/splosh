@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <move element="register-link" destination="top.links" after="authorization-link"/>
+        <referenceBlock name="wish-list-link" remove="true" />
+        <referenceBlock name="multiple-wish-list-link" remove="true" />
+        <move element="authorization-link" destination="top.links" after="my-account-link"/>
+        <referenceBlock name="top.links">
+            <block class="Acidgreen\Customer\Block\Account\ContextWiseLink" name="stockist-login" template="Magento_Customer::account/stockist-login-link.phtml" after="authorization-link">
+                <arguments>
+                    <argument name="label" xsi:type="string">Stockist Login</argument>
+                    <argument name="path" xsi:type="string">customer/account/login</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,338 @@
+05/07/2019 - 2.0.7.27
+- Improved theme auto updating
+
+22/06/2019 - 2.0.7.24
+- Cleaned up asset injector
+
+18/06/2019 - 2.0.7.23
+- Improved Factory to check class exists before creating.
+
+07/06/2019 - 2.0.7.22
+- Updated WordPress FishPig theme to 3.0.0.6
+
+05/06/2019 - 2.0.7.20
+- Removed wpautop if content has blocks
+
+03/06/2019 - 2.0.7.19
+- Removed multiple jQuery Migrate instances
+- Added redirect for URLs containing is_front/1
+
+01/05/2019 - 2.0.7.18
+- Added call to getMetaAndLinkTags in the AssetInjector. This allows for bringing across HrefLang tags when using Shortcodes & Widgets
+
+25/04/2019 - 2.0.7.17
+- Improved Front URLs
+
+25/04/2019 - 2.0.7.16
+- Fixed issue with JS minification was enabled
+
+25/04/2019 - 2.0.7.15
+- Improved post preview functionality
+
+24/04/2019 - 2.0.7.14
+- Added fix for WPBakery when page/post is empty.
+
+16/04/2019 - 2.0.7.12
+- Modified inline JS in asset injector. This has been moved to an external file.
+
+16/04/2019 - 2.0.7.11
+- Modified path resolution for relative paths so that BP/pub/$path is checked before BP/$path.
+
+09/04/2019 - 2.0.7.10
+- Added Homepage::getRealHomepageUrl
+
+09/04/2019 - 2.0.7.9
+- Fixed some broken images.
+
+08/04/2019 - 2.0.7.8
+- WordPress theme update that fixed missing sidebar widgets.
+
+04/04/2019 - 2.0.7.6
+- Fix for RSS feeds
+
+03/04/2019 - 2.0.7.5
+- Multiple small code fixes raised in testing
+- Modified preview functionality to fix issues under certain conditions
+
+02/04/2019 - 2.0.7.3
+- Updated WordPress theme.
+
+27/03/2019 - 2.0.7.0
+- Updated WordPress theme.
+
+27/03/2019 - 2.0.6.14
+- Fix for FishPig\WordPress\Model\Taxonomy::getPostTermsCollection
+
+26/03/2019 - 2.0.6.12
+- Fixed issue that caused URLs to invalid users
+
+26/03/2019 - 2.0.6.11
+- Fixed issue that caused async scripts to break when Magento Minify is enabled
+
+15/03/2019 - 2.0.6.8
+- Updated WP Theme to work with File Scanner in Magento 2.1.
+
+12/03/2019 - 2.0.6.7
+- Fixed issue that caused the post used for to display blog posts to display its content at the top of the page, above the posts.
+
+11/03/2019 - 2.0.6.6
+- Updated Gravatar URL to use https.
+
+08/03/2019 - 2.0.6.5
+- Stopped moving script tags that don't have a type or content but have data attributes.
+
+08/03/2019 - 2.0.6.4
+- Fixed issue with JS files that don't have .js in the filename.
+
+08/03/2019 - 2.0.6.3
+- Cleaned up attachment models to prevent duplicate name issues
+
+07/03/2019 - 2.0.6.2
+- Fixed issue with XML sitemap that causes invalid items to sometimes be included.
+
+06/03/2019 - 2.0.6.1
+- Fixed small bug that caused excerpts to not be shown if the excerpt contained white space.
+
+04/03/2019 - 2.0.5.17
+- Updated WordPress theme.
+
+28/02/2019 - 2.0.5.16
+- Added \FishPig\WordPress\Block\Sidebar\Widget\AbstractWidget::getWidgetId method
+
+21/02/2019 - 2.0.5.14
+- Added code to listen to enabled flag
+
+21/02/2019 - 2.0.5.12
+- Added integration check for Multisite in WordPress but not in Magento.
+
+20/02/2019 - 2.0.5.11
+- Remove duplicate assets from asset injector. This fixes bug with Divi Page Builder plugin but probably also fixes other issues, especially with page builders.
+
+15/02/2019 - 2.0.5.10
+- Fixed issue in category widget template
+
+12/02/2019 - 2.0.5.8
+- Fixed issue that caused fatal PHP error when viewing a private post.
+
+03/02/2019 - 2.0.5.7
+- Asset Injector improvements. JS templates are no longer lost.
+
+01/02/2019 - 2.0.5.6
+- Fixed issue with FPC flushing.
+
+30/01/2019 - 2.0.5.5
+- Fixed issue with FPC flushing.
+
+28/01/2019 - 2.0.5.4
+- FishPig casing fixes.
+
+26/01/2019 - 2.0.5.3
+- Added add-on module version list in config
+
+25/01/2019 - 2.0.5.2
+- Added support for FishPig_WordPress_IntegratedSearch
+
+21/01/2019 - 2.0.5.1
+- Merged bexdoggett's fix for homepage model method names. 
+
+17/01/2019 - 2.0.5.0
+- Added full support for FishPig_WordPress_RelatedProducts (https://fishpig.co.uk/magento/wordpress-integration/related-products/)
+
+17/01/2019 - 2.0.4.19
+- Changed theme installation and upgrade process to use DI to generate theme source modules. This is preparation for FishPig_WordPress_RelatedProducts
+
+16/01/2019 - 2.0.4.18
+- Improved AssetInjector.
+
+14/01/2019 - 2.0.4.15
+- Improved error display in Admin
+
+11/01/2019 - 2.0.4.14
+- Fixed issue with URL's XML sitemap.
+
+10/01/2019 - 2.0.4.12
+- Fixed breadcrumbs when page is third level or more.
+
+07/01/2019 - 2.0.4.11
+- Fixed issue that caused widgets to stop displaying.
+
+03/01/2018 - 2.0.4.10
+- Improved REST API URL generation.
+
+03/01/2018 - 2.0.4.9
+- Fixed XML Sitemap generation error.
+
+03/01/2018 - 2.0.4.8
+- Small modification to widget manager that fixes an issue with WordPress widgets that register names containing numbers
+
+03/01/2018 - 2.0.4.7
+- Improved theme update detection system.
+- Added Template option for all post types. Previously was only available for pages.
+
+18/12/2018 - 2.0.4.3
+- Fix for calendar widget
+
+29/11/2018 - 2.0.4.0
+- Added another translation fix to work with Magento 2.2.7 and above when installing using composer
+
+29/11/2018 - 2.0.3.2
+Added Shortcode block so you can use:  {{block class="FishPig\WordPress\Block\Shortcode" shortcode="[someshortcode id=\"123\"]}}
+
+29/11/2018 - 2.0.3.1
+- Modified Post List Wrapper block name in layout XML to make it easier to modify layouts (new block name is wp.postlist.wrapper for each wrapper block).
+
+12/11/2018 - 2.0.2.5
+- Improved Asset Injector JS
+
+10/11/2018 - 2.0.2.4
+- Added support for the custom HTML widget.
+
+05/11/2018 - 2.0.2.2
+- Small modification to FishPig WordPress theme.
+
+31/10/2018 - 2.0.2.1
+- Fixed issue with empty breadcrumb for custom post types
+
+27/10/2018 - 2.0.2.0
+- Fixed 404 issue
+
+25/10/2018 - 2.0.1.22
+- Performance improvement.
+- Added PHP 7.2 support
+
+15/10/2018 - 2.0.1.19
+- Added throwing object to var/log/wordpress.log context array
+
+04/10/2018 - 2.0.1.15
+- Fixed issue with previews
+
+03/10/2018 - 2.0.1.14
+- Improved Elementor support, especially when using Root. Ensure you have define('COOKIEPATH', '/'); in your wp-config.php file.
+
+03/10/2018 - 2.0.1.11
+- Fixed fatal PHP error that occurs when using the Custom Sidebars plugin.
+
+02/10/2018 - 2.0.1.10
+- Fixed path issue when using different paths for different stores.
+
+29/09/2018 - 2.0.1.9
+- Removed ScopeConfigInterface for Pager constructor as this is already available via the Context object
+
+14/09/2018 - 2.0.1.4
+- Improved Term URL generation.
+
+13/09/2018 - 2.0.1.0
+- Added translation fix to registration.php
+
+12/09/2018 - 2.0.0.15
+- Removed M1 references
+
+11/09/2018 - 2.0.0.14
+- Removed comments.js
+
+11/09/2018 - 2.0.0.12
+- Fixed issue with image URLs.
+
+08/09/2018 - 2.0.0.9
+- Added support for the WPBakery Page Builder Frontend Editor.
+
+07/08/2018 - 2.0.0.7
+- Added Ignore Store Code option. When enabled, the blog is delivered without the Magento store code in the URL. This is useful if you have store codes and want a single blog from the root (eg. store A = /uk/ and store B = /us/ and you want a blog at /blog/).
+
+07/08/2018 - 2.0.0.5
+- Small bug fixes from version 2.0.0.0's release.
+
+06/09/2018 - 2.0.0.0
+- Version 2.0 released. This is pretty much a complete rewrite of the inner workings of the module, although most of the top level methods and functionality will remain the same. The module should run more efficiently now and be easier to take forward and enhance with new features and optimisations.
+
+02/09/2018 - 1.3.0.32
+- Improved Asset Injection JS
+
+29/08/2018 - 1.3.0.30
+- Used Magento Pagination settings for frame length.
+
+13/08/2018 - 1.3.0.29
+- Fixed JS define issue.
+
+06/08/2018 - 1.3.0.28
+- Improved hierarchical term breadcrumbs.
+
+03/08/2018 - 1.3.0.27
+- Backwards compatibility changes for Zend_Db. 
+
+02/08/2018 - 1.3.0.25
+- Improved NextGEN Gallery support
+
+23/07/2018 - 1.3.0.24
+- Updated WP theme to stop incorrect redirects.
+
+27/06/2018 - 1.3.0.22
+- Improved Asset Injector's doc ready replacement system.
+
+21/06/2018 - 1.3.0.21
+- Fixed FishPig\WordPress\Model\User::getRole
+
+20/06/2018 - 1.3.0.20
+- Stopped theme validation from running when theme integration is disabled.
+
+19/06/2018 - 1.3.0.19
+- Fixed issue that stopped More tag from working.
+
+19/06/2018 - 1.3.0.18
+- Added option to disable Theme Integration.
+
+01/06/2018 - 1.3.0.15
+- Added exception printing for module exceptions. This should help diagnose integration errors quicker.
+
+30/05/2018 - 1.3.0.14
+- Added session messages for successful comments and for comments awaiting moderation
+
+03/04/2018 - 1.3.0.3
+- Added improved search functionality.
+
+01/03/2018 - 1.2.2.10
+- Added fix for using page as WordPress homepage
+- Added Blog breadcrumb when using /blog/ in permalink structure.
+
+22/01/2018 - 1.2.2.3
+- Added fix for limiting search to specific post types (<input type="hidden" name="post_type[]" value="your_post_type"/>)
+
+17/01/2018 - 1.2.2.2
+- Any custom post types that don't have exclude_from_search=1 will be included in the search.
+
+04/01/2018 - 1.2.1.0
+- Improved AssetInjector to fix issue around jQuery document event types. This fixes issues with Visual Composer
+
+06/12/2017 - 1.2.0.28
+- Fixed issue that stopped post content being converted to HTML.
+- Created WordPress code directory to store WP code files required by integration.
+
+26/10/2017 - 1.2.0.19
+- Fixed issue that stopped search, archive and homepage from displaying posts
+
+25/10/2017 - 1.2.0.18
+- Added XML sitemap fix so that it works with Magento 2.2 and below.
+
+23/10/2017 - 1.2.0.17
+- Fixed issue that stopped the 'layout' attribute in some layout XML files from working.
+
+23/10/2017 - 1.2.0.16
+- Added basic support for Magento XML sitemap
+
+20/10/2017 - 1.2.0.15
+- Added support for more page templates
+
+18/10/2017 - 1.2.0.12
+- Added module version number to configuration area.
+
+12/10/2017 - 1.2.0.10
+- Added support for Yoast SEO template tags: %%page%%, %%pagenumber%% and %%pagetotal%%
+
+11/10/2017 - 1.2.0.9
+- Added support for the custom sidebars plugin
+
+04/10/2017 - 1.2.0.7
+- Fixed issue with Magento 2.1.9 and lower
+
+01/10/2017 - 1.2.0.2
+- Modified asset injection to work with FPC

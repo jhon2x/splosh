@@ -1,0 +1,167 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Mirasvit\Core\Block\Adminhtml\Menu">
+        <arguments>
+            <argument name="menu" xsi:type="array">
+                <item name="email" xsi:type="object">Mirasvit\Email\Block\Adminhtml\Menu</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Mirasvit\Email\Ui\Campaign\Listing\ModifierPool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="email" xsi:type="array">
+                    <item name="class" xsi:type="string">Mirasvit\Email\Ui\Campaign\Modifier\CampaignModifier</item>
+                    <item name="sortOrder" xsi:type="number">1</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Mirasvit\Email\Ui\Campaign\Listing\DataProvider">
+        <arguments>
+            <argument name="modifierPool" xsi:type="object">Mirasvit\Email\Ui\Campaign\Listing\ModifierPool</argument>
+        </arguments>
+    </type>
+
+
+    <type name="Mirasvit\Email\Ui\Campaign\View\DataProvider">
+        <arguments>
+            <argument name="modifierPool" xsi:type="object">Mirasvit\Email\Ui\Campaign\Listing\ModifierPool</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Mirasvit\Email\Ui\Campaign\Modifier\CampaignModifierPool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="email" xsi:type="array">
+                    <item name="class" xsi:type="string">Mirasvit\Email\Ui\Campaign\Modifier\TriggerModifier</item>
+                    <item name="sortOrder" xsi:type="number">1</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Mirasvit\Email\Ui\Campaign\Modifier\CampaignModifier">
+        <arguments>
+            <argument name="modifierPool" xsi:type="object">Mirasvit\Email\Ui\Campaign\Modifier\CampaignModifierPool</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Mirasvit\Email\Ui\Campaign\Modifier\TriggerModifierPool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="email" xsi:type="array">
+                    <item name="class" xsi:type="string">Mirasvit\Email\Ui\Campaign\Modifier\ChainModifier</item>
+                    <item name="sortOrder" xsi:type="number">1</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Mirasvit\Email\Ui\Campaign\Modifier\TriggerModifier">
+        <arguments>
+            <argument name="modifierPool" xsi:type="object">Mirasvit\Email\Ui\Campaign\Modifier\TriggerModifierPool</argument>
+        </arguments>
+    </type>
+
+
+    <!--<virtualType name="Mirasvit\Email\Ui\Campaign\Modifiers\TriggerDataModifier" type="Magento\Ui\DataProvider\Modifier\Pool">-->
+        <!--<arguments>-->
+            <!--<argument name="modifiers" xsi:type="array">-->
+                <!--<item name="modifier_stub" xsi:type="array">-->
+                    <!--<item name="class" xsi:type="string">Mirasvit\Email\Ui\DataProvider\Modifier</item>-->
+                    <!--<item name="sortOrder" xsi:type="number">1</item>-->
+                <!--</item>-->
+            <!--</argument>-->
+        <!--</arguments>-->
+    <!--</virtualType>-->
+
+    <!--<virtualType name="Mirasvit\Email\Ui\Trigger\Modifiers\DataModifier" type="Magento\Ui\DataProvider\Modifier\Pool">-->
+        <!--<arguments>-->
+            <!--<argument name="modifiers" xsi:type="array">-->
+                <!--<item name="pending_queue_counter" xsi:type="array">-->
+                    <!--<item name="class" xsi:type="string">Mirasvit\Email\Ui\Campaign\View\Email\Modifier</item>-->
+                    <!--<item name="sortOrder" xsi:type="number">10</item>-->
+                <!--</item>-->
+            <!--</argument>-->
+        <!--</arguments>-->
+    <!--</virtualType>-->
+
+    <!--<virtualType name="Mirasvit\Email\Ui\Modifiers\ChainDataModifier" type="Magento\Ui\DataProvider\Modifier\Pool">-->
+        <!--<arguments>-->
+            <!--<argument name="modifiers" xsi:type="array">-->
+                <!--<item name="pending_queue_counter" xsi:type="array">-->
+                    <!--<item name="class" xsi:type="string">Mirasvit\Email\Ui\Campaign\View\Email\Modifier</item>-->
+                    <!--<item name="sortOrder" xsi:type="number">10</item>-->
+                <!--</item>-->
+            <!--</argument>-->
+        <!--</arguments>-->
+    <!--</virtualType>-->
+
+
+
+
+    <!--START Campaign View-->
+    <!--<virtualType name="Mirasvit\Email\Ui\Campaign\View\ModifierPool" type="Magento\Ui\DataProvider\Modifier\Pool">-->
+        <!--<arguments>-->
+            <!--<argument name="modifiers" xsi:type="array">-->
+                <!--<item name="email" xsi:type="array">-->
+                    <!--<item name="class" xsi:type="string">Mirasvit\Email\Ui\Campaign\View\Modifier\ExtraDataModifier</item>-->
+                    <!--<item name="sortOrder" xsi:type="number">1</item>-->
+                <!--</item>-->
+            <!--</argument>-->
+        <!--</arguments>-->
+    <!--</virtualType>-->
+
+    <!--<type name="Mirasvit\Email\Ui\Campaign\View\DataProvider">-->
+        <!--<arguments>-->
+            <!--<argument name="modifiers" xsi:type="object">Mirasvit\Email\Ui\Campaign\View\ModifierPool</argument>-->
+        <!--</arguments>-->
+    <!--</type>-->
+    <!--END Campaign View-->
+
+
+
+
+
+    <!--<type name="Mirasvit\Email\Ui\Trigger\Form\DataProvider">-->
+        <!--<arguments>-->
+            <!--<argument name="modifiers" xsi:type="object">Mirasvit\Email\Ui\Trigger\Modifiers\DataModifier</argument>-->
+        <!--</arguments>-->
+    <!--</type>-->
+
+    <!--&lt;!&ndash;<type name="Mirasvit\Email\Ui\Campaign\Listing\DataProvider\Modifier">&ndash;&gt;-->
+        <!--&lt;!&ndash;<arguments>&ndash;&gt;-->
+            <!--&lt;!&ndash;<argument name="modifiers" xsi:type="object">Mirasvit\Email\Ui\Campaign\Modifiers\TriggerDataModifier</argument>&ndash;&gt;-->
+        <!--&lt;!&ndash;</arguments>&ndash;&gt;-->
+    <!--&lt;!&ndash;</type>&ndash;&gt;-->
+
+    <!--<type name="Mirasvit\Email\Ui\Campaign\View\Email\ChainDataProvider">-->
+        <!--<arguments>-->
+            <!--<argument name="modifiers" xsi:type="object">Mirasvit\Email\Ui\Modifiers\ChainDataModifier</argument>-->
+        <!--</arguments>-->
+    <!--</type>-->
+
+    <!--<type name="Mirasvit\Email\Ui\Campaign\View\DataProvider\Modifier">-->
+        <!--<arguments>-->
+            <!--<argument name="modifiers" xsi:type="object">Mirasvit\Email\Ui\Campaign\Modifiers\TriggerDataModifier</argument>-->
+        <!--</arguments>-->
+    <!--</type>-->
+
+
+
+    <!--<virtualType name="Mirasvit\Email\Ui\Modifiers\CampaignViewModifier" type="Magento\Ui\DataProvider\Modifier\Pool">-->
+        <!--<arguments>-->
+            <!--<argument name="modifiers" xsi:type="array">-->
+                <!--<item name="modifier_stub" xsi:type="array">-->
+                    <!--<item name="class" xsi:type="string">Mirasvit\Email\Ui\Campaign\View\DataProvider\Modifier</item>-->
+                    <!--<item name="sortOrder" xsi:type="number">1</item>-->
+                <!--</item>-->
+            <!--</argument>-->
+        <!--</arguments>-->
+    <!--</virtualType>-->
+    <!--<type name="Mirasvit\Email\Ui\Campaign\View\DataProvider">-->
+        <!--<arguments>-->
+            <!--<argument name="modifiers" xsi:type="object">Mirasvit\Email\Ui\Modifiers\CampaignViewModifier</argument>-->
+        <!--</arguments>-->
+    <!--</type>-->
+
+</config>

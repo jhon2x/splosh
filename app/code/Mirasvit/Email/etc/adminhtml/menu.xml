@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Mirasvit_Email::email" title="Follow Up Email" module="Mirasvit_Email" sortOrder="100"
+             resource="Mirasvit_Email::email" parent="Magento_Backend::marketing"/>
+
+        <add id="Mirasvit_Email::campaign" title="Manage Campaigns" module="Mirasvit_Email" sortOrder="10"
+             action="email/campaign/index" resource="Mirasvit_Email::campaign"
+             parent="Mirasvit_Email::email"/>
+
+        <add id="Mirasvit_Email::email_email_queue" title="Mail Log (Queue)" module="Mirasvit_Email" sortOrder="20"
+             action="email/queue/index" resource="Mirasvit_Email::queue" parent="Mirasvit_Email::email"/>
+
+        <add id="Mirasvit_Email::event" title="Event Log" module="Mirasvit_Email"
+             sortOrder="30" action="email/event/index" resource="Mirasvit_Email::event"
+             parent="Mirasvit_Email::email"/>
+
+        <add id="Mirasvit_Email::email_email_system_email_settings" title="Settings" module="Mirasvit_Email"
+             sortOrder="40" action="adminhtml/system_config/edit/section/email"
+             resource="Mirasvit_Email::settings" parent="Mirasvit_Email::email"/>
+    </menu>
+</config>

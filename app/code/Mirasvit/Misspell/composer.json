@@ -1,0 +1,22 @@
+{
+  "name": "mirasvit/module-misspell",
+  "description": "Search Spell Correction",
+  "require": {
+    "ext-mbstring": "*",
+    "magento/framework": "~100.0.0|~100.1.0|~100.2.0|101.0.*|102.0.*",
+    "mirasvit/module-core": "dev-master|>=1.2.75"
+  },
+  "type": "magento2-module",
+  "version": "1.0.32",
+  "license": [
+    "proprietary"
+  ],
+  "autoload": {
+    "files": [
+      "src/Misspell/registration.php"
+    ],
+    "psr-4": {
+      "Mirasvit\\Misspell\\": "src/Misspell"
+    }
+  }
+}

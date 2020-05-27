@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <type name="Mirasvit\Search\Block\Result">
+        <plugin name="mstSearchHighlight" type="Mirasvit\Search\Plugin\HighlightPlugin"/>
+        <plugin name="mstSearchSingleResult" type="Mirasvit\Search\Plugin\SingleResultPlugin"/>
+    </type>
+
+    <type name="Magento\Framework\App\Response\HttpInterface">
+        <plugin name="mstSearchNoRoute" type="Mirasvit\Search\Plugin\NoRoutePlugin"/>
+    </type>
+</config>

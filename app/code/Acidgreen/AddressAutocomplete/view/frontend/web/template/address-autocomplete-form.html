@@ -1,0 +1,28 @@
+<div>
+    <form id="address-autocomplete-form" class="form" data-bind="attr: {'data-hasrequired': $t('* Required Fields')}, submit: preventSubmit">
+        <fieldset class="fieldset">
+        	<a href="#" data-bind="i18n: 'Clear',click: clearField" class="clearer">Clear</a>
+            <legend data-bind="i18n: 'Address:'" class="form-legend" style="display: none;"></legend>
+            <!-- ko foreach: getRegion('address-autocomplete-form-fields') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </fieldset>
+    	<!-- address labels -->
+	    <div id="address-label" class="shipping-address-item" style="display: none;">
+	    	<div class="address-label-content">
+		    	<p id="label-street"></p>
+		    	<p id="label-city"></p>
+		    	<p id="label-region"></p>
+		    	<p id="label-postcode"></p>
+		    	<p id="label-country_id"></p>
+	    	</div>
+		    <button type="button" data-bind="click: switchToForm" class="action action-edit-address" title="Edit Address">
+		        <span data-bind="i18n: 'Edit'">Edit</span>
+		    </button>
+	    </div>
+
+	    <button type="button" data-bind="click: switchToForm" class="action action-manual-address" title="Enter Address Manually">
+	        <span data-bind="i18n: 'Enter Address Manually'">Enter Address Manually</span>
+	    </button>
+    </form>
+</div>

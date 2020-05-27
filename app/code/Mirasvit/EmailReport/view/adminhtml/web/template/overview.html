@@ -1,0 +1,56 @@
+<div class="mst-email-report__overview">
+    <h1 data-bind="text: title"/>
+    <div class="rates">
+
+        <div class="value fa-send">
+            <h3 translate="'Sent'"/>
+            <strong text="report.emailCount"/>
+            <i class="arrow fa fa-arrow-circle-right"></i>
+        </div>
+
+        <div class="value fa-envelope-open">
+            <h3 translate="'Opened'"/>
+            <strong text="report.openCount"/>
+            <i class="arrow fa fa-arrow-circle-right"></i>
+        </div>
+
+        <div class="value fa-mouse-pointer">
+            <h3 translate="'Clicked'"/>
+            <strong text="report.clickCount"/>
+        </div>
+
+        <div class="value fa-shopping-cart">
+            <h3 translate="'Orders'"/>
+            <strong text="report.orderCount"/>
+        </div>
+
+        <div class="value fa-comment">
+            <h3 translate="'Reviews'"/>
+            <strong text="report.reviewCount"/>
+        </div>
+
+        <div class="value _revenue fa-check">
+            <h3 translate="'Revenue'"/>
+            <strong text="report.amountSum"/>
+        </div>
+    </div>
+
+    <div class="conversations">
+        <div class="value rate">
+            <h3 data-bind="i18n: 'Open Rate'"></h3>
+            <strong data-bind="text: report.openRate"></strong>
+        </div>
+        <div class="value rate">
+            <h3 data-bind="i18n: 'Click Rate'"></h3>
+            <strong data-bind="text: report.clickRate"></strong>
+        </div>
+        <div class="value rate">
+            <h3 data-bind="i18n: 'Order Rate'"></h3>
+            <strong data-bind="text: report.orderRate"></strong>
+        </div>
+        <div class="value rate">
+            <h3 data-bind="i18n: 'Review Rate'"></h3>
+            <strong data-bind="text: report.reviewRate"></strong>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+diff --git a/vendor/magento/module-visual-merchandiser/Model/Category/Products.php b/vendor/magento/module-visual-merchandiser/Model/Category/Products.php
+index e0a512ccc9..2a08101955 100644
+--- a/vendor/magento/module-visual-merchandiser/Model/Category/Products.php
++++ b/vendor/magento/module-visual-merchandiser/Model/Category/Products.php
+@@ -164,7 +164,7 @@ class Products
+ 
+         $select->reset(\Magento\Framework\DB\Select::LIMIT_COUNT);
+         $select->reset(\Magento\Framework\DB\Select::LIMIT_OFFSET);
+-        $select->columns('e.' . $collection->getEntity()->getIdFieldName());
++        $this->prependColumn($select, $collection->getEntity()->getIdFieldName());
+ 
+         $positions = array_flip($collection->getConnection()->fetchCol($select));
+ 
+@@ -172,6 +172,22 @@ class Products
+     }
+ 
+     /**
++     * Add needed column to the Select on the first position
++     *
++     * There are no problems for MySQL with several same columns in the result set
++     *
++     * @param \Magento\Framework\DB\Select $select
++     * @param string $columnName
++     * @return void
++     */
++    private function prependColumn(\Magento\Framework\DB\Select $select, string $columnName)
++    {
++        $columns = $select->getPart(\Magento\Framework\DB\Select::COLUMNS);
++        array_unshift($columns, ['e', $columnName, null]);
++        $select->setPart(\Magento\Framework\DB\Select::COLUMNS, $columns);
++    }
++
++    /**
+      * Apply cached positions, sort order products
+      * returns a base collection with WHERE IN filter applied
+      *
+diff --git a/vendor/magento/module-visual-merchandiser/Model/Position/Cache.php b/vendor/magento/module-visual-merchandiser/Model/Position/Cache.php
+index 5487397775..93b2f5f9d3 100755
+--- a/vendor/magento/module-visual-merchandiser/Model/Position/Cache.php
++++ b/vendor/magento/module-visual-merchandiser/Model/Position/Cache.php
+@@ -68,7 +68,11 @@ class Cache extends \Magento\Framework\Model\AbstractModel
+             $data['sort_order'] = $sortOrder;
+         }
+ 
+-        $this->cache->save(\Zend_Json::encode($data), self::CACHE_PREFIX . $key, [], $lifeTime);
++        $this->cachedData = null;
++        $saveResult = $this->cache->save(\Zend_Json::encode($data), self::CACHE_PREFIX . $key, [], $lifeTime);
++        if ($saveResult) {
++            $this->cachedData = $data;
++        }
+     }
+ 
+     /**

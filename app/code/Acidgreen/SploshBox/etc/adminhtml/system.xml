@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/system_file.xsd">
+	<system>
+		<section id="sploshbox_settings" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+			<class>separator-top</class>
+			<label>Splosh Box Settings</label>
+			<tab>acidgreen_exo</tab>
+			<resource>Acidgreen_Exo::settings</resource>
+			<group id="b2b_settings" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+				<label>B2B Settings</label>
+				<field id="b2b_website_ids" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+					<label>Website IDs of B2B Sites</label>
+					<comment>Website IDs of B2B Sites, separate by comma if there's more than 1</comment>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

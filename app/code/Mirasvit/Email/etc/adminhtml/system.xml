@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Config/etc/system_file.xsd">
+    <system>
+        <section id="email" showInDefault="1" showInWebsite="1" showInStore="1" type="text" translate="label" sortOrder="100">
+            <label>Follow Up Email</label>
+            <tab>mirasvit</tab>
+            <resource>Mirasvit_Email::email_settings</resource>
+            <group id="general" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="0">
+                <label>General</label>
+                <field id="max_email_heading" translate="label" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Limit number of emails per address</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                </field>
+                <field id="max_email" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Send maximum emails</label>
+                </field>
+                <field id="max_email_period" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Period (hours)</label>
+                </field>
+            </group>
+
+            <group id="info" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="10">
+                <label>Information</label>
+                <field id="facebook_url" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Facebook Url</label>
+                </field>
+                <field id="twitter_url" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Twitter Url</label>
+                </field>
+            </group>
+
+            <group id="coupon" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="15">
+                <label>Coupons Information</label>
+                <field id="length" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Code Length</label>
+                </field>
+                <field id="prefix" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Code Prefix</label>
+                </field>
+                <field id="suffix" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Code Suffix</label>
+                </field>
+                <field id="dash" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Dash Every X Characters</label>
+                </field>
+            </group>
+
+            <group id="test" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="20">
+                <label>Test Information</label>
+                <field id="sandbox" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Sandbox Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="email" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Test Recipient Email</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

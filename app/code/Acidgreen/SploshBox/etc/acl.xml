@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Acidgreen_SploshBox::box" sortOrder="10" title="box">
+					<resource id="Acidgreen_SploshBox::box_save" sortOrder="10" title="Save box"/>
+					<resource id="Acidgreen_SploshBox::box_delete" sortOrder="20" title="Delete box"/>
+					<resource id="Acidgreen_SploshBox::box_update" sortOrder="30" title="Update box"/>
+					<resource id="Acidgreen_SploshBox::box_view" sortOrder="40" title="View box"/>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

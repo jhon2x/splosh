@@ -1,0 +1,29 @@
+<ul class="action-submenu" data-bind="foreach: {data: action.actions, as: 'action'}, css: { _active: action.visible }">
+    <li data-bind="css: { '_visible': $data.visible}">
+        <div data-bind="" class="advn-action-form">
+            <div class="action-item action-item-label">
+                <label data-bind="i18n: action.title"></label>
+            </div>
+            <div class="action-item action-item-input">
+                <!-- ko if: $data.rendererType == 'text' -->
+                    <input type="text" class="admin__control-text" data-bind="attr: { placeholder: action.placeholder}">
+                <!-- /ko -->
+                <!-- ko if: $data.rendererType == 'select' -->
+                    <select id="advn-action-select"
+                            class="admin__control-select"
+                            data-bind="
+                                    options: action.child,
+                                    optionsText: 'label',
+                                    optionsValue: 'fieldvalue',
+                                    optionsCaption: 'Algorithm'">
+                    </select>
+                <!-- /ko -->
+            </div>
+            <div class="action-item action-item-button">
+                <button type="button" data-bind="click: function() {$parent.applyMassaction(action)}" class="action-save">
+                    <span data-bind="i18n: $parents[1].buttonLabel"></span>
+                </button>
+            </div>
+        </div>
+    </li>
+</ul>

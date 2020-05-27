@@ -1,0 +1,12 @@
+diff --git a/vendor/magento/module-directory/Model/PriceCurrency.php b/vendor/magento/module-directory/Model/PriceCurrency.php
+index a211242d..62d63200 100644
+--- a/vendor/magento/module-directory/Model/PriceCurrency.php
++++ b/vendor/magento/module-directory/Model/PriceCurrency.php
+@@ -155,6 +155,6 @@ class PriceCurrency implements \Magento\Framework\Pricing\PriceCurrencyInterface
+      */
+     public function round($price)
+     {
+-        return round($price, 2);
++        return round($price, 4);
+     }
+ }

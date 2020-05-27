@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+
+    <section name="StorefrontMiniCartSection">
+        <element name="miniCart" type="button" selector="//div[@data-block='minicart']"/>
+        <element name="quantity" type="button" selector="//div[@data-block='minicart']//span[@class='counter-number']"/>
+        <element name="goToCheckout" type="button" selector="//button[@id='top-cart-btn-checkout']"/>
+        <element name="confirmDeletion" type="button" selector="//div[@class='modal-inner-wrap']//button[@class='action-primary action-accept']"/>
+    </section>
+
+</sections>

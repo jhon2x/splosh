@@ -1,0 +1,19 @@
+title: Welcome Trigger
+description:
+store_ids:
+    - 0
+is_active: 0
+event: customer_create
+campaign_id: 2
+chain:
+    new_0:
+        template_id: 10
+        day: 0
+        hour: 0
+        minute: 0
+        cross_sells_enabled: 1
+        cross_sells_type_id: mage_cross
+ga_source: "follow-up-email"
+ga_medium: email
+ga_name: customer sign up
+trigger_type: ''

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="head.additional">
+            <block class="Magento\Catalog\Block\Product\View" name="g_product_meta_tags" template="Magento_Catalog::product/view/productmeta.phtml" />
+        </referenceBlock>
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Framework\View\Element\Template" name="optimise_tracking_code" as="optimise_tracking_code" template="Magento_Catalog::product/view/optimise-tracking.phtml" />
+        </referenceContainer>
+        <referenceBlock name="product.info.addto">
+            <referenceBlock name="view.addto.compare" remove="true" />
+        </referenceBlock>
+        <referenceContainer name="columns">
+            <referenceBlock name="side_popup" remove="true" />
+        </referenceContainer>
+    </body>
+</page>

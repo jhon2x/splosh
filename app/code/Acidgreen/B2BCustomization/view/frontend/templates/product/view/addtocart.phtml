@@ -1,0 +1,116 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Acidgreen\Catalog\Block\Product\View */
+
+$_product = $block->getProduct();
+?>
+<?php $buttonTitle = __('Add to Cart'); ?>
+<?php // if ($_product->isSaleable()): ?>
+<?php if ($_product->isSaleable() || $block->isProductBackorder()): ?>
+<div class="box-tocart">
+    <div class="fieldset">
+        <?php if ($block->shouldRenderQuantity()): ?>
+        <div class="field qty">
+            <label class="label" for="qty"><span><?php /* @escapeNotVerified */ echo __('Qty') ?></span></label>
+            <div class="control">
+                <input type="number"
+                       name="qty"
+                       id="qty"
+                       maxlength="12"
+                       value="<?php /* @escapeNotVerified */ echo $block->getProductDefaultQty() * 1 ?>"
+                       title="<?php /* @escapeNotVerified */ echo __('Qty') ?>" class="input-text qty"
+                       data-validate="<?php echo $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                       />
+            </div>
+            <div class="qty-changer">
+                <a href="javascript:void(0)" class="qty-inc"><i class="porto-icon-up-dir"></i></a>
+                <a href="javascript:void(0)" class="qty-dec"><i class="porto-icon-down-dir"></i></a>
+            </div>
+        </div>
+        <?php endif; ?>
+        <div class="actions">
+            <button type="submit"
+                    title="<?php /* @escapeNotVerified */ echo $buttonTitle ?>"
+                    class="action primary tocart"
+                    id="product-addtocart-button">
+                <span><?php /* @escapeNotVerified */ echo $buttonTitle ?></span>
+            </button>
+            <?php echo $block->getChildHtml('', true) ?>
+        </div>
+
+        <?php // SPL-392 ?>
+        <div class="product n-added" data-product-id="<?php echo $_product->getId() ?>">
+        </div>
+    </div>
+</div>
+<script type="text/x-magento-init">
+{
+    ".product.n-added": {
+        "Acidgreen_B2BCustomization/js/cart-n-added": {
+            "products": "<?php echo $_product->getId() ?>"
+        }
+    }
+}
+</script>
+<script>
+require(['jquery'], function($) {
+    $(document).ready(function() {
+        $('.product.n-added').on('cart-updated', function(e) {
+            $.ajax({
+                url: '/b2bcustomization/checkout/loadquantity',
+                type: 'GET',
+                data: {
+                    product: <?php echo $_product->getId() ?>
+                },
+                dataType: 'json'
+            }).success(function(data) {
+                console.log('cart-updated data?', data);
+                var selector = '.product.n-added[data-product-id="' + data.product_id + '"]';
+                $(selector).html('<span class="content">'+data.qty+' added</span>');
+            });
+        });
+    });
+});
+</script>
+<?php endif; ?>
+<?php if ($block->isRedirectToCartEnabled()) : ?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/product/view/validation": {
+                "radioCheckboxClosest": ".nested"
+            }
+        }
+    }
+</script>
+<?php else : ?>
+<script>
+    require([
+        'jquery',
+        'mage/mage',
+        'Magento_Catalog/product/view/validation',
+        'Magento_Catalog/js/catalog-add-to-cart'
+    ], function ($) {
+        'use strict';
+
+        $('#product_addtocart_form').mage('validation', {
+            radioCheckboxClosest: '.nested',
+            submitHandler: function (form) {
+                var widget = $(form).catalogAddToCart({
+                    bindSubmit: false
+                });
+
+                widget.catalogAddToCart('submitForm', $(form));
+
+                return false;
+            }
+        });
+    });
+</script>
+<?php endif; ?>

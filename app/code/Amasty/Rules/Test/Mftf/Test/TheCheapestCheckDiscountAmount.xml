@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="TheCheapestCheckDiscountAmount">
+        <annotations>
+            <features value="Rule Creation"/>
+            <stories value="Create a Rule via the Admin"/>
+            <title value="The Cheapest Check Discount Amount"/>
+            <description value="The Cheapest Check Discount Amount"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="SP-MFTF-1"/>
+            <group value="Amasty"/>
+            <group value="Rules"/>
+            <group value="Rule"/>
+            <group value="Shipping"/>
+            <group value="DiscountAmount"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
+        </before>
+
+        <after>
+            <!--Delete Rules -->
+            <actionGroup ref="DeleteAllCartRules" stepKey="DeleteAllRules1"/>
+            <amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>
+        </after>
+
+        <!--Create Price Rule -->
+        <actionGroup ref="CreateCartRule" stepKey="CreateCartRule1">
+            <argument name="actionsRule" value="_applyTheCheapestAlsoForBuy1Get1Free"/>
+            <argument name="cartRule" value="_theCheapestCheckDiscountAmountData"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddFirstSimpleProduct">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+        </actionGroup>
+
+        <!--Check first discount-->
+        <actionGroup ref="CheckDiscountAmount" stepKey="CheckDiscountWithOneProduct">
+            <argument name="cartRule" value="_theCheapestCheckDiscountAmountData"/>
+            <argument name="discountAmount" value="_theCheapestCheckDiscountAmountData.discountAmountOne"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddSecondSimpleProduct">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+        </actionGroup>
+
+        <!--Check second discount-->
+        <actionGroup ref="CheckDiscountAmount" stepKey="CheckDiscountWithTwoProduct">
+            <argument name="cartRule" value="_theCheapestCheckDiscountAmountData"/>
+            <argument name="discountAmount" value="_theCheapestCheckDiscountAmountData.discountAmountTwo"/>
+        </actionGroup>
+
+    </test>
+</tests>

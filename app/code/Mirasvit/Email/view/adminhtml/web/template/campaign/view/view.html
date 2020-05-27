@@ -1,0 +1,103 @@
+<div class="mst-email__campaign-view">
+    <div class="trigger" repeat="foreach: $campaign().triggers, item: '$trigger'" data-bind="css: {'_inactive': $trigger().is_active == 0}">
+        <header data-bind="attr: {id: 'trigger_id_' + $trigger().trigger_id}" afterRender="scrollToTrigger">
+            <div class="status" data-bind="css: {active: $trigger().is_active == 1}"/>
+            <h2><a class="action" data-bind="text: 'Trigger: ' + $trigger().title, click: showModal.bind($data, 'trigger', {trigger_id: $trigger().trigger_id})"></a></h2>
+
+            <div class="actions">
+                <div><a class="action-secondary" data-bind="click: showModal.bind($data, 'trigger', {trigger_id: $trigger().trigger_id})">Edit Trigger</a></div>
+                <div><a class="action" data-bind="text: getToggleLabel($trigger().is_active), attr: {href: $trigger().toggle_url}"></a></div>
+                <div><a class="action" data-bind="click: deleteConfirm.bind($data, triggerDeleteMsg, $trigger().delete_url)">Delete</a></div>
+                <div><a class="action" data-bind="attr: {href: $trigger().duplicate_url}">Duplicate</a></div>
+                <div><a class="action" data-bind="click: showModal.bind($data, 'trigger_move', {trigger_id: $trigger().trigger_id})">Move</a></div>
+            </div>
+        </header>
+
+        <section>
+            <div class="info">
+                <div class="item">
+                    <div class="item__inner">
+                        <strong><!-- ko i18n: 'Event' --><!-- /ko --></strong> <a class="action" href="#" data-bind="click: showModal.bind($data, 'event', {trigger_id: $trigger().trigger_id})"><!-- ko i18n: 'edit' --><!-- /ko --></a>
+                        <!-- ko ifnot: $trigger().event -->
+                            <p><i class="fa fa-info-circle"></i> Choose <b>triggering event</b> to start schedule emails</p>
+                        <!-- /ko -->
+                        <div text="$trigger().event"/>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="item__inner">
+                        <strong><!-- ko i18n: 'Audience' --><!-- /ko --></strong> <a class="action" href="#" data-bind="click: showModal.bind($data, 'audience', {trigger_id: $trigger().trigger_id})"><!-- ko i18n: 'edit' --><!-- /ko --></a>
+                        <!-- ko ifnot: $trigger().rule -->
+                            <p><i class="fa fa-info-circle"></i> Edit <b>audience</b> settings to filter target recipients</p>
+                        <!-- /ko -->
+                        <div html="$trigger().rule"/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ko ifnot: $trigger().chains.length -->
+                <!-- ko template: chainHelpTpl --><!-- /ko -->
+            <!-- /ko -->
+
+            <!-- ko if: $trigger().chains.length -->
+                <div class="chains">
+                    <table class="chains-table" style="width: 100%">
+                        <caption class="caption" translate="'Emails'"></caption>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <!-- ko if: $trigger().chains.length -->
+                                    <th translate="'Ready to Go'"></th>
+                                    <th translate="'Sent'"></th>
+                                    <th translate="'Opened'"></th>
+                                    <th translate="'Clicked'"></th>
+                                    <th translate="'Reviews'"></th>
+                                    <th translate="'Orders'"></th>
+                                    <th translate="'Revenue'"></th>
+                                <!-- /ko -->
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="chain" repeat="foreach: $trigger().chains, item: '$chain'">
+                                <td class="fa-envelope">
+                                    <div class="col-info">
+                                        <h3><a class="action" text="$chain().title" data-bind="click: showModal.bind($data, 'chain', {chain_id: $chain().chain_id})"></a></h3>
+                                        <div html="$chain().info"/>
+                                    </div>
+                                </td>
+                                <!-- ko template: {
+                                        name: 'Mirasvit_Email/campaign/view/view/report',
+                                        data: {report: $chain().report}
+                                } --><!-- /ko -->
+                                <td class="col-actions">
+                                    <div class="actions">
+                                        <div><a class="action-secondary" data-bind="click: showModal.bind($data, 'chain', {chain_id: $chain().chain_id})">Edit Email</a></div>
+                                        <div><a class="action" data-bind="click: deleteConfirm.bind($data, emailDeleteMsg, $chain().delete_url)">Delete</a></div>
+                                        <div><a class="action" data-bind="attr: {href: $chain().duplicate_url}">Duplicate</a></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>
+                                    <button class="new-btn secondary" data-bind="click: showModal.bind($data, 'chain', {trigger_id: $trigger().trigger_id})"><!-- ko i18n: 'Add Email' --><!-- /ko --></button>
+                                </td>
+                                <!-- ko template: {
+                                        name: 'Mirasvit_Email/campaign/view/view/report',
+                                        data: {report: $trigger().report}
+                                } --><!-- /ko -->
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            <!-- /ko -->
+        </section>
+    </div>
+
+    <!-- ko if: $campaign().triggers.length === 0 -->
+        <!-- ko template: triggerHelpTpl --><!-- /ko -->
+    <!-- /ko -->
+</div>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Email Creditmemo Items List" design_abstraction="custom">
+    <body>
+        <referenceBlock name="sales.email.order.renderers">
+            <action method="setOverridenTemplates">
+                <argument xsi:type="array">
+                    <item name="default" xsi:type="string">Acidgreen_SploshBackorder::email/items/order/default.phtml</item>
+                </argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,16 @@
+<?php
+/** @var \Mirasvit\Search\Block\Suggestion $block */
+
+$suggestedData = $block->getSuggestedTerms();
+$terms = [];
+foreach ($suggestedData as $suggestedTerm) {
+    array_push($terms, '<a href="' . $block->getUrl('catalogsearch/result', ['_query' => ['q' => $suggestedTerm->getQueryText()]]) . '" >' . $suggestedTerm->getQueryText() . '</a>');
+}
+if (empty($terms)) {
+    return;
+}
+?>
+
+<p class="suggested">
+    <?= __('Suggested search terms: %1', implode(', ', $terms)) ?>
+</p>

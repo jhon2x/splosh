@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento 2 extensions for Afterpay Payment
+ *
+ * @author Afterpay
+ * @copyright 2016-2018 Afterpay https://www.afterpay.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="afterpay_order_limit_update" instance="Afterpay\Afterpay\Model\Cron\Limit" method="execute">
+            <schedule>0 6 * * *</schedule>
+        </job>
+    </group>
+</config>

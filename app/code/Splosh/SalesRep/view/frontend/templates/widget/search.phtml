@@ -1,0 +1,79 @@
+<?php
+/** @var $block Splosh\SalesRep\Block\Widget\Search */
+?>
+<style type="text/css" rel="stylesheet">
+    .salesrep-search-widget {
+        font-family: 'Montserrat', 'sans-serif';
+    }
+
+    form.form.salesrep-location-form .search-form {
+        width: 100%;
+        max-width: 1440px;
+        display: flex;
+    }
+
+    form.form.salesrep-location-form .search-form .control {
+        width: 90%;
+    }
+
+    form.form.salesrep-location-form .search-form .control .salesrep.query.input-text {
+        border-right: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        height: 38px;
+    }
+
+    form.form.salesrep-location-form .search-form .actions {
+        width: 10%;
+        margin-left: -4px;
+        padding-left: 0;
+        left: 0;
+    }
+    form.form.salesrep-location-form .search-form .actions button {
+        width: 100%;
+        background-color: #ffffff;
+        color: #000000;
+        border-color: #ccc;
+        border-left: 0;
+    }
+    .salesrep-search-widget .title {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .title strong {
+        font-size: 2.5rem;
+        font-weight: 300;
+    }
+</style>
+<div class="salesrep-search-widget">
+    <div class="content container">
+        <div class="title">
+            <strong><?= $block->getTitle() ?></strong>
+        </div>
+        <form action="" class="form salesrep-location-form">
+            <div class="search-form">
+                <div class="control">
+                    <input type="text" name="query" placeholder="<?= $block->getPlaceholderText() ?>" class="input-text salesrep query"/>
+                </div>
+                <div class="actions">
+                    <button type="submit" class="primary action search"><?= __('Search') ?></button>
+                </div>
+            </div>
+        </form>
+        <div class="results row"></div>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "salesrepsearch": {
+                "ajaxUrl": "<?= $block->getAjaxUrl() ?>",
+                "errorMsg": "<?= $block->getErrorMsg() ?>",
+                "errorMsgClass": "<?= $block->getErrorMsgClass() ?>",
+                "getItemClass": "<?= $block->getItemClass() ?>",
+                "getItemImageClass": "<?= $block->getItemImageClass() ?>"
+            }
+        }
+    }
+</script>

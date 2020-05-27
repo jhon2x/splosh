@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="acidgreen_exo_cronjob">
+        <job name="exo_timeout" instance="Acidgreen\SploshExo\Cron\Timeout" method="execute">
+            <schedule>*/1 * * * *</schedule>
+        </job>
+    </group>
+    <!-- override exo_stockpriceupdate schedule -->
+    <group id="acidgreen_exo_stockpriceupdate">
+        <job name="exo_stockpriceupdate" instance="Acidgreen\Exo\Cron\ProductStockPriceUpdate" method="execute">
+            <schedule>1 8-23/4 * * *</schedule>
+        </job>
+    </group>
+
+    <group id="acidgreen_exo_setpendings">
+        <job name="exo_pending_customer_sync" instance="Acidgreen\SploshExo\Cron\CustomerSync" method="execute">
+            <schedule>35 12 * * *</schedule>
+        </job>
+    </group>
+</config>

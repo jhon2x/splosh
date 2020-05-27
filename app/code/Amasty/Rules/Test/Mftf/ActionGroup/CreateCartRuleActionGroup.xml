@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+
+    <actionGroup name="CreateCartRule">
+        <arguments>
+            <argument name="actionsRule"/>
+            <argument name="cartRule"/>
+        </arguments>
+        <!--Open page for creation new Price Rule -->
+        <amOnPage url="{{AdminCartPriceRulePage.url}}" stepKey="navigateToCartPriceRulePage1"/>
+        <waitForPageLoad time="100" stepKey="waitForPageLoad1"/>
+        <click selector="{{AdminRuleGridActionSection.AddNewRuleButton}}" stepKey="clickOnAddNewRule"/>
+        <waitForPageLoad time="100" stepKey="waitForPageLoad2"/>
+        <!--Add Cart Price Rule -->
+        <fillField selector="{{AdminActionsCartPriceRuleSection.RuleName}}" userInput="{{cartRule.name}}" stepKey="enterRuleName"/>
+        <fillField selector="{{AdminActionsCartPriceRuleSection.Description}}" userInput="{{cartRule.description}}" stepKey="enterDescription"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.Websites}}" stepKey="selectWebsite"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.CustomerGroupsGeneral}}" stepKey="selectCustomerGeneral"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.CustomerGroupsNotLoggedIn}}" stepKey="selectCustomerNotLoggedIn"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.CustomerGroupsWholesale}}" stepKey="selectCustomerWholesale"/>
+        <!--Open Action section and select Action parameters -->
+        <conditionalClick stepKey="openActionTab"
+                          selector="{{AdminActionsCartPriceRuleSection.ActionTab}}"
+                          dependentSelector="{{AdminActionsCartPriceRuleSection.ActionTabOpen}}"
+                          visible="false"/>
+        <waitForPageLoad time="5" stepKey="waitForPageLoad3"/>
+        <click selector="//select[@name='simple_action']/option[@value='{{actionsRule.action}}']" stepKey="ChooseAction"/>
+        <fillField selector="{{AdminActionsCartPriceRuleSection.DiscountAmount}}" userInput="{{cartRule.discountPercent}}"
+                   stepKey="enterDiscountAmount"/>
+        <fillField selector="{{AdminActionsCartPriceRuleSection.MaxQtyDiscountIsAppliedTo}}" userInput="{{cartRule.maxQtyDiscountAppliedTo}}"
+                   stepKey="enterMaxQtyDiscountAppliedTo"/>
+        <fillField selector="{{AdminActionsCartPriceRuleSection.MaxAmountOfDiscount}}" userInput="{{cartRule.maxAmountOfDiscount}}"
+                   stepKey="enterMaxAmountOfDiscount"/>
+        <fillField selector="{{AdminActionsCartPriceRuleSection.DiscountQtyStep}}" userInput="{{cartRule.discountQtyStep}}"
+                   stepKey="enterDiscountQty"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.Save}}" stepKey="clickOnSave"/>
+        <waitForPageLoad time="300" stepKey="waitForPageLoad4"/>
+    </actionGroup>
+
+
+    <actionGroup name="CreateCartRuleEachGroupOfN">
+        <arguments>
+            <argument name="actionsRule"/>
+            <argument name="cartRule"/>
+        </arguments>
+        <!--Open page for creation new Price Rule -->
+        <amOnPage url="{{AdminCartPriceRulePage.url}}" stepKey="navigateToCartPriceRulePage1"/>
+        <waitForPageLoad time="100" stepKey="waitForPageLoad1"/>
+        <click selector="{{AdminRuleGridActionSection.AddNewRuleButton}}" stepKey="clickOnAddNewRule"/>
+        <waitForPageLoad time="100" stepKey="waitForPageLoad2"/>
+        <!--Add Cart Price Rule -->
+        <fillField selector="{{AdminActionsCartPriceRuleSection.RuleName}}" userInput="{{cartRule.name}}" stepKey="enterRuleName"/>
+        <fillField selector="{{AdminActionsCartPriceRuleSection.Description}}" userInput="{{cartRule.description}}" stepKey="enterDescription"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.Websites}}" stepKey="selectWebsite"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.CustomerGroupsGeneral}}" stepKey="selectCustomerGeneral"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.CustomerGroupsNotLoggedIn}}" stepKey="selectCustomerNotLoggedIn"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.CustomerGroupsWholesale}}" stepKey="selectCustomerWholesale"/>
+        <!--Open Action section and select Action parameters -->
+        <conditionalClick stepKey="openActionTab"
+                          selector="{{AdminActionsCartPriceRuleSection.ActionTab}}"
+                          dependentSelector="{{AdminActionsCartPriceRuleSection.ActionTabOpen}}"
+                          visible="false"/>
+        <waitForPageLoad time="5" stepKey="waitForPageLoad3"/>
+        <click selector="//select[@name='simple_action']/option[@value='{{actionsRule.action}}']" stepKey="ChooseAction"/>
+        <fillField selector="{{AdminActionsCartPriceRuleSection.DiscountAmount}}" userInput="{{cartRule.discountPercent}}"
+                   stepKey="enterDiscountAmount"/>
+        <fillField selector="{{AdminActionsCartPriceRuleSection.MaxAmountOfDiscount}}" userInput="{{cartRule.maxAmountOfDiscount}}"
+                   stepKey="enterMaxAmountOfDiscount"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.Save}}" stepKey="clickOnSave"/>
+        <waitForPageLoad time="300" stepKey="waitForPageLoad4"/>
+    </actionGroup>
+
+    <actionGroup name="CreateCartRuleBuyXGetYBase">
+        <arguments>
+            <argument name="actionsRule"/>
+            <argument name="cartRule"/>
+        </arguments>
+        <!--Open page for creation new Price Rule -->
+        <amOnPage url="{{AdminCartPriceRulePage.url}}" stepKey="navigateToCartPriceRulePage1"/>
+        <waitForPageLoad time="100" stepKey="waitForPageLoad1"/>
+        <click selector="{{AdminRuleGridActionSection.AddNewRuleButton}}" stepKey="clickOnAddNewRule"/>
+        <waitForPageLoad time="100" stepKey="waitForPageLoad2"/>
+        <!--Add Cart Price Rule -->
+        <fillField selector="{{AdminActionsCartPriceRuleSection.RuleName}}" userInput="{{cartRule.name}}" stepKey="enterRuleName"/>
+        <fillField selector="{{AdminActionsCartPriceRuleSection.Description}}" userInput="{{cartRule.description}}" stepKey="enterDescription"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.Websites}}" stepKey="selectWebsite"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.CustomerGroupsGeneral}}" stepKey="selectCustomerGeneral"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.CustomerGroupsNotLoggedIn}}" stepKey="selectCustomerNotLoggedIn"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.CustomerGroupsWholesale}}" stepKey="selectCustomerWholesale"/>
+        <!--Open Action section and select Action parameters -->
+        <conditionalClick stepKey="openActionTab"
+                          selector="{{AdminActionsCartPriceRuleSection.ActionTab}}"
+                          dependentSelector="{{AdminActionsCartPriceRuleSection.ActionTabOpen}}"
+                          visible="false"/>
+        <waitForPageLoad time="5" stepKey="waitForPageLoad3"/>
+        <click selector="//select[@name='simple_action']/option[@value='{{actionsRule.action}}']" stepKey="ChooseAction"/>
+        <fillField selector="{{AdminActionsCartPriceRuleSection.DiscountAmount}}" userInput="{{cartRule.discountPercent}}"
+                   stepKey="enterDiscountAmount"/>
+        <fillField selector="{{AdminActionsCartPriceRuleSection.MaxQtyDiscountIsAppliedTo}}" userInput="{{cartRule.maxQtyDiscountAppliedTo}}"
+                   stepKey="enterMaxQtyDiscountAppliedTo"/>
+        <fillField selector="{{AdminActionsCartPriceRuleSection.MaxAmountOfDiscount}}" userInput="{{cartRule.maxAmountOfDiscount}}"
+                   stepKey="enterMaxAmountOfDiscount"/>
+        <fillField selector="{{AdminActionsCartPriceRuleSection.DiscountQtyStep}}" userInput="{{cartRule.discountQtyStep}}"
+                   stepKey="enterDiscountQty"/>
+        <fillField selector="{{AdminActionsCartPriceRuleSection.NumberOfYProducts}}" userInput="{{cartRule.numberOfYProducts}}"
+                   stepKey="enterNumberOfY"/>
+    </actionGroup>
+
+
+    <actionGroup name="CreateCartRuleBuyXGetYPromoSKU" extends="CreateCartRuleBuyXGetYBase">
+        <fillField selector="{{AdminActionsCartPriceRuleSection.SetItemsBySKU}}" userInput="{{cartRule.promoSKU}}"
+                   stepKey="enterPromoSKU"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.Save}}" stepKey="clickOnSave"/>
+        <waitForPageLoad time="300" stepKey="waitForPageLoad4"/>
+    </actionGroup>
+
+
+    <actionGroup name="CreateCartRuleBuyXGetYPromoCategories" extends="CreateCartRuleBuyXGetYBase">
+        <fillField selector="{{AdminActionsCartPriceRuleSection.SetItemsByCategoryIDs}}" userInput="{{cartRule.promoCategories}}"
+                   stepKey="enterPromoCategories"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.Save}}" stepKey="clickOnSave"/>
+        <waitForPageLoad time="300" stepKey="waitForPageLoad4"/>
+    </actionGroup>
+
+</actionGroups>

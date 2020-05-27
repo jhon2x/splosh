@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/system_file.xsd">
+    <system>
+        <tab id="acidgreen_exo" translate="label" sortOrder="51">
+            <label>EXO Settings</label>
+        </tab>
+
+        <section id="acidgreen_exo_apisettings">
+            <group id="exostockist_settings" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>EXO Stockist Settings</label>
+
+                <field id="myob_stockist_search_template_id" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>MYOB Stockist Search Template ID</label>
+                    <comment>MYOB Stockist Search Template ID</comment>
+                </field>
+
+                <field id="myob_search_radius" translate="label comment" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>MYOB Search Radius</label>
+                    <comment>MYOB Search Radius</comment>
+                </field>
+
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,309 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!--DATA-->
+    <preference for="Mirasvit\Event\Api\Data\EventInterface" type="Mirasvit\Event\Model\Event"/>
+    <preference for="Mirasvit\Event\Api\Data\AttributeInterface" type="Mirasvit\Event\EventData\Attribute"/>
+
+    <!--REPOSITORY-->
+    <preference for="Mirasvit\Event\Api\Repository\EventRepositoryInterface" type="Mirasvit\Event\Repository\EventRepository"/>
+    <preference for="Mirasvit\Event\Api\Repository\AttributeRepositoryInterface" type="Mirasvit\Event\Repository\AttributeRepository"/>
+
+    <!--SERVICE-->
+    <preference for="Mirasvit\Event\Api\Service\EventServiceInterface" type="Mirasvit\Event\Service\EventService"/>
+    <preference for="Mirasvit\Event\Api\Service\OptionsConverterInterface" type="Mirasvit\Event\Service\OptionsConverter"/>
+    <preference for="Mirasvit\Event\Api\Service\ValidatorServiceInterface" type="Mirasvit\Event\Service\ValidatorService"/>
+    <preference for="Mirasvit\Event\Api\Service\GeoIpValidatorInterface" type="Mirasvit\Event\Service\GeoIpValidator"/>
+
+
+    <!-- Set event handler executed after event registration -->
+    <type name="Mirasvit\Event\Api\Repository\EventRepositoryInterface">
+        <plugin name="eventHandler" type="Mirasvit\Event\Plugin\PublisherPlugin"/>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Mirasvit\Event\Api\Data\EventInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">mst_event_event</item>
+                    <item name="identifierField" xsi:type="string">event_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Mirasvit\Event\Api\Data\EventInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Mirasvit\Event\Repository\EventRepository">
+        <arguments>
+            <argument name="events" xsi:type="array">
+                <item name="customer_login" xsi:type="string">Mirasvit\Event\Event\Customer\LoginLogoutEvent</item>
+                <item name="customer_create" xsi:type="string">Mirasvit\Event\Event\Customer\CreateEvent</item>
+                <item name="admin_login" xsi:type="string">Mirasvit\Event\Event\Admin\LoginEvent</item>
+                <item name="cron_cronSchedule" xsi:type="string">Mirasvit\Event\Event\Cron\CronScheduleEvent</item>
+                <item name="product_outOfStock" xsi:type="string">Mirasvit\Event\Event\Product\OutOfStockEvent</item>
+                <item name="product_qtyReduced" xsi:type="string">Mirasvit\Event\Event\Product\QtyEvent</item>
+                <item name="product_view" xsi:type="string">Mirasvit\Event\Event\Product\ViewEvent</item>
+                <item name="newsletter_subscription" xsi:type="string">Mirasvit\Event\Event\Newsletter\SubscriptionEvent</item>
+                <item name="customer_birthday" xsi:type="string">Mirasvit\Event\Event\Customer\BirthdayEvent</item>
+                <item name="cart_abandoned" xsi:type="string">Mirasvit\Event\Event\Quote\AbandonedEvent</item>
+                <item name="order_status" xsi:type="string">Mirasvit\Event\Event\Sales\OrderStatusEvent</item>
+                <item name="wishlist_item_new" xsi:type="string">Mirasvit\Event\Event\Wishlist\NewItemEvent</item>
+                <item name="wishlist_shared" xsi:type="string">Mirasvit\Event\Event\Wishlist\SharedEvent</item>
+                <item name="admin_notification_new" xsi:type="string">Mirasvit\Event\Event\AdminNotification\NewEvent</item>
+                <item name="review_new" xsi:type="string">Mirasvit\Event\Event\Review\NewEvent</item>
+                <item name="review_approved" xsi:type="string">Mirasvit\Event\Event\Review\ApprovedEvent</item>
+                <item name="hdmx_message_new" xsi:type="string">Mirasvit\Event\Event\Helpdesk\NewMessageEvent</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--<virtualType name="Mirasvit\Event\Api\Data\EventParamsInterface" type="Magento\Framework\DataObject" />-->
+
+    <!-- Event Plugins -->
+    <type name="Mirasvit\Helpdesk\Model\Ticket">
+        <plugin name="eventNewHelpdeskMessage" type="Mirasvit\Event\Event\Helpdesk\NewMessageEvent"/>
+    </type>
+
+    <type name="Magento\Customer\Model\Session">
+        <plugin name="eventCustomerLoginLogout" type="Mirasvit\Event\Event\Customer\LoginLogoutEvent"/>
+    </type>
+
+    <type name="Magento\User\Model\User">
+        <plugin name="eventAdminLogin" type="Mirasvit\Event\Event\Admin\LoginEvent"/>
+    </type>
+
+    <type name="Magento\Catalog\Model\Product">
+        <plugin name="eventProductQtyReduced" type="Mirasvit\Event\Event\Product\QtyEvent"/>
+    </type>
+    <type name="Magento\CatalogInventory\Model\ResourceModel\Stock">
+        <plugin name="eventProductQtyReduced" type="Mirasvit\Event\Event\Product\QtyEvent"/>
+    </type>
+    <type name="Magento\InventoryApi\Api\Data\SourceItemInterface">
+        <plugin name="eventProductOutOfStock" type="Mirasvit\Event\Event\Product\OutOfStockEvent"/>
+    </type>
+
+    <type name="Magento\Newsletter\Model\Subscriber">
+        <plugin name="eventNewsletter" type="Mirasvit\Event\Event\Newsletter\SubscriptionEvent"/>
+    </type>
+
+    <type name="Magento\Sales\Api\Data\OrderInterface">
+        <plugin name="eventSalesOrderStatus" type="Mirasvit\Event\Event\Sales\OrderStatusModel"/>
+    </type>
+
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="eventSalesOrderStatus" type="Mirasvit\Event\Event\Sales\OrderStatusRepository"/>
+    </type>
+
+    <type name="Magento\Review\Model\Review">
+        <plugin name="eventReviewApproved" type="Mirasvit\Event\Event\Review\ApprovedEvent"/>
+    </type>
+
+    <type name="Magento\Wishlist\Model\ResourceModel\Item">
+        <plugin name="eventWishlistItemAdded" type="Mirasvit\Event\Event\Wishlist\NewItemEvent"/>
+    </type>
+    <type name="Magento\Wishlist\Model\ResourceModel\Wishlist">
+        <plugin name="eventWishlistShared" type="Mirasvit\Event\Event\Wishlist\SharedEvent"/>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="event_event_listing_data_source" xsi:type="string">Mirasvit\Event\Model\ResourceModel\Event\Grid</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="EventTestCommand" xsi:type="object">Mirasvit\Event\Console\Command\TestCommand</item>
+            </argument>
+        </arguments>
+    </type>
+
+
+    <!-- This plugin is executed after 'getAttributes' method -->
+    <type name="Mirasvit\Event\Api\Data\EventDataInterface">
+        <plugin name="prepareEventAttributes" type="Mirasvit\Event\Plugin\Attributes"/>
+    </type>
+
+    <!-- Add Custom Cron Schedule Attributes -->
+    <type name="Mirasvit\Event\EventData\ScheduleData">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="event_attributes" xsi:type="array">
+                    <item name="finished_ago" xsi:type="object">Mirasvit\Event\EventData\Schedule\FinishedAgoAttribute</item>
+                    <item name="run_time" xsi:type="object">Mirasvit\Event\EventData\Schedule\RunTimeAttribute</item>
+                    <item name="last_heartbeat" xsi:type="object">Mirasvit\Event\EventData\Schedule\LastHeartbeatAttribute</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Add Customer Attributes -->
+    <type name="Mirasvit\Event\EventData\CustomerData">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="event_attributes" xsi:type="array">
+                    <item name="lifetime_sales" xsi:type="object">Mirasvit\Event\EventData\Customer\LifetimeSalesAttribute</item>
+                    <item name="number_of_orders" xsi:type="object">Mirasvit\Event\EventData\Customer\NumOrdersAttribute</item>
+                    <item name="avgsale" xsi:type="object">Mirasvit\Event\EventData\Customer\AvgsaleAttribute</item>
+                    <item name="is_subscriber" xsi:type="object">Mirasvit\Event\EventData\Customer\IsSubscriberAttribute</item>
+                    <item name="subscription_status" xsi:type="object">Mirasvit\Event\EventData\Customer\SubscriptionStatusAttribute</item>
+                    <item name="reviews_count" xsi:type="object">Mirasvit\Event\EventData\Customer\ReviewsCountAttribute</item>
+                    <item name="last_activity" xsi:type="object">Mirasvit\Event\EventData\Customer\LastActivityAttribute</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Add Store Attributes -->
+    <type name="Mirasvit\Event\EventData\StoreData">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="event_attributes" xsi:type="array">
+                    <item name="lifetime_sales" xsi:type="object">Mirasvit\Event\EventData\Store\LifetimeSalesAttribute</item>
+                    <item name="num_orders" xsi:type="object">Mirasvit\Event\EventData\Store\NumOrdersAttribute</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Add Custom Cron Attributes -->
+    <type name="Mirasvit\Event\EventData\AdminData">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="event_attributes" xsi:type="array">
+                    <item name="ip" xsi:type="object">Mirasvit\Event\EventData\Admin\IpAttribute</item>
+                    <item name="is_new_ip" xsi:type="object">Mirasvit\Event\EventData\Admin\IsNewIpAttribute</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Add Wishlist Attributes -->
+    <type name="Mirasvit\Event\EventData\WishlistData">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="event_attributes" xsi:type="array">
+                    <item name="summary_qty" xsi:type="object">Mirasvit\Event\EventData\Wishlist\SummaryQtyAttribute</item>
+                    <item name="summary_count" xsi:type="object">Mirasvit\Event\EventData\Wishlist\SummaryCountAttribute</item>
+                    <item name="subtotal" xsi:type="object">Mirasvit\Event\EventData\Wishlist\SubtotalAttribute</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Add Quote Attributes -->
+    <type name="Mirasvit\Event\EventData\QuoteData">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="event_attributes" xsi:type="array">
+                    <item name="summary_qty" xsi:type="object">Mirasvit\Event\EventData\Quote\SummaryQtyAttribute</item>
+                    <item name="summary_count" xsi:type="object">Mirasvit\Event\EventData\Quote\SummaryCountAttribute</item>
+                    <item name="product_availability" xsi:type="object">Mirasvit\Event\EventData\Quote\ProductAvailabilityAttribute</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Add Order Attributes -->
+    <type name="Mirasvit\Event\EventData\OrderData">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="event_attributes" xsi:type="array">
+                    <item name="payment_method" xsi:type="object">Mirasvit\Event\EventData\Order\PaymentMethodAttribute</item>
+                    <item name="summary_qty" xsi:type="object">Mirasvit\Event\EventData\Order\SummaryQtyAttribute</item>
+                    <item name="summary_count" xsi:type="object">Mirasvit\Event\EventData\Order\SummaryCountAttribute</item>
+                    <item name="time_updated_at" xsi:type="object">Mirasvit\Event\EventData\Order\TimeUpdatedAtAttribute</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Add Custom Condition Group to Event Data -->
+    <type name="Mirasvit\Event\EventData\OrderData">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="condition_group" xsi:type="array">
+                    <item name="product_group" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Products</item>
+                        <item name="value" xsi:type="array">
+                            <item name="1" xsi:type="array">
+                                <item name="value" xsi:type="string">Mirasvit\Event\EventData\Condition\Product\Subselect</item>
+                                <item name="label" xsi:type="string" translate="true">Products Subselection</item>
+                            </item>
+                            <item name="2" xsi:type="array">
+                                <item name="value" xsi:type="string">Mirasvit\Event\EventData\Condition\Product\Different</item>
+                                <item name="label" xsi:type="string" translate="true">Product Attribute Value Comparison</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Mirasvit\Event\EventData\QuoteData">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="condition_group" xsi:type="array">
+                    <item name="product_group" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Products</item>
+                        <item name="value" xsi:type="array">
+                            <item name="1" xsi:type="array">
+                                <item name="value" xsi:type="string">Mirasvit\Event\EventData\Condition\Product\Subselect</item>
+                                <item name="label" xsi:type="string" translate="true">Products Subselection</item>
+                            </item>
+                            <item name="2" xsi:type="array">
+                                <item name="value" xsi:type="string">Mirasvit\Event\EventData\Condition\Product\Different</item>
+                                <item name="label" xsi:type="string" translate="true">Product Attribute Value Comparison</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Add 'Addition Product' Condition Group to Product Event Data -->
+    <type name="Mirasvit\Event\EventData\ProductData">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="condition_group" xsi:type="array">
+                    <item name="product" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Additional Product Conditions</item>
+                        <item name="value" xsi:type="array">
+                            <item name="newest_products" xsi:type="array">
+                                <item name="value" xsi:type="string">Mirasvit\Event\EventData\Condition\Product\Newest</item>
+                                <item name="label" xsi:type="string" translate="true">Newest Products</item>
+                            </item>
+                            <item name="top_selling_products" xsi:type="array">
+                                <item name="value" xsi:type="string">Mirasvit\Event\EventData\Condition\Product\Topselling</item>
+                                <item name="label" xsi:type="string" translate="true">Top Selling Products</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Replace ConditionFactory in CombineCondition -->
+    <virtualType name="VirtualContext" type="Magento\Rule\Model\Condition\Context">
+        <arguments>
+            <argument name="conditionFactory" xsi:type="object">Mirasvit\Event\Model\Rule\ConditionFactory</argument>
+        </arguments>
+    </virtualType>
+    <type name="Mirasvit\Event\Model\Rule\Condition\Combine">
+        <arguments>
+            <argument name="context" xsi:type="object">VirtualContext</argument>
+        </arguments>
+    </type>
+</config>

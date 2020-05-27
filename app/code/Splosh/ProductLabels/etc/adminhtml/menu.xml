@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Splosh_ProductLabels"
+             title="Product Labels"
+             translate="title"
+             module="Splosh_ProductLabels"
+             parent="Acidgreen::top_level"
+             action="splosh_product_labels/action/index"
+             resource="Splosh_ProductLabels::grid"/>
+    </menu>
+</config>

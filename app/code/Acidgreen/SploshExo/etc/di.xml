@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- for future use -->
+    <preference for="Acidgreen\Exo\Helper\ProductInterface" type="Acidgreen\SploshExo\Helper\Product" />
+    <preference for="Acidgreen\Exo\Helper\CustomerInterface" type="Acidgreen\SploshExo\Helper\Customer" />
+    <!-- SPL-135 -->
+    <preference for="Acidgreen\Exo\Helper\Api\Config" type="Acidgreen\SploshExo\Helper\Api\Config" />
+    <preference for="Acidgreen\Exo\Helper\Api\Api" type="Acidgreen\SploshExo\Helper\Api" />
+    <preference for="Acidgreen\Exo\Helper\ImportModelObjectInterface" type="Acidgreen\SploshExo\Helper\ImportModelObject" />
+    <preference for="Acidgreen\Exo\Cron\Pending" type="Acidgreen\SploshExo\Cron\Pending" />
+
+    <preference for="Acidgreen\Exo\Model\Import\Product" type="Acidgreen\SploshExo\Model\Import\Product" />
+    <preference for="Magento\CatalogImportExport\Model\Import\Product" type="Acidgreen\SploshExo\Model\Catalog\Import\Product" />
+
+    <preference for="Acidgreen\Exo\Model\Import\Customer" type="Acidgreen\SploshExo\Model\Import\Customer" />
+    <preference for="Acidgreen\Exo\Model\Import\Order" type="Acidgreen\SploshExo\Model\Import\Order" />
+
+    <!-- SPL-156, SPL-231 -->
+    <preference for="Acidgreen\Exo\Model\Import\Product\StockPrice" type="Acidgreen\SploshExo\Model\Import\Product\StockPrice" />
+
+    <preference for="Magento\ImportExport\Controller\Adminhtml\Import\Start" type="Acidgreen\SploshExo\Controller\Adminhtml\Import\Start" />
+
+    <preference for="Acidgreen\Exo\Model\Process" type="Acidgreen\SploshExo\Model\Process" />
+    <preference for="Acidgreen\Exo\Helper\Import" type="Acidgreen\SploshExo\Helper\Import" />
+    <preference for="Acidgreen\Exo\Cron\ProductStockPriceUpdate" type="Acidgreen\SploshExo\Cron\ProductStockPriceUpdate" />
+    <preference for="Acidgreen\Exo\Block\Adminhtml\Process\Grid\Renderer\Status" type="Acidgreen\SploshExo\Block\Adminhtml\Process\Grid\Renderer\Status" />
+
+    <!-- SPL-135 -->
+	<virtualType name="Acidgreen\SploshExo\Model\ResourceModel\Staff\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">splosh_staff</argument>
+			<argument name="resourceModel" xsi:type="string">Acidgreen\SploshExo\Model\ResourceModel\Staff\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="staff_grid_data_source" xsi:type="string">Acidgreen\SploshExo\Model\ResourceModel\Staff\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+    <!-- SPL-173 -->
+   <type name="Magento\Framework\Console\CommandList">
+       <arguments>
+           <argument name="commands" xsi:type="array">
+               <item name="sploshexoGenerateCategoryUrls" xsi:type="object">Acidgreen\SploshExo\Console\GenerateCategoryUrls</item>
+           </argument>
+       </arguments>
+   </type>
+   <type name="Magento\Quote\Api\CartManagementInterface">
+       <plugin name="Acidgreen_SploshExo::CartManagementInterfacePlugin" type="Acidgreen\SploshExo\Plugin\CartManagementInterfacePlugin" />
+   </type>
+
+   <type name="Acidgreen\Exo\Model\Records\Tosync\OrderCreate">
+       <plugin name="Acidgreen_SploshExo::addExoCurrentWebsiteIdForConfigScope" type="Acidgreen\SploshExo\Plugin\Model\Records\Tosync\OrderCreate" />
+   </type>
+
+   <type name="Acidgreen\Exo\Model\Records\Tosync\OrderCreate">
+       <arguments>
+           <argument name="orderHelper" xsi:type="object">Acidgreen\SploshExo\Helper\Order</argument>
+       </arguments>
+   </type>
+    <type name="Acidgreen\SploshExo\Controller\Adminhtml\Staff\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Acidgreen\SploshExo\Model\ImageUploader</argument>
+        </arguments>
+    </type>
+    <type name="Acidgreen\SploshExo\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="const">\Acidgreen\SploshExo\Helper\Data::PATH_BASE_TEMP_STAFF_PHOTO</argument>
+            <argument name="basePath" xsi:type="const">\Acidgreen\SploshExo\Helper\Data::PATH_BASE_STAFF_PHOTO</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+
+    </type>
+</config>

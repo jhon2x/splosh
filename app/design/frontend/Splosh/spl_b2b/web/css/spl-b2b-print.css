@@ -1,0 +1,16 @@
+@media print {
+	html, body, .return-status, .order-status, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, span.order-status, h1.page-title, .order-date, span, .account .page-main .page-title-wrapper .page-title {
+		font-family: sans-serif !important;
+		color: #000 !important
+    }
+	.columns {
+	    display: block;
+	    color: #999999;
+	    font-family: sans-serif !important
+	}
+      .stock.backorder-only, .backorder-only {
+        color: #aa1903 !important;
+        font-weight: 700;
+        text-transform: uppercase;
+    }  
+}

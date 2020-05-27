@@ -1,0 +1,16 @@
+theme: Base Theme
+title: Customer coming back
+template_subject: Thank you for coming back to us!
+template_areas:
+  header: <h1>Dear {{ customer_name }}!</h1>
+  content: |
+    <p>Thank you for coming back to us! We really appreciate it!</p>
+  footer: |
+    {% if coupon.code %}
+    <div class="offer">
+      Let us offer you a <b>discount</b> to complete your purchase.<br>
+      Your coupon code: <span class="coupon">{{ coupon.code }}</span>
+    </div>
+    {% endif %}
+
+    <p>If you have any questions about our products or services, please <a href="{{ store.store_url }}/contact/">contact with us.</a></p>

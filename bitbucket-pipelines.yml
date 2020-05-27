@@ -1,0 +1,35 @@
+image: 1and1internet/ubuntu-16-apache-php-7.0-magento-2
+pipelines:
+  branches:
+    develop:
+      - step:
+          name: Deploy Staging
+          deployment: staging
+          caches:
+            - composer
+          artifacts:
+            - vendor/**
+          script:
+            - apt-get update && apt-get install -y unzip openssh-client rsync && apt-get install -y git
+            - echo "$AUTH" > auth.json
+            - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+            - composer global require jalogut/magento2-deployer-plus
+            - composer global require deployer/deployer
+            - composer global require deployer/recipes --dev
+            - /root/.composer/vendor/bin/dep deploy staging -vvv
+    master:
+      - step:
+          name: Deploy Production
+          deployment: production
+          caches:
+            - composer
+          artifacts:
+            - vendor/**
+          script:
+            - apt-get update && apt-get install -y unzip openssh-client rsync && apt-get install -y git
+            - echo "$AUTH" > auth.json
+            - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+            - composer global require jalogut/magento2-deployer-plus
+            - composer global require deployer/deployer
+            - composer global require deployer/recipes --dev
+            - /root/.composer/vendor/bin/dep deploy master -vvv

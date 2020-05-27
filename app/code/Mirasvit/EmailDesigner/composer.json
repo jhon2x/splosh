@@ -1,0 +1,22 @@
+{
+  "name": "mirasvit/module-email-designer",
+  "description": "Email Designer",
+  "require": {
+    "mirasvit/module-core": ">=1.2.46",
+    "liquid/liquid": "~1.4",
+    "zf1/zend-reflection": "*"
+  },
+  "type": "magento2-module",
+  "version": "1.1.32",
+  "license": [
+    "proprietary"
+  ],
+  "autoload": {
+    "files": [
+      "src/EmailDesigner/registration.php"
+    ],
+    "psr-4": {
+      "Mirasvit\\EmailDesigner\\": "src/EmailDesigner"
+    }
+  }
+}

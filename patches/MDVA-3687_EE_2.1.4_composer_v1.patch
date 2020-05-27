@@ -1,0 +1,212 @@
+diff --git a/vendor/magento/module-staging/Model/Update/Cleaner.php b/vendor/magento/module-staging/Model/Update/Cleaner.php
+index 49de7fe554..3f61de8a1c 100644
+--- a/vendor/magento/module-staging/Model/Update/Cleaner.php
++++ b/vendor/magento/module-staging/Model/Update/Cleaner.php
+@@ -5,11 +5,12 @@
+  */
+ namespace Magento\Staging\Model\Update;
+ 
++use Magento\Framework\Api\FilterBuilder;
++use Magento\Framework\Api\SearchCriteria;
++use Magento\Framework\Api\SearchCriteriaBuilder;
+ use Magento\Staging\Api\Data\UpdateInterface;
+ use Magento\Staging\Model\Update\Includes\Retriever as IncludesRetriever;
+ use Magento\Staging\Model\UpdateRepository;
+-use Magento\Framework\Api\SearchCriteriaBuilder;
+-use Magento\Framework\Api\FilterBuilder;
+ use Magento\Staging\Model\VersionHistoryInterface;
+ 
+ class Cleaner
+@@ -30,11 +31,6 @@ class Cleaner
+     private $includes;
+ 
+     /**
+-     * @var FilterBuilder
+-     */
+-    private $filterBuilder;
+-
+-    /**
+      * @var VersionHistoryInterface
+      */
+     private $versionHistory;
+@@ -45,6 +41,7 @@ class Cleaner
+      * @param IncludesRetriever $includes
+      * @param FilterBuilder $filterBuilder
+      * @param VersionHistoryInterface $versionHistory
++     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+      */
+     public function __construct(
+         UpdateRepository $updateRepository,
+@@ -56,7 +53,6 @@ class Cleaner
+         $this->updateRepository = $updateRepository;
+         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+         $this->includes = $includes;
+-        $this->filterBuilder = $filterBuilder;
+         $this->versionHistory = $versionHistory;
+     }
+ 
+@@ -67,71 +63,95 @@ class Cleaner
+      */
+     public function execute()
+     {
+-        $updateList = $this->getUpdateList();
+-        $movedIds = $this->getMovedToUpdateIds();
+-        $updateIds = array_map(function (UpdateInterface $item) {
+-            return $item->getId();
+-        }, $updateList->getItems());
+-
+-        $updateIds = array_diff($updateIds, $movedIds);
++        $updatesToDelete = $this->getDeleteIdList();
+ 
+-        $includes = $this->includes->getIncludes($updateIds);
+-        $notEmptyUpdates = array_unique(array_column($includes, 'created_in'));
+-        $idsToDelete = array_diff($updateIds, $notEmptyUpdates);
+-        $updatesToDelete = array_filter($updateList->getItems(), function (UpdateInterface $update) use ($idsToDelete) {
+-            return in_array($update->getId(), $idsToDelete);
+-        });
+-        foreach ($updatesToDelete as $update) {
+-            $this->updateRepository->delete($update);
++        if (!empty($updatesToDelete)) {
++            $this->searchCriteriaBuilder->addFilter('id', $updatesToDelete, 'in');
++            $updatesToDelete = $this->getListItemsBySearchCriteria($this->searchCriteriaBuilder->create());
++            foreach ($updatesToDelete as $update) {
++                $this->updateRepository->delete($update);
++            }
+         }
+     }
+ 
+     /**
+-     * @return \Magento\Staging\Api\Data\UpdateSearchResultInterface
++     * Gets list of updates ids which not equal to the current update's version.
++     *
++     * @return array
+      */
+-    private function getUpdateList()
++    private function getUpdateIdList()
+     {
+-        $this->searchCriteriaBuilder->addFilters(
+-            [
+-                //exclude campaigns which were changed but not synchronized with their entities yet
+-                $this->filterBuilder
+-                    ->setField('moved_to')
+-                    ->setConditionType('null')
+-                    ->create(),
+-                $this->filterBuilder
+-                    ->setField('is_rollback')
+-                    ->setConditionType('null')
+-                    ->create(),
+-                // exclude active update
+-                $this->filterBuilder
+-                    ->setField('id')
+-                    ->setConditionType('neq')
+-                    ->setValue($this->versionHistory->getCurrentId())
+-                    ->create()
+-            ]
+-        );
+-        $searchCriteria = $this->searchCriteriaBuilder->create();
+-        return $this->updateRepository->getList($searchCriteria);
++        $this->searchCriteriaBuilder->addFilter('moved_to', null, 'null');
++        $this->searchCriteriaBuilder->addFilter('is_rollback', null, 'null');
++        $this->searchCriteriaBuilder->addFilter('id', $this->versionHistory->getCurrentId(), 'neq');
++
++        $updateIds = array_keys($this->getListItemsBySearchCriteria($this->searchCriteriaBuilder->create()));
++        $rollbackIds = $this->getPastRollbackIdList();
++        $updateIds = array_merge($updateIds, $rollbackIds);
++        $movedIds = $this->getMovedToIdList();
++        return array_diff($updateIds, $movedIds);
+     }
+ 
+     /**
++     * Gets list of rollback ids in the past without updates.
++     * 
+      * @return array
+      */
+-    private function getMovedToUpdateIds()
++    private function getPastRollbackIdList()
+     {
+-        $this->searchCriteriaBuilder->addFilters(
+-            [
+-                $this->filterBuilder
+-                    ->setField('moved_to')
+-                    ->setConditionType('notnull')
+-                    ->create()
+-            ]
+-        );
+-        $searchCriteria = $this->searchCriteriaBuilder->create();
+-        $list = [];
+-        foreach ($this->updateRepository->getList($searchCriteria) as $item) {
+-            $list[] = $item->getMovedTo();
+-        }
+-        return $list;
++        // get list of rollback ids
++        $this->searchCriteriaBuilder->addFilter('is_rollback', null, 'notnull');
++        $this->searchCriteriaBuilder->addFilter('id', $this->versionHistory->getCurrentId(), 'lt');
++        $rollbackIdList = array_keys($this->getListItemsBySearchCriteria($this->searchCriteriaBuilder->create()));
++
++        // get list of rollbacks with updates
++        $this->searchCriteriaBuilder->addFilter('rollback_id', $rollbackIdList, 'in');
++        $items = $this->getListItemsBySearchCriteria($this->searchCriteriaBuilder->create());
++        $rollbackIdListWithUpdates = array_map(function (UpdateInterface $update) {
++            return $update->getRollbackId();
++        }, $items);
++
++        // filter only rollbacks without updates
++        return array_diff($rollbackIdList, $rollbackIdListWithUpdates);
++    }
++
++    /**
++     *
++     * Gets id list of moved to updates.
++     *
++     * @return array
++     */
++    private function getMovedToIdList()
++    {
++        $this->searchCriteriaBuilder->addFilter('moved_to', null, 'notnull');
++        $items = $this->getListItemsBySearchCriteria($this->searchCriteriaBuilder->create());
++        return array_map(function (UpdateInterface $update) {
++            return $update->getMovedTo();
++        }, $items);
++    }
++
++    /**
++     * Gets list of updates ids which should be deleted.
++     *
++     * @return array
++     */
++    private function getDeleteIdList()
++    {
++        $updateIds = $this->getUpdateIdList();
++        $includes = $this->includes->getIncludes($updateIds);
++        $includeIdList = array_unique(array_column($includes, 'created_in'));
++        return array_diff($updateIds, $includeIdList);
++    }
++
++    /**
++     * Gets items by search criteria.
++     *
++     * @param SearchCriteria $searchCriteria
++     * @return UpdateInterface[]
++     */
++    private function getListItemsBySearchCriteria(SearchCriteria $searchCriteria)
++    {
++        return $this->updateRepository->getList($searchCriteria)
++            ->getItems();
+     }
+ }
+diff --git a/vendor/magento/module-staging/Model/UpdateRepository.php b/vendor/magento/module-staging/Model/UpdateRepository.php
+index cd3bba8efe..bcd0d84d7d 100644
+--- a/vendor/magento/module-staging/Model/UpdateRepository.php
++++ b/vendor/magento/module-staging/Model/UpdateRepository.php
+@@ -138,8 +138,9 @@ class UpdateRepository implements UpdateRepositoryInterface
+             if ($this->versionHistory->getCurrentId() == $entity->getId()) {
+                 throw new CouldNotDeleteException(__('Active update can not be deleted'));
+             }
+-            if ($entity->getRollbackId()) {
+-                $this->resource->delete($this->get($entity->getRollbackId()));
++            $rollbackId = $entity->getRollbackId();
++            if ($rollbackId && $rollbackId !== $this->getVersionMaxIdByTime(time())) {
++                $this->resource->delete($this->get($rollbackId));
+             }
+             $this->resource->delete($entity);
+         } catch (\Exception $exception) {

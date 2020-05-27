@@ -1,0 +1,3 @@
+<?php if ($block->isWebsiteRestrictionEnabled()): ?>
+<input type="hidden" name="referer" class="referer input" value="<?php echo $block->getRefererUrl() ?>" />
+<?php endif; ?>

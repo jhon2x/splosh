@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- might conflict with SPL-255 -->
+    <!--<preference for="Magento\Catalog\Block\Product\ListProduct" type="Acidgreen\Catalog\Block\Product\ListProduct" />-->
+    <preference for="Magento\Catalog\Block\Product\View" type="Acidgreen\Catalog\Block\Product\View" />
+    <!-- SPL-252 -->
+    <preference for="Magento\Catalog\Controller\Product\View" type="Acidgreen\Catalog\Controller\Product\View" />
+    <preference for="Magento\Catalog\Helper\Product\View" type="Acidgreen\Catalog\Helper\Product\View" />
+</config>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<section id="commissionfactory" type="text" sortOrder="999" showInDefault="1" showInWebsite="1" showInStore="1">
+			<label>Commission Factory</label>
+			<tab>sales</tab>
+			<resource>CommissionFactory_Tracking::commissionfactory</resource>
+			<group id="tracking" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Commission Factory Tracking</label>
+				<field id="advertiser" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Advertiser ID</label>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

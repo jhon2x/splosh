@@ -1,0 +1,36 @@
+From 7a03421e7bb6cde60b11141a66fc8a1618b0d000 Mon Sep 17 00:00:00 2001
+From: Ivan Novykov <inovykov@magento.com>
+Date: Sat, 3 Jun 2017 11:44:55 +0300
+Subject: [PATCH] MDVA-3505: Incorrect url in reset password email for customer
+ account
+
+---
+ vendor/magento/module-customer/Model/EmailNotification.php | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/vendor/magento/module-customer/Model/EmailNotification.php b/vendor/magento/module-customer/Model/EmailNotification.php
+index bf7ff59105b..4f362ccada6 100644
+--- a/vendor/magento/module-customer/Model/EmailNotification.php
++++ b/vendor/magento/module-customer/Model/EmailNotification.php
+@@ -268,8 +268,7 @@ private function getWebsiteStoreId($customer, $defaultStoreId = null)
+     {
+         if ($customer->getWebsiteId() != 0 && empty($defaultStoreId)) {
+             $storeIds = $this->storeManager->getWebsite($customer->getWebsiteId())->getStoreIds();
+-            reset($storeIds);
+-            $defaultStoreId = current($storeIds);
++            $defaultStoreId = reset($storeIds);
+         }
+         return $defaultStoreId;
+     }
+@@ -282,9 +281,9 @@ private function getWebsiteStoreId($customer, $defaultStoreId = null)
+      */
+     public function passwordReminder(CustomerInterface $customer)
+     {
+-        $storeId = $this->storeManager->getStore()->getId();
++        $storeId = $this->getWebsiteStoreId($customer);
+         if (!$storeId) {
+-            $storeId = $this->getWebsiteStoreId($customer);
++            $storeId = $this->storeManager->getStore()->getId();
+         }
+ 
+         $customerEmailData = $this->getFullCustomerObject($customer);

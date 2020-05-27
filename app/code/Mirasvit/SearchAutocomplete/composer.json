@@ -1,0 +1,25 @@
+{
+  "name": "mirasvit/module-search-autocomplete",
+  "description": "Search Autocomplete & Suggest",
+  "require": {
+    "magento/framework": "100.1.*|100.2.*|101.0.*|102.0.*",
+    "mirasvit/module-core": "dev-master|>=1.2.75"
+  },
+  "conflict": {
+    "mirasvit/module-search-sphinx": "1.0.*|<=1.1.43",
+    "mirasvit/module-search-elastic": "<=1.2.37"
+  },
+  "type": "magento2-module",
+  "version": "1.1.96",
+  "license": [
+    "proprietary"
+  ],
+  "autoload": {
+    "files": [
+      "src/SearchAutocomplete/registration.php"
+    ],
+    "psr-4": {
+      "Mirasvit\\SearchAutocomplete\\": "src/SearchAutocomplete"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+title: Customer Re-Engagement Campaign
+description: This campaign helps you to attract and win the interest of inactive audience of your store. Use this simple re-engagement strategy to win back inactive customers.
+is_active: 1
+triggers:
+    6_we_miss_you
+    9_we_miss_you

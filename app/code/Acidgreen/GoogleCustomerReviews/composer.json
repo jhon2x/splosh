@@ -1,0 +1,22 @@
+{
+    "name": "acidgreen/module-googlecustomerreviews",
+    "description": "Module for Google Customer Reviews",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "email": "josephson.eduardo@acidgreen.com.au",
+            "name": "acidgreen"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Acidgreen\\GoogleCustomerReviews\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

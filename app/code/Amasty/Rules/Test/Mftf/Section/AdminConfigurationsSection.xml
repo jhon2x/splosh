@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+
+    <section name="AdminConfigurationsRulesSection">
+        <element name="SkipItemsWithSpecialPrice" type="selector" selector="//select[@id='amrules_skip_price_skip_special_price']"/>
+        <element name="SkipConfigurableItemsWhenChildHasSpecialPrice" type="select" selector="//select[@id='amrules_skip_price_skip_special_price_configurable']"/>
+        <element name="SkipSettingsTab" type="button" selector="//a[@id='amrules_skip_price-head']"/>
+        <element name="SkipSettingsTabOpen" type="block" selector="//div[@class='entry-edit-head admin__collapsible-block']/span[@id='amrules_skip_price-link']/following-sibling::a[@class='open']"/>
+        <element name="Save" type="button" selector="//div[@class='page-actions-buttons']/button[@id='save']"/>
+    </section>
+
+</sections>

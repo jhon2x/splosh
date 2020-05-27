@@ -1,0 +1,26 @@
+<?php
+/** @var \Acidgreen\SploshBackorder\Block\Checkout\Cart\Additional\Info $block */
+$otherProductData = $block->getOtherProductData();
+$cartStockzoneItem = $block->getCartStockzoneItem();
+$itemProduct = $block->getItem();
+
+if (!$itemProduct instanceof \Magento\Catalog\Model\Product) {
+    $itemProduct = $block->getItem()->getProduct();
+}
+?>
+
+<?php if (!empty($otherProductData) && !empty($otherProductData->getForceBackorder())): ?>
+    <div class="backorder-only">Backorder Only</div>
+    <span>Due Date: <?php echo $otherProductData->getExoDueDate() ?></span>
+<?php endif; ?>
+
+<?php
+$regularPrice = $itemProduct->getPriceInfo()->getPrice('regular_price')->getAmount()->getValue();
+$finalPrice = $itemProduct->getPriceInfo()->getPrice('final_price')->getAmount()->getValue();
+$hasSpecialPrice = $finalPrice < $regularPrice;
+?>
+<?php if ($hasSpecialPrice): ?>
+<div class="item sale">
+    <span><?php echo __('Sale'); ?></span>
+</div>
+<?php endif; ?>

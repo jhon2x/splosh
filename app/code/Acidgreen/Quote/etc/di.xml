@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<type name="Magento\Quote\Model\Cart\CartTotalRepository">
+		<plugin disabled="false" name="Acidgreen_Quote_Plugin_Magento_Quote_Model_Cart_CartTotalRepository"  type="Acidgreen\Quote\Plugin\Magento\Quote\Model\Cart\CartTotalRepository"/>
+	</type>
+</config>

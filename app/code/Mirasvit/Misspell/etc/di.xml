@@ -1,0 +1,26 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Mirasvit\Misspell\Api\Repository\ProviderRepositoryInterface"
+                type="Mirasvit\Misspell\Repository\ProviderRepository"/>
+
+    <type name="Mirasvit\Misspell\Api\Repository\ProviderRepositoryInterface">
+        <arguments>
+            <argument name="providers" xsi:type="array">
+                <item name="mysql" xsi:type="object">Mirasvit\Misspell\Provider\Mysql</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Indexer\Model\Config\Data">
+        <plugin name="mstMisspellIndexerConfig" type="Mirasvit\Misspell\Plugin\IndexerConfigDataPlugin"/>
+    </type>
+
+    <type name="Mirasvit\Core\Service\ValidationService">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="misspell" xsi:type="object">Mirasvit\Misspell\Service\ValidationService</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

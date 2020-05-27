@@ -1,0 +1,10 @@
+title: Customer Engagement Campaign
+description: Create a close relationship between you and your customers. Encourage your store's customers in order to foster a long-term loyalty.
+is_active: 1
+triggers:
+    2_birthday
+    3_coming_back
+    5_review_request
+    7_product_view
+    8_welcome
+    10_anniversary

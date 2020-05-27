@@ -1,0 +1,19 @@
+title: Review Request
+description:
+store_ids:
+    - 0
+is_active: 0
+event: order_status|complete
+campaign_id: 2
+chain:
+    new_0:
+        template_id: 2
+        day: 10
+        hour: 0
+        minute: 0
+        cross_sells_enabled: 1
+        cross_sells_type_id: mage_cross
+ga_source: "follow-up-email"
+ga_medium: email
+ga_name: review request
+trigger_type: ''

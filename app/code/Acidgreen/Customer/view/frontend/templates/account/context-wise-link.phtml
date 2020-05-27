@@ -1,0 +1,10 @@
+<?php $websiteCode = $block->getWebsiteCode() ?>
+<?php if (!$block->isLoggedIn() && ($websiteCode=="default" || !$websiteCode)): ?>
+    <li>
+        <a href="<?= $block->getHref() ?>"> <?= $block->getLabel() ?></a>
+    </li>
+<?php elseif(!$block->isLoggedIn() && $websiteCode=="nz_b2c_store_view"): ?>
+    <li>
+        <a href="<?= $block->getHref() ?>"> <?= $block->getLabel() ?></a>
+    </li>
+<?php endif; ?>

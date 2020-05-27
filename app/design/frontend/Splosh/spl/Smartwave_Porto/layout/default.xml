@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="page.wrapper">
+            <referenceBlock name="porto_header">
+                <referenceBlock name="header_customer_form_login" remove="true" />
+                <block class="Magento\Cms\Block\Block" name="social.header" as="social.header">
+				    <arguments>
+				        <argument name="block_id" xsi:type="string">spl_social_icon_header</argument>
+				    </arguments>
+				</block>
+            </referenceBlock>
+        </referenceContainer>
+        <referenceBlock name="header.links">
+            <referenceBlock name="custom_link" remove="true" />
+            <block class="Acidgreen\Customer\Block\Account\ContextWiseLink" name="become-a-stockist-link" template="Acidgreen_Customer::account/context-wise-link.phtml" before="customer">
+                <arguments>
+                    <argument name="label" xsi:type="string">Become A Stockist</argument>
+                    <argument name="path" xsi:type="string">become-a-stockist</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

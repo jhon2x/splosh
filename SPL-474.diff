@@ -1,0 +1,17 @@
+diff --git a/app/code/Afterpay/Afterpay/view/frontend/web/js/view/payment/method-renderer/afterpaypayovertime.js b/app/code/Afterpay/Afterpay/view/frontend/web/js/view/payment/method-renderer/afterpaypayovertime.js
+index 679a3b80..3a523414 100644
+--- a/app/code/Afterpay/Afterpay/view/frontend/web/js/view/payment/method-renderer/afterpaypayovertime.js
++++ b/app/code/Afterpay/Afterpay/view/frontend/web/js/view/payment/method-renderer/afterpaypayovertime.js
+@@ -128,10 +128,10 @@ define(
+                             if( data.success && (typeof data.token !== 'undefined' && data.token !== null && data.token.length) ) {
+
+                                 //Init Afterpay
+-                                AfterPay.init();
++                                AfterPay.initialize({countryCode: "AU"});
+
+                                 //Waiting for all AJAX calls to resolve to avoid error messages upon redirection
+-                                $("body").ajaxStop(function() {
++                                $(document).ajaxStop(function() {
+                                     switch (window.Afterpay.checkoutMode) {
+                                         case 'lightbox':
+                                             AfterPay.display({

@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="location_grid_data_source" xsi:type="string">Splosh\SalesRep\Model\ResourceModel\Location\Grid\Collection</item>
+                <item name="location_form_data_source" xsi:type="string">Splosh\SalesRep\Model\ResourceModel\Location\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Splosh\SalesRep\Model\ResourceModel\Location\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">splosh_staff_location_mapping</argument>
+            <argument name="eventPrefix" xsi:type="string">splosh_staff_location_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">splosh_staff_location_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Splosh\SalesRep\Model\ResourceModel\Location</argument>
+        </arguments>
+    </type>
+</config>

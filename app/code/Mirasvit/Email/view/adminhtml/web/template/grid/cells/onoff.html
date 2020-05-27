@@ -1,0 +1,22 @@
+<div class="admin__actions-switch">
+    <input class="admin__actions-switch-checkbox"
+           type="checkbox"
+           data-bind="
+               event: { change: toggleState },
+               staticChecked: $row()[$col.indexField] == 1,
+               value: $row()[$row().id_field_name],
+               attr: {
+                   id: 'check' + $row()[$row().id_field_name]
+               }">
+    <label class="admin__actions-switch-label"
+           data-bind="
+               attr: {
+                   for: 'check' + $row()[$row().id_field_name]
+               }">
+        <span data-bind="attr: {
+                   'data-text-on': $t('Yes'),
+                   'data-text-off': $t('No')
+              }"
+              class="admin__actions-switch-text"></span>
+    </label>
+</div>

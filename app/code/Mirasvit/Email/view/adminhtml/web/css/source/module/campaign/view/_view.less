@@ -1,0 +1,209 @@
+.mst-email__campaign-view {
+    .trigger {
+        margin-bottom: 5rem;
+
+        header {
+            display: flex;
+            width: 100%;
+            border-bottom: 1px solid #DFE3E8;
+            padding-bottom: 1rem;
+
+            .status {
+                background: #C4CDD5;
+                width: 1.4rem;
+                height: 1.4rem;
+                border-radius: 100%;
+                display: inline-block;
+                margin-right: .5rem;
+                margin-top: .3rem;
+
+                &.active {
+                    background: #50B83C;
+                }
+            }
+
+            h2 {
+                font-size: 1.8rem;
+                font-weight: 600;
+                margin-bottom: 0;
+            }
+
+            .actions {
+                text-align: right;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                margin-left: auto;
+
+                > div {
+                    margin: 0 1rem 0 0;
+
+                    a {
+                        cursor: pointer;
+                    }
+
+                    &:after {
+                        margin-left: 1rem;
+                        content: "\2022";
+                        color: #e3e3e3;
+                    }
+
+                    &:last-child {
+                        margin-right: 0;
+
+                        &:after {
+                            margin-left: 0;
+                            content: "";
+                        }
+                    }
+                }
+            }
+        }
+
+        section {
+            border: 1px solid #dfe3e8;
+            border-top: 0;
+            margin-left: 5rem;
+            padding-top: 2rem;
+            border-radius: 0 0 2px 2px;
+        }
+
+        .info {
+            display: flex;
+            margin-bottom: 3rem;
+            align-content: center;
+            align-items: center;
+
+            .item {
+                border-right: 1px solid #DFE3E8;
+                flex-grow: 1;
+                text-align: center;
+
+                &:last-child {
+                    border: none;
+                }
+
+                .item__inner {
+                    width: 50%;
+                    margin: 0 auto;
+                    border: 2px dashed #DFE3E8;
+                    border-radius: 3px;
+                    padding: 1rem;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                strong {
+                    display: inline-block;
+                    margin-bottom: .5rem;
+                }
+            }
+        }
+
+        .chains {
+            background: #f4f6f8;
+            padding: 3rem;
+            border-radius: 2px;
+
+            .chains-table {
+                width: 100%;
+
+                .caption {
+                    font-size: 16px;
+                    font-weight: 600;
+                    text-align: left;
+                }
+
+                th {
+                    font-size: 1.4rem;
+                    font-weight: 600;
+                    vertical-align: bottom;
+                    padding: 1.3rem 1rem 1.3rem 1rem;
+                    white-space: nowrap;
+                }
+
+                .col-actions {
+                    width: 30rem;
+                }
+            }
+
+            .chain {
+                border-bottom: 1px solid #DFE3E8;
+
+                .fa-envelope {
+                    position: relative;
+                    margin-left: 8rem;
+                    display: flex;
+                    padding-bottom: 1rem;
+                    margin-top: 2rem;
+
+                    &:before {
+                        font: normal normal normal 6rem/1 FontAwesome;
+                        color: #DFE3E8;
+                        position: absolute;
+                        z-index: 1;
+                        left: -8rem;
+                        top: -1rem;
+                        text-align: left;
+                    }
+                }
+
+                .col-actions {
+                    .actions {
+                        text-align: right;
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+
+                        > div {
+                            margin: 0 1rem 0 0;
+
+                            a {
+                                cursor: pointer;
+                                white-space: nowrap;
+                            }
+
+                            &:after {
+                                margin-left: 1rem;
+                                content: "\2022";
+                                color: #e3e3e3;
+                            }
+
+                            &:last-child {
+                                margin-right: 0;
+
+                                &:after {
+                                    margin-left: 0;
+                                    content: "";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .new-btn {
+                margin-top: 2rem;
+            }
+        }
+
+        .action {
+            cursor: pointer;
+        }
+    }
+
+    ._inactive {
+        section {
+            opacity: 0.6;
+        }
+    }
+}
+
+.modal-slide {
+    .admin__action-multiselect-crumb {
+        .action-close {
+            padding: 0;
+            font-size: .5rem;
+        }
+    }
+}

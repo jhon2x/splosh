@@ -1,0 +1,120 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * Catalog Event product page
+ *
+ * @var $block \Magento\CatalogEvent\Block\Catalog\Product\Event
+ */
+?>
+<?php $_event = $block->getEvent(); ?>
+<?php if ($block->canDisplay()): ?>
+<div class="container">
+<div class="block block-category-event <?php /* @escapeNotVerified */ echo $_event->getStatus()?>">
+    <div class="event-title">
+        <em class="porto-icon-tag-line"></em>
+        <?php switch ($_event->getStatus()):
+            case 'upcoming': ?>
+        <p><?php echo __("Don't Miss Out"); ?></p>
+        <h4><?php echo __("Sale Coming Soon:"); ?></h4>
+        <?php break;
+            case 'open': ?>
+        <p><?php echo __("Hurry Up"); ?></p>
+        <h4><?php echo __("Sale Ends In:"); ?></h4>
+        <?php break;
+            case 'closed': ?>
+        <p><?php echo __("Wooops"); ?></p>
+        <h4><?php echo __("Sale Ended:"); ?></h4>
+        <?php break; ?>
+        <?php endswitch; ?>
+    </div>
+    <div class="event-ticker">
+        <?php switch ($_event->getStatus()):
+            case 'upcoming': ?>
+            <div class="dates">
+                <div class="start">
+                <?php
+                    $start_date=date_create($block->getEventDate('start', $_event));
+                ?>
+                    <span class="desc"><?php echo __('Starts At:'); ?></span>
+                    <span class="date"><?php echo date_format($start_date,"d"); ?></span>
+                    <span class="year-month"><?php echo date_format($start_date,"M Y"); ?></span>
+                    <span class="time"><?php echo $block->getEventTime('start', $_event, 'hh a zzz'); ?></span>
+                </div>
+                <div class="end">
+                <?php
+                    $end_date=date_create($block->getEventDate('end', $_event));
+                ?>
+                    <span class="desc"><?php echo __('Ends At:'); ?></span>
+                    <span class="date"><?php echo date_format($end_date,"d"); ?></span>
+                    <span class="year-month"><?php echo date_format($end_date,"M Y"); ?></span>
+                    <span class="time"><?php echo $block->getEventTime('end', $_event, 'hh a zzz'); ?></span>
+                </div>
+            </div>
+        <?php break;
+            case 'open': ?>
+            <ul class="ticker" id="event-ticker-<?php /* @escapeNotVerified */ echo $_event->getId() ?>"
+                data-mage-init='{"ticker":{"secondsToClose": <?php /* @escapeNotVerified */ echo $block->getSecondsToClose($_event); ?>}}'>
+                <li class="days">
+                    <span data-container="days" class="value">&nbsp;</span>
+                    <span class="label"><?php /* @escapeNotVerified */ echo __('Days') ?></span>
+                </li>
+                <li class="hour">
+                    <span data-container="hour" class="value">&nbsp;</span>
+                    <span class="label"><?php /* @escapeNotVerified */ echo __('Hrs') ?></span>
+                </li>
+                <li class="minute">
+                    <span data-container="minute" class="value">&nbsp;</span>
+                    <span class="label"><?php /* @escapeNotVerified */ echo __('Mins') ?></span>
+                </li>
+                <li class="second">
+                    <span data-container="second" class="value">&nbsp;</span>
+                    <span class="label"><?php /* @escapeNotVerified */ echo __('Sec') ?></span>
+                </li>
+            </ul>
+        <?php break;
+            case 'closed': ?>
+            <div class="dates">
+                <div class="start">
+                <?php
+                    $start_date=date_create($block->getEventDate('start', $_event));
+                ?>
+                    <span class="desc"><?php echo __('Started At:'); ?></span>
+                    <span class="date"><?php echo date_format($start_date,"d"); ?></span>
+                    <span class="year-month"><?php echo date_format($start_date,"M Y"); ?></span>
+                    <span class="time"><?php echo $block->getEventTime('start', $_event, 'hh a zzz'); ?></span>
+                </div>
+                <div class="end">
+                <?php
+                    $end_date=date_create($block->getEventDate('end', $_event));
+                ?>
+                    <span class="desc"><?php echo __('Ended At:'); ?></span>
+                    <span class="date"><?php echo date_format($end_date,"d"); ?></span>
+                    <span class="year-month"><?php echo date_format($end_date,"M Y"); ?></span>
+                    <span class="time"><?php echo $block->getEventTime('end', $_event, 'hh a zzz'); ?></span>
+                </div>
+            </div>
+        <?php break; ?>
+        <?php endswitch; ?>
+    </div>
+    <div class="event-desc">
+        <?php switch ($_event->getStatus()):
+            case 'upcoming': ?>
+            <?php echo __('Stay Tuned!'); ?>
+        <?php break;
+            case 'open': ?>
+            <?php echo __('Last Chance To Buy!'); ?>
+        <?php break;
+            case 'closed': ?>
+            <?php echo __('New Sale Coming Soon!'); ?>
+        <?php break; ?>
+        <?php endswitch; ?>
+    </div>
+</div>
+</div>
+<?php endif; ?>

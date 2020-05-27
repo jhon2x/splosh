@@ -1,0 +1,34 @@
+theme: Base Theme
+title: Anniversary
+template_subject: A great big thank you!
+template_areas:
+  header: <h1>Happy Anniversary!</h1>
+  content: |
+    <p>We just wanted to say thank you for being a 1-year {{ store.store_name }} customer!</p>
+    <p>We hope the experience met your expectations.</p>
+
+    {% if coupon.code %}
+    <p style="text-align:center;">
+       <span style="font-size: 55px; font-weight: bold;">Enjoy</span> <span style="font-size: 95px; font-weight: bold;">15%</span> <span style="font-size: 55px; font-weight: bold;">off</span>
+    </p>
+
+    <div class="offer">
+      Your coupon code: <span class="coupon">{{ coupon.code }}</span>
+    </div>
+
+    <table class="button" width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td>
+          <table class="inner-wrapper" border="0" cellspacing="0" cellpadding="0" align="center">
+            <tr>
+              <td align="center">
+                <a href="{{ store.store_url }}">Shop Now</a>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    {% endif %}
+  footer: |
+    <p>If you have any questions about our products or services, please <a href="{{ store.store_url }}/contact/">contact with us.</a></p>

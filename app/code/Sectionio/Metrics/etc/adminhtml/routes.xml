@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Section.io. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/
+Framework/App/etc/routes.xsd">
+    <router id="admin">
+        <route id="metrics" frontName="metrics">
+            <module name="Sectionio_Metrics" before="Magento_Adminhtml" />
+        </route>
+    </router>
+</config>

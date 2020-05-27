@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">email_campaign_listing.email_campaign_listing_data_source</item>
+            <item name="deps" xsi:type="string">email_campaign_listing.email_campaign_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">listing</item>
+        <item name="buttons" xsi:type="array">
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">add</item>
+                <item name="label" xsi:type="string" translate="true">Create Campaign</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="on_click" xsi:type="string"/>
+                <item name="data_attribute" xsi:type="array">
+                    <item name="mage-init" xsi:type="array">
+                        <item name="buttonAdapter" xsi:type="array">
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">email_campaign_listing.email_campaign_listing.modals.campaign_new_form_modal</item>
+                                    <item name="actionName" xsi:type="string">setTitle</item>
+                                    <item name="params" xsi:type="array">
+                                        <item name="0" xsi:type="string" translate="true">Create Campaign</item>
+                                    </item>
+                                </item>
+                                <item name="1" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">email_campaign_listing.email_campaign_listing.modals.campaign_new_form_modal</item>
+                                    <item name="actionName" xsi:type="string">toggleModal</item>
+                                </item>
+                                <item name="2" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">email_campaign_listing.email_campaign_listing.modals.campaign_new_form_modal.email_campaign_new_form</item>
+                                    <item name="actionName" xsi:type="string">render</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </item>
+        </item>
+    </argument>
+
+    <dataSource name="email_campaign_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Mirasvit\Email\Ui\Campaign\Listing\DataProvider</argument>
+            <argument name="name" xsi:type="string">email_campaign_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">campaign_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+
+    <container name="listing" class="Mirasvit\Email\Ui\Campaign\Listing\Listing">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="sortOrder" xsi:type="number">10</item>
+                <item name="template" xsi:type="string">Mirasvit_Email/campaign/listing/listing</item>
+                <item name="helpTemplate" xsi:type="string">Mirasvit_Email/campaign/listing/help</item>
+                <item name="overviewTemplate" xsi:type="string">Mirasvit_Email/campaign/listing/help</item>
+                <item name="component" xsi:type="string">Mirasvit_Email/js/campaign/listing/listing</item>
+                <item name="campaignDeleteMsg" xsi:type="string" translate="true">Are you sure you want to delete this campaign?</item>
+            </item>
+        </argument>
+    </container>
+
+    <container name="modals">
+        <modal name="campaign_new_form_modal">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="isTemplate" xsi:type="boolean">false</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="state" xsi:type="string">!index=email_campaign_new_form:responseStatus</item>
+                    </item>
+                    <item name="options" xsi:type="array">
+                        <!--<item name="type" xsi:type="string">popup</item>-->
+                        <item name="type" xsi:type="string">slide</item>
+                        <item name="title" xsi:type="string">Create Campaign</item>
+                    </item>
+                </item>
+            </argument>
+            <insertForm name="email_campaign_new_form">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <!--<item name="formSubmitType" xsi:type="string">ajax</item>-->
+                        <item name="component" xsi:type="string">Mirasvit_Email/js/campaign/form/components/insert-form</item>
+                        <item name="toolbarContainer" xsi:type="string">${ $.parentName }</item>
+                        <item name="ns" xsi:type="string">email_campaign_new_form</item>
+                        <item name="externalProvider" xsi:type="string">${ $.ns }.${ $.ns }_data_source</item>
+                        <item name="listens" xsi:type="array">
+                            <item name="${ $.parentName }:state" xsi:type="string">onState</item>
+                        </item>
+                        <item name="render_url" xsi:type="url" path="mui/index/render_handle">
+                            <param name="handle">email_campaign_new</param>
+                            <param name="buttons">1</param>
+                        </item>
+                    </item>
+                </argument>
+            </insertForm>
+        </modal>
+    </container>
+</listing>

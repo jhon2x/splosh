@@ -1,0 +1,38 @@
+diff --git a/app/code/Afterpay/Afterpay/Block/Catalog/Installments.php b/app/code/Afterpay/Afterpay/Block/Catalog/Installments.php
+index 6935535..12f3676 100644
+--- a/app/code/Afterpay/Afterpay/Block/Catalog/Installments.php
++++ b/app/code/Afterpay/Afterpay/Block/Catalog/Installments.php
+@@ -83,11 +83,29 @@ class Installments extends Template
+         $product = $this->registry->registry('product');
+ 
+         // check if price is above max or min limit
+-        if ($product->getFinalPrice() > $this->afterpayConfig->getMaxOrderLimit() // greater than max order limit
+-                || $product->getFinalPrice() < $this->afterpayConfig->getMinOrderLimit()) { // lower than min order limit
++        if ($product->getFinalPrice() > $this->afterpayConfig->getMaxOrderLimit()) { // greater than max order limit
+             return false;
+         }
+ 
+         return true;
+     }
+-}
+\ No newline at end of file
++
++    /**
++     * Check if product price < min order limit
++     */
++    public function isPriceBelowMinOrderLimit()
++    {
++        // get current product
++        $product = $this->registry->registry('product');
++
++        return ($product->getFinalPrice() < $this->afterpayConfig->getMinOrderLimit());
++    }
++
++    /**
++     * Get min. order limit
++     */
++    public function getMinOrderLimit()
++    {
++        return $this->afterpayConfig->getMinOrderLimit();
++    }
++}

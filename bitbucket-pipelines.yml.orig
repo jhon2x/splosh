@@ -1,0 +1,127 @@
+image: rafaelcgstz/magento2
+clone:
+  depth: 1 # include just the last commit
+pipelines:
+  branches:
+    staging:
+      - step:
+          name: Deploy Staging
+          deployment: staging
+          caches:
+            - composer
+          artifacts:
+            - vendor/**
+          script:
+            - echo "$AUTH" > auth.json
+            - composer install --quiet
+            - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > /root/.ssh/id_rsa.tmp
+            - base64 -d /root/.ssh/id_rsa.tmp > /root/.ssh/id_rsa
+            - echo "$SSH_PUBLIC_KEY" | tr -d '\r' > /root/.ssh/id_rsa.pub
+            - cat /root/.ssh/id_rsa.pub > /root/.ssh/authorized_keys
+            - eval "$(ssh-agent -s)"
+            - echo "$KNOWN_HOSTS" >> /root/.ssh/known_hosts
+            - chmod 700 /root/.ssh
+            - chmod 600 /root/.ssh/id_rsa
+            - chmod 644 /root/.ssh/authorized_keys
+            - chmod 644 /root/.ssh/known_hosts
+            - echo -e "Host *\n StrictHostKeyChecking no\n UserKnownHostsFile=/dev/null" > /root/.ssh/config
+            - curl -LO https://deployer.org/deployer.phar && mv deployer.phar /usr/local/bin/dep && chmod +x /usr/local/bin/dep
+            - echo "set('slack_text', '_Bitbucket Pipelines_ deploying `{{branch}}` to *{{target}}*');" >> deploy.php
+            - dep deploy staging
+      - step:
+          name: PHP Copy/Paste Detector
+          caches:
+            - composer
+          artifacts:
+            - vendor/**
+          trigger: manual
+          script:
+            - composer install --quiet
+            - php vendor/bin/phpcpd app/
+      - step:
+          name: PHP CodeSniffer PSR1
+          caches:
+            - composer
+          artifacts:
+            - vendor/**
+          trigger: manual
+          script:
+            - composer install --quiet
+            - php vendor/bin/phpcs --standard=PSR1 app/code app/design
+      - step:
+          name: PHP Mess Detector
+          caches:
+            - composer
+          artifacts:
+            - vendor/**
+          trigger: manual
+          script:
+            - composer install --quiet
+            - php vendor/bin/phpmd app/code,app/design text cleancode,codesize,controversial,design,naming,unusedcode
+      - step:
+          name: ECG Magento Code Sniffer PSR2
+          caches:
+            - composer
+          artifacts:
+            - vendor/**
+          trigger: manual
+          script:
+            - composer install --quiet
+            - composer require magento-ecg/coding-standard
+            - php vendor/bin/phpcs --standard=PSR2 app/code app/design
+            - php vendor/bin/phpcs --standard=vendor/magento-ecg/coding-standard/EcgM2/ruleset.xml --extensions=php,phtml app/code app/design
+    master:
+      - step:
+          name: Deploy Production
+          deployment: production
+          size: 2x # Double resources available for this step
+          caches:
+            - composer
+          artifacts:
+            - vendor/**
+          script:
+            - echo "$AUTH" > auth.json
+            - composer install --quiet
+            - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > /root/.ssh/id_rsa.tmp
+            - base64 -d /root/.ssh/id_rsa.tmp > /root/.ssh/id_rsa
+            - echo "$SSH_PUBLIC_KEY" | tr -d '\r' > /root/.ssh/id_rsa.pub
+            - cat /root/.ssh/id_rsa.pub > /root/.ssh/authorized_keys
+            - eval "$(ssh-agent -s)"
+            - echo "$KNOWN_HOSTS" >> /root/.ssh/known_hosts
+            - chmod 700 /root/.ssh
+            - chmod 600 /root/.ssh/id_rsa
+            - chmod 644 /root/.ssh/authorized_keys
+            - chmod 644 /root/.ssh/known_hosts
+            - echo -e "Host *\n StrictHostKeyChecking no\n UserKnownHostsFile=/dev/null" > /root/.ssh/config
+            - curl -LO https://deployer.org/deployer.phar && mv deployer.phar /usr/local/bin/dep && chmod +x /usr/local/bin/dep
+            - echo "set('slack_text', '_Bitbucket Pipelines_ deploying `{{branch}}` to *{{target}}*');" >> deploy.php
+            - dep deploy production
+      - step:
+          name: Install Magento 2 Local
+          trigger: manual
+          caches:
+            - composer
+          artifacts:
+            - vendor/**
+          script:
+            - echo "$AUTH" > auth.json
+            - composer install --no-dev --quiet
+            - chmod u+w -R ./var ./vendor ./pub/static ./pub/media ./app/etc
+            - chmod u+x ./bin/magento
+            - php -f ./bin/magento setup:install --base-url=http://localhost/ --use-secure=0 --db-host=127.0.0.1 --db-name=magento2 --db-user=root --db-password=root --admin-firstname=Magento --admin-lastname=Commerce --admin-email=user@example.com --admin-user=admin --admin-password=admin123 --language=en_US --currency=USD --timezone=America/Chicago --use-rewrites=1 --backend-frontname=admin
+            - php -f ./bin/magento setup:upgrade
+            - php -f ./bin/magento deploy:mode:set production --skip-compilation
+            - php -f ./bin/magento setup:di:compile
+            - php -f ./bin/magento setup:static-content:deploy -j 10
+            - composer dump-autoload --no-dev --no-interaction --optimize
+          services:
+            - mysql
+definitions:
+  services:
+    mysql:
+      image: mysql:5.6
+      environment:
+        MYSQL_ROOT_PASSWORD: 'root'
+        MYSQL_DATABASE: 'magento2'
+        MYSQL_USER: 'magento'
+        MYSQL_PASSWORD: 'magento'

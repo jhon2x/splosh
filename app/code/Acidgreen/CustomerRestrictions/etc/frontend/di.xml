@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Plugin for Customer Restriction on Product direct access -->
+    <type name="Magento\Catalog\Helper\Product">
+        <plugin name="acidgreen_product_restrict" type="Acidgreen\CustomerRestrictions\Plugin\ProductRestrict" />
+    </type>
+    <!-- Plugin for Customer Restriction on Layered Navigation / Search Level -->
+    <type name="Magento\Catalog\Model\Layer">
+        <plugin name="acidgreen_product_collection_restrict" type="Acidgreen\CustomerRestrictions\Plugin\ProductCollectionRestrict" />
+    </type>
+    <!-- Plugin for Customer Restriction on Categories -->
+    <type name="Smartwave\Megamenu\Block\Topmenu">
+        <plugin name="acidgreen_category_restrict" type="Acidgreen\CustomerRestrictions\Plugin\CategoryRestrict" />
+    </type>
+    <!-- Plugin for Customer Restriction on Product Cross Sells/Related/Up Sells level -->
+    <type name="Magento\TargetRule\Block\Product\AbstractProduct">
+        <plugin name="acidgreen_product_links_restrict" type="Acidgreen\CustomerRestrictions\Plugin\ItemCollectionRestrict" />
+    </type>
+    <!-- Preference for Magento_AdvancedCheckout -->
+    <preference for="Magento\AdvancedCheckout\Controller\Cart\AdvancedAdd" type="Acidgreen\CustomerRestrictions\Controller\Cart\AdvancedAdd" />
+</config>

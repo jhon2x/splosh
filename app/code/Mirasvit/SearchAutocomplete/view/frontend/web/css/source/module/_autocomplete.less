@@ -1,0 +1,433 @@
+//
+//    Common
+//--------------------------------------
+@spinner-color-from: #D8D8D8;
+@spinner-color-to: #D8D8D8;
+
+& when (@media-common = true) {
+    @header-bg: #EFEFEF;
+    @hr-color: #F6F6F6;
+    @hover-bg: #f8f8f8;
+    @mute-color: #999;
+    @text-color: #333;
+
+    .mst-searchautocomplete__autocomplete {
+        display: none !important;
+        border: 1px solid #C2C2C2;
+        position: absolute;
+        top: 3.1rem;
+        left: 0;
+        box-sizing: border-box;
+        background: #fff;
+        border-radius: 0 0 1px 1px;
+        min-height: 3.5rem;
+        z-index: 1000;
+        text-align: left;
+
+        &._active {
+            display: block !important;
+        }
+
+        .mst-searchautocomplete__spinner {
+            display: none;
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            margin-left: -90px;
+        }
+
+        &._loading {
+            .mst-searchautocomplete__spinner {
+                display: block;
+            }
+        }
+
+        .mst-searchautocomplete__empty-result {
+            background: @header-bg;
+            text-align: center;
+            padding: 8px 10px;
+            color: @mute-color;
+            font-size: 1.2rem;
+            display: block;
+        }
+
+        .mst-searchautocomplete__show-all {
+            background: @header-bg;
+            text-align: center;
+
+            a {
+                padding: 8px 10px;
+                color: @mute-color;
+                font-size: 1.2rem;
+                display: block;
+            }
+        }
+
+        .mst-searchautocomplete__index-title {
+            background: @header-bg;
+            padding: 8px 10px;
+            text-align: left;
+            font-size: 1.2rem;
+            line-height: 1.2rem;
+            color: @mute-color;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .mst-searchautocomplete__close {
+            display: none;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                .lib-clearfix();
+                margin: 0 1rem;
+                padding: 1rem 0;
+                cursor: pointer;
+
+                a.title {
+                    font-weight: 600;
+                    margin-bottom: 0;
+                    color: @text-color;
+                    text-decoration: none;
+                }
+
+                &._active {
+                    a.title {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+
+    .mst-searchautocomplete__index {
+        &.popular {
+            .index-title {
+                background: none;
+                text-align: left;
+                color: #999;
+            }
+
+            ul {
+                li {
+                    float: left;
+                    padding: .7rem 0 .7rem 1rem;
+                    margin: 0;
+
+                    a {
+                        font-size: 1.3rem;
+                        color: #575757;
+                    }
+
+                    &:hover {
+                        background: none;
+                        cursor: pointer;
+
+                        a {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .mst-searchautocomplete__item {
+        &.magento_catalog_product {
+            display: flex;
+            border-bottom: 1px solid @hr-color;
+            align-items: center;
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            img {
+                height: 8rem;
+                max-width: 8rem;
+                margin-right: 1rem;
+            }
+
+            .title {
+                display: block;
+                margin-bottom: 0.5rem;
+
+                a {
+                    color: @text-color;
+                }
+
+                .sku {
+                    color: @mute-color;
+                }
+            }
+
+            .meta {
+                flex-grow: 1;
+                overflow: hidden;
+            }
+
+            .description {
+                font-size: 1.2rem;
+                color: @mute-color;
+                height: 3rem;
+                line-height: 1.5rem;
+                overflow: hidden;
+                margin-bottom: 0.5rem;
+            }
+
+            .price {
+                display: block;
+                font-weight: 600;
+                margin-left: 1rem;
+                white-space: nowrap;
+                font-size: 1.3rem;
+
+                .price-label {
+                    margin-right: 1rem;
+                }
+            }
+
+            .product-reviews-summary {
+                margin: 0;
+                .reviews-actions {
+                    display: none;
+                }
+            }
+
+            .to-cart {
+                float: right;;
+                margin-top: .5rem;
+                margin-bottom: .5rem;
+            }
+
+            &._active {
+                background: #fff !important;
+
+                .title {
+                    a {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+
+        &.magento_catalog_category {
+            a {
+                i {
+                    color: @mute-color;
+                    display: inline-block;
+                    margin: 0 .5rem;
+                    font-style: normal;
+                }
+            }
+        }
+
+        &.magento_search_query {
+            a {
+                float: left;
+            }
+            .num_results {
+                float: right;
+                color: @mute-color;
+            }
+        }
+    }
+
+    .mst-searchautocomplete__highlight {
+        font-weight: @font-weight__semibold;
+        color: #1BA1FC;
+    }
+
+    .mst-searchautocomplete__spinner {
+        position: relative;
+        width: 186px;
+        height: 20px;
+        margin: auto;
+
+        .spinner-item {
+            position: absolute;
+            top: 0;
+            background-color: @spinner-color-from;
+            width: 20px;
+            height: 20px;
+            animation-name: bounce_fountainG;
+            animation-duration: 0.645s;
+            animation-iteration-count: infinite;
+            animation-direction: normal;
+            transform: scale(.3);
+            border-radius: 15px;
+
+            &.spinner-item-1 {
+                left: 0;
+                animation-delay: 0.256s;
+            }
+
+            &.spinner-item-2 {
+                left: 20px;
+                animation-delay: 0.3225s;
+            }
+
+            &.spinner-item-3 {
+                left: 40px;
+                animation-delay: 0.389s;
+            }
+
+            &.spinner-item-4 {
+                left: 60px;
+                animation-delay: 0.4555s;
+            }
+
+            &.spinner-item-5 {
+                left: 80px;
+                animation-delay: 0.522s;
+            }
+
+            &.spinner-item-6 {
+                left: 100px;
+                animation-delay: 0.5885s;
+            }
+
+            &.spinner-item-7 {
+                left: 120px;
+                animation-delay: 0.645s;
+            }
+
+            &.spinner-item-8 {
+                left: 140px;
+                animation-delay: 0.7115s;
+            }
+        }
+    }
+
+    @keyframes bounce_fountainG {
+        0% {
+            transform: scale(1);
+            background-color: @spinner-color-from;
+        }
+
+        100% {
+            transform: scale(.3);
+            background-color: @spinner-color-to;
+        }
+    }
+
+    @-o-keyframes bounce_fountainG {
+        0% {
+            -o-transform: scale(1);
+            background-color: @spinner-color-from;
+        }
+
+        100% {
+            -o-transform: scale(.3);
+            background-color: @spinner-color-to;
+        }
+    }
+
+    @-ms-keyframes bounce_fountainG {
+        0% {
+            -ms-transform: scale(1);
+            background-color: @spinner-color-from;
+        }
+
+        100% {
+            -ms-transform: scale(.3);
+            background-color: @spinner-color-to;
+        }
+    }
+
+    @-webkit-keyframes bounce_fountainG {
+        0% {
+            -webkit-transform: scale(1);
+            background-color: @spinner-color-from;
+        }
+
+        100% {
+            -webkit-transform: scale(.3);
+            background-color: @spinner-color-to;
+        }
+    }
+
+    @-moz-keyframes bounce_fountainG {
+        0% {
+            -moz-transform: scale(1);
+            background-color: @spinner-color-from;
+        }
+
+        100% {
+            -moz-transform: scale(.3);
+            background-color: @spinner-color-to;
+        }
+    }
+}
+
+//
+//    Desktop
+//--------------------------------------
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .mst-searchautocomplete__autocomplete {
+        width: 100%;
+        min-width: 50rem;
+
+        &._active {
+            display: block !important;
+
+            &.mst-2-cols {
+                width: 720px!important;
+                position: absolute;
+
+                .mst-searchautocomplete__index {
+                    clear: left;
+                    float: left;
+                    display: block;
+                    position: relative;
+                    max-width: 240px;
+                    width: 240px;
+                    padding-bottom: 10px;
+                    box-sizing: border-box;
+                    border-right: 1px solid #efefef;
+                    margin-right: -1px;
+                }
+
+                div.magento_catalog_product {
+                    width: 480px!important;
+                    max-width: 480px!important;
+                    clear: right;
+                    float: right;
+                    border-left: 1px solid #efefef;
+                    border-right: unset;
+                    margin-left:-1px;
+                }
+
+                .mst-searchautocomplete__show-all {
+                    clear: both;
+                }
+            }
+        }
+    }
+}
+
+
+//
+//    Mobile
+//--------------------------------------
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+    .mst-searchautocomplete__autocomplete {
+        .mst-searchautocomplete__close {
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-weight: bold;
+            color: #999;
+            font-size: 1.6rem;
+            padding: 1rem;
+            line-height: 1rem;
+            cursor: pointer;
+        }
+    }
+}

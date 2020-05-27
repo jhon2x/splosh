@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">email_campaign_view.email_campaign_view_data_source</item>
+            <item name="deps" xsi:type="string">email_campaign_view.email_campaign_view_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Campaign View</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">email_campaign_view</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="array">
+                <item name="name" xsi:type="string">back</item>
+                <item name="label" xsi:type="string" translate="true">Back</item>
+                <item name="class" xsi:type="string">back</item>
+                <item name="url" xsi:type="url" path="*/*/"/>
+            </item>
+
+            <item name="delete" xsi:type="string">Mirasvit\Email\Ui\Campaign\View\Control\DeleteButton</item>
+
+            <item name="edit" xsi:type="array">
+                <item name="class" xsi:type="string">edit</item>
+                <item name="sort_order" xsi:type="string">20</item>
+                <item name="label" xsi:type="string" translate="true">Edit</item>
+                <item name="on_click" xsi:type="string"/>
+                <item name="data_attribute" xsi:type="array">
+                    <item name="mage-init" xsi:type="array">
+                        <item name="buttonAdapter" xsi:type="array">
+                            <item name="actions" xsi:type="array">
+                                <item name="1" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">email_campaign_view.email_campaign_view.modals.campaign_edit_form_modal</item>
+                                    <item name="actionName" xsi:type="string">toggleModal</item>
+                                </item>
+                                <item name="2" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">email_campaign_view.email_campaign_view.modals.campaign_edit_form_modal.email_campaign_edit_form</item>
+                                    <item name="actionName" xsi:type="string">render</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </item>
+
+            <item name="add_trigger" xsi:type="array">
+                <item name="sort_order" xsi:type="string">1</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="label" xsi:type="string" translate="true">Add Trigger</item>
+                <item name="on_click" xsi:type="string"/>
+                <item name="data_attribute" xsi:type="array">
+                    <item name="mage-init" xsi:type="array">
+                        <item name="buttonAdapter" xsi:type="array">
+                            <item name="actions" xsi:type="array">
+                                <item name="1" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">email_campaign_view.email_campaign_view.modals.trigger_edit_form_modal</item>
+                                    <item name="actionName" xsi:type="string">toggleModal</item>
+                                </item>
+                                <item name="2" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">email_campaign_view.email_campaign_view.modals.trigger_edit_form_modal.email_trigger_edit_form</item>
+                                    <item name="actionName" xsi:type="string">render</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </item>
+        </item>
+    </argument>
+
+    <dataSource name="email_campaign_view_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Mirasvit\Email\Ui\Campaign\View\DataProvider</argument>
+            <argument name="name" xsi:type="string">email_campaign_view_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">campaign_id</argument>
+            <argument name="requestFieldName" xsi:type="string">campaign_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="*/*/save">
+                        <param name="_current">1</param>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+
+    <container name="view" class="Mirasvit\Email\Ui\Campaign\View\View">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="sortOrder" xsi:type="number">10</item>
+                <item name="template" xsi:type="string">Mirasvit_Email/campaign/view/view</item>
+                <item name="triggerHelpTpl" xsi:type="string">Mirasvit_Email/campaign/view/help</item>
+                <item name="chainHelpTpl" xsi:type="string">Mirasvit_Email/campaign/view/chain/help</item>
+                <item name="component" xsi:type="string">Mirasvit_Email/js/campaign/view/view</item>
+                <item name="triggerDeleteMsg" xsi:type="string" translate="true">Are you sure you want to delete this trigger?</item>
+                <item name="emailDeleteMsg" xsi:type="string" translate="true">Are you sure you want to delete this email?</item>
+            </item>
+        </argument>
+    </container>
+
+    <container name="modals">
+        <!-- Campaign Edit Form Modal -->
+        <modal name="campaign_edit_form_modal">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Mirasvit_Email/js/campaign/form/components/modal</item>
+                    <item name="isTemplate" xsi:type="boolean">false</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="state" xsi:type="string">!index=email_campaign_edit_form:responseStatus</item>
+                    </item>
+                    <item name="options" xsi:type="array">
+                        <item name="title" xsi:type="string">Edit Campaign Settings</item>
+                    </item>
+                </item>
+            </argument>
+            <insertForm name="email_campaign_edit_form">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="component" xsi:type="string">Mirasvit_Email/js/campaign/form/components/insert-form</item>
+                        <!--<item name="formSubmitType" xsi:type="string">ajax</item>-->
+                        <item name="toolbarContainer" xsi:type="string">${ $.parentName }</item>
+                        <item name="ns" xsi:type="string">email_campaign_edit_form</item>
+                        <item name="externalProvider" xsi:type="string">${ $.ns }.${ $.ns }_data_source</item>
+                        <item name="entityFieldName" xsi:type="string">campaign_id</item>
+                        <item name="listens" xsi:type="array">
+                            <item name="${ $.parentName }:state" xsi:type="string">onState</item>
+                        </item>
+                        <item name="render_url" xsi:type="url" path="mui/index/render_handle">
+                            <param name="handle">email_campaign_edit</param>
+                            <param name="buttons">1</param>
+                            <param name="_current">1</param>
+                        </item>
+                    </item>
+                </argument>
+            </insertForm>
+        </modal>
+
+        <!-- Trigger Edit Form Modal -->
+        <modal name="trigger_edit_form_modal">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Mirasvit_Email/js/campaign/form/components/modal</item>
+                    <item name="isTemplate" xsi:type="boolean">false</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="state" xsi:type="string">!index=email_trigger_edit_form:responseStatus</item>
+                    </item>
+                    <item name="options" xsi:type="array">
+                        <item name="title" xsi:type="string">Edit Trigger</item>
+                    </item>
+                </item>
+            </argument>
+            <insertForm name="email_trigger_edit_form">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="component" xsi:type="string">Mirasvit_Email/js/campaign/form/components/insert-form</item>
+                        <item name="toolbarContainer" xsi:type="string">${ $.parentName }</item>
+                        <item name="ns" xsi:type="string">email_trigger_form</item>
+                        <item name="externalProvider" xsi:type="string">${ $.ns }.${ $.ns }_data_source</item>
+                        <item name="entityFieldName" xsi:type="string">trigger_id</item>
+                        <item name="listens" xsi:type="array">
+                            <item name="${ $.parentName }:state" xsi:type="string">onState</item>
+                        </item>
+                        <item name="render_url" xsi:type="url" path="mui/index/render_handle">
+                            <param name="handle">email_trigger_edit</param>
+                            <param name="buttons">1</param>
+                            <param name="_current">1</param>
+                        </item>
+                    </item>
+                </argument>
+            </insertForm>
+        </modal>
+
+        <!-- Event Edit Form Modal -->
+        <modal name="event_edit_form_modal">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Mirasvit_Email/js/campaign/form/components/modal</item>
+                    <item name="isTemplate" xsi:type="boolean">false</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="state" xsi:type="string">!index=email_event_edit_form:responseStatus</item>
+                    </item>
+                    <item name="options" xsi:type="array">
+                        <item name="title" xsi:type="string">Edit Event</item>
+                    </item>
+                </item>
+            </argument>
+            <insertForm name="email_event_edit_form">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="component" xsi:type="string">Mirasvit_Email/js/campaign/form/components/insert-form</item>
+                        <item name="toolbarContainer" xsi:type="string">${ $.parentName }</item>
+                        <item name="ns" xsi:type="string">email_trigger_event</item>
+                        <item name="externalProvider" xsi:type="string">${ $.ns }.${ $.ns }_data_source</item>
+                        <item name="entityFieldName" xsi:type="string">trigger_id</item>
+                        <item name="listens" xsi:type="array">
+                            <item name="${ $.parentName }:state" xsi:type="string">onState</item>
+                        </item>
+                        <item name="render_url" xsi:type="url" path="mui/index/render_handle">
+                            <param name="handle">email_trigger_event_edit</param>
+                            <param name="buttons">1</param>
+                            <param name="_current">1</param>
+                        </item>
+                    </item>
+                </argument>
+            </insertForm>
+        </modal>
+
+        <!-- Audience Edit Form Modal -->
+        <modal name="audience_edit_form_modal">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Mirasvit_Email/js/campaign/form/components/modal</item>
+                    <item name="isTemplate" xsi:type="boolean">false</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="state" xsi:type="string">!index=email_audience_edit_form:responseStatus</item>
+                    </item>
+                    <item name="options" xsi:type="array">
+                        <item name="title" xsi:type="string">Edit Audience</item>
+                    </item>
+                </item>
+            </argument>
+            <insertForm name="email_audience_edit_form">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="component" xsi:type="string">Mirasvit_Email/js/campaign/form/components/insert-form</item>
+                        <item name="toolbarContainer" xsi:type="string">${ $.parentName }</item>
+                        <item name="ns" xsi:type="string">email_trigger_audience</item>
+                        <item name="externalProvider" xsi:type="string">${ $.ns }.${ $.ns }_data_source</item>
+                        <item name="entityFieldName" xsi:type="string">trigger_id</item>
+                        <item name="listens" xsi:type="array">
+                            <item name="${ $.parentName }:state" xsi:type="string">onState</item>
+                        </item>
+                        <item name="render_url" xsi:type="url" path="mui/index/render_handle">
+                            <param name="handle">email_trigger_audience_edit</param>
+                            <param name="buttons">1</param>
+                            <param name="_current">1</param>
+                        </item>
+                    </item>
+                </argument>
+            </insertForm>
+        </modal>
+
+        <!-- Email Edit Form Modal -->
+        <modal name="chain_edit_form_modal">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Mirasvit_Email/js/campaign/form/components/modal</item>
+                    <item name="isTemplate" xsi:type="boolean">false</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="state" xsi:type="string">!index=email_chain_edit_form:responseStatus</item>
+                    </item>
+                    <item name="options" xsi:type="array">
+                        <item name="title" xsi:type="string">Edit Email</item>
+                    </item>
+                </item>
+            </argument>
+            <insertForm name="email_chain_edit_form">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="component" xsi:type="string">Mirasvit_Email/js/campaign/form/components/insert-form</item>
+                        <item name="toolbarContainer" xsi:type="string">${ $.parentName }</item>
+                        <item name="ns" xsi:type="string">email_trigger_chain</item>
+                        <item name="externalProvider" xsi:type="string">${ $.ns }.${ $.ns }_data_source</item>
+                        <item name="entityFieldName" xsi:type="string">trigger_id</item>
+                        <item name="listens" xsi:type="array">
+                            <item name="${ $.parentName }:state" xsi:type="string">onState</item>
+                        </item>
+                        <item name="render_url" xsi:type="url" path="mui/index/render_handle">
+                            <param name="handle">email_trigger_chain_edit</param>
+                            <param name="buttons">1</param>
+                            <param name="_current">1</param>
+                        </item>
+                    </item>
+                </argument>
+            </insertForm>
+        </modal>
+
+        <!-- Email Trigger Move Form Modal -->
+        <modal name="trigger_move_edit_form_modal">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Mirasvit_Email/js/campaign/form/components/modal</item>
+                    <item name="isTemplate" xsi:type="boolean">false</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="state" xsi:type="string">!index=email_trigger_move_edit_form:responseStatus</item>
+                    </item>
+                    <item name="options" xsi:type="array">
+                        <item name="title" xsi:type="string">Edit Email</item>
+                    </item>
+                </item>
+            </argument>
+            <insertForm name="email_trigger_move_edit_form">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="component" xsi:type="string">Mirasvit_Email/js/campaign/form/components/insert-form</item>
+                        <item name="toolbarContainer" xsi:type="string">${ $.parentName }</item>
+                        <item name="ns" xsi:type="string">email_trigger_move_form</item>
+                        <item name="externalProvider" xsi:type="string">${ $.ns }.${ $.ns }_data_source</item>
+                        <item name="entityFieldName" xsi:type="string">trigger_id</item>
+                        <item name="listens" xsi:type="array">
+                            <item name="${ $.parentName }:state" xsi:type="string">onState</item>
+                        </item>
+                        <item name="render_url" xsi:type="url" path="mui/index/render_handle">
+                            <param name="handle">email_trigger_move</param>
+                            <param name="buttons">1</param>
+                            <param name="_current">1</param>
+                        </item>
+                    </item>
+                </argument>
+            </insertForm>
+        </modal>
+    </container>
+</form>

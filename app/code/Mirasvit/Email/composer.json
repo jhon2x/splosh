@@ -1,0 +1,24 @@
+{
+  "name": "mirasvit/module-email",
+  "description": "Follow Up Email",
+  "require": {
+    "magento/framework": "100.1.*|100.2.*|101.0.*|102.0.*",
+    "mirasvit/module-core": ">=1.2.46",
+    "mirasvit/module-email-designer": "^1.1.20|dev-master",
+    "mirasvit/module-email-report": ">=2.0.3|dev-master",
+    "mirasvit/module-event": "~1.2.0|dev-master"
+  },
+  "type": "magento2-module",
+  "version": "2.1.28",
+  "license": [
+    "proprietary"
+  ],
+  "autoload": {
+    "files": [
+      "src/Email/registration.php"
+    ],
+    "psr-4": {
+      "Mirasvit\\Email\\": "src/Email"
+    }
+  }
+}

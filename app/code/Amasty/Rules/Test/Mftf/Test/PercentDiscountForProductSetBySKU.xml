@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="PercentDiscountForProductSetBySKU">
+        <annotations>
+            <features value="Rule Creation"/>
+            <stories value="Create a Rule via the Admin"/>
+            <title value="Percent discount for product set и Set Items by SKU"/>
+            <description value="Percent discount for product set и Set Items by SKU"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="SP-MFTF-27"/>
+            <group value="Amasty"/>
+            <group value="Rules"/>
+            <group value="Rule"/>
+            <group value="Shipping"/>
+            <group value="PercentDiscountForProductSetBySKU"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
+        </before>
+
+        <after>
+            <!--Delete Rules -->
+            <actionGroup ref="DeleteAllCartRules" stepKey="DeleteAllRules1"/>
+            <amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>
+        </after>
+
+        <!--Create new Price Rule -->
+        <actionGroup ref="CreateCartRuleEachGroupOfN" stepKey="CreateCartRuleEachGroupOfN">
+            <argument name="actionsRule" value="_applyProductSetWithPercentOff"/>
+            <argument name="cartRule" value="_percentDiscountForProductSetBySKU"/>
+        </actionGroup>
+
+        <!--Edit Rule For Set Items by SKU -->
+        <actionGroup ref="OpenRuleForEdit" stepKey="OpenFirstCartRule">
+            <argument name="cartRule" value="_percentDiscountForProductSetBySKU"/>
+        </actionGroup>
+        <actionGroup ref="EditRuleMaxQtyDiscountIsAppliedTo" stepKey="AddMaxQtyDiscount">
+            <argument name="cartRule" value="_percentDiscountForProductSetBySKU"/>
+        </actionGroup>
+        <actionGroup ref="EditRuleAddPromoSKU" stepKey="AddPromoSKU">
+            <argument name="cartRule" value="_percentDiscountForProductSetBySKU"/>
+        </actionGroup>
+        <actionGroup ref="SaveRuleAfterEdit" stepKey="SaveFirstCartRuleAfterChange"/>
+
+        <!--Add first product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddFirstProduct">
+            <argument name="addProductQty" value="_enterQty2"/>
+            <argument name="products" value="_theBagJoustDuffleBag"/>
+        </actionGroup>
+
+        <!-- Check no discount-->
+        <actionGroup ref="CheckNoDiscountAmount" stepKey="CheckNoDiscount1">
+            <argument name="cartRule" value="_percentDiscountForProductSetBySKU"/>
+        </actionGroup>
+
+        <!--Add second product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddSecondProduct">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+        </actionGroup>
+
+        <!--Check discount-->
+        <actionGroup ref="CheckDiscountAmount" stepKey="CheckDiscountOne">
+            <argument name="cartRule" value="_percentDiscountForProductSetBySKU"/>
+            <argument name="discountAmount" value="_percentDiscountForProductSetBySKU.discountAmountOne"/>
+        </actionGroup>
+
+        <!--Change Qty Second Product by Two-->
+        <actionGroup ref="ChangeQtyProductInCart" stepKey="ChangeQtySecondProductByTwo">
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+            <argument name="addProductQty" value="_enterQty2"/>
+        </actionGroup>
+
+        <!--Check discount-->
+        <actionGroup ref="CheckDiscountAmount" stepKey="CheckDiscountTwo">
+            <argument name="cartRule" value="_percentDiscountForProductSetBySKU"/>
+            <argument name="discountAmount" value="_percentDiscountForProductSetBySKU.discountAmountTwo"/>
+        </actionGroup>
+
+        <!--Change Qty First Product by Two-->
+        <actionGroup ref="ChangeQtyProductInCart" stepKey="ChangeQtyFirstProductByThree">
+            <argument name="products" value="_theBagJoustDuffleBag"/>
+            <argument name="addProductQty" value="_enterQty3"/>
+        </actionGroup>
+
+        <!--Change Qty Second Product by Two-->
+        <actionGroup ref="ChangeQtyProductInCart" stepKey="ChangeQtySecondProductByThree">
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+            <argument name="addProductQty" value="_enterQty3"/>
+        </actionGroup>
+
+        <!--Check discount-->
+        <actionGroup ref="CheckDiscountAmount" stepKey="CheckDiscountThree">
+            <argument name="cartRule" value="_percentDiscountForProductSetBySKU"/>
+            <argument name="discountAmount" value="_percentDiscountForProductSetBySKU.discountAmountThree"/>
+        </actionGroup>
+
+    </test>
+</tests>
+

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+
+    <section name="AdminActionsCartPriceRuleSection">
+        <element name="Reset" type="button" selector="#reset" timeout="30"/>
+        <element name="Back" type="button" selector="#back" timeout="30"/>
+        <element name="RuleName" type="input" selector="input[name='name']"/>
+        <element name="Description" type="textarea" selector="textarea[name='description']"/>
+        <element name="IsActiveSwitch" type="checkbox" selector="//div[@data-index='is_active']//label[@class='admin__actions-switch-label']"/>
+        <element name="Websites" type="select" selector="//select[@name='website_ids']/option[@value=1]"/>
+        <element name="CustomerGroupsNotLoggedIn" type="select" selector="//select[@name='customer_group_ids']/option[@value=0]"/>
+        <element name="CustomerGroupsGeneral" type="select" selector="//select[@name='customer_group_ids']/option[@value=1]"/>
+        <element name="CustomerGroupsWholesale" type="select" selector="//select[@name='customer_group_ids']/option[@value=2]"/>
+        <element name="CustomerGroupsRetailer" type="select" selector="//select[@name='customer_group_ids']/option[@value=3]"/>
+        <element name="CouponsNo" type="select" selector="//select[@name='coupon_type']/option[@value='1']"/>
+        <element name="CouponsYes" type="select" selector="//select[@name='coupon_type']/option[@value='2']"/>
+        <element name="CouponsCode" type="input" selector="//input[@name='coupon_code']"/>
+        <element name="Priority" type="input" selector="//input[@name='sort_order']"/>
+
+        <!-- The options, why you can choose -->
+        <element name="ApplyActionField" type="input" selector="//select[@name='simple_action']"/>
+        <element name="ApplyPercentOfProductPriceDiscount" type="select" selector="//select[@name='simple_action']/option[@value='by_percent']"/>
+        <element name="ApplyFixedAmountDiscount" type="select" selector="//select[@name='simple_action']/option[@value='by_fixed']"/>
+        <element name="ApplyFixedAmountDiscountForWholeCart" type="select" selector="//select[@name='simple_action']/option[@value='cart_fixed']"/>
+        <element name="ApplyBuyNProductsGetNextProductsWithDiscount" type="select" selector="//select[@name='simple_action']/option[@value='buy_x_get_y']"/>
+        <element name="ApplyAutoAddPromoItemsWithProducts" type="select" selector="//select[@name='simple_action']/option[@value='ampromo_items']"/>
+        <element name="ApplyAutoAddPromoItemsForTheWholeCart" type="select" selector="//select[@name='simple_action']/option[@value='ampromo_cart']"/>
+        <element name="ApplyAutoAddTheSameProduct" type="select" selector="//select[@name='simple_action']/option[@value='ampromo_product']"/>
+        <element name="ApplyAutoAddPromoItemsForEveryXSpent" type="select" selector="//select[@name='simple_action']/option[@value='ampromo_spent']"/>
+        <element name="ApplyAddGiftWithEachNProductInTheCart" type="select" selector="//select[@name='simple_action']/option[@value='ampromo_eachn']"/>
+        <element name="ApplyTheCheapestAlsoForBuy1Get1Free" type="select" selector="//select[@name='simple_action']/option[@value='thecheapest']"/>
+        <element name="ApplyTheMostExpensive" type="select" selector="//select[@name='simple_action']/option[@value='themostexpencive']"/>
+        <element name="ApplyGetYForEachXSpent" type="select" selector="//select[@name='simple_action']/option[@value='moneyamount']"/>
+        <element name="ApplyBuyXGetYFree" type="select" selector="//select[@name='simple_action']/option[@value='buyxgetn_perc']"/>
+        <element name="ApplyBuyXGetYWithAmountOff" type="select" selector="//select[@name='simple_action']/option[@value='buyxgetn_fixdisc']"/>
+        <element name="ApplyBuyXGetYForAmount" type="select" selector="//select[@name='simple_action']/option[@value='buyxgetn_fixprice']"/>
+        <element name="ApplyEachNWithPercent0ff" type="select" selector="//select[@name='simple_action']/option[@value='eachn_perc']"/>
+        <element name="ApplyEachNWithFixed0ff" type="select" selector="//select[@name='simple_action']/option[@value='eachn_fixdisc']"/>
+        <element name="ApplyEachNForAmount" type="select" selector="//select[@name='simple_action']/option[@value='eachn_fixprice']"/>
+        <element name="ApplyEachProductAfterNWithPercent0ff" type="select" selector="//select[@name='simple_action']/option[@value='eachmaftn_perc']"/>
+        <element name="ApplyEachProductAfterNWithAmount0ff" type="select" selector="//select[@name='simple_action']/option[@value='eachmaftn_fixdisc']"/>
+        <element name="ApplyEachProductAfterNForAmount" type="select" selector="//select[@name='simple_action']/option[@value='eachmaftn_fixprice']"/>
+        <element name="ApplyEachGroupOfNForAmount" type="select" selector="//select[@name='simple_action']/option[@value='groupn']"/>
+        <element name="ApplyEachGroupOfNWithPercentOff" type="select" selector="//select[@name='simple_action']/option[@value='groupn_disc']"/>
+        <element name="ApplyProductSetWithPercentOff" type="select" selector="//select[@name='simple_action']/option[@value='setof_percent']"/>
+        <element name="ApplyProductSetForAmount" type="select" selector="//select[@name='simple_action']/option[@value='setof_fixed']"/>
+
+        <!--Other Field In Actions Tab-->
+        <element name="DiscountAmount" type="input" selector="//input[@name='discount_amount']"/>
+        <element name="NumberOfGiftItems" type="input" selector="//input[@name='discount_amount']"/>
+        <element name="PromoItems" type="input" selector="//input[@name='extension_attributes[ampromo_rule][sku]']"/>
+        <element name="MaxQtyDiscountIsAppliedTo" type="input" selector="//input[@name='discount_qty']"/>
+        <element name="MaxAmountOfDiscount" type="input" selector="//input[@name='extension_attributes[amrules][max_discount]']"/>
+        <element name="DiscountQtyStep" type="input" selector="//input[@name='discount_step']"/>
+        <element name="EachN" type="input" selector="//input[@name='discount_step']"/>
+        <element name="NumberOfYProducts" type="input" selector="//input[@name='extension_attributes[amrules][nqty]']"/>
+        <element name="AfterN" type="input" selector="//input[@name='extension_attributes[amrules][eachm]']"/>
+        <element name="EachProduct" type="input" selector="//input[@name='discount_step']"/>
+        <element name="SetItemsBySKU" type="input" selector="//textarea[@name='extension_attributes[amrules][promo_skus]']"/>
+        <element name="SetItemsByCategoryIDs" type="input" selector="//input[@name='extension_attributes[amrules][promo_cats]']"/>
+
+        <!-- Switches -->
+        <element name="ApplyToShippingAmount" type="checkbox" selector="//div[@data-index='apply_to_shipping']//label[@class='admin__actions-switch-label']"/>
+        <element name="DiscardSubsequentRules" type="checkbox" selector="//div[@data-index='stop_rules_processing']//label[@class='admin__actions-switch-label']"/>
+        <element name="ApplyTaxOnOriginalPrice" type="checkbox" selector="//div[@data-index='ampromorule[apply_tax]']//label[@class='admin__actions-switch-label']"/>
+        <element name="ApplyShippingOnPromoFree" type="checkbox" selector="//div[@data-index='ampromorule[apply_shipping]']//label[@class='admin__actions-switch-label']"/>
+
+        <!-- Other Select-->
+        <element name="TypeAllSKUsBelow" type="select" selector="//select[@name='extension_attributes[ampromo_rule][type]']/option[@value=0]"/>
+        <element name="TypeOneOfTheSKUsBelow" type="select" selector="//select[@name='extension_attributes[ampromo_rule][type]']/option[@value=1]"/>
+        <element name="CalculateDiscountBasedOnPrice" type="select" selector="//select[@name='extension_attributes[amrules][priceselector]']/option[@value=0]"/>
+        <element name="CalculateDiscountBasedOnPriceAfterPreviousDiscount" type="select" selector="//select[@name='extension_attributes[amrules][priceselector]']/option[@value=1]"/>
+        <element name="CalculateDiscountBasedOnOriginalPrice" type="select" selector="//select[@name='extension_attributes[amrules][priceselector]']/option[@value=2]"/>
+        <element name="SkipItemsWithSpecialPriceAsDefault" type="select" selector="//select[@name='extension_attributes[amrules][skip_rule]']/option[@value=0]"/>
+        <element name="SkipItemsWithSpecialPriceYes" type="select" selector="//select[@name='extension_attributes[amrules][skip_rule]']/option[@value=1]"/>
+        <element name="SkipItemsWithSpecialPriceNo" type="select" selector="//select[@name='extension_attributes[amrules][skip_rule]']/option[@value=2]"/>
+        <element name="SkipItemsWithSpecialPriceSkipIfDiscounted" type="select" selector="//select[@name='extension_attributes[amrules][skip_rule]']/option[@value=3]"/>
+        <element name="AtFirstApplyDiscountToCheapestProducts" type="select" selector="//select[@name='extension_attributes[amrules][apply_discount_to]']/option[@value='asc']"/>
+        <element name="AtFirstApplyDiscountToMostExpensiveProducts" type="select" selector="//select[@name='extension_attributes[amrules][apply_discount_to]']/option[@value='desc']"/>
+        <element name="UseForAllProductsInShoppingCart" type="select" selector="//select[@name='extension_attributes[amrules][use_for]']/option[@value='0']"/>
+        <element name="UseForTheSameProductInShoppingCart" type="select" selector="//select[@name='extension_attributes[amrules][use_for]']/option[@value='1']"/>
+    </section>
+
+</sections>
+

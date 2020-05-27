@@ -1,0 +1,12 @@
+<?php
+$state = \Magento\Framework\App\ObjectManager::getInstance()->get('\Magento\Framework\App\State');
+$state->setAreaCode('frontend');
+// $custom503Block = \Magento\Framework\App\ObjectManager::getInstance()->create('Acidgreen\Custom503\Block\Custom503');
+
+$storeManager = \Magento\Framework\App\ObjectManager::getInstance()->get('Magento\Store\Model\StoreManagerInterface');
+
+if (preg_match('/b2b/', $storeManager->getStore()->getCode())) {
+    include(BP . '/pub/errors/splosh/maintenance.b2b.php');
+} else {
+    include(BP . '/pub/errors/splosh/maintenance.b2c.php');
+}

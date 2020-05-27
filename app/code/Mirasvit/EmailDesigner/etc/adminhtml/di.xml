@@ -1,0 +1,36 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- email_designer_template_form DataProvider modifiers -->
+    <virtualType name="Mirasvit\EmailDesigner\Ui\Modifiers\TemplateFormDataModifier" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="area_modifier" xsi:type="array">
+                    <item name="class" xsi:type="string">Mirasvit\EmailDesigner\Ui\Template\Form\Modifier\AreaModifier</item>
+                    <item name="sortOrder" xsi:type="number">1</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Mirasvit\EmailDesigner\Ui\Template\Form\DataProvider">
+        <arguments>
+            <argument name="poolInterface" xsi:type="object">Mirasvit\EmailDesigner\Ui\Modifiers\TemplateFormDataModifier</argument>
+        </arguments>
+    </type>
+
+    <!-- email_designer_theme_form DataProvider modifiers -->
+    <virtualType name="Mirasvit\EmailDesigner\Ui\Modifiers\ThemeFormDataModifier" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="area_modifier" xsi:type="array">
+                    <item name="class" xsi:type="string">Mirasvit\EmailDesigner\Ui\Theme\Form\Modifier\AreaModifier</item>
+                    <item name="sortOrder" xsi:type="number">1</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Mirasvit\EmailDesigner\Ui\Theme\Form\DataProvider">
+        <arguments>
+            <argument name="poolInterface" xsi:type="object">Mirasvit\EmailDesigner\Ui\Modifiers\ThemeFormDataModifier</argument>
+        </arguments>
+    </type>
+</config>

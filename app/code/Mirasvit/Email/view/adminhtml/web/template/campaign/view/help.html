@@ -1,0 +1,18 @@
+<div class="help">
+    <h3><!-- ko i18n: 'A campaign is just a collection of triggers that listen for events and initialize sending of emails when a required event is triggered.' --><!-- /ko --></h3>
+
+    <ul class="instruction">
+        <li class="point"><i class="fa fa-hand-o-right"></i><b>Add Trigger</b> to Campaign</li>
+        <li class="point"><i class="fa fa-hand-o-right"></i>Set descriptive <b>title</b> for a trigger, e.g. <i>For carts with subtotal over $1000</i></li>
+        <li class="point"><i class="fa fa-hand-o-right"></i>Set triggering and cancellation <b>Events</b>, e.g. <i>Abandoned Shopping Cart</i></li>
+        <li class="point"><i class="fa fa-hand-o-right"></i>Configure rules for target <b>Audience</b>, e.g. <i>Quote: Subtotal  equals or greater than  1000</i></li>
+        <li class="point"><i class="fa fa-hand-o-right"></i>And finally <b>Add Email</b></li>
+    </ul>
+
+    <p translate="'Start by adding the first trigger to your campaign'"></p>
+    <button data-bind="click: showModal.bind($data, 'trigger', {})" title="Add Trigger" type="button" class="action- scalable primary">
+        <span translate="'Add Trigger'"></span>
+    </button>
+
+    <i class="icon-help fa fa-book"></i>
+</div>

@@ -1,0 +1,30 @@
+theme: Base Theme
+title: Replenishment products
+template_subject: Products you may want to buy again
+template_areas:
+  header: <h1>Hello {{ customer_name }},</h1>
+  content: |
+    <p>Thanks again for buying with us.</p>
+
+    <p>We hope you are enjoying items from your recent purchase.</p>
+    <p>Your products should be finishing soon, so we thought you might be interesting in buying them again.</p>
+
+    <table width="0" border="0" cellspacing="5" cellpadding="10">
+    {% for item in this.all_visible_items %}
+      <tr>
+        <td><img src="{{ item.image | resize: 'image', 300}}" style="max-width: 15rem"/></td>
+        <td valign="top">
+          <b><a href="{{ item.product.product_url | resume }}">Review {{ item.name }}</a></b>
+        </td>
+      </tr>
+    {% endfor %}
+    </table>
+  footer: |
+    {% if coupon.code %}
+    <div class="offer">
+      Let us offer you a <b>10% discount</b>.<br>
+      Your coupon code: <span class="coupon">{{ coupon.code }}</span>
+    </div>
+    {% endif %}
+
+    <p>If you have any questions about our products or services, please <a href="{{ store.store_url }}/contact/">contact with us.</a></p>

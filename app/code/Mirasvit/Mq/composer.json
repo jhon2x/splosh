@@ -1,0 +1,21 @@
+{
+  "name": "mirasvit/module-message-queue",
+  "description": "Message Queue Implementation",
+  "require": {
+    "magento/framework": "100.0.*|100.1.*|101.0.*|102.0.*",
+    "mirasvit/module-core": ">=1.2.46"
+  },
+  "type": "magento2-module",
+  "version": "1.0.9",
+  "license": [
+    "proprietary"
+  ],
+  "autoload": {
+    "files": [
+      "src/Mq/registration.php"
+    ],
+    "psr-4": {
+      "Mirasvit\\Mq\\": "src/Mq"
+    }
+  }
+}

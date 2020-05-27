@@ -1,0 +1,10 @@
+ <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+     <default>
+         <acidgreen_exo_apisettings>
+             <exostockist_settings>
+                 <myob_stockist_search_template_id>20</myob_stockist_search_template_id>
+                 <myob_search_radius>35</myob_search_radius>
+             </exostockist_settings>
+         </acidgreen_exo_apisettings>
+     </default>
+ </config>

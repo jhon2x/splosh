@@ -1,0 +1,13 @@
+diff --git a/vendor/magento/module-catalog/Model/Indexer/Category/Product/Action/Full.php b/vendor/magento/module-catalog/Model/Indexer/Category/Product/Action/Full.php
+index ad49eeec..3d408ca6 100644
+--- a/vendor/magento/module-catalog/Model/Indexer/Category/Product/Action/Full.php
++++ b/vendor/magento/module-catalog/Model/Indexer/Category/Product/Action/Full.php
+@@ -28,7 +28,7 @@ class Full extends \Magento\Catalog\Model\Indexer\Category\Product\AbstractActio
+      *
+      * @var bool
+      */
+-    protected $useTempTable = false;
++    protected $useTempTable = true;
+
+     /**
+      * @var \Magento\Framework\Indexer\BatchSizeManagementInterface

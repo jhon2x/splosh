@@ -1,0 +1,108 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--DATA-->
+    <preference for="Mirasvit\EmailDesigner\Api\Data\TemplateInterface" type="Mirasvit\EmailDesigner\Model\Template"/>
+    <preference for="Mirasvit\EmailDesigner\Api\Data\ThemeInterface" type="Mirasvit\EmailDesigner\Model\Theme"/>
+
+    <!--SERVICE-->
+    <preference for="Mirasvit\EmailDesigner\Api\Service\VariableResolverInterface" type="Mirasvit\EmailDesigner\Service\VariableResolver"/>
+    <preference for="Mirasvit\EmailDesigner\Api\Service\TemplateProcessorInterface" type="Mirasvit\EmailDesigner\Service\TemplateProcessor"/>
+
+    <!--REPOSITORY-->
+    <preference for="Mirasvit\EmailDesigner\Api\Repository\TemplateRepositoryInterface" type="Mirasvit\EmailDesigner\Repository\TemplateRepository"/>
+    <preference for="Mirasvit\EmailDesigner\Api\Repository\ThemeRepositoryInterface" type="Mirasvit\EmailDesigner\Repository\ThemeRepository"/>
+
+    <!--TEMPLATE ENGINES-->
+    <type name="Mirasvit\EmailDesigner\Api\Service\TemplateProcessorInterface">
+        <arguments>
+            <argument name="templateEngines" xsi:type="array">
+                <item name="translation" xsi:type="object">Mirasvit\EmailDesigner\Service\TemplateEngine\Translator</item>
+                <item name="php" xsi:type="object">Mirasvit\EmailDesigner\Service\TemplateEngine\Php</item>
+                <item name="liquid" xsi:type="object">Mirasvit\EmailDesigner\Service\TemplateEngine\Liquid</item>
+                <item name="magento" xsi:type="object">Mirasvit\EmailDesigner\Service\TemplateEngine\Magento</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--Liquid Filters-->
+    <type name="Mirasvit\EmailDesigner\Service\TemplateEngine\Liquid">
+        <arguments>
+            <argument name="filters" xsi:type="array">
+                <item name="image" xsi:type="string">Mirasvit\EmailDesigner\Service\TemplateEngine\Liquid\Filter\Image</item>
+                <item name="url" xsi:type="string">Mirasvit\EmailDesigner\Service\TemplateEngine\Liquid\Filter\Url</item>
+                <item name="price" xsi:type="string">Mirasvit\EmailDesigner\Service\TemplateEngine\Liquid\Filter\Price</item>
+                <item name="date" xsi:type="string">Mirasvit\EmailDesigner\Service\TemplateEngine\Liquid\Filter\Date</item>
+                <item name="string" xsi:type="string">Mirasvit\EmailDesigner\Service\TemplateEngine\Liquid\Filter\StringFilter</item>
+                <item name="number" xsi:type="string">Mirasvit\EmailDesigner\Service\TemplateEngine\Liquid\Filter\NumberFilter</item>
+                <item name="theme" xsi:type="string">Mirasvit\EmailDesigner\Service\TemplateEngine\Liquid\Filter\ThemeFilter</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--VARIABLES PHP-->
+    <type name="Mirasvit\EmailDesigner\Service\TemplateEngine\Php\Variable\Pool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="filters" xsi:type="object">Mirasvit\EmailDesigner\Service\TemplateEngine\Php\Variable\Filters</item>
+                <item name="store" xsi:type="object">Mirasvit\EmailDesigner\Service\TemplateEngine\Php\Variable\Store</item>
+                <item name="quote" xsi:type="object">Mirasvit\EmailDesigner\Service\TemplateEngine\Php\Variable\Quote</item>
+                <item name="customer" xsi:type="object">Mirasvit\EmailDesigner\Service\TemplateEngine\Php\Variable\Customer</item>
+                <item name="order" xsi:type="object">Mirasvit\EmailDesigner\Service\TemplateEngine\Php\Variable\Order</item>
+                <item name="wishlist" xsi:type="object">Mirasvit\EmailDesigner\Service\TemplateEngine\Php\Variable\Wishlist</item>
+                <item name="item" xsi:type="object">Mirasvit\EmailDesigner\Service\TemplateEngine\Php\Variable\Item</item>
+                <item name="template" xsi:type="object">Mirasvit\EmailDesigner\Service\TemplateEngine\Php\Variable\Template</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--VARIABLES LIQUID-->
+    <type name="Mirasvit\EmailDesigner\Api\Service\VariableResolverInterface">
+        <arguments>
+            <argument name="variables" xsi:type="array">
+                <item name="item" xsi:type="object">Mirasvit\EmailDesigner\Service\TemplateEngine\Liquid\Variable\Item</item>
+                <item name="customer" xsi:type="object">Mirasvit\EmailDesigner\Service\TemplateEngine\Liquid\Variable\Customer</item>
+                <item name="store" xsi:type="object">Mirasvit\EmailDesigner\Service\TemplateEngine\Liquid\Variable\Store</item>
+                <item name="order" xsi:type="object">Mirasvit\EmailDesigner\Service\TemplateEngine\Liquid\Variable\Order</item>
+                <item name="quote" xsi:type="object">Mirasvit\EmailDesigner\Service\TemplateEngine\Liquid\Variable\Quote</item>
+                <item name="product" xsi:type="object">Mirasvit\EmailDesigner\Service\TemplateEngine\Liquid\Variable\Product</item>
+                <item name="wishlist" xsi:type="object">Mirasvit\EmailDesigner\Service\TemplateEngine\Liquid\Variable\Wishlist</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--VARIABLE PROVIDERS-->
+    <type name="Mirasvit\EmailDesigner\Ui\Template\Form\Modifier\AreaModifier">
+        <arguments>
+            <argument name="liquidVariableProvider" xsi:type="object">Mirasvit\EmailDesigner\Service\TemplateEngine\Liquid\VariableProvider</argument>
+        </arguments>
+    </type>
+    <type name="Mirasvit\EmailDesigner\Ui\Theme\Form\Modifier\AreaModifier">
+        <arguments>
+            <argument name="liquidVariableProvider" xsi:type="object">Mirasvit\EmailDesigner\Service\TemplateEngine\Liquid\VariableProvider</argument>
+        </arguments>
+    </type>
+
+    <!--ENTITY MANAGER-->
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Mirasvit\EmailDesigner\Api\Data\TemplateInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\EmailDesigner\Api\Data\TemplateInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\EmailDesigner\Api\Data\TemplateInterface::ID</item>
+                </item>
+                <item name="Mirasvit\EmailDesigner\Api\Data\ThemeInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\EmailDesigner\Api\Data\ThemeInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\EmailDesigner\Api\Data\ThemeInterface::ID</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Mirasvit\EmailDesigner\Api\Data\TemplateInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Mirasvit\EmailDesigner\Api\Data\ThemeInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

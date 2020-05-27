@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Config/etc/system_file.xsd">
+    <system>
+        <section id="mevent" showInDefault="1" showInWebsite="1" showInStore="1" type="text" translate="label" sortOrder="100">
+            <label>Event</label>
+            <tab>mirasvit</tab>
+            <resource>Mirasvit_Event::event_settings</resource>
+            <group id="general" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="0">
+                <label>General</label>
+                <field id="capture_status" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable AJAX Data Capturing</label>
+                    <source_model>Mirasvit\Event\Model\Config\Source\CaptureStatus</source_model>
+                    <comment><![CDATA[* Requires download of GeoLite2 Country database. See our <a href="https://docs.mirasvit.com/module-email/current/configuration/event" target="_blank">documentation</a> for more information.]]></comment>
+                </field>
+                <field id="geo_db_path" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>GeoLite2 Country database path</label>
+                    <comment><![CDATA[Absolute path to GeoLite2 Country database on your server, <a href="https://dev.maxmind.com/geoip/geoip2/geolite2/#Downloads" target="_blank">download from here</a>.]]></comment>
+                    <validate>required-entry</validate>
+                    <backend_model>Mirasvit\Event\Model\Config\Backend\GeoDbPath</backend_model>
+                    <depends>
+                        <field id="capture_status">2</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

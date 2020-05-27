@@ -1,0 +1,217 @@
+.mst-email-report__overview {
+    margin-bottom: 4rem;
+
+    h1 {
+        font-size: 1.4rem;
+        font-weight: bold;
+    }
+
+    .rates {
+        display: flex;
+        align-content: center;
+        margin: 0 -1rem;
+
+        .value {
+            flex-grow: 1;
+            text-align: center;
+            border: 1px solid #dfe3e8;
+            position: relative;
+            padding: 2rem;
+            margin: 1rem;
+            border-radius: 3px;
+
+            &:before {
+                font: normal normal normal 4rem/1 FontAwesome;
+                color: #F4F6F8;
+                position: absolute;
+                z-index: 1;
+                width: 100%;
+                left: 0;
+                text-align: left;
+                padding: 1rem 0 0 2rem;
+            }
+
+            > * {
+                z-index: 2;
+                position: relative;
+            }
+
+            h3 {
+                color: #637381;
+                font-size: 1.4rem;
+                font-weight: normal;
+                margin-bottom: 1rem;
+            }
+
+            strong {
+                font-size: 2.6rem;
+                font-weight: normal;
+            }
+
+            .arrow {
+                color: #637381;
+                font-size: 3rem;
+                position: absolute;
+                right: -2.3rem;
+                top: 3.5rem;
+            }
+
+            &._revenue {
+                border-color: #eb5202;
+
+                strong {
+                    color: #eb5202;
+                }
+            }
+        }
+    }
+
+    .conversations {
+        border: none;
+        display: flex;
+        width: 60%;
+        justify-content: space-between;
+        padding-top: 0;
+        flex-grow: 0;
+        margin-top: -1rem;
+        margin-left: 13rem;
+
+        .rate {
+            width: 20%;
+            flex-grow: 0;
+            border: 1px dashed #dfe3e8;
+            border-top: none;
+            text-align: center;
+            padding: 1rem;
+
+            h3 {
+                color: #637381;
+                font-size: 1.4rem;
+                font-weight: normal;
+                margin-bottom: 1rem;
+            }
+
+            strong {
+                font-size: 2.6rem;
+                font-weight: normal;
+            }
+        }
+    }
+
+    &._inline {
+        margin-bottom: 0;
+
+        .rates {
+            .value {
+                border: none;
+                padding: 0;
+
+                strong {
+                    font-size: 2rem;
+                }
+            }
+        }
+    }
+}
+
+//.email-campaign__overview,
+//.email-campaign__inline-overview {
+//    margin-bottom: 8rem;
+//
+//    h1 {
+//        font-size: 1.4rem;
+//        font-weight: bold;
+//    }
+//
+//    .rates {
+//        display: flex;
+//        align-content: center;
+//
+//        .value {
+//            flex-grow: 1;
+//            text-align: center;
+//            border-right: 1px solid #DFE3E8;
+//            position: relative;
+//
+//            &:before {
+//                font: normal normal normal 6rem/1 FontAwesome;
+//                color: #F4F6F8;
+//                position: absolute;
+//                z-index: 1;
+//                width: 100%;
+//                left: 0;
+//                text-align: left;
+//                padding-left: 2rem;
+//            }
+//
+//            > * {
+//                z-index: 2;
+//                position: relative;
+//            }
+//
+//            &:last-child {
+//                border: none;
+//            }
+//
+//            h3 {
+//                color: #637381;
+//                font-size: 1.4rem;
+//                font-weight: normal;
+//                margin-bottom: 1rem;
+//            }
+//
+//            strong {
+//                font-size: 2.6rem;
+//                font-weight: normal;
+//            }
+//        }
+//    }
+//}
+//
+//.email-chain__overview {
+//    margin-bottom: 0;
+//}
+//
+//.email-campaign__overview {
+//    .rates {
+//        flex-wrap: wrap;
+//
+//        .value {
+//            border: 1px solid #dfe3e8;
+//            padding: 2rem;
+//            margin: 0.8rem;
+//            border-radius: 3px;
+//            width: 18%;
+//
+//            &:last-child {
+//                border: 1px solid #dfe3e8;
+//            }
+//
+//            .arrow {
+//                color: #637381;
+//                font-size: 25px;
+//                position: absolute;
+//                right: -20px;
+//                top: 40%;
+//            }
+//        }
+//
+//        .rate-box {
+//            border: none;
+//            display: flex;
+//            width: 80%;
+//            justify-content: space-around;
+//            padding-top: 0;
+//            flex-grow: 0;
+//            margin: 0 auto;
+//            margin-top: -17px;
+//
+//            .rate {
+//                width: 20%;
+//                flex-grow: 0;
+//                border: 1px dashed #dfe3e8;
+//                border-top: none;
+//            }
+//        }
+//    }
+//}

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="DiscountBasedOnPriceAfterPreviousDiscount">
+        <annotations>
+            <features value="Rule Creation"/>
+            <stories value="Create a Rule via the Admin"/>
+            <title value="Check Calculate Discount Based On Price After Previous Discount"/>
+            <description value="Check Calculate Discount Based On Price After Previous Discount"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="SP-MFTF-30"/>
+            <group value="Amasty"/>
+            <group value="Rules"/>
+            <group value="Rule"/>
+            <group value="Shipping"/>
+            <group value="DiscountBasedOnPriceAfterPreviousDiscount"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
+        </before>
+
+        <after>
+            <!--Delete Rules -->
+            <actionGroup ref="DeleteAllCartRules" stepKey="DeleteAllRules1"/>
+            <amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>
+        </after>
+
+        <!--Create Price Rule -->
+        <actionGroup ref="CreateCartRule" stepKey="CreateCartRule1">
+            <argument name="actionsRule" value="_applyTheCheapestAlsoForBuy1Get1Free"/>
+            <argument name="cartRule" value="_discountBasedOnPriceAfterPreviousDiscount1"/>
+        </actionGroup>
+        <actionGroup ref="EditRuleAddPriority" stepKey="AddPriority">
+            <argument name="cartRule" value="_discountBasedOnPriceAfterPreviousDiscount1"/>
+        </actionGroup>
+        <actionGroup ref="EditRuleCalculateDiscountBasedOnPriceAfterPreviousDiscount" stepKey="PriceAfterPreviousDiscount">
+            <argument name="cartRule" value="_discountBasedOnPriceAfterPreviousDiscount1"/>
+        </actionGroup>
+        <actionGroup ref="SaveRuleAfterEdit" stepKey="SaveFirstCartRuleAfterChange2"/>
+
+        <!--Create Price Rule -->
+        <actionGroup ref="CreateCartRule" stepKey="CreateCartRule2">
+            <argument name="actionsRule" value="_applyTheCheapestAlsoForBuy1Get1Free"/>
+            <argument name="cartRule" value="_discountBasedOnPriceAfterPreviousDiscount2"/>
+        </actionGroup>
+        <actionGroup ref="EditRuleAddActionsConditions" stepKey="AddConditionsForCartRule">
+            <argument name="actionsConditionOptions" value="_SKU"/>
+            <argument name="ruleName" value="_discountBasedOnPriceAfterPreviousDiscount2.name"/>
+            <argument name="actionsConditionOptionsParamIs" value="_isOneOf"/>
+            <argument name="conditionsData" value="_discountBasedOnPriceAfterPreviousDiscount2.conditions"/>
+        </actionGroup>
+        <actionGroup ref="EditRuleAddPriority" stepKey="AddPriority2">
+            <argument name="cartRule" value="_discountBasedOnPriceAfterPreviousDiscount2"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddFirstSimpleProduct">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theFitnessHarmonyLumaflex"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddSecondSimpleProduct">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagImpulseDuffleData"/>
+        </actionGroup>
+
+        <!--Check first discount-->
+        <actionGroup ref="CheckDiscountAmountTwoRules" stepKey="CheckDiscountWithTwoProduct">
+            <argument name="discountAmount" value="_discountBasedOnPriceAfterPreviousDiscount1.discountAmountOne"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddThirdSimpleProduct">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+        </actionGroup>
+
+        <!--Check second discount-->
+        <actionGroup ref="CheckDiscountAmountTwoRules" stepKey="CheckDiscountWithThreeProduct">
+            <argument name="discountAmount" value="_discountBasedOnPriceAfterPreviousDiscount1.discountAmountTwo"/>
+        </actionGroup>
+
+        <!--Change Qty product in the cart-->
+        <actionGroup ref="ChangeQtyProductInCart" stepKey="ChangeQtyBagSSPInCartToTwo">
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+            <argument name="addProductQty" value="_enterQty2"/>
+        </actionGroup>
+
+        <!--Check third discount-->
+        <actionGroup ref="CheckDiscountAmountTwoRules" stepKey="CheckDiscountWittFourProduct">
+            <argument name="discountAmount" value="_discountBasedOnPriceAfterPreviousDiscount1.discountAmountThree"/>
+        </actionGroup>
+
+        <!--Change Qty product in the cart-->
+        <actionGroup ref="ChangeQtyProductInCart" stepKey="ChangeQtyFitnessLumaflexToTwo">
+            <argument name="products" value="_theFitnessHarmonyLumaflex"/>
+            <argument name="addProductQty" value="_enterQty2"/>
+        </actionGroup>
+
+        <!--Check fourth discount-->
+        <actionGroup ref="CheckDiscountAmountTwoRules" stepKey="CheckDiscountWithProduct">
+            <argument name="discountAmount" value="_discountBasedOnPriceAfterPreviousDiscount1.discountAmountFour"/>
+        </actionGroup>
+
+    </test>
+</tests>

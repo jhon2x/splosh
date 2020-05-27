@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="sales" sortOrder="999" translate="label">
+			<label>sales</label>
+		</tab>
+		<section id="google" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+			<label>google</label>
+			<tab>sales</tab>
+			<resource>Acidgreen_GoogleTagManager::config_acidgreen_googletagmanager</resource>
+			<group id="exemptions" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Google Analytics - Exemptions</label>
+				<field id="full_action_name_exemptions" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label>Exemptions to add_to_cart cookie setting</label>
+					<comment>Pages to be exempted from add_to_cart cookie setting (e.g. Order By SKU, since bulk orders are uploaded - causing cookie size problems)</comment>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

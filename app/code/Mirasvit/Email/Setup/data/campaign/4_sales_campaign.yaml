@@ -1,0 +1,7 @@
+title: Sales Follow-Up Campaign
+description: Gain more profit by sending a series of emails following the customers' purchases. For example, remind your prospects to re-order items when they run out and send them complementary products in addition to recent purchase.
+is_active: 1
+triggers:
+    4_order_is_processing
+    11_complementary
+    12_replenishment

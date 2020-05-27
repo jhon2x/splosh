@@ -1,0 +1,19 @@
+& when (@media-common = true) {
+  body {
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 480px) {
+    .header .logo img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .panel-spl-custom ul.header.links, .customer-menu li.authorization-link {
+      display: none;
+    }
+  }
+}

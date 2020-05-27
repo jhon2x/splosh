@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">mageworx_shippingrules_rate_form.mageworx_shippingrules_rate_form_data_source</item>
+            <item name="deps" xsi:type="string">mageworx_shippingrules_rate_form.mageworx_shippingrules_rate_form_data_source</item>
+            <item name="namespace" xsi:type="string">mageworx_shippingrules_rate_form</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">MageWorx\ShippingRules\Block\Adminhtml\Shippingrules\Rate\Edit\Button\Back</item>
+            <item name="save" xsi:type="string">MageWorx\ShippingRules\Block\Adminhtml\Shippingrules\Rate\Edit\Button\Save</item>
+            <item name="save_and_continue" xsi:type="string">MageWorx\ShippingRules\Block\Adminhtml\Shippingrules\Rate\Edit\Button\SaveAndContinue</item>
+            <item name="duplicate" xsi:type="string">MageWorx\ShippingRules\Block\Adminhtml\Shippingrules\Rate\Edit\Button\Duplicate</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">mageworx_shippingrules_rate_form</item>
+        </item>
+        <item name="childrenFromMeta" xsi:type="boolean">true</item>
+    </argument>
+    <dataSource name="mageworx_shippingrules_rate_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">MageWorx\ShippingRules\Ui\DataProvider\Rate\Form\RateDataProvider</argument>
+            <argument name="name" xsi:type="string">mageworx_shippingrules_rate_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">rate_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Rate Information</item>
+                <item name="collapsible" xsi:type="boolean">false</item>
+                <item name="sortOrder" xsi:type="number">10</item>
+                <item name="opened" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        <field name="rate_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">hidden</item>
+                    <item name="dataScope" xsi:type="string">rate_id</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                </item>
+            </argument>
+        </field>
+        <field name="rate_code">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Unique Code</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">rate_code</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-code" xsi:type="boolean">true</item>
+                        <item name="min_text_len‌​gth" xsi:type="number">1</item>
+                        <item name="max_text_length" xsi:type="number">32</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Title</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">title</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="active">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="default" xsi:type="number">1</item>
+                    <item name="label" xsi:type="string" translate="true">Active</item>
+                    <item name="dataScope" xsi:type="string">active</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                </item>
+            </argument>
+        </field>
+        <field name="priority">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Priority</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">priority</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-zero-or-greater" xsi:type="boolean">true</item>
+                        <item name="required-entry" xsi:type="boolean">false</item>
+                    </item>
+                    <item name="notice" xsi:type="string" translate="true">
+                        The Rate with a max priority (e.g. 999)
+                        will be applied first, then will be applied the Rate with a lower priority (e.g. 100).
+                        The Rate with the lowest priority (e.g. 0) will be applied at the end.
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="store_ids">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Cms\Ui\Component\Listing\Column\Cms\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">int</item>
+                    <item name="label" xsi:type="string" translate="true">Store View</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="source" xsi:type="string">rate</item>
+                    <item name="dataScope" xsi:type="string">store_ids</item>
+                    <item name="default" xsi:type="string">0</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="rate_method_price">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">MageWorx\ShippingRules\Model\Config\Source\MethodRatePrice</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Price Calculation Method</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="dataScope" xsi:type="string">rate_method_price</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="notice" xsi:type="string" translate="true">
+                        Allows to overwrite a price of a method or take the sum of the methods price and the
+                        resulted price of the rate.
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="estimated_delivery_time_min">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Estimated delivery time min</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">estimated_delivery_time_min</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-zero-or-greater" xsi:type="boolean">true</item>
+                        <item name="required-entry" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="estimated_delivery_time_max">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Estimated delivery time max</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">estimated_delivery_time_max</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-zero-or-greater" xsi:type="boolean">true</item>
+                        <item name="required-entry" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="conditions">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Conditions</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">20</item>
+                <item name="opened" xsi:type="boolean">false</item>
+            </item>
+        </argument>
+        <field name="country_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">MageWorx\ShippingRules\Model\Config\Source\Locale\Country</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Country</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="dataScope" xsi:type="string">country_id</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                </item>
+            </argument>
+        </field>
+        <field name="region">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Region (plain text)</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">region</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-state" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="region_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">MageWorx\ShippingRules\Model\Config\Source\Locale\AllRegions</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Region</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="component" xsi:type="string">MageWorx_ShippingRules/js/form/element/rate/region_multiselect</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="dataScope" xsi:type="string">region_id</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="customEntry" xsi:type="string">region</item>
+                    <item name="filterBy" xsi:type="array">
+                        <item name="target" xsi:type="string">${ $.provider }:${ $.parentScope }.country_id</item>
+                        <item name="field" xsi:type="string">country_id</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <!-- Zip Codes Section -->
+        <field name="zip_validation_mode">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">MageWorx\ShippingRules\Model\Config\Source\ZipValidationMode</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Zip Codes Validation Mode</item>
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="dataScope" xsi:type="string">zip_validation_mode</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="component" xsi:type="string">MageWorx_ShippingRules/js/component/zip_validation_mode_select</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true"><![CDATA[<div style="font-size:1.2rem;"><p>This setting determines how the zip codes entered by the customers will be validated in the rule.</p><p>3 modes are available:</p><ul><li><strong>None</strong> - the rule doesn't check the entered zip codes;</li><li><strong>Zip Codes List</strong> - you can add the list of the zip codes separated by the commas to validate the rule;</li><li><strong>Zip Codes Ranges</strong> - you can add the ranges of the zip codes to validate the rule;</li></ul></div>]]></item>
+                </item>
+            </argument>
+        </field>
+
+        <!-- Plain Zip Codes start:-->
+        <field name="plain_zip_codes_inversion">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="label" xsi:type="string" translate="true">Exclude Zip Codes</item>
+                    <item name="dataScope" xsi:type="string">plain_zip_codes_inversion</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="notice" xsi:type="string" translate="true">Enable this option if you need to exclude the zip codes to validate this rule.</item>
+                </item>
+            </argument>
+        </field>
+        <field name="plain_zip_codes_string">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Zip Codes</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">plain_zip_codes_string</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="notice" xsi:type="string" translate="true">Zip codes separated by the commas.</item>
+                </item>
+            </argument>
+        </field>
+        <!-- Plain Zip Codes End; -->
+
+        <!-- Zip Code Diapasons start: -->
+        <field name="zip_format">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">MageWorx\ShippingRules\Model\Config\Source\ZipFormats</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Zip Diapasons Format</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="dataScope" xsi:type="string">zip_format</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        <![CDATA[
+                        <div style="font-size:1.2rem;">
+                            <p>This setting checks the zip codes format:</p>
+                            <ul>
+                                <li><strong>Numeric </strong> for most countries with just numeric values in the postal (zip) code;</li>
+                                <li><strong>Alphanumeric (UK) </strong>for the postal codes in the United Kingdom;</li>
+                                <li><strong>Alphanumeric (NL) </strong>for the postal codes in the Netherlands;</li>
+                                <li><strong>Alphanumeric (Other) </strong>for any other postal code that uses both letters and numbers (like the postal codes in Canada, Ireland etc.)</li>
+                            </ul>
+                        </div>
+                        ]]>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <dynamicRows name="zip_code_diapasons">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Zip Codes Ranges</item>
+                    <item name="addButtonLabel" xsi:type="string" translate="true">Add New Diapason</item>
+                    <item name="additionalClasses" xsi:type="array">
+                        <item name="has-dynamic-rows" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="componentType" xsi:type="string">dynamicRows</item>
+                </item>
+            </argument>
+
+            <container name="record">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="component" xsi:type="string">Magento_Ui/js/dynamic-rows/record</item>
+                        <item name="isTemplate" xsi:type="boolean">true</item>
+                        <item name="is_collection" xsi:type="boolean">true</item>
+                        <item name="componentType" xsi:type="string">container</item>
+                    </item>
+                </argument>
+                <field name="from">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="label" xsi:type="string" translate="true">From</item>
+                            <item name="validation" xsi:type="array">
+                                <item name="required-entry" xsi:type="boolean">true</item>
+                                <item name="validate-zip-international" xsi:type="boolean">true</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="to">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="label" xsi:type="string" translate="true">To</item>
+                            <item name="validation" xsi:type="array">
+                                <item name="required-entry" xsi:type="boolean">true</item>
+                                <item name="validate-zip-international" xsi:type="boolean">true</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="inverted">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">boolean</item>
+                            <item name="label" xsi:type="string" translate="true">Exclude</item>
+                            <item name="formElement" xsi:type="string">checkbox</item>
+                            <item name="prefer" xsi:type="string">toggle</item>
+                            <item name="checked" xsi:type="boolean">true</item>
+                            <item name="valueMap" xsi:type="array">
+                                <item name="true" xsi:type="number">1</item>
+                                <item name="false" xsi:type="number">0</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <actionDelete name="action_delete">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="fit" xsi:type="boolean">true</item>
+                            <item name="elementTmpl" xsi:type="string">Magento_Catalog/form/element/action-delete</item>
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="componentType" xsi:type="string">actionDelete</item>
+                        </item>
+                    </argument>
+                </actionDelete>
+            </container>
+        </dynamicRows>
+        <!-- Zip Code Diapasons end; -->
+
+        <field name="price_from">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Total Price From</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">price_from</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-not-negative-number" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="price_to">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Total Price To</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">price_to</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-not-negative-number" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="qty_from">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Total Qty From</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">qty_from</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-not-negative-number" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="qty_to">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Total Qty To</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">qty_to</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-not-negative-number" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="weight_from">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Total Weight From</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">weight_from</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-not-negative-number" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="weight_to">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Total Weight To</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">weight_to</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-not-negative-number" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="pricing">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Rate Pricing</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">30</item>
+                <item name="opened" xsi:type="boolean">false</item>
+            </item>
+        </argument>
+        <field name="price">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Total Price</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">price</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-not-negative-number" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="price_per_product">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Price Per Each Product</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">price_per_product</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-not-negative-number" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="price_per_item">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Price Per Each Item</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">price_per_item</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-not-negative-number" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="price_percent_per_product">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Price Per Each Product (% of the method price)</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">price_percent_per_product</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-not-negative-number" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="price_percent_per_item">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Price Per Each Item (% of the method price)</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">price_percent_per_item</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-not-negative-number" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="item_price_percent">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Price Per Each Item (% of the item price)</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">item_price_percent</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-not-negative-number" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="price_per_weight">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Price Per 1 Unit of Weight</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">price_per_weight</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-not-negative-number" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="labels">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Labels</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="string">40</item>
+                <item name="imports" xsi:type="array">
+                    <item name="visible" xsi:type="string">!${ $.provider }:data.single_store</item>
+                </item>
+            </item>
+        </argument>
+        <container name="store_view_labels" >
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">40</item>
+                </item>
+            </argument>
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">MageWorx\ShippingRules\Block\Adminhtml\Shippingrules\Rate\Edit\Tab\Labels</argument>
+            </htmlContent>
+        </container>
+    </fieldset>
+</form>

@@ -1,0 +1,29 @@
+theme: Base Theme
+title: Review Request
+template_subject: Please add review for products you have bought
+template_areas:
+  header: <h1>Dear {{ customer_name }}</h1>
+  content: |
+    <p>Thank you for your recent purchase from <a href="{{ store.store_url }}">{{ store.store_name }}</a>.</p>
+    <p>We hope the experience met your expectations. We always strive to offer the highest quality service to all of our customers, and we rely on your feedback to help us achieve this.</p>
+    <p>We hope you’ll take a couple of minutes to write a review of your experience with our products.</p>
+
+    <table width="0" border="0" cellspacing="5" cellpadding="10">
+    {% for item in this.all_visible_items %}
+      <tr>
+        <td><img src="{{ item.image | resize: 'image', 300}}" style="max-width: 15rem"/></td>
+        <td valign="top">
+          <b><a href="{{ item.product.product_url | resume }}">Review {{ item.name }}</a></b>
+        </td>
+      </tr>
+    {% endfor %}
+    </table>
+  footer: |
+    {% if coupon.code %}
+    <div class="offer">
+      We highly appreciate each and every our visitor, and it's extremely frustrating for us to lose you as a customer.<br>
+      So let us offer you a <b>discount</b> to complete your purchase.<br>
+      Your coupon code: <span class="coupon">{{ coupon.code }}</span>
+    </div>
+    {% endif %}
+    <p>If you have any questions about our products or services, please <a href="{{ store.store_url }}/contact/">contact with us.</a></p>

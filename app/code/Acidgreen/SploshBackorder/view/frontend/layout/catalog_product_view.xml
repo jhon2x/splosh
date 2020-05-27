@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<body>
+    <referenceContainer name="content">
+        <referenceContainer name="product.info.main">
+            <referenceContainer name="product.info.price">
+                <referenceContainer name="product.info.stock.sku">
+                    <block class="Acidgreen\SploshBackorder\Block\Product\View\DueDate" name="product.info.duedate" template="Acidgreen_SploshBackorder::product/view/duedate.phtml" before="product.info.sku" />
+                </referenceContainer>
+            </referenceContainer>
+            <referenceBlock name="product.info">
+                <referenceBlock name="product.info.form.options">
+                    <!-- see Magento_Catalog::catalog_product_view.xml for structure -->
+                    <block class="Magento\Catalog\Block\Product\View" name="product.info.options.wrapper.bottom" as="product_options_wrapper_bottom" template="Magento_Catalog::product/view/options/wrapper/bottom.phtml">
+                        <block class="Magento\Catalog\Block\Product\View" name="product.info.addtocart.additional" as="product.info.addtocart" template="Magento_Catalog::product/view/addtocart.phtml"/>
+                    </block>
+                </referenceBlock>
+            </referenceBlock>
+        </referenceContainer>
+    </referenceContainer>
+</body>

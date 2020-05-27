@@ -1,0 +1,26 @@
+theme: Base Theme
+title: Recently viewed product
+template_subject: Take another look!
+template_areas:
+  header: |
+        <h3>You recently viewed this product</h3>
+        {% if coupon.code %}
+        <div class="offer">
+          We highly appreciate each and every our visitor, and it's extremely frustrating for us to lose you as a customer.<br>
+          So let us offer you a <b>discount</b> to complete your purchase.<br>
+          Your coupon code: <span class="coupon">{{ coupon.code }}</span>
+        </div>
+        {% endif %}
+  content: |
+        <table width="0" border="0" cellspacing="5" cellpadding="10">
+          <tr>
+            <td><img src="{{ product.image | resize: 'image', 300}}" style="max-width: 15rem"/></td>
+            <td valign="top">
+              <b><a href="{{ product.product_url | resume }}">{{ product.name }}</a></b>
+            </td>
+          </tr>
+        </table>
+  footer: |
+        {% if crosssell.cross_sell_html %}
+          <h4 style="text-align: center">You may also be interested in the following products</h4>
+        {% endif %}

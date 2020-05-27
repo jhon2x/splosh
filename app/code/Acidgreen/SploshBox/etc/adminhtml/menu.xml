@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="Acidgreen::top_level" module="Acidgreen_SploshBox" resource="Magento_Backend::content" sortOrder="59" title="Splosh"/>
+		<add action="acidgreen_sploshbox/box/index" id="Acidgreen::acidgreen_box" module="Acidgreen_SploshBox" parent="Acidgreen::top_level" resource="Magento_Backend::content" sortOrder="1" title="Manage Carton Sizes"/>
+	</menu>
+</config>

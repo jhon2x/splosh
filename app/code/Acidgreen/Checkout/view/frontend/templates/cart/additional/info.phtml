@@ -1,0 +1,30 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Shopping cart additional info
+ * @var $block \Magento\Framework\View\Element\Template
+ */
+?>
+<?php
+
+$name = $block->getNameInLayout();
+foreach ($block->getChildNames($name) as $childName) {
+    if ($childName != 'backorder.additional.info')
+        echo $block->getChildBlock($childName)->setItem($block->getItem())->toHtml();
+    else {
+        echo $block->getChildBlock($childName)
+            ->setOtherProductData($block->getOtherProductData())
+            ->setCartStockzoneItem($block->getCartStockzoneItem())
+            ->setItem($block->getItem())
+            ->toHtml();
+    }
+}
+?>

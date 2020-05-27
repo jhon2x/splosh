@@ -1,0 +1,88 @@
+.email-designer-theme-edit,
+.email-designer-template-edit {
+    #editor {
+        width: calc(~"100% - 30px") !important;
+    }
+}
+
+.email-designer__editor {
+    .lib-clearfix();
+
+    .email-designer__editor-areas {
+        float: left;
+        padding-right: 1rem;
+        width: 50%;
+
+        section {
+            position: relative;
+            margin-bottom: 3rem;
+
+            label {
+                color: #303030;
+                font-weight: @font-weight__semibold;
+                margin-bottom: 1rem;
+                display: block;
+                text-align: left;
+            }
+
+            .email-designer__variable-default {
+                text-align: right;
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+
+            .CodeMirror {
+                border: 1px solid @color-gray68;
+                height: auto;
+            }
+
+            textarea {
+                border: none;
+            }
+        }
+    }
+
+    .email-designer__editor-preview {
+        border: 1px solid @color-gray68;
+        float: left;
+        position: relative;
+        width: 50%;
+
+        iframe {
+            border: none;
+            width: 100%;
+        }
+
+        .spinner {
+            position: absolute;
+            left: 50%;
+            top: 55px;
+            transform: translate(-50%, 0);
+            display: none;
+        }
+
+        .toolbar {
+            .lib-clearfix();
+
+            margin: 8px 10px 8px 10px;
+
+            .admin__field-option {
+                margin-top: 0;
+                float: right;
+            }
+            .admin__field-mode {
+                float: left;
+            }
+            .admin__field-refresh {
+                float: right;
+                margin-top: 0;
+                margin-right: 10px;
+            }
+
+            label {
+                display: block;
+            }
+        }
+    }
+}

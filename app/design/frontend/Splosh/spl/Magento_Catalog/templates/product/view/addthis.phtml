@@ -1,0 +1,180 @@
+<?php
+    $porto_helper = $this->helper('Smartwave\Porto\Helper\Data');
+    echo $porto_helper->getConfig('porto_settings/product/custom_social');
+?>
+<?php if (!$this->helper('Acidgreen\Checkout\Helper\Cart')->isSiteB2b()): ?>
+    <style>
+      #map {
+        width: 100%;
+        height: 600px;
+        background-color: grey;
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrnQSQ8f7kmLbAf5g-8J_gsOCLaTXdJAQ&callback=initMap"></script>
+    <div class="search-postal-wrapper">
+    <h4><?php /* @escapeNotVerified */ echo __('Find your closest stockist'); ?></h4>
+      <form onsubmit="return false;"
+            data-mage-init='{"validation": {"errorClass": "mage-error"}}'>
+          <div class="postal-search-input">
+            <input name="postcode" id="st-postcode" type="text" data-validate="{required:true}" aria-required="true" placeholder="Enter postal code">
+            <input name="stockcode" id="st-stockcode" type="hidden" value="<?php echo $this->_coreRegistry->registry('product')->getSku(); ?>">
+          </div>
+          <button type="submit" id="submit-st" value="Search">
+            <span><?php /* @escapeNotVerified */ echo __('Search'); ?></span>
+          </button>
+      </form>
+    </div>
+
+    <div id="popup-mpdal" name="popup-mpdal">
+        <div id="map"></div>
+    </div>
+    <script>
+        require(
+            [
+                'jquery',
+                'Magento_Ui/js/modal/modal'
+            ],
+            function(
+                $,
+                modal
+            ) {
+                var options = {
+                    title: 'Available Stockists',
+                    type: 'popup',
+                    responsive: true,
+                    innerScroll: true,
+                    clickableOverlay: true
+                };
+
+                var popup = modal(options, $('#popup-mpdal'));
+                $('.modal-footer').hide();
+
+                $(window).click(function() {
+                    if ($("#popup-mpdal").is(":visible") && !$(".loading-mask").is(":visible")) {
+                        $("#popup-mpdal").modal("closeModal");
+                    }
+                });
+
+                $(".modal-inner-wrap").on('click',function(event){
+                    if ($("#popup-mpdal").is(":visible")) {
+                        event.stopPropagation();
+                    }
+                });
+
+                $("#submit-st").on('click',function(event){
+                    event.stopPropagation();
+                    if ($("#st-postcode").val()) {
+                        $("#popup-mpdal").modal("openModal");
+
+                        _position = { lat: -33.8688, lng: 151.2093};
+                        obj = '';
+
+                        mapOptions = {
+                          zoom: 10,
+                          center: _position,
+                          mapTypeControl: false
+                        }
+
+                        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+                        infoWindow = [];
+
+
+                        $.ajax({
+                            type: "POST",
+                            url: "<?php echo $block->getUrl('storefinder'); ?>",
+                            dataType: 'json',
+                            data: "postcode="+$("#st-postcode").val()+"&stockcode="+$("#st-stockcode").val(),
+                            showLoader: true,
+                            context: $("#popup-mpdal"),
+                            success: function(data){
+                                setupMap(data);
+                            }
+                        });
+                    }
+                });
+
+                function setupMap(obj) {
+
+                  var search_radius;
+
+                  var foundCoords = !isEmpty(obj.parsedLat) && !isEmpty(obj.parsedLong);
+
+                  if (foundCoords) {
+                    _position = { lat: obj.parsedLat, lng: obj.parsedLong };
+                    _positionText = $.mage.__('Your Postcode');
+                  } else {
+                    _positionText = $.mage.__('Unable to find requested postcode');
+                  }
+
+                  map.setCenter(_position);
+
+                  var centerMarker = new google.maps.Marker({
+                    position: _position,
+                    map: map,
+                    animation: google.maps.Animation.DROP,
+                    icon: '<?php echo $block->getViewFileUrl('images/littleGuy.png') ?>',
+                    title: _positionText
+                  });
+
+                  var iwContentCenter = '<div id="iw_container"><div class="iw_title">'+_positionText+'</div></div>';
+
+                  var infoWindowCenter = new google.maps.InfoWindow();
+
+                  infoWindowCenter.setContent(iwContentCenter);
+
+                  if(!foundCoords) {
+                      infoWindowCenter.open(map, centerMarker);
+                  }
+
+                  if(!obj.data) {
+                    return;
+                  }
+
+                  var marker = [];
+                  for (var i = 0; i < Object.keys(obj.data).length; i++) {
+                      var latFloat = parseFloat(obj.data[i][2]);
+                      var lngFloat = parseFloat(obj.data[i][3]);
+                      marker[i] = new google.maps.Marker({
+                          position: { lat: latFloat, lng: lngFloat },
+                          map: map,
+                          animation: google.maps.Animation.DROP,
+                          title: obj.data[i][1]
+                      });
+
+                      var iwContent = '<div id="iw_container">' +
+                      '<div class="iw_title">' + obj.data[i][1] + '</div>' +
+                      '<br />' +
+                      '<div class="iw_content">' +
+                         obj.data[i][4] +
+                         obj.data[i][5] + '<br />' +
+                         obj.data[i][6] + '<br />' +
+                         obj.data[i][7] + '<br />' +
+                         obj.data[i][8] + '<br />' +
+                         obj.data[i][9] + '<br />' +
+                         obj.data[i][10] +
+                      '</div></div>';
+
+                      infoWindow[i] = new google.maps.InfoWindow();
+
+                      google.maps.event.addListener(marker[i], 'click', (function(i, marker,iwContent,infoWindow,infoWindowCenter) {
+                          return function() {
+                              infoWindow[i].setContent(iwContent);
+                              $.each(infoWindow, function (index, value) {
+                                  infoWindow[index].close();
+                                  infoWindowCenter.close();
+                              });
+                              infoWindow[i].open(map, marker[i]);
+                          };
+                      })(i,marker,iwContent,infoWindow,infoWindowCenter));
+                  }
+                }
+
+                function isEmpty(val){
+                    return (val === undefined || val == null || val.length <= 0) ? true : false;
+                }
+
+            }
+        );
+    </script>
+<?php endif; ?>

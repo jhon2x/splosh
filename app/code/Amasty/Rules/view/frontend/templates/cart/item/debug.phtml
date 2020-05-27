@@ -1,0 +1,28 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+?>
+<?php
+/** @var \Amasty\Rules\Block\Cart\Item\Debug $block */
+$itemsDiscounts = $block->getDiscountDebuggerInformation();
+?>
+
+<?php if ($itemsDiscounts) : ?>
+<table>
+    <tr>
+        <td><?= $block->escapeHtml(__('Rule Id')) ?></td>
+        <td><?= $block->escapeHtml(__('Rule Name')) ?></td>
+        <td><?= $block->escapeHtml(__('Discount')) ?></td>
+    </tr>
+    <?php foreach ($itemsDiscounts as $ruleId => $discountData) :?>
+        <tr>
+            <td><?= $block->escapeHtml($ruleId) ?></td>
+            <td><?= $block->escapeHtml($discountData['rule_name']) ?></td>
+            <td><?= $block->escapeHtml($discountData['amount']) ?></td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+<?php endif; ?>

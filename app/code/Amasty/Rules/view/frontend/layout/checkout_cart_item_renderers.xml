@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="checkout.cart.item.renderers.simple.actions">
+            <block before="-" class="Amasty\Rules\Block\Cart\Item\Debug" name="am.checkout.cart.simple.item.debug" as="am.debug.simple.item" template="Amasty_Rules::cart/item/debug.phtml"/>
+        </referenceBlock>
+        <referenceBlock name="checkout.cart.item.renderers.default.actions">
+            <block before="-" class="Amasty\Rules\Block\Cart\Item\Debug" name="am.checkout.cart.default.item.debug" as="am.debug.default.item" template="Amasty_Rules::cart/item/debug.phtml"/>
+        </referenceBlock>
+        <referenceBlock name="checkout.cart.item.renderers.bundle.actions">
+            <block before="-" class="Amasty\Rules\Block\Cart\Item\Debug" name="am.checkout.cart.item.bundle.debug" as="am.debug.item.bundle" template="Amasty_Rules::cart/item/debug.phtml"/>
+        </referenceBlock>
+        <referenceBlock name="checkout.cart.item.renderers.downloadable.actions">
+            <block before="-" class="Amasty\Rules\Block\Cart\Item\Debug" name="am.checkout.cart.item.downloadable.debug" as="am.debug.item.downloadable" template="Amasty_Rules::cart/item/debug.phtml"/>
+        </referenceBlock>
+        <referenceBlock name="checkout.cart.item.renderers.grouped.actions">
+            <block before="-" class="Amasty\Rules\Block\Cart\Item\Debug" name="am.checkout.cart.item.grouped.debug" as="am.debug.item.grouped" template="Amasty_Rules::cart/item/debug.phtml"/>
+        </referenceBlock>
+        <referenceBlock name="checkout.cart.item.renderers.configurable.actions">
+            <block before="-" class="Amasty\Rules\Block\Cart\Item\Debug" name="am.checkout.cart.item.configurable.debug" as="am.debug.item.configurable" template="Amasty_Rules::cart/item/debug.phtml"/>
+        </referenceBlock>
+        <referenceBlock name="checkout.cart.item.renderers.virtual.actions">
+            <block before="-" class="Amasty\Rules\Block\Cart\Item\Debug" name="am.checkout.cart.item.virtual.debug" as="am.debug.item.virtual" template="Amasty_Rules::cart/item/debug.phtml"/>
+        </referenceBlock>
+    </body>
+</page>

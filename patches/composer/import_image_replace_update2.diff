@@ -1,0 +1,13 @@
+--- a/Model/Import/Product.php	2019-08-23 21:26:10.000000000 +0800
++++ b/Model/Import/Product2.php	2019-08-23 21:36:24.000000000 +0800
+@@ -2067,7 +2067,9 @@
+ 
+         foreach ($images as $sku => $files) {
+             foreach ($files as $path => $file) {
+-                $images[$sku][$path]['hash'] = hash_file("sha256",$productMediaPath . $file['value']);
++                if ($this->_mediaDirectory->isReadable($productMediaPath . $file['value'])) {
++                    $images[$sku][$path]['hash'] = hash_file("sha256", $productMediaPath . $file['value']);
++                }
+             }
+         }
+     }

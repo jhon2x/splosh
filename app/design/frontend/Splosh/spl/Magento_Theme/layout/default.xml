@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="3columns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+    	<referenceBlock name="store.settings">
+    		<arguments>
+                <argument name="title" translate="true" xsi:type="string">Follow Us</argument>
+            </arguments>
+    		<block class="Magento\Cms\Block\Block" name="social.header.mobile" as="social.header.mobile">
+			    <arguments>
+			        <argument name="block_id" xsi:type="string">spl_social_icon_header</argument>
+			        <argument name="id_modifier" xsi:type="string">nav</argument>
+			    </arguments>
+			</block>
+    	</referenceBlock>
+    </body>
+</page>

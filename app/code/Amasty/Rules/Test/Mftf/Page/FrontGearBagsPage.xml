@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+
+<pages xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Page/etc/PageObject.xsd">
+    <page name="FrontGearBagsPage" url="/{{gear/bags}}.html" area="storefront" module="Magento_SalesRule" parameterized="true">
+		<section name="StorefrontCategoryMainSection"/>
+	</page>
+
+	<page name="FrontBagImpulseDufflePage" url="/impulse-duffle.html" area="storefront" module="Magento_SalesRule">
+		<section name="StorefrontProductPageSection"/>
+	</page>
+
+	<page name="FrontBagStriveShoulderPackPage" url="/strive-shoulder-pack.html" area="storefront" module="Magento_SalesRule">
+		<section name="StorefrontProductPageSection"/>
+	</page>
+
+	<page name="FrontBagWayfarerMessengerPage" url="/wayfarer-messenger-bag.html" area="storefront" module="Magento_SalesRule">
+		<section name="StorefrontProductPageSection"/>
+	</page>
+
+	<page name="FrontBagWayfarerPage" url="/overnight-duffle.html" area="storefront" module="Magento_SalesRule">
+		<section name="StorefrontProductPageSection"/>
+	</page>
+
+	<page name="FrontBagJoustDuffleBag" url="/joust-duffle-bag.html" area="storefront" module="Magento_SalesRule">
+		<section name="StorefrontProductPageSection"/>
+	</page>
+
+	<page name="FrontFitnessSpriteFoamRoller" url="/sprite-foam-roller.html" area="storefront" module="Magento_SalesRule">
+		<section name="StorefrontProductPageSection"/>
+	</page>
+
+</pages>

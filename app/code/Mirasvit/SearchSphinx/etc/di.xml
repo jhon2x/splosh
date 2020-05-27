@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!--register indexes for sphinx-->
+    <type name="Mirasvit\SearchSphinx\Adapter\Mapper">
+        <arguments>
+            <argument name="indexProviders" xsi:type="array">
+                <item name="catalogsearch_fulltext" xsi:type="object">Mirasvit\SearchSphinx\Model\Search\CatalogSearchIndexBuilder</item>
+                <item name="magento_catalog_category" xsi:type="object">Mirasvit\SearchSphinx\Model\Search\IndexBuilder</item>
+                <item name="magento_cms_page" xsi:type="object">Mirasvit\SearchSphinx\Model\Search\IndexBuilder</item>
+                <item name="external_wordpress_post" xsi:type="object">Mirasvit\SearchSphinx\Model\Search\IndexBuilder</item>
+                <item name="mirasvit_blog_post" xsi:type="object">Mirasvit\SearchSphinx\Model\Search\IndexBuilder</item>
+                <item name="magefan_blog_post" xsi:type="object">Mirasvit\SearchSphinx\Model\Search\IndexBuilder</item>
+                <item name="mirasvit_kb_article" xsi:type="object">Mirasvit\SearchSphinx\Model\Search\IndexBuilder</item>
+                <item name="mirasvit_gry_registry" xsi:type="object">Mirasvit\SearchSphinx\Model\Search\IndexBuilder</item>
+                <item name="magento_catalog_attribute" xsi:type="object">Mirasvit\SearchSphinx\Model\Search\IndexBuilder</item>
+                <item name="ves_blog_post" xsi:type="object">Mirasvit\SearchSphinx\Model\Search\IndexBuilder</item>
+            </argument>
+
+            <argument name="entityMetadata" xsi:type="object">Magento\Framework\Search\ObjectEntityMetadata</argument>
+        </arguments>
+    </type>
+
+    <!--register new search engine-->
+    <type name="Magento\Search\Model\AdapterFactory">
+        <arguments>
+            <argument name="adapters" xsi:type="array">
+                <item name="sphinx" xsi:type="string">Mirasvit\SearchSphinx\Adapter\Adapter</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Search\Model\Adminhtml\System\Config\Source\Engine">
+        <arguments>
+            <argument name="engines" xsi:type="array">
+                <item name="sphinx" xsi:type="string">External Sphinx Engine</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\CatalogSearch\Model\ResourceModel\EngineProvider">
+        <arguments>
+            <argument name="engines" xsi:type="array">
+                <item name="sphinx" xsi:type="string">Mirasvit\SearchSphinx\Model\ResourceModel\Engine</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Search\Model\EngineResolver">
+        <arguments>
+            <argument name="engines" xsi:type="array">
+                <item name="sphinx" xsi:type="string">sphinx</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\CatalogSearch\Model\Indexer\IndexerHandlerFactory">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="sphinx" xsi:type="string">Mirasvit\SearchSphinx\Model\Indexer\IndexerHandler</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Magento\Framework\Search\ObjectEntityMetadata" type="Magento\Framework\Search\EntityMetadata">
+        <arguments>
+            <argument name="entityId" xsi:type="string">entity_id</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\Search\Dynamic\IntervalFactory">
+        <arguments>
+            <argument name="intervals" xsi:type="array">
+                <item name="sphinx" xsi:type="string">Magento\Framework\Search\Adapter\Mysql\Aggregation\Interval</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\AdvancedSearch\Model\SuggestedQueries">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="sphinx" xsi:type="string">Magento\AdvancedSearch\Model\DataProvider\Suggestions</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--register console commands-->
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="mstSearchSphinxManage" xsi:type="object">Mirasvit\SearchSphinx\Console\Command\ManageCommand</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Mirasvit\SearchAutocomplete\Service\JsonConfigService">
+        <plugin name="mstSearchSphinxAutocompleteJson" type="Mirasvit\SearchSphinx\Plugin\AutocompleteJsonConfigPlugin"/>
+    </type>
+
+    <type name="Magento\CatalogSearch\Model\Search\ItemCollectionProvider">
+        <arguments>
+            <argument name="factories" xsi:type="array">
+                <item name="sphinx" xsi:type="object">Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Elasticsearch\Model\Layer\Category\ItemCollectionProvider">
+        <arguments>
+            <argument name="factories" xsi:type="array">
+                <item name="sphinx" xsi:type="object">Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="mst_LayerSearchItemCollectionProvider" type="Magento\Elasticsearch\Model\Layer\Search\ItemCollectionProvider">
+        <arguments>
+            <argument name="factories" xsi:type="array">
+                <item name="sphinx" xsi:type="object">Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="mst_LayerCategoryItemCollectionProvider" type="Magento\Elasticsearch\Model\Layer\Category\ItemCollectionProvider">
+        <arguments>
+            <argument name="factories" xsi:type="array">
+                <item name="sphinx" xsi:type="object">Magento\CatalogSearch\Model\ResourceModel\Fulltext\CollectionFactory</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+     <virtualType name="Magento\Elasticsearch\Model\Layer\Search\Context" type="Magento\Catalog\Model\Layer\Search\Context">
+        <arguments>
+            <argument name="collectionProvider" xsi:type="object">mst_LayerSearchItemCollectionProvider</argument>
+            <argument name="stateKey" xsi:type="object">Magento\CatalogSearch\Model\Layer\Search\StateKey</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magento\Elasticsearch\Model\Layer\Category\Context" type="Magento\Catalog\Model\Layer\Category\Context">
+        <arguments>
+            <argument name="collectionProvider" xsi:type="object">mst_LayerCategoryItemCollectionProvider</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\CatalogSearch\Model\Search\ItemCollectionProvider">
+        <arguments>
+            <argument name="factories" xsi:type="array">
+                <item name="sphinx" xsi:type="object">Magento\CatalogSearch\Model\ResourceModel\Advanced\CollectionFactory</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\CatalogSearch\Model\Advanced\ProductCollectionPrepareStrategyProvider">
+        <arguments>
+            <argument name="strategies" xsi:type="array">
+                <item name="sphinx" xsi:type="object">Magento\CatalogSearch\Model\Advanced\ProductCollectionPrepareStrategy</item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>

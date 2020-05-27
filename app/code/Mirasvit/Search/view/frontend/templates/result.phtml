@@ -1,0 +1,81 @@
+<?php
+//@codingStandardsIgnoreFile
+/** @var \Mirasvit\Search\Block\Result $block */
+
+$indices = $block->getIndices();
+$minCollectionSize = $block->getMinCollectionSize();
+$lessThanMinIndexes = [];
+$tabsCnt = 0;
+$totalCnt = 0;
+?>
+
+<ul class="mst-search__result-tabs">
+    <?php foreach ($indices as $index): ?>
+        <?php $collection = $block->getSearchCollection($index); ?>
+        <?php $totalCnt += $collection->getSize() ?>
+
+        <?php if ($collection->getSize() || $index->getIdentifier() == 'catalogsearch_fulltext'): ?>
+            <?php
+            if ($collection->getSize() < $minCollectionSize && $index->getIdentifier() != 'catalogsearch_fulltext') {
+                $lessThanMinIndexes[] = $index;
+                continue;
+            }
+            ?>
+
+            <?php if ($index->getTitle() == $block->getCurrentIndex()->getTitle()
+                && $index->getStoreId() == $block->getCurrentIndex()->getStoreId()): ?>
+                <li>
+                    <a class="active" href="#">
+                        <?= __($index->getTitle()) ?>
+                    </a>
+                </li>
+            <?php else: ?>
+                <li>
+                    <a href="<?= $block->getIndexUrl($index) ?>">
+                        <?= __($index->getTitle()) ?> (<?= $collection->getSize() ?>)
+                    </a>
+                </li>
+                <?php $tabsCnt++ ?>
+            <?php endif ?>
+        <?php endif ?>
+    <?php endforeach ?>
+</ul>
+
+<?php if ($tabsCnt == 0): ?>
+    <style>
+        .mst-search__result-tabs {
+            display: none
+        }
+    </style>
+<?php endif ?>
+
+<?= $block->getChildHtml("suggestion") ?>
+
+<?php if ($block->getCurrentIndex()->getIdentifier() == 'catalogsearch_fulltext'
+    && !empty($lessThanMinIndexes)
+    && $block->getSearchCollection($block->getCurrentIndex())->getCurPage() == 1): ?>
+    <div>
+        <?php foreach ($lessThanMinIndexes as $index): ?>
+            <div class="mst-search__result-index">
+                <div class="mst-search__result-index-title">
+                    <?= __($index->getTitle()) ?>
+                </div>
+
+                <?= $block->getContentBlock($index)->toHtml() ?>
+            </div>
+        <?php endforeach ?>
+    </div>
+<?php endif ?>
+
+
+<?= $block->getCurrentContent() ?>
+
+<?php if ($totalCnt == 0): ?>
+    <?= $block->getChildHtml("search.no_results") ?>
+<?php endif ?>
+
+<?php if ($block->getCurrentIndexSize() == 0 && $tabsCnt > 1): ?>
+    <div class="message notice">
+        <div><?= __('Please select other tab to see more results') ?></div>
+    </div>
+<?php endif ?>

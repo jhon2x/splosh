@@ -1,0 +1,15 @@
+diff --git a/vendor/magento/module-catalog-inventory/Model/Quote/Item/QuantityValidator.php b/vendor/magento/module-catalog-inventory/Model/Quote/Item/QuantityValidator.php
+index 0bd7b74c..013f1554 100644
+--- a/vendor/magento/module-catalog-inventory/Model/Quote/Item/QuantityValidator.php
++++ b/vendor/magento/module-catalog-inventory/Model/Quote/Item/QuantityValidator.php
+@@ -109,8 +109,8 @@ class QuantityValidator
+         }
+
+         if ($stockStatus) {
+-            if ($stockStatus->getStockStatus() == Stock::STOCK_OUT_OF_STOCK
+-                || $parentStockStatus && $parentStockStatus->getStockStatus() == Stock::STOCK_OUT_OF_STOCK
++            if (($stockStatus->getStockStatus() == Stock::STOCK_OUT_OF_STOCK || ($parentStockStatus && $parentStockStatus->getStockStatus() == Stock::STOCK_OUT_OF_STOCK))
++                && !$stockItem->getBackorders()
+             ) {
+                 $quoteItem->addErrorInfo(
+                     'cataloginventory',

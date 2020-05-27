@@ -1,0 +1,42 @@
+--- app/code/Acidgreen/SploshExo/Model/Import/Customer.php	2018-04-04 14:13:59.361839600 +1000
++++ SPL-Customers-Issue-March/app/code/Acidgreen/SploshExo/Model/Import/Customer.php	2018-04-04 14:14:18.693839338 +1000
+@@ -306,6 +306,13 @@
+                     ->save();
+ 
+                 return;
++            } else { // JOSEPHSON
++                $this->exoCustomersAddressToDelete = [];
++                foreach ($customersArray as $c) {
++                    if (!empty($c['exo_customer_id'])) {
++                        $this->exoCustomersAddressToDelete[] = $c['exo_customer_id'];
++                    }
++                }
+             }
+ 
+ 		    $this->processImport($customersArray);
+@@ -899,6 +906,25 @@
+ 
+ 		public function purgeDuplicateAddresses() {
+ 				$this->logger->debug('Purging Duplicate Addresses');
++                $customerCollection = $this->customerModel->getCollection();
++                $customerCollection->addAttributeToSelect(['*']);
++                if (!empty($this->exoCustomersAddressToDelete)) {
++                    $customerCollection->addFieldToFilter('exo_customer_id', ['in' => $this->exoCustomersAddressToDelete]);
++                    $customerCollection->load();
++
++                    if (count($customerCollection) > 0) {
++                                $this->logger->debug('SPL :: 03-15-2018 :: purgeDuplicateAddresses :: customers affected? :: '.count($customerCollection));
++                                $this->logger->debug('SPL :: 03-15-2018 :: purgeDuplicateAddresses :: customerCollection SQL below?');
++                                $this->logger->debug($customerCollection->getSelect()->__toString());
++                        foreach ($customerCollection as $customer) {
++$this->logger->debug('Delete extra addresses for :: '.$customer->getEmail(). ' :: additional addresses? :: '.count($customer->getAddresses()));
++                            foreach ($customer->getAddresses() as $address) {
++                                $this->logger->debug('Delete Extra Address ID :: '.$address->getId());
++                                $address->delete();
++                            }
++                        }
++                    }
++                }
+ 		}
+ 
+ 		/**

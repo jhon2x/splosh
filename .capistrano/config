@@ -1,0 +1,15 @@
+###############################################################################
+### list of locale codes for static content deployment (setup:static-content:deploy)
+### separated by space (Magento default is en_US)
+### sample:
+###     lang = en_AU
+###     lang = en_AU en_NZ en_US
+lang = en_US en_AU en_NZ
+  
+###############################################################################
+### set to true for multi-store setup (default is false)
+### when set to true, capistrano will run the following Magento command when deploying
+###     php bin/magento setup:di:compile-multi-tenant
+### Otherwise
+###     php bin/magento setup:di:compile
+multi-tenant = false

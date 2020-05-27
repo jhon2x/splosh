@@ -1,0 +1,201 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--DATA-->
+    <preference for="Mirasvit\Email\Api\Data\QueueInterface" type="Mirasvit\Email\Model\Queue"/>
+    <preference for="Mirasvit\Email\Api\Data\CampaignInterface" type="Mirasvit\Email\Model\Campaign"/>
+    <preference for="Mirasvit\Email\Api\Data\TriggerInterface" type="Mirasvit\Email\Model\Trigger"/>
+    <preference for="Mirasvit\Email\Api\Data\ChainInterface" type="Mirasvit\Email\Model\Trigger\Chain"/>
+
+    <!--REPOSITORY-->
+    <preference for="Mirasvit\Email\Api\Repository\QueueRepositoryInterface" type="Mirasvit\Email\Repository\QueueRepository"/>
+    <preference for="Mirasvit\Email\Api\Repository\CampaignRepositoryInterface" type="Mirasvit\Email\Repository\CampaignRepository"/>
+    <preference for="Mirasvit\Email\Api\Repository\TriggerRepositoryInterface" type="Mirasvit\Email\Repository\TriggerRepository"/>
+    <preference for="Mirasvit\Email\Api\Repository\Trigger\ChainRepositoryInterface" type="Mirasvit\Email\Repository\Trigger\ChainRepository"/>
+
+    <!--SERVICE-->
+    <preference for="Mirasvit\Email\Api\Service\EventManagementInterface" type="Mirasvit\Email\Service\EventManagement"/>
+    <preference for="Mirasvit\Email\Api\Service\ErrorHandlerInterface" type="Mirasvit\Email\Service\ErrorHandler"/>
+    <preference for="Mirasvit\Email\Api\Service\SessionInitiatorInterface" type="Mirasvit\Email\Service\FrontSessionInitiator"/>
+    <preference for="Mirasvit\Email\Api\Service\EventProcessorInterface" type="Mirasvit\Email\Service\EventProcessor"/>
+    <preference for="Mirasvit\Email\Api\Service\TriggerHandlerInterface" type="Mirasvit\Email\Model\Trigger\Handler"/>
+    <preference for="Mirasvit\Email\Api\Service\SenderInterface" type="Mirasvit\Email\Service\TestSender"/>
+    <preference for="Mirasvit\Email\Api\Service\CloneServiceInterface" type="Mirasvit\Email\Service\CloneService"/>
+    <preference for="Mirasvit\Email\Api\Repository\CampaignTemplateRepositoryInterface" type="Mirasvit\Email\Repository\CampaignTemplateRepository"/>
+
+    <!-- Configure available events for Follow Up Email module -->
+    <type name="Mirasvit\Email\Repository\EventRepository">
+        <arguments>
+            <argument name="events" xsi:type="array">
+                <item name="customer_login" xsi:type="string">Mirasvit\Event\Event\Customer\LoginLogoutEvent</item>
+                <item name="customer_create" xsi:type="string">Mirasvit\Event\Event\Customer\CreateEvent</item>
+                <!--<item name="product_qtyReduced" xsi:type="string">Mirasvit\Event\Event\Product\QtyEvent</item>-->
+                <item name="product_view" xsi:type="string">Mirasvit\Event\Event\Product\ViewEvent</item>
+                <item name="newsletter_subscription" xsi:type="string">Mirasvit\Event\Event\Newsletter\SubscriptionEvent</item>
+                <item name="customer_birthday" xsi:type="string">Mirasvit\Event\Event\Customer\BirthdayEvent</item>
+                <item name="cart_abandoned" xsi:type="string">Mirasvit\Event\Event\Quote\AbandonedEvent</item>
+                <item name="order_status" xsi:type="string">Mirasvit\Event\Event\Sales\OrderStatusEvent</item>
+                <item name="wishlist_item_new" xsi:type="string">Mirasvit\Event\Event\Wishlist\NewItemEvent</item>
+                <item name="wishlist_shared" xsi:type="string">Mirasvit\Event\Event\Wishlist\SharedEvent</item>
+                <item name="review_new" xsi:type="string">Mirasvit\Event\Event\Review\NewEvent</item>
+                <item name="review_approved" xsi:type="string">Mirasvit\Event\Event\Review\ApprovedEvent</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Mirasvit\Email\Ui\Event\Source\Event" type="Mirasvit\Event\Ui\Event\Source\Event">
+        <arguments>
+            <argument name="eventRepository" xsi:type="object">Mirasvit\Email\Repository\EventRepository</argument>
+        </arguments>
+    </virtualType>
+    <!-- Display only events available for follow up email module -->
+    <type name="Mirasvit\Email\Block\Adminhtml\Event\Grid">
+        <arguments>
+            <argument name="eventRepository" xsi:type="object">Mirasvit\Email\Repository\EventRepository</argument>
+            <argument name="sourceEvent" xsi:type="object">Mirasvit\Email\Ui\Event\Source\Event</argument>
+        </arguments>
+    </type>
+
+    <!--VARIABLES-->
+    <type name="Mirasvit\EmailDesigner\Service\TemplateEngine\Php\Variable\Pool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="coupon" xsi:type="object">Mirasvit\Email\EmailDesigner\Variable\Php\Coupon</item>
+                <item name="crossSell" xsi:type="object">Mirasvit\Email\EmailDesigner\Variable\Php\CrossSell</item>
+                <item name="url" xsi:type="object">Mirasvit\Email\EmailDesigner\Variable\Php\Url</item>
+                <item name="review" xsi:type="object">Mirasvit\Email\EmailDesigner\Variable\Php\Review</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Mirasvit\EmailDesigner\Api\Service\VariableResolverInterface">
+        <arguments>
+            <argument name="variables" xsi:type="array">
+                <item name="url" xsi:type="object">Mirasvit\Email\EmailDesigner\Variable\Liquid\Url</item>
+                <item name="coupon" xsi:type="object">Mirasvit\Email\EmailDesigner\Variable\Liquid\Coupon</item>
+                <item name="review" xsi:type="object">Mirasvit\Email\EmailDesigner\Variable\Liquid\Review</item>
+                <item name="crossSell" xsi:type="object">Mirasvit\Email\EmailDesigner\Variable\Liquid\CrossSell</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="EmailCronCommand" xsi:type="object">Mirasvit\Email\Console\Command\CronCommand</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="email_trigger_listing_data_source" xsi:type="string">Mirasvit\Email\Model\ResourceModel\Trigger\Grid</item>
+                <item name="email_campaign_listing_data_source" xsi:type="string">Mirasvit\Email\Model\ResourceModel\Campaign\Grid</item>
+                <item name="email_campaign_view_data_source" xsi:type="string">Mirasvit\Email\Model\ResourceModel\Campaign\Grid</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Configure Entity Manager -->
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Mirasvit\Email\Api\Data\QueueInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\Email\Api\Data\QueueInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\Email\Api\Data\QueueInterface::ID</item>
+                </item>
+                <item name="Mirasvit\Email\Api\Data\CampaignInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\Email\Api\Data\CampaignInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\Email\Api\Data\CampaignInterface::ID</item>
+                </item>
+                <item name="Mirasvit\Email\Api\Data\TriggerInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\Email\Api\Data\TriggerInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\Email\Api\Data\TriggerInterface::ID</item>
+                </item>
+                <item name="Mirasvit\Email\Api\Data\ChainInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\Email\Api\Data\ChainInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\Email\Api\Data\ChainInterface::ID</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Mirasvit\Email\Api\Data\QueueInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Mirasvit\Email\Api\Data\CampaignInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Mirasvit\Email\Api\Data\TriggerInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Mirasvit\Email\Api\Data\ChainInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Configure Email Report -->
+    <!--<type name="Mirasvit\EmailReport\Api\Service\PreparerInterface">-->
+        <!--<arguments>-->
+            <!--<argument name="embedders" xsi:type="array">-->
+                <!--<item name="openEmbedder" xsi:type="object">Mirasvit\EmailReport\Service\Embedders\OpenEmbedder</item>-->
+                <!--<item name="clickEmbedder" xsi:type="object">Mirasvit\EmailReport\Service\Embedders\ClickEmbedder</item>-->
+            <!--</argument>-->
+        <!--</arguments>-->
+    <!--</type>-->
+    <type name="Mirasvit\EmailReport\Api\Service\PreparerInterface">
+        <arguments>
+            <argument name="registrars" xsi:type="array">
+                <item name="registerEmailSending" xsi:type="object">Mirasvit\EmailReport\Service\Registrars\SendRegistrar</item>
+            </argument>
+        </arguments>
+    </type>
+    <!--<type name="Mirasvit\EmailReport\Service\Embedders\AbstractEmbedder">-->
+        <!--<arguments>-->
+            <!--<argument name="paramProviders" xsi:type="array">-->
+                <!--<item name="gaParamProvider" xsi:type="object">Mirasvit\Email\Service\EmailReport\GaParamProvider</item>-->
+                <!--<item name="queueParamProvider" xsi:type="object">Mirasvit\Email\Service\EmailReport\QueueParamProvider</item>-->
+            <!--</argument>-->
+        <!--</arguments>-->
+    <!--</type>-->
+
+    <!-- Register MQ Consumer -->
+    <type name="Mirasvit\Mq\Api\Repository\ConsumerRepositoryInterface">
+        <arguments>
+            <argument name="consumers" xsi:type="array">
+                <item name="follow_up_email" xsi:type="array">
+                    <item name="queue" xsi:type="string">mirasvit.event.register</item>
+                    <item name="callback" xsi:type="string">Mirasvit\Email\Api\Service\EventProcessorInterface::execute</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Add 'Trigger' Condition Group to Customer Event Data -->
+    <type name="Mirasvit\Event\EventData\CustomerData">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="condition_group" xsi:type="array">
+                    <item name="trigger" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Follow Up Email</item>
+                        <item name="value" xsi:type="array">
+                            <item name="1" xsi:type="array">
+                                <item name="value" xsi:type="string">Mirasvit\Email\Event\Condition\Trigger</item>
+                                <item name="label" xsi:type="string" translate="true">Recipient has Follow Up emails</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Mirasvit\Event\Api\Repository\EventRepositoryInterface">
+        <arguments>
+            <argument name="eventKeepers" xsi:type="array">
+                <item name="email" xsi:type="object">Mirasvit\Email\Service\EventKeeper</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--Required for send generate templates in CLI-->
+    <type name="Magento\Developer\Model\TemplateEngine\Plugin\DebugHints">
+        <arguments>
+            <argument name="debugHintsPath" xsi:type="string">dev/debug/template_hints_storefront</argument>
+        </arguments>
+    </type>
+</config>

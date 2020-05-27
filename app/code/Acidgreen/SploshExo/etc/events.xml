@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="staff_save_after">
+        <observer name="exo_sync_staff" instance="Acidgreen\SploshExo\Observer\Exo\SyncStaff" />
+    </event>
+    <event name="customer_register_success">
+        <observer name="acidgreen_exo_customer_observer" disabled="true" />
+    </event>
+    <event name="customer_save_after_data_object">
+        <observer name="exo_customer_info_save_after_observer" disabled="true" />
+        <!--observer name="sploshexo_customer_info_save_after_observer" instance="Acidgreen\SploshExo\Observer\QueueCustomerInfoExoUpdate" /-->
+    </event>
+    <event name="customer_address_save_after">
+    	<observer name="exo_customer_address_save_after_observer" disabled="true" />
+    	<!--observer name="sploshexo_customer_address_save_after_observer" instance="Acidgreen\SploshExo\Observer\QueueCustomerExoUpdate" /-->
+    </event>
+</config>

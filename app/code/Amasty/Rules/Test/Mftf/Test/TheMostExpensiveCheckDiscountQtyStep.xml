@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="TheMostExpensiveCheckDiscountQtyStepData">
+        <annotations>
+            <features value="Rule Creation"/>
+            <stories value="Create a Rule via the Admin"/>
+            <title value="The Most Expensive check discount qty step"/>
+            <description value="The Most Expensive check discount qty step"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="SP-MFTF-12"/>
+            <group value="Amasty"/>
+            <group value="Rules"/>
+            <group value="Rule"/>
+            <group value="Shipping"/>
+            <group value="MostExpDiscountQtyStep"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
+        </before>
+
+        <after>
+            <!--Delete Rules -->
+            <actionGroup ref="DeleteAllCartRules" stepKey="DeleteAllRules1"/>
+            <amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>
+        </after>
+
+        <!--Create new Price Rule -->
+        <actionGroup ref="CreateCartRule" stepKey="CreateCartRule1">
+            <argument name="actionsRule" value="_applyTheMostExpensive"/>
+            <argument name="cartRule" value="_theMostExpensiveCheckDiscountQtyStepData"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddOneProduct">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagWayfarerMessenger"/>
+        </actionGroup>
+
+        <!-- Check no discount-->
+        <actionGroup ref="CheckNoDiscountAmount" stepKey="CheckNoDiscount1">
+            <argument name="cartRule" value="_theMostExpensiveCheckDiscountQtyStepData"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddTwoProduct">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+        </actionGroup>
+
+        <!--Check discount-->
+        <actionGroup ref="CheckDiscountAmount" stepKey="CheckDiscount1">
+            <argument name="cartRule" value="_theMostExpensiveCheckDiscountQtyStepData"/>
+            <argument name="discountAmount" value="_theMostExpensiveCheckDiscountQtyStepData.discountAmountOne"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddThreeProduct">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagImpulseDuffleData"/>
+        </actionGroup>
+
+        <!--Check discount-->
+        <actionGroup ref="CheckDiscountAmount" stepKey="CheckDiscount2">
+            <argument name="cartRule" value="_theMostExpensiveCheckDiscountQtyStepData"/>
+            <argument name="discountAmount" value="_theMostExpensiveCheckDiscountQtyStepData.discountAmountTwo"/>
+        </actionGroup>
+
+        <!--Change Qty product in the cart-->
+        <actionGroup ref="ChangeQtyProductInCart" stepKey="ChangeQtyBagSSPInCartToTwo">
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+            <argument name="addProductQty" value="_enterQty2"/>
+        </actionGroup>
+
+        <!--Check discount-->
+        <actionGroup ref="CheckDiscountAmount" stepKey="CheckDiscount3">
+            <argument name="cartRule" value="_theMostExpensiveCheckDiscountQtyStepData"/>
+            <argument name="discountAmount" value="_theMostExpensiveCheckDiscountQtyStepData.discountAmountThree"/>
+        </actionGroup>
+
+    </test>
+</tests>
+

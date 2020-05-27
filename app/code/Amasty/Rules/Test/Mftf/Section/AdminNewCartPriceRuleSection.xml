@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		  xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+
+	<section name="AdminNewCartPriceRuleSection">
+        <element name="Save" type="button" selector="#save" timeout="30"/>
+		<element name="SaveAndContinueEdit" type="button" selector="#save_and_continue" timeout="30"/>
+		<element name="Reset" type="button" selector="#reset" timeout="30"/>
+		<element name="Back" type="button" selector="#back" timeout="30"/>
+        <element name="RuleName" type="input" selector="input[name='name']"/>
+		<element name="Description" type="textarea" selector="textarea[name='description']"/>
+		<element name="Websites" type="select" selector="select option[value='1']"/>
+		<element name="CustomerGroups" type="select" selector="select option[value='0']"/>
+	</section>
+
+</sections>

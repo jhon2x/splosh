@@ -1,0 +1,21 @@
+{
+    "name": "acidgreen/module-quote",
+    "description": "Customizations to Magento_Quote module",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "email": "josephson.eduardo@acidgreen.com.au",
+            "name": "acidgreen"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Acidgreen\\Quote\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

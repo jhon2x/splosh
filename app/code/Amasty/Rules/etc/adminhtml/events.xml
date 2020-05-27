@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!--TODO: delete this file after 10.2019-->
+    <event name="controller_action_postdispatch_sales_rule_promo_quote_save" >
+        <observer name="amasty_rules_salesrule_validator_process" disabled="true" />
+    </event>
+</config>
+

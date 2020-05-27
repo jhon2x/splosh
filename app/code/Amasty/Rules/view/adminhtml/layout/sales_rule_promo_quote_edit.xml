@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+<!--
+/**
+ * Copyright © 2015 Amasty. All rights reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Amasty_Rules::css/am-highlight-promotion.css"/>
+    </head>
+    <body>
+        <referenceContainer name="main.col">
+            <block class="Magento\Framework\View\Element\Template" template="Amasty_Rules::form_scripts.phtml" name="amrules_form_scripts" />
+        </referenceContainer>
+    </body>
+</page>

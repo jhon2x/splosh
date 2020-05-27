@@ -1,0 +1,104 @@
+<?php
+/** @var \Mirasvit\Email\Block\Adminhtml\Queue\View $block */
+
+$model = $block->getModel();
+?>
+<div class="admin__scope-old">
+    <table width="100%">
+        <tr>
+            <td width="50%">
+                <fieldset class="fieldset admin__fieldset">
+                    <legend class="legend"><span><?= __('General Information') ?></span></legend>
+
+                    <table class="admin__table-secondary">
+                        <tr>
+                            <th><?= __('Trigger') ?></th>
+                            <td>
+                                <a href="<?= $block->getTriggerUrl($model->getTrigger()) ?>">
+                                    <?= $model->getTrigger()->getTitle() ?>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Scheduled At') ?></th>
+                            <td><?= $model->getScheduledAt()
+                                    ? $block->formatDate($model->getScheduledAt(), \IntlDateFormatter::MEDIUM, true)
+                                    : '-' ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Sent At') ?></th>
+                            <td><?= $model->getSentAt()
+                                    ? $block->formatDate($model->getSentAt(), \IntlDateFormatter::MEDIUM, true)
+                                    : '-' ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Subject') ?></th>
+                            <td><?= $model->getSubject() ?></td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Recipient Email') ?></th>
+                            <td><?= $model->getRecipientEmail() ?></td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Recipient Name') ?></th>
+                            <td><?= $model->getRecipientName() ?></td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Sender Email') ?></th>
+                            <td><?= $model->getSenderEmail() ?></td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Sender Name') ?></th>
+                            <td><?= $model->getSenderName() ?></td>
+                        </tr>
+                    </table>
+                </fieldset>
+
+                <fieldset class="fieldset admin__fieldset">
+                    <legend class="legend"><span><?= __('History') ?></span></legend>
+
+                    <table class="admin__table-secondary">
+                        <?php foreach (explode(PHP_EOL, $model->getHistory()) as $message): ?>
+                            <tr>
+                                <td><?= $message ?></td>
+                            </tr>
+                        <?php endforeach ?>
+                    </table>
+                </fieldset>
+
+                <fieldset class="fieldset admin__fieldset">
+                    <legend class="legend"><span><?= __('Variables') ?></span></legend>
+
+                    <table class="admin__table-secondary">
+                        <tr>
+                            <th><?= __('Unique Key') ?></th>
+                            <td><?= $model->getUniqKey() ?></td>
+                        </tr>
+                        <?php foreach ($model->getArgs() as $key => $value): ?>
+                            <tr>
+                                <th><?= is_object($value) ? $key . '_id' : $key ?>
+                                </th>
+                                <td><?= is_object($value) ? $value->getId() : $value ?></td>
+                            </tr>
+                        <?php endforeach ?>
+                    </table>
+                </fieldset>
+
+            </td>
+            <td width="50%" style="vertical-align: baseline">
+                <iframe width="100%" height="100%" id="preview_iframe" onload="resizePreviewIframe(this)"
+                        src="<?= $block->getPreviewUrl() ?>"
+                        style="border: 1px solid #cac3b4; margin: 0 1rem;">
+                </iframe>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script type="text/javascript">
+    function resizePreviewIframe(previewIframe) {
+        previewIframe.parentElement.style.height = previewIframe.contentWindow.document.body.scrollHeight + 'px';
+    }
+</script>

@@ -1,0 +1,13 @@
+<?php
+/** @var \Magento\Backend\Block\Page\RequireJs $block */
+?>
+
+<script>
+    // we disabled mutation observers that used in ui/../lib/dom-observer.js for prevent slow rendering if we have many attributes
+    window.MutationObserver = function () {
+        this.observe = function () {
+        }
+    };
+</script>
+
+<?= $block->getChildHtml() ?>

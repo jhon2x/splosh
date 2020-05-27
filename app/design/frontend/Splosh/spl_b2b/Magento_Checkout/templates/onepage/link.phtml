@@ -1,0 +1,20 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+$aghelper = $this->helper('Acidgreen\Checkout\Helper\Cart');
+?>
+<?php if ($block->isPossibleOnepageCheckout() || $aghelper->isSiteB2b()):?>
+    <button type="button"
+            data-role="proceed-to-checkout"
+            title="<?= /* @escapeNotVerified */ __('Proceed to Checkout') ?>"
+            data-mage-init='{"Magento_Checkout/js/proceed-to-checkout":{"checkoutUrl":"<?= /* @escapeNotVerified */ $block->getCheckoutUrl() ?>"}}'
+            class="action primary checkout<?= ($block->isDisabled() || $aghelper->cartHasError()) ? ' disabled' : '' ?>"
+            <?php if ($block->isDisabled() || $aghelper->cartHasError()):?>disabled="disabled"<?php endif; ?>>
+        <span><?= /* @escapeNotVerified */ __('Proceed to Checkout') ?></span>
+    </button>
+<?php endif?>

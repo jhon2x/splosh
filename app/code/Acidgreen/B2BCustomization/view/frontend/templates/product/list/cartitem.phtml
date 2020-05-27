@@ -1,0 +1,4 @@
+<?php /* @var \Acidgreen\B2BCustomization\Block\ProductList\CartItem $block */ ?>
+<?php if ($block->getProductId() && $block->isProductInCart($block->getProductId())): ?>
+<span class="n-added"><?php echo $block->getProductCartQty(); ?></span>
+<?php endif; ?>

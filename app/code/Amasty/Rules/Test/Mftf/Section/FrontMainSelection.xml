@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+
+    <section name="FrontCartSection">
+        <element name="CurrencyDropDown" type="button" selector="//span[text()='Discount']"/>
+        <element name="ProceedToCheckout" type="button" selector="//button[@data-role='proceed-to-checkout']"/>
+        <element name="UpdateShoppingCart" type="button" selector="//button[@value='update_qty']"/>
+        <element name="Subtotal" type="text" selector="//span[@data-th='Subtotal']"/>
+        <element name="OrderTotal" type="text" selector="//td[@data-th='Order Total']/strong/span[@class='price']"/>
+    </section>
+
+</sections>

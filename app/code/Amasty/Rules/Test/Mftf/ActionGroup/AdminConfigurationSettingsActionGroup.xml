@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+
+    <actionGroup name="EditSkipSettingRules">
+        <arguments>
+            <argument name="settingSkipItemsWithSpecialPrice"/>
+            <argument name="settingSkipConfigurableItemsWhenChildHasSpecialPrice"/>
+        </arguments>
+        <amOnPage url="{{AdminRulesConfigurationPage.url}}" stepKey="navigateToRulesConfiguration"/>
+        <conditionalClick stepKey="openSkipSettingsTab"
+                          selector="{{AdminConfigurationsRulesSection.SkipSettingsTab}}"
+                          dependentSelector="{{AdminConfigurationsRulesSection.SkipSettingsTabOpen}}"
+                          visible="false"/>
+        <selectOption selector="{{AdminConfigurationsRulesSection.SkipItemsWithSpecialPrice}}"
+                      userInput="{{settingSkipItemsWithSpecialPrice}}"
+                      stepKey="selectSkipSetting1"/>
+        <selectOption selector="{{AdminConfigurationsRulesSection.SkipConfigurableItemsWhenChildHasSpecialPrice}}"
+                      userInput="{{settingSkipConfigurableItemsWhenChildHasSpecialPrice}}"
+                      stepKey="selectSkipSetting2"/>
+        <click selector="{{AdminConfigurationsRulesSection.Save}}" stepKey="saveChangeInRates"/>
+        <waitForPageLoad time="30" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="DefaultSkipSettingRules">
+        <amOnPage url="{{AdminRulesConfigurationPage.url}}" stepKey="navigateToRulesConfiguration"/>
+        <conditionalClick stepKey="openSkipSettingsTab"
+                          selector="{{AdminConfigurationsRulesSection.SkipSettingsTab}}"
+                          dependentSelector="{{AdminConfigurationsRulesSection.SkipSettingsTabOpen}}"
+                          visible="false"/>
+        <selectOption selector="{{AdminConfigurationsRulesSection.SkipItemsWithSpecialPrice}}"
+                      userInput="0"
+                      stepKey="selectDefaultSkipSetting1"/>
+        <selectOption selector="{{AdminConfigurationsRulesSection.SkipConfigurableItemsWhenChildHasSpecialPrice}}"
+                      userInput="0"
+                      stepKey="selectDefaultSkipSetting2"/>
+        <click selector="{{AdminConfigurationsRulesSection.Save}}" stepKey="saveChangeInRates"/>
+        <waitForPageLoad time="30" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+</actionGroups>

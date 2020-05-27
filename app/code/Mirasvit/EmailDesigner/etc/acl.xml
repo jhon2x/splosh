@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::marketing">
+                    <resource id="Mirasvit_EmailDesigner::email_designer" title="Email Designer" sortOrder="110">
+                        <resource id="Mirasvit_EmailDesigner::email_designer_theme" title="Themes" sortOrder="10"/>
+                        <resource id="Mirasvit_EmailDesigner::email_designer_template" title="Templates" sortOrder="20"/>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,108 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Mirasvit\EmailReport\Api\Data\OpenInterface"
+                type="Mirasvit\EmailReport\Model\Open" />
+    <preference for="Mirasvit\EmailReport\Api\Data\ClickInterface"
+                type="Mirasvit\EmailReport\Model\Click" />
+    <preference for="Mirasvit\EmailReport\Api\Data\OrderInterface"
+                type="Mirasvit\EmailReport\Model\Order" />
+    <preference for="Mirasvit\EmailReport\Api\Data\ReviewInterface"
+                type="Mirasvit\EmailReport\Model\Review" />
+    <preference for="Mirasvit\EmailReport\Api\Data\EmailInterface"
+                type="Mirasvit\EmailReport\Model\Email" />
+
+    <preference for="Mirasvit\EmailReport\Api\Repository\OpenRepositoryInterface"
+                type="Mirasvit\EmailReport\Repository\OpenRepository"/>
+    <preference for="Mirasvit\EmailReport\Api\Repository\ClickRepositoryInterface"
+                type="Mirasvit\EmailReport\Repository\ClickRepository"/>
+    <preference for="Mirasvit\EmailReport\Api\Repository\OrderRepositoryInterface"
+                type="Mirasvit\EmailReport\Repository\OrderRepository"/>
+    <preference for="Mirasvit\EmailReport\Api\Repository\ReviewRepositoryInterface"
+                type="Mirasvit\EmailReport\Repository\ReviewRepository"/>
+    <preference for="Mirasvit\EmailReport\Api\Repository\EmailRepositoryInterface"
+                type="Mirasvit\EmailReport\Repository\EmailRepository"/>
+
+    <preference for="Mirasvit\EmailReport\Api\Service\StorageServiceInterface"
+                type="Mirasvit\EmailReport\Service\StorageService"/>
+    <preference for="Mirasvit\EmailReport\Api\Service\CookieInterface"
+                type="Mirasvit\EmailReport\Service\Cookie"/>
+
+    <type name="Magento\Review\Model\Review">
+        <plugin name="mstEmailReportReview" type="Mirasvit\EmailReport\Plugin\ReviewPlugin"/>
+    </type>
+
+    <type name="Magento\Sales\Api\Data\OrderInterface">
+        <plugin name="mstEmailReportOrder" type="Mirasvit\EmailReport\Plugin\OrderPlugin"/>
+    </type>
+
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="mstEmailReportOrder" type="Mirasvit\EmailReport\Plugin\OrderPlugin"/>
+    </type>
+
+    <type name="Mirasvit\Email\Api\Data\QueueInterface">
+        <plugin name="mstEmailReportQueue" type="Mirasvit\EmailReport\Plugin\QueuePlugin"/>
+    </type>
+
+    <!-- Configure Entity Manager -->
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Mirasvit\EmailReport\Api\Data\OpenInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\EmailReport\Api\Data\OpenInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\EmailReport\Api\Data\OpenInterface::ID</item>
+                </item>
+                <item name="Mirasvit\EmailReport\Api\Data\ClickInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\EmailReport\Api\Data\ClickInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\EmailReport\Api\Data\ClickInterface::ID</item>
+                </item>
+                <item name="Mirasvit\EmailReport\Api\Data\OrderInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\EmailReport\Api\Data\OrderInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\EmailReport\Api\Data\OrderInterface::ID</item>
+                </item>
+                <item name="Mirasvit\EmailReport\Api\Data\ReviewInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\EmailReport\Api\Data\ReviewInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\EmailReport\Api\Data\ReviewInterface::ID</item>
+                </item>
+                <item name="Mirasvit\EmailReport\Api\Data\EmailInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\EmailReport\Api\Data\EmailInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\EmailReport\Api\Data\EmailInterface::ID</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Mirasvit\EmailReport\Api\Data\OpenInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Mirasvit\EmailReport\Api\Data\ClickInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Mirasvit\EmailReport\Api\Data\OrderInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Mirasvit\EmailReport\Api\Data\ReviewInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Mirasvit\EmailReport\Api\Data\EmailInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Mirasvit\EmailReport\Controller\Adminhtml\Report\Reset">
+        <arguments>
+            <argument name="reportRepositories" xsi:type="array">
+                <item name="emailRepository" xsi:type="object">Mirasvit\EmailReport\Repository\EmailRepository</item>
+                <item name="openRepository" xsi:type="object">Mirasvit\EmailReport\Repository\OpenRepository</item>
+                <item name="clickRepository" xsi:type="object">Mirasvit\EmailReport\Repository\ClickRepository</item>
+                <item name="orderRepository" xsi:type="object">Mirasvit\EmailReport\Repository\OrderRepository</item>
+                <item name="reviewRepository" xsi:type="object">Mirasvit\EmailReport\Repository\ReviewRepository</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Mirasvit\Email\Model\Queue\Sender">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="mstEmailReportLink" xsi:type="object">Mirasvit\EmailReport\Service\MailModifier\LinkModifier</item>
+                <item name="mstEmailReportOpen" xsi:type="object">Mirasvit\EmailReport\Service\MailModifier\OpenModifier</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
+    <container name="overview" class="Mirasvit\EmailReport\Ui\Overview">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="sortOrder" xsi:type="number">5</item>
+                <item name="template" xsi:type="string">Mirasvit_EmailReport/overview</item>
+                <item name="title" xsi:type="string" translate="true">Cross Overview</item>
+            </item>
+        </argument>
+    </container>
+</listing>

@@ -1,0 +1,126 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Search
+ * @copyright   Copyright (c) 2017 Mageplaza (http://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+// @codingStandardsIgnoreFile
+?>
+<?php
+/** @var $block \Magento\Framework\View\Element\Template */
+
+/** @var $helper \Mageplaza\Search\Helper\Data */
+$helper = $this->helper('Mageplaza\Search\Helper\Data');
+if ($helper->isEnabled()):
+    /** @var \Magento\Search\Helper\Data $searchHelper */
+    $searchHelper = $this->helper(\Magento\Search\Helper\Data::class);
+    ?>
+    <?php if ($helper->getConfigGeneral('category/enable')): ?>
+    <div class="search-category" style="position:absolute; top: 0; right: 35px; width: 130px">
+        <select id="mpsearch-category">
+            <?php foreach ($helper->getCategoryTree() as $id => $name): ?>
+                <option value="<?php echo $id ?>"><?php echo $name ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+    <?php endif; ?>
+    <script src="<?php echo $helper->getJsFileUrl(); ?>"></script>
+    <script type="text/javascript">
+    require([
+        'jquery',
+        'Magento_Catalog/js/price-utils',
+        'mpDevbridgeAutocomplete'
+    ], function ($, priceUtils) {
+        "use strict";
+
+        var baseUrl = '<?php echo trim($block->getBaseUrl(), '/') . '/' ?>',
+            baseImageUrl = '<?php echo $helper->getMediaHelper()->getSearchMediaUrl() ?>',
+            priceFormat = <?php echo $helper->getPriceFormat() ?>,
+            displayInfo = <?php echo $helper->getDisplay() ?>;
+
+        var categorySelect = $('#mpsearch-category'),
+            searchInput = $('#search');
+        if (categorySelect.length) {
+            categorySelect.on('change', function () {
+                searchInput.focus();
+
+                if ($(this).val() === 0) {
+                    $(this).removeAttr('name');
+                } else {
+                    $(this).attr('name', 'cat');
+                }
+            });
+        }
+
+        searchInput.devbridgeAutocomplete({
+            lookup: mageplazaSearchProducts,
+            lookupLimit: <?php  echo (int)$helper->getConfigGeneral('max_query_results') ?: 10; ?>,
+            maxHeight: 2000,
+            minChars: <?php echo $searchHelper->getMinQueryLength(); ?>,
+            lookupFilter: function (suggestion, query, queryLowerCase) {
+                if (categorySelect.length) {
+                    var categoryId = categorySelect.val();
+                    if (categoryId > 0 && ($.inArray(categoryId, suggestion.c) === -1)) {
+                        return false;
+                    }
+                }
+
+                return suggestion.value.toLowerCase().indexOf(queryLowerCase) !== -1;
+            },
+            onSelect: function (suggestion) {
+                window.location.href = correctProductUrl(suggestion.u);
+            },
+            formatResult: function (suggestion, currentValue) {
+                var html = '<a href="' + correctProductUrl(suggestion.u) + '">';
+
+                if ($.inArray('image', displayInfo) !== -1) {
+                    html += '<div class="suggestion-left"><img class="img-responsive" src="' + correctProductUrl(suggestion.i, true) + '" alt="" /></div>';
+                }
+
+                html += '<div class="suggestion-right">';
+                html += '<div class="product-line product-name">' + suggestion.value + '</div>';
+
+                if ($.inArray('price', displayInfo) !== -1) {
+                    html += '<div class="product-line product-price"><?php echo __('Price: ') ?>' + priceUtils.formatPrice(suggestion.p, priceFormat) + '</div>';
+                }
+
+                if ($.inArray('description', displayInfo) !== -1 && suggestion.d) {
+                    html += '<div class="product-des"><p class="short-des">' + suggestion.d + '...</p></div>';
+                }
+
+                html += '</div></a>';
+
+                return html;
+            }
+    //		onSearchComplete: function (query, suggestion) {
+    //			$('.autocomplete-suggestions').append("<div id='view_all'><a href='javascript:void(0)' id='search-view-all'>View all >></a></div>");
+    //			$('#search-view-all').on('click', function(){
+    //			   $('#search_mini_form').submit();
+    //            });
+    //		}
+        });
+
+        function correctProductUrl(urlKey, isImage) {
+            if (urlKey.search('http') !== -1) {
+                return urlKey;
+            }
+
+            return ((typeof isImage !== 'undefined') ? baseImageUrl : baseUrl) + urlKey;
+        }
+    });
+    </script>
+<?php endif; ?>

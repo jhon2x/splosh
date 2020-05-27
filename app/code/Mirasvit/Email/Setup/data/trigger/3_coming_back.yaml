@@ -1,0 +1,30 @@
+title: Customer coming back
+description:
+store_ids:
+    - 0
+is_active: 0
+event: customer_login
+campaign_id: 2
+chain:
+    new_0:
+        template_id: 3
+        day: 0
+        hour: 0
+        minute: 0
+        cross_sells_enabled: 1
+        cross_sells_type_id: mage_cross
+rule:
+    conditions:
+        1:
+            type: Mirasvit\Event\Model\Rule\Condition\Combine
+            aggregator: all
+            value: 1
+        1--1:
+            type: Mirasvit\Event\EventData\Condition\CustomerCondition
+            attribute: last_activity
+            operator: '>='
+            value: 10
+ga_source: "follow-up-email"
+ga_medium: email
+ga_name: customer came back
+trigger_type: ''

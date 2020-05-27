@@ -1,0 +1,47 @@
+.am-promo-module {
+    position: relative;
+    margin:0 3rem 1.5rem 0;
+    padding: 0;
+    border: 0;
+}
+
+.am-promo-module:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.am-label {
+    float: left;
+    width: calc(25% - 15px);
+    padding: 0;
+    text-align: right;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 3.2rem;
+    white-space: nowrap;
+    color: #303030;
+    cursor: pointer;
+}
+
+.am-status-wrapper {
+    float: left;
+    width: 50%;
+    margin-left: 30px;
+    line-height: 3.2rem;
+}
+
+.am-status.-installed {
+    color: #008000;
+}
+
+.am-status.-not-installed {
+    color: #ff0000;
+}
+
+.am-note {
+    padding: 0;
+    line-height: initial;
+    font-size: 1.2rem;
+    color: #303030;
+}

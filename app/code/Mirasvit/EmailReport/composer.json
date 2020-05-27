@@ -1,0 +1,20 @@
+{
+  "name": "mirasvit/module-email-report",
+  "description": "Email Report",
+  "require": {
+    "mirasvit/module-core": "^1.2"
+  },
+  "type": "magento2-module",
+  "version": "2.0.8",
+  "license": [
+    "proprietary"
+  ],
+  "autoload": {
+    "files": [
+      "src/EmailReport/registration.php"
+    ],
+    "psr-4": {
+      "Mirasvit\\EmailReport\\": "src/EmailReport"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+	"name": "bentideswell/magento2-wordpress-integration",
+	"description": "Magento 2 WordPress Integration",
+	"type": "magento2-module",
+	"autoload": {
+		"files": [
+			"registration.php"
+		],
+		"psr-4": {
+			"FishPig\\WordPress\\": ""
+		}
+	}
+}

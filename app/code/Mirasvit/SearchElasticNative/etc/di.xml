@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Elasticsearch native compatibility -->
+    <preference for="Magento\Elasticsearch\Model\Adapter\Index\IndexNameResolver" type="Mirasvit\SearchElasticNative\Model\Index\IndexNameResolver"/>
+    <preference for="Magento\Elasticsearch\Model\Adapter\Elasticsearch" type="Mirasvit\SearchElasticNative\Model\ElasticsearchAdapter"/>
+    <preference for="Magento\Elasticsearch\Model\Adapter\FieldMapperInterface" type="Mirasvit\SearchElasticNative\Model\Index\IndexFieldMapperResolver"/>
+
+    <type name="Mirasvit\SearchElasticNative\Model\Index\IndexFieldMapperResolver">
+        <arguments>
+            <argument name="fieldMappers" xsi:type="array">
+                <item name="product" xsi:type="string">Magento\Elasticsearch\Elasticsearch5\Model\Adapter\FieldMapper\ProductFieldMapperProxy</item>
+                <item name="magento_catalog_category" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexFieldMapper</item>
+                <item name="magento_cms_page" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexFieldMapper</item>
+                <item name="external_wordpress_post" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexFieldMapper</item>
+                <item name="mirasvit_blog_post" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexFieldMapper</item>
+                <item name="mirasvit_kb_article" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexFieldMapper</item>
+                <item name="mirasvit_gry_registry" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexFieldMapper</item>
+                <item name="magefan_blog_post" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexFieldMapper</item>
+                <item name="aheadworks_blog_post" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexFieldMapper</item>
+                <item name="mageplaza_blog_post" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexFieldMapper</item>
+                <item name="ves_blog_post" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexFieldMapper</item>
+                <item name="ves_brand_brand" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexFieldMapper</item>
+                <item name="magento_catalog_attribute" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexFieldMapper</item>
+                <item name="amasty_faq_question" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexFieldMapper</item>
+                <item name="amasty_blog_post" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexFieldMapper</item>
+                <item name="blackbird_contentmanager_content" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexFieldMapper</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Elasticsearch\Model\Adapter\BatchDataMapper\DataMapperFactory">
+        <arguments>
+            <argument name="dataMappers" xsi:type="array">
+                <item name="magento_catalog_category" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexDataMapper</item>
+                <item name="magento_cms_page" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexDataMapper</item>
+                <item name="external_wordpress_post" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexDataMapper</item>
+                <item name="mirasvit_blog_post" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexDataMapper</item>
+                <item name="mirasvit_kb_article" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexDataMapper</item>
+                <item name="mirasvit_gry_registry" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexDataMapper</item>
+                <item name="magefan_blog_post" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexDataMapper</item>
+                <item name="aheadworks_blog_post" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexDataMapper</item>
+                <item name="mageplaza_blog_post" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexDataMapper</item>
+                <item name="ves_blog_post" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexDataMapper</item>
+                <item name="ves_brand_brand" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexDataMapper</item>
+                <item name="magento_catalog_attribute" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexDataMapper</item>
+                <item name="amasty_faq_question" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexDataMapper</item>
+                <item name="amasty_blog_post" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexDataMapper</item>
+                <item name="blackbird_contentmanager_content" xsi:type="string">Mirasvit\SearchElasticNative\Model\Index\IndexDataMapper</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Elasticsearch\SearchAdapter\Aggregation\Builder">
+        <arguments>
+            <argument name="dataProviderContainer" xsi:type="array">
+                <item name="magento_catalog_category" xsi:type="object">Mirasvit\SearchElasticNative\Model\Search\AggregationDataProvider</item>
+                <item name="magento_cms_page" xsi:type="object">Mirasvit\SearchElasticNative\Model\Search\AggregationDataProvider</item>
+                <item name="external_wordpress_post" xsi:type="object">Mirasvit\SearchElasticNative\Model\Search\AggregationDataProvider</item>
+                <item name="mirasvit_blog_post" xsi:type="object">Mirasvit\SearchElasticNative\Model\Search\AggregationDataProvider</item>
+                <item name="mirasvit_kb_article" xsi:type="object">Mirasvit\SearchElasticNative\Model\Search\AggregationDataProvider</item>
+                <item name="mirasvit_gry_registry" xsi:type="object">Mirasvit\SearchElasticNative\Model\Search\AggregationDataProvider</item>
+                <item name="magefan_blog_post" xsi:type="object">Mirasvit\SearchElasticNative\Model\Search\AggregationDataProvider</item>
+                <item name="aheadworks_blog_post" xsi:type="object">Mirasvit\SearchElasticNative\Model\Search\AggregationDataProvider</item>
+                <item name="mageplaza_blog_post" xsi:type="object">Mirasvit\SearchElasticNative\Model\Search\AggregationDataProvider</item>
+                <item name="ves_blog_post" xsi:type="object">Mirasvit\SearchElasticNative\Model\Search\AggregationDataProvider</item>
+                <item name="ves_brand_brand" xsi:type="object">Mirasvit\SearchElasticNative\Model\Search\AggregationDataProvider</item>
+                <item name="magento_catalog_attribute" xsi:type="object">Mirasvit\SearchElasticNative\Model\Search\AggregationDataProvider</item>
+                <item name="amasty_faq_question" xsi:type="object">Mirasvit\SearchElasticNative\Model\Search\AggregationDataProvider</item>
+                <item name="amasty_blog_post" xsi:type="object">Mirasvit\SearchElasticNative\Model\Search\AggregationDataProvider</item>
+                <item name="blackbird_contentmanager_content" xsi:type="object">Mirasvit\SearchElasticNative\Model\Search\AggregationDataProvider</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Elasticsearch\Model\Adapter\BatchDataMapper\DataMapperResolver">
+        <plugin name="DataMapperResolverPlugin" type="Mirasvit\SearchElasticNative\Plugin\DataMapperResolverPlugin"/>
+    </type>
+
+    <type name="Magento\Elasticsearch\Elasticsearch5\SearchAdapter\Mapper">
+        <plugin name="mstElastic5MapperPlugin" type="Mirasvit\SearchElasticNative\Plugin\Elasticsearch\MapperPlugin"/>
+    </type>
+
+    <type name="Magento\Elasticsearch\Elasticsearch6\SearchAdapter\Mapper">
+        <plugin name="mstElastic6MapperPlugin" type="Mirasvit\SearchElasticNative\Plugin\Elasticsearch\MapperPlugin"/>
+    </type>
+
+</config>

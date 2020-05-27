@@ -1,0 +1,19 @@
+title: Order status changed to processing
+description:
+store_ids:
+    - 0
+is_active: 0
+event: order_status|processing
+campaign_id: 4
+chain:
+    new_0:
+        template_id: 6
+        day: 0
+        hour: 0
+        minute: 0
+        cross_sells_enabled: 1
+        cross_sells_type_id: mage_cross
+ga_source: "follow-up-email"
+ga_medium: email
+ga_name: order status processing
+trigger_type: ''

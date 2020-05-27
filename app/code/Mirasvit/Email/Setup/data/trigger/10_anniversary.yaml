@@ -1,0 +1,17 @@
+title: Anniversary
+description:
+store_ids:
+    - 0
+is_active: 0
+campaign_id: 2
+event: customer_create
+chain:
+    new_0:
+        template_id: 11
+        day: 365
+        hour: 0
+        minute: 0
+ga_source: "follow-up-email"
+ga_medium: email
+ga_name: anniversary
+trigger_type: ''

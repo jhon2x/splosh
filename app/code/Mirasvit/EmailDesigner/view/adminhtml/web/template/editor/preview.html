@@ -1,0 +1,25 @@
+<div class="email-designer__editor-preview">
+    <div class="spinner" data-role="spinner">
+        <span repeat="8"/>
+    </div>
+
+    <div class="toolbar">
+        <div class="admin__field admin__field-mode">
+            <button class="secondary" data-role="desktop-view"><!-- ko i18n: 'Desktop' --><!-- /ko --></button>
+            <button class="tertiary" data-role="mobile-view"><!-- ko i18n: 'Mobile' --><!-- /ko --></button>
+        </div>
+
+        <div class="admin__field admin__field-option">
+            <input type="checkbox" class="admin__control-checkbox" data-role="auto-refresh" id="auto-refresh">
+            <label class="admin__field-label" for="auto-refresh">
+                <span><!-- ko i18n: 'Auto Refresh' --><!-- /ko --></span>
+            </label>
+        </div>
+
+        <div class="admin__field admin__field-refresh">
+            <button class="action-default" data-role="refresh"><!-- ko i18n: 'Refresh' --><!-- /ko --></button>
+        </div>
+    </div>
+
+    <iframe id="email-designer__preview" data-role="preview"></iframe>
+</div>

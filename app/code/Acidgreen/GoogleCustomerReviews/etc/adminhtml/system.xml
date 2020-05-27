@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="sales" sortOrder="999" translate="label">
+			<label>sales</label>
+		</tab>
+		<section id="google" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+			<label>google</label>
+			<tab>sales</tab>
+			<resource>Acidgreen_GoogleCustomerReviews::config_acidgreen_googlecustomerreviews</resource>
+			<group id="customer_reviews" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Google Customer Reviews</label>
+				<field id="enabled" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Enabled</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="api_url" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="text">
+					<label>API URL</label>
+                    <comment>URL towards the JS file needed for Google Customer Reviews</comment>
+				</field>
+				<field id="merchant_id" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="text">
+					<label>Merchant ID</label>
+                    <comment>Google Customer Reviews Merchant ID</comment>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

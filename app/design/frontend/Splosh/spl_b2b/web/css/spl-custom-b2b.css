@@ -1,0 +1,254 @@
+/** Splosh B2B Theme Custom CSS File **/
+
+/* reset */
+body ._keyfocus *:focus,body input:not([disabled]):focus,body textarea:not([disabled]):focus,body select:not([disabled]):focus {
+    box-shadow: none !important
+}
+
+/* Cart Page */
+#top-cart-btn-checkout {
+    display: none;
+}
+table.box-wrapper-error {
+    border: 3px solid #b30000;
+    overflow: visible;
+    margin: 5px 0
+}
+table.box-wrapper-error .with-col, table.box-wrapper-error .with-col, table.box-wrapper-error td:last-child, table.box-wrapper-error thead tr:last-child, table.box-wrapper-error th.col.subtotal  {
+	border-right: 3px solid #b30000
+}
+
+.box-wrapper-success {
+    border: 3px solid #006400;
+    overflow: visible;
+    margin: 5px 0
+}
+
+table.box-wrapper-success .with-col, table.box-wrapper-success .with-col, table.box-wrapper-success td:last-child, table.box-wrapper-success thead tr:last-child, table.box-wrapper-success th.col.subtotal  {
+	border-right: 3px solid #006400
+}
+
+td.with-col {
+    padding: 0;
+}
+.cart.table-wrapper .actions-toolbar > .action-delete {
+    right: 10px;
+}
+.checkout-cart-index td.col.item .message.error.item br {
+    display: none;
+}
+.checkout-cart-index div#block-shipping {
+    display: none;
+}
+@media (max-width: 767px) {
+	.col.subtotal {
+		width: 33.3333333% !important
+	}
+	table.box-wrapper-error .with-col, table.box-wrapper-error .with-col, table.box-wrapper-error td:last-child, table.box-wrapper-error thead tr:last-child, table.box-wrapper-error th.col.subtotal {
+		padding: 3px;
+	}
+	table.box-wrapper-success .with-col, table.box-wrapper-success .with-col, table.box-wrapper-success td:last-child, table.box-wrapper-success thead tr:last-child, table.box-wrapper-error th.col.subtotal {
+		padding: 3px;
+	}
+	table.box-wrapper-error {
+		border: 0;
+	    overflow: visible;
+	    margin: 5px 0;
+	    -webkit-box-shadow: inset 0px 0px 0px 3px #b30000;
+	    -moz-box-shadow: inset 0px 0px 0px 3px #b30000;
+	    box-shadow: inset 0px 0px 0px 3px #b30000;
+	}
+	table.box-wrapper-success {
+		border: 0;
+	    overflow: visible;
+	    margin: 5px 0;
+	    -webkit-box-shadow: inset 0px 0px 0px 3px #006400;
+	    -moz-box-shadow: inset 0px 0px 0px 3px #006400;
+	    box-shadow: inset 0px 0px 0px 3px #006400;
+	}
+    .block.block-search.spl-block-search-custom {
+        z-index: 1;
+    }
+}
+.magento-advancedcheckout-sku-index .box.box-upload {
+    border: 1px solid #ededed;
+    padding: 10px 10px 0 10px;
+    margin-bottom: 10px;
+}
+@media (min-width: 768px) {
+	.magento-advancedcheckout-sku-index .box.box-upload {
+	    width: 40%;
+	}
+}
+span.minicart-qty {
+    display: none;
+}
+.counter.qty > .counter-number {display: none !important;}
+
+.counter.qty::before {
+    content: "\f00c";
+    display: inline-block;
+    content: "\f00c";
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.minicart-wrapper .action.showcart .counter.qty {
+	padding: 1px 10px;
+}
+.login-container {
+    padding: 25px !important;
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+	.page-header .header.panel {
+	    padding: 15px 10px !important
+	}
+}
+/* EOF Cart Page */
+h4.spl-excerpt-title {
+    padding-bottom: 9px;
+    color: #777777;
+    font-weight: 300;
+    margin: 25px 0 20px 0;
+    font-size: 1.6rem;
+    line-height: normal;
+}
+.checkout-index-index div#checkout-shipping-method-load,.checkout-index-index .payment-method-billing-address,.sales-order-view .box.box-order-shipping-method,
+.sales-order-view .box.box-order-billing-method, .box.box-order-shipping-method, .box.box-order-billing-method, tr.totals.shipping.incl {
+    display: none;
+}
+a.dl-csv { border: 1px solid #ccc; color: #777; padding: 12px; background-color: #fff; text-transform: uppercase; display: inline-block; margin-bottom: 15px; }
+a.dl-csv:hover, a.dl-csv:focus { text-decoration: none; background-color: #999999; color: #fff }
+.box-sku-wrapper {border: 1px solid #ededed; overflow: hidden; padding: 10px 15px; }
+.box.box-items + .row {margin-bottom: 20px; }
+.box-sku-wrapper ul { margin: 15px 0 20px 0 }
+
+@media (max-width: 767px) {
+	.col-xs-12.col-md-6.box-upload.spl-sku-tmp { margin-top: 20px }
+}
+
+/* Out of stock text in PDP (SPL-156) */
+.product-info-stock-sku > .stock.unavailable { color: #aa1903; }
+/* Backorder SPL-232 */
+.backorder-info {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.stock.backorder-only, .backorder-only {
+    color: #aa1903;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.sales-order-view .order-details-items .table-order-items .product-item-name {
+    margin: 0 0 5px !important
+}
+.order-details-items .items-qty .item {
+    text-align: center !important
+}
+.message.global.salesrep {
+    margin: 0 0 9px;
+    padding: 12px 18px 12px 22.5px;
+    display: block;
+    font-size: 1.3rem;
+    background: #000000;
+    border-color: none;
+    color: #ffffff;
+    margin-bottom: 0;
+    text-align: center;
+}
+.backorder-box {
+    border: 3px solid #dedede;
+    overflow: visible;
+    margin: 5px 0;
+}
+.backorder-box .subtotal {
+    border-right: 3px solid #dedede;
+}
+
+/* SPL-24 and SPL-250 */
+.sales-order-view li.nav.item.current + li, .block.block-dashboard-addresses .box-actions,.customer-address-index .block.block-addresses-list,
+.customer-address-index .actions-toolbar, .block.block-addresses-default .box-actions, li#shipping button.action.action-show-popup, div#giftcardaccount-placer {
+    display: none;
+}
+@media (min-width: 768px) {
+    .sales-order-view .order-links .item strong {
+        margin-bottom: 0
+    }
+}
+.spl-change-request {
+    line-height: 1.7em;
+}
+.customer-address-index .block.block-addresses-default {
+    margin-bottom: 30px
+}
+
+.form-comment .payment-option-inner .field .label .comment-optional-text {
+    font-size: 12px;
+    font-style: italic;
+}
+
+div.login-announcement {
+    margin-bottom: 10px;
+}
+.order-sku-vid {
+    padding-bottom: 15px;
+}
+/* SPL-347 - hide discount code */
+tr.totals.shipping.incl {
+    display: block !important;
+}
+.checkout-index-index .checkout-billing-address, tr.totals.shipping.incl .amount { display: none; }
+.cms-wholesale-splosh .widget.block.block-static-block > .container {
+    padding: 0 !important;
+}
+.cms-wholesale-splosh .widget.block.block-static-block {
+    margin-bottom: 0;
+}
+/* Change icon of product view image zoom */
+.fotorama--fullscreen .fotorama__fullscreen-icon:before {
+    content: "\f819";
+    font-size: 30px;
+}
+/* SPL-395 - Product already in cart */
+.fieldset > .product.n-added,
+.product .n-added
+{
+display: inline-block;
+vertical-align: middle;
+}
+.product .n-added {
+margin-top: 3px;
+}
+.fieldset > .product.n-added span.content,
+.product .n-added span
+{
+background-color: #ccc;
+color: #000;
+}
+.fieldset > .product.n-added span.content
+{
+padding: 10px 17px;
+}
+.product .n-added span.content {
+padding: 5px 17px;
+}
+
+.n-added span.content:before {
+    display: inline;
+    content: '\f814';
+    font-family: 'porto-icons';
+    font-size: 15px;
+    margin-right: 5px;
+}
+/* SPL-464 */
+.sw-megamenu.navigation li.level0.fullwidth .submenu li.level1.parent > a {
+    font-weight: 600;
+}
+
+body.checkout-cart-index .cart-container button.action.clear {
+    display: inline-block !important;
+    margin-right: 15px;
+}

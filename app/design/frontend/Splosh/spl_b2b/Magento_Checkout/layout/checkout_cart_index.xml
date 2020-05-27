@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 Acidgreen. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="checkout.cart.container">
+            <referenceBlock name="checkout.cart.giftcardaccount" remove="true" />
+            <referenceContainer name="cart.summary">
+            	<block class="Magento\Cms\Block\Block" name="b2b_cart_page_disclaimer">
+				    <arguments>
+				        <argument name="block_id" xsi:type="string">b2b_cart_page_disclaimer</argument>
+				    </arguments>
+				</block>
+            </referenceContainer>
+        </referenceContainer>
+    </body>
+</page>

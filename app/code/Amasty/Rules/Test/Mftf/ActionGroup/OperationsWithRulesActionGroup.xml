@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+
+    <actionGroup name="OpenRuleForEdit">
+        <arguments>
+            <argument name="cartRule"/>
+        </arguments>
+        <amOnPage url="{{AdminCartPriceRulePage.url}}" stepKey="navigateToCartPriceRulePage1"/>
+        <waitForPageLoad time="100" stepKey="waitForPageLoad1"/>
+        <click selector="//table[@id='promo_quote_grid_table']//*[contains(text(), '{{cartRule.name}}')]"
+               stepKey="chooseOpenRuleForEdit"/>
+        <waitForPageLoad time="100" stepKey="waitForPageLoad2"/>
+        <conditionalClick stepKey="openActionTab"
+                          selector="{{AdminActionsCartPriceRuleSection.ActionTab}}"
+                          dependentSelector="{{AdminActionsCartPriceRuleSection.ActionTabOpen}}"
+                          visible="false"/>
+        <waitForPageLoad time="5" stepKey="waitForPageLoad3"/>
+    </actionGroup>
+
+
+    <actionGroup name="SaveRuleAfterEdit">
+        <click selector="{{AdminActionsCartPriceRuleSection.Save}}" stepKey="clickOnSave"/>
+        <waitForPageLoad time="300" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditRuleAddPriority" extends="OpenRuleForEdit">
+        <fillField selector="{{AdminActionsCartPriceRuleSection.Priority}}" userInput="{{cartRule.priority}}"
+                   stepKey="enterPriority"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.SaveAndContinueEdit}}" stepKey="clickOnSave"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditRuleDiscardSubsequentRulesClick">
+        <click selector="{{AdminActionsCartPriceRuleSection.DiscardSubsequentRules}}"
+               stepKey="clickSwitchDiscardRules"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditRuleApplyToShippingAmountClick">
+        <click selector="{{AdminActionsCartPriceRuleSection.ApplyToShippingAmount}}"
+               stepKey="clickSwitchApplyToShippingAmount"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditRuleFreeShippingNo">
+        <click selector="{{AdminActionsCartPriceRuleSection.FreeShippingNo}}" stepKey="ChooseFreeShippingNo"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditRuleFreeShippingForMatchingItemsOnly">
+        <click selector="{{AdminActionsCartPriceRuleSection.FreeShippingForMatchingItemsOnly}}"
+               stepKey="ChooseFreeShippingForMatchingItemsOnly"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditRuleFreeShippingForShipmentWithMatchingItems">
+        <click selector="{{AdminActionsCartPriceRuleSection.FreeShippingForShipmentWithMatchingItems}}"
+               stepKey="ChooseFreeShippingForMatchingItemsOnly"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditRuleCalculateDiscountBasedOnPriceSpecialPrice">
+        <click selector="{{AdminActionsCartPriceRuleSection.CalculateDiscountBasedOnPrice}}"
+               stepKey="chooseCalculateDiscountPriceSpecialPrice"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditRuleCalculateDiscountBasedOnPriceAfterPreviousDiscount" extends="OpenRuleForEdit">
+        <click selector="{{AdminActionsCartPriceRuleSection.CalculateDiscountBasedOnPriceAfterPreviousDiscount}}"
+               stepKey="chooseCalculateDiscountPriceAfterPreviousDiscount"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditRuleCalculateDiscountBasedOnOriginalPrice" extends="OpenRuleForEdit">
+        <click selector="{{AdminActionsCartPriceRuleSection.CalculateDiscountBasedOnOriginalPrice}}"
+               stepKey="chooseCalculateDiscountOnOriginalPrice"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditRuleSkipItemsWithSpecialPriceYes">
+        <click selector="{{AdminActionsCartPriceRuleSection.SkipItemsWithSpecialPriceYes}}"
+               stepKey="chooseSkipProductWitSpecialPrice"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditRuleSkipItemsWithSpecialPriceNo">
+        <click selector="{{AdminActionsCartPriceRuleSection.SkipItemsWithSpecialPriceNo}}"
+               stepKey="chooseNoSkipProductWitSpecialPrice"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditRuleSkipItemsWithSpecialPriceSkipIfDiscounted"  extends="OpenRuleForEdit">
+        <click selector="{{AdminActionsCartPriceRuleSection.SkipItemsWithSpecialPriceSkipIfDiscounted}}"
+               stepKey="chooseSkipItemsWithSpecialPriceSkipIfDiscounted"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditRuleAddNumberYProducts">
+        <arguments>
+            <argument name="cartRule"/>
+        </arguments>
+        <fillField selector="{{AdminActionsCartPriceRuleSection.NumberOfYProducts}}"
+                   userInput="{{cartRule.numberOfYProducts}}" stepKey="enterNumberOfYProducts"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditRuleAddPromoSKU">
+        <arguments>
+            <argument name="cartRule"/>
+        </arguments>
+        <fillField selector="{{AdminActionsCartPriceRuleSection.SetItemsBySKU}}" userInput="{{cartRule.promoSKU}}"
+                   stepKey="enterPromoSKU"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditRuleAddPromoCategories">
+        <arguments>
+            <argument name="cartRule"/>
+        </arguments>
+        <fillField selector="{{AdminActionsCartPriceRuleSection.SetItemsByCategoryIDs}}"
+                   userInput="{{cartRule.promoCategories}}" stepKey="enterPromoCategories"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditRuleAddAfterN">
+        <arguments>
+            <argument name="cartRule"/>
+        </arguments>
+        <fillField selector="{{AdminActionsCartPriceRuleSection.AfterN}}" userInput="{{cartRule.afterN}}"
+                   stepKey="enterAfterNProductsInTheCart"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditRuleFirstApplyDiscountToMost">
+        <click selector="{{AdminActionsCartPriceRuleSection.AtFirstApplyDiscountToMostExpensiveProducts}}"
+               stepKey="chooseApplyFirstMostProd"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditRuleUseForTheSameProductInShoppingCart">
+        <click selector="{{AdminActionsCartPriceRuleSection.UseForTheSameProductInShoppingCart}}"
+               stepKey="ChooseUseForTheSameProductInShoppingCart"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditRuleDiscountQtyStep">
+        <arguments>
+            <argument name="cartRule"/>
+        </arguments>
+        <fillField selector="{{AdminActionsCartPriceRuleSection.DiscountQtyStep}}"
+                   userInput="{{cartRule.discountQtyStep}}" stepKey="enterDiscountQty"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditRuleMaxQtyDiscountIsAppliedTo">
+        <arguments>
+            <argument name="cartRule"/>
+        </arguments>
+        <fillField selector="{{AdminActionsCartPriceRuleSection.MaxQtyDiscountIsAppliedTo}}"
+                   userInput="{{cartRule.maxQtyDiscountAppliedTo}}" stepKey="enterMaxQtyDiscountAppliedTo"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+</actionGroups>

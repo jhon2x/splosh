@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Section.io. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="../../../../../../
+../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="left">
+            <block class="Sectionio\Metrics\Block\Adminhtml\Report\Edit\Tabs"
+                name="metrics_report_edit_tabs"/>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Sectionio\Metrics\Block\Adminhtml\Report\Edit" name="metrics_report_edit"/>
+        </referenceContainer>
+    </body>
+</page>

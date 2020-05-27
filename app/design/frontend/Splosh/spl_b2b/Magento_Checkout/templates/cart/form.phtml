@@ -1,0 +1,190 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+
+/** @var $agCheckoutHelper \Acidgreen\Checkout\Helper\Cart */
+$agCheckoutHelper = $this->helper('Acidgreen\Checkout\Helper\Cart');
+
+$otherProductsData = $agCheckoutHelper->getOtherProductCollectionData();
+
+$cartStockzoneItems = $agCheckoutHelper->getCartStockzoneItems();
+
+/**  @var $block \Magento\Checkout\Block\Cart\Grid */
+?>
+<?php $mergedCells = ($this->helper('Magento\Tax\Helper\Data')->displayCartBothPrices() ? 2 : 1); ?>
+<?= $block->getChildHtml('form_before') ?>
+<form action="<?= /* @escapeNotVerified */ $block->getUrl('checkout/cart/updatePost') ?>"
+          method="post"
+          id="form-validate"
+          data-mage-init='{"Magento_Checkout/js/action/update-shopping-cart":
+              {"validationURL" : "/checkout/cart/updateItemQty",
+              "updateCartActionContainer": "#update_cart_action_container"}
+          }'
+          class="form form-cart">
+    <?= $block->getBlockHtml('formkey') ?>
+    <div class="cart main actions">
+        <?php if ($block->getContinueShoppingUrl()): ?>
+            <a class="action continue"
+               href="<?= $block->escapeUrl($block->getContinueShoppingUrl()) ?>"
+               title="<?= $block->escapeHtml(__('Continue Shopping')) ?>">
+                <span><?= /* @escapeNotVerified */ __('Continue Shopping') ?></span>
+            </a>
+        <?php endif; ?>
+        <button type="submit"
+                name="update_cart_action"
+                data-cart-empty=""
+                value="empty_cart"
+                title="<?php echo $block->escapeHtml(__('Clear Shopping Cart')); ?>"
+                class="action clear" id="empty_cart_button">
+            <span><?php /* @escapeNotVerified */ echo __('Clear Shopping Cart'); ?></span>
+        </button>
+        <button type="submit"
+                name="update_cart_action"
+                data-cart-item-update=""
+                value="update_qty"
+                title="<?php echo $block->escapeHtml(__('Update Shopping Cart')); ?>"
+                class="action update">
+            <span><?php /* @escapeNotVerified */ echo __('Update Shopping Cart'); ?></span>
+        </button>
+        <input type="hidden" value="" id="update_cart_action_container" data-cart-item-update=""/>
+    </div>
+    <div class="cart table-wrapper<?php echo $mergedCells == 2 ? ' detailed' : ''; ?>">
+        <table id="shopping-cart-table"
+               class="cart items data table"
+               data-mage-init='{"shoppingCart":{"emptyCartButton": ".action.clear",
+               "updateCartActionContainer": "#update_cart_action_container"}}'>
+            <caption class="table-caption"><?= /* @escapeNotVerified */ __('Shopping Cart Items') ?></caption>
+            <?php foreach ($agCheckoutHelper->getSortedBoxItems() as $box_mix => $box): ?>
+                <?php if ($box_mix == 'backorders'): ?>
+                    <?php foreach ($box as $name => $box_content): ?>
+                       <table class="box-wrapper backorder-box">
+                            <thead>
+                                <tr>
+                                    <th class="col item" scope="col"><span><?= /* @escapeNotVerified */ __('Backorder') ?></span></th>
+                                    <th class="col price" scope="col"><span><?= /* @escapeNotVerified */ __('Price') ?></span></th>
+                                    <th class="col qty" scope="col"><span><?= /* @escapeNotVerified */ __('Qty') ?></span></th>
+                                    <th class="col subtotal" scope="col"><span><?= /* @escapeNotVerified */ __('Subtotal') ?></span></th>
+                                </tr>
+                            </thead>
+                            <?php foreach ($box_content['items'] as $_item): ?>
+                                <?php
+
+                                    $otherProductData = false;
+                                    $cartStockzoneItem = false;
+
+                                    if (!empty($otherProductsData[$_item->getProductId()]))
+                                        $otherProductData = $otherProductsData[$_item->getProductId()];
+                                    if (!empty($cartStockzoneItems[$_item->getProductId()]))
+                                        $cartStockzoneItem = $cartStockzoneItems[$_item->getProductId()];
+
+                                    $block->setOtherProductData($otherProductData)->setCartStockzoneItem($cartStockzoneItem);
+                                    echo $block->getItemHtml($_item);
+
+                                ?>
+                            <?php endforeach ?>
+                      </table>
+                    <?php endforeach ?>
+                <?php elseif ($box_mix == 'unmixed'): ?>
+                    <?php foreach ($box as $name => $box_content): ?>
+                        <?php foreach ($box_content['items'] as $key => $_item): ?>
+                          <table class="box-wrapper-<?php echo $box_content['validation'][$key]['status'] ?>">
+                            <thead>
+                                <tr>
+                                    <td colspan="4" class="with-col">
+                                    <div class="message-<?php echo $box_content['validation'][$key]['status'] ?> <?php echo $box_content['validation'][$key]['status'] ?> message">
+                                        <div><?php echo $box_content['validation'][$key]['message'] ?></div>
+                                    </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="col item" scope="col"><span><?php /* @escapeNotVerified */ echo __($name) ?></span></th>
+                                    <th class="col price" scope="col"><span><?php /* @escapeNotVerified */ echo __('Price') ?></span></th>
+                                    <th class="col qty" scope="col"><span><?php /* @escapeNotVerified */ echo __('Qty') ?></span></th>
+                                    <th class="col subtotal" scope="col"><span><?php /* @escapeNotVerified */ echo __('Subtotal') ?></span></th>
+                                </tr>
+                            </thead>
+                            <?php echo $block->getItemHtml($_item) ?>
+                          </table>
+                        <?php endforeach ?>
+                    <?php endforeach ?>
+                <?php elseif ($box_mix == 'mixed'): ?>
+                    <?php foreach ($box as $name => $box_content): ?>
+                      <table class="box-wrapper-<?php echo $box_content['validation']['status'] ?>">
+                        <thead>
+                            <tr>
+                                <td colspan="4" class="with-col">
+                                <div class="message-<?php echo $box_content['validation']['status'] ?> <?php echo $box_content['validation']['status'] ?> message">
+                                    <div><?php echo $box_content['validation']['message'] ?></div>
+                                    <?php ?>
+                                </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="col item" scope="col"><span><?php /* @escapeNotVerified */ echo __($name) ?></span></th>
+                                <th class="col price" scope="col"><span><?php /* @escapeNotVerified */ echo __('Price') ?></span></th>
+                                <th class="col qty" scope="col"><span><?php /* @escapeNotVerified */ echo __('Qty') ?></span></th>
+                                <th class="col subtotal" scope="col"><span><?php /* @escapeNotVerified */ echo __('Subtotal') ?></span></th>
+                            </tr>
+                        </thead>
+                        <?php foreach ($box_content['items'] as $_item): ?>
+                            <?php echo $block->getItemHtml($_item) ?>
+                        <?php endforeach ?>
+                      </table>
+                    <?php endforeach ?>
+                  <?php else: ?>
+                      <?php /** prevent non-backorder behavior from showing... */ ?>
+                      <?php $block->setOtherProductData(false)->setCartStockzoneItem(false); ?>
+                      <?php foreach ($box as $name => $box_content): ?>
+                          <table class="box-wrapper">
+                             <thead>
+                                 <tr>
+                                     <th class="col item" scope="col"><span><?= /* @escapeNotVerified */ __('Item (No Box)') ?></span></th>
+                                     <th class="col price" scope="col"><span><?= /* @escapeNotVerified */ __('Price') ?></span></th>
+                                     <th class="col qty" scope="col"><span><?= /* @escapeNotVerified */ __('Qty') ?></span></th>
+                                     <th class="col subtotal" scope="col"><span><?= /* @escapeNotVerified */ __('Subtotal') ?></span></th>
+                                 </tr>
+                             </thead>
+                          <?php foreach ($box_content['items'] as $_item): ?>
+                              <?php echo $block->getItemHtml($_item) ?>
+                          <?php endforeach ?>
+                        </table>
+                      <?php endforeach ?>
+                <?php endif ?>
+            <?php endforeach ?>
+        </table>
+    </div>
+    <div class="cart main actions">
+        <?php if ($block->getContinueShoppingUrl()): ?>
+            <a class="action continue"
+               href="<?= $block->escapeUrl($block->getContinueShoppingUrl()) ?>"
+               title="<?= $block->escapeHtml(__('Continue Shopping')) ?>">
+                <span><?= /* @escapeNotVerified */ __('Continue Shopping') ?></span>
+            </a>
+        <?php endif; ?>
+        <button type="submit"
+                name="update_cart_action"
+                data-cart-empty=""
+                value="empty_cart"
+                title="<?= $block->escapeHtml(__('Clear Shopping Cart')) ?>"
+                class="action clear" id="empty_cart_button">
+            <span><?= /* @escapeNotVerified */ __('Clear Shopping Cart') ?></span>
+        </button>
+        <button type="submit"
+                name="update_cart_action"
+                data-cart-item-update=""
+                value="update_qty"
+                title="<?= $block->escapeHtml(__('Update Shopping Cart')) ?>"
+                class="action update">
+            <span><?= /* @escapeNotVerified */ __('Update Shopping Cart') ?></span>
+        </button>
+        <input type="hidden" value="" id="update_cart_action_container" data-cart-item-update=""/>
+    </div>
+</form>
+<?= $block->getChildHtml('checkout.cart.order.actions') ?>
+<?= $block->getChildHtml('shopping.cart.table.after') ?>
+

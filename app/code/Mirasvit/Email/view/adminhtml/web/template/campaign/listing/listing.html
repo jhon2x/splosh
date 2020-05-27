@@ -1,0 +1,34 @@
+<div class="mst-email__campaign-listing">
+    <if args="hasData()">
+        <div class="campaign" repeat="foreach: rows, item: '$campaign'">
+            <div class="col-info">
+                <div class="status" data-bind="css: {_active: $campaign().is_active == 1}"/>
+                <a class="title" text="$campaign().title" data-bind="attr: {href: $campaign().view_url}"/>
+                <div class="description" text="$campaign().description"/>
+
+                <div class="triggers">
+                    <a data-bind="attr: {href: $trigger().view_url}" class="trigger"
+                       repeat="foreach: $campaign().triggers, item: '$trigger'">
+                        <div class="status" data-bind="css: {_active: $trigger().is_active == 1}"/>
+                        <span text="$trigger().title"/>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-overview">
+                <div class="actions">
+                    <div><a data-bind="attr: {href: $campaign().view_url}" class="action-secondary">View Campaign</a></div>
+                    <div><a data-bind="click: deleteConfirm.bind($data, campaignDeleteMsg, $campaign().delete_url, undefined)" href="#">Delete</a></div>
+                    <div><a data-bind="attr: {href: $campaign().duplicate_url}">Duplicate</a></div>
+                </div>
+
+                <!-- ko template: {
+                        name: 'Mirasvit_Email/campaign/listing/listing/report',
+                        data: {report: $campaign().report}
+                    } --><!-- /ko -->
+            </div>
+        </div>
+    </if>
+
+    <!-- ko template: helpTemplate --><!-- /ko -->
+</div>

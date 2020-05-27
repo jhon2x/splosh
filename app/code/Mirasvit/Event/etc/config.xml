@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Magento/Store/etc/config.xsd">
+    <default>
+        <mevent>
+            <general>
+                <!-- enable capturing by default -->
+                <capture_status>0</capture_status>
+            </general>
+        </mevent>
+    </default>
+</config>

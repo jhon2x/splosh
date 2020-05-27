@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <amrules>
+            <skip_price>
+                <skip_special_price>1</skip_special_price>
+            </skip_price>
+            <discount_breakdown>
+                <enable>1</enable>
+            </discount_breakdown>
+        </amrules>
+    </default>
+</config>

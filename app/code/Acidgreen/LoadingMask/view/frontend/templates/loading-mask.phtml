@@ -1,0 +1,10 @@
+<div class="loader-container">
+    <div data-role="loader" class="loading-mask custom" style="display: none;">
+        <div class="opacity-bg"></div>
+        <div class="loader">
+            <img src="<?php /* @escapeNotVerified */ echo $block->getViewFileUrl('images/loading.gif'); ?>"
+                 alt="<?php /* @escapeNotVerified */ echo __('Loading...') ?>">
+            <?php echo $block->getChildHtml('') ?>
+        </div>
+    </div>
+</div>

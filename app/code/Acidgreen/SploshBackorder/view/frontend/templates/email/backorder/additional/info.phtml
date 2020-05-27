@@ -1,0 +1,16 @@
+<?php
+if (!empty($block->getParentBlock()->getOtherProductData()))
+    $otherProductData = $block->getParentBlock()->getOtherProductData();
+
+if (!empty($block->getParentBlock()->getStockzoneItem()))
+    $stockzoneItem = $block->getParentBlock()->getStockzoneItem();
+
+?>
+<?php if (!empty($otherProductData) && !empty($otherProductData->getForceBackorder())): ?>
+<div class="backorder additional-info">
+    <span class="backorder-only">Backorder only</span>
+    <div class="backorder exo-info">
+        <span class="backorder due-date"><?php echo 'Due Date: ' . $otherProductData->getExoDueDate() ?></span>
+    </div>
+</div>
+<?php endif; ?>

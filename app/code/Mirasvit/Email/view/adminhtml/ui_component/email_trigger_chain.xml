@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">email_trigger_chain.email_trigger_chain_data_source</item>
+            <item name="deps" xsi:type="string">email_trigger_chain.email_trigger_chain_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">email_trigger_chain</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="cancel" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Cancel</item>
+                <item name="sort_order" xsi:type="string">10</item>
+                <item name="on_click" xsi:type="string"/>
+                <item name="data_attribute" xsi:type="array">
+                    <item name="mage-init" xsi:type="array">
+                        <item name="buttonAdapter" xsi:type="array">
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">email_campaign_view.email_campaign_view.modals.chain_edit_form_modal</item>
+                                    <item name="actionName" xsi:type="string">actionCancel</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </item>
+            <item name="send-test" xsi:type="string">Mirasvit\Email\Ui\Campaign\View\Control\SendTestButton</item>
+            <item name="save" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Save</item>
+                <item name="class" xsi:type="string">action-default primary</item>
+                <item name="on_click" xsi:type="string"/>
+                <item name="sort_order" xsi:type="string">1</item>
+            </item>
+        </item>
+    </argument>
+
+    <dataSource name="email_trigger_chain_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Mirasvit\Email\Ui\Chain\Form\DataProvider</argument>
+            <argument name="name" xsi:type="string">email_trigger_chain_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">chain_id</argument>
+            <argument name="requestFieldName" xsi:type="string">chain_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="email/chain/save">
+                        <param name="back">edit</param>
+                        <param name="_current">1</param>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+
+    <!--<container name="overview" class="Mirasvit\Email\Ui\Campaign\Overview">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Email Overview</item>
+                <item name="template" xsi:type="string">Mirasvit_Email/campaign/view/chain/overview</item>
+                <item name="pending" xsi:type="number">0</item>
+                <item name="email_qty" xsi:type="number">0</item>
+                <item name="open_qty" xsi:type="number">0</item>
+                <item name="click_qty" xsi:type="number">0</item>
+                <item name="order_qty" xsi:type="number">0</item>
+                <item name="review_qty" xsi:type="number">0</item>
+            </item>
+        </argument>
+    </container>-->
+
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="additionalClasses" xsi:type="string">admin__fieldset-offset</item>
+                <item name="label" xsi:type="string">General</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="opened" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+
+        <field name="template_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Mirasvit\EmailDesigner\Model\Config\Source\Template</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Email Template</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="showCheckbox" xsi:type="boolean">false</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="multiple" xsi:type="boolean">false</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="caption" xsi:type="string" translate="true">-- Please Select --</item>
+                </item>
+            </argument>
+        </field>
+
+        <container name="delivery_settings">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Delivery Time Delay</item>
+                    <item name="template" xsi:type="string">Mirasvit_Email/campaign/view/chain/delivery-settings</item>
+                </item>
+            </argument>
+
+            <field name="day">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="addafter" xsi:type="string" translate="true">day(s)</item>
+                        <item name="placeholder" xsi:type="string">0</item>
+                        <item name="dataType" xsi:type="string">number</item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="component" xsi:type="string">Mirasvit_Email/js/form/element/masked-input</item>
+                        <item name="elementTmpl" xsi:type="string">Mirasvit_Email/form/element/input</item>
+                        <item name="additionalClasses" xsi:type="string">admin__field-delay</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="validate-digits" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+            </field>
+
+            <field name="hour">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">Mirasvit\Email\Model\Config\Source\Hours</item>
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="additionalClasses" xsi:type="string">admin__field-delay</item>
+                        <item name="caption" xsi:type="string" translate="true">-- Select Hour Delay --</item>
+                    </item>
+                </argument>
+            </field>
+
+            <field name="minute">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">Mirasvit\Email\Model\Config\Source\Minutes</item>
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="additionalClasses" xsi:type="string">admin__field-delay</item>
+                        <item name="tooltip" xsi:type="array">
+                            <item name="link" xsi:type="string">http://docs.mirasvit.com/module-email/current/trigger/email_chain</item>
+                            <item name="description" xsi:type="string" translate="true">e.g. send an email 1 day 2 hours 35 minutes later. See more information on delaying email sending in our documentation.</item>
+                        </item>
+                        <item name="caption" xsi:type="string" translate="true">-- Select Minute Delay --</item>
+                    </item>
+                </argument>
+            </field>
+        </container>
+
+        <field name="exclude_days">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">\Magento\Config\Model\Config\Source\Locale\Weekdays</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Excluded Weekdays</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                    <item name="componentType" xsi:type="string">field</item>
+                    <item name="filterOptions" xsi:type="boolean">false</item>
+                    <item name="showCheckbox" xsi:type="boolean">true</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="multiple" xsi:type="boolean">true</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="notice" xsi:type="string" translate="true">Do not send emails these days.</item>
+                </item>
+            </argument>
+        </field>
+
+    </fieldset>
+
+    <fieldset name="coupon">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="additionalClasses" xsi:type="string">admin__fieldset-offset</item>
+                <item name="label" xsi:type="string">Coupon</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="opened" xsi:type="boolean">false</item>
+            </item>
+        </argument>
+
+        <field name="coupon_enabled">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Include coupon in email</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Mirasvit_Email/js/form/element/select</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="default" xsi:type="string">0</item>
+                    <item name="depending" xsi:type="array">
+                        <item name="coupon_sales_rule_id" xsi:type="string">coupon_sales_rule_id</item>
+                        <item name="coupon_expires_days" xsi:type="string">coupon_expires_days</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="coupon_sales_rule_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">\Mirasvit\Email\Model\Config\Source\SalesRule</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Shopping Cart Price Rule</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Mirasvit_Email/js/form/element/select</item>
+                    <item name="depends" xsi:type="string">coupon_enabled</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="caption" xsi:type="string" translate="true">-- Select Cart Price Rule --</item>
+                    <item name="visibleValue" xsi:type="string">1</item>
+                    <item name="tooltip" xsi:type="array">
+                        <item name="link" xsi:type="string">http://docs.mirasvit.com/module-email/current/trigger/email_chain</item>
+                        <item name="description" xsi:type="string" translate="true">The coupon codes are generated automatically. Check the option "Use Auto Generation" at the cart price rule to use it.</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="coupon_expires_days">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Coupon expires after, days</item>
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="component" xsi:type="string">Mirasvit_Email/js/form/element/abstract</item>
+                    <item name="depends" xsi:type="string">coupon_enabled</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="visibleValue" xsi:type="string">1</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-digits" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+
+    <fieldset name="cross_sell">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="additionalClasses" xsi:type="string">admin__fieldset-offset</item>
+                <item name="label" xsi:type="string">Cross-sells</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="opened" xsi:type="boolean">false</item>
+            </item>
+        </argument>
+
+        <field name="cross_sells_enabled">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Include cross-sells in email</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Mirasvit_Email/js/form/element/select</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="default" xsi:type="string">0</item>
+                    <item name="depending" xsi:type="array">
+                        <item name="cross_sells_type_id" xsi:type="string">cross_sells_type_id</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="cross_sells_type_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">\Mirasvit\Email\Model\Config\Source\CrossSell</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Cross-sells source</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Mirasvit_Email/js/form/element/select</item>
+                    <item name="depends" xsi:type="string">cross_sells_enabled</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="caption" xsi:type="string" translate="true">-- Select Cross-sells source --</item>
+                    <item name="visibleValue" xsi:type="string">1</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

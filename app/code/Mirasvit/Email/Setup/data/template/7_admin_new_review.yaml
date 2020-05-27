@@ -1,0 +1,11 @@
+theme: Base Theme
+title: "Admin: New review"
+template_subject: New review was added
+template_areas:
+  header:
+  content: |
+        <p><b>{{ review.nickname }}</b> just added new review for product <a href="{{ product.product_url }}"><b>"{{ product.name }}"</b></a></p>
+        <hr>
+        <p>Title: {{ review.title }}</p>
+        <p>Detail: {{ review.detail }}</p>
+  footer: |

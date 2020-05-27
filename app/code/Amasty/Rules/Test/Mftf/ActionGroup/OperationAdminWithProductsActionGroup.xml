@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+
+    <actionGroup name="AddSpecialPriceProduct">
+        <arguments>
+            <argument name="cartRule"/>
+        </arguments>
+        <scrollTo selector="{{AdminProductSection.Status}}" stepKey="ScrollToAdvancedPricingSetting"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+        <click selector="{{AdminProductSection.AdvancedPricing}}" stepKey="OpenAdvancedPricingSetting"/>
+        <waitForPageLoad time="300" stepKey="waitForPageLoad2"/>
+        <fillField selector="{{AdminProductSection.SpecialPrice}}"
+                   userInput="{{cartRule.specialPrice}}" stepKey="enterSpecialPrice"/>
+        <waitForPageLoad time="20" stepKey="waitForPageLoad3"/>
+        <click selector="{{AdminProductSection.CloseAdvancedPricing}}" stepKey="CloseAdvancedPricingSetting"/>
+        <waitForPageLoad time="50" stepKey="waitForPageLoad4"/>
+    </actionGroup>
+
+
+    <actionGroup name="ReturnOriginPriceProduct">
+        <arguments>
+            <argument name="cartRule"/>
+        </arguments>
+        <scrollTo selector="{{AdminProductSection.Status}}" stepKey="ScrollToAdvancedPricingSetting"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+        <click selector="{{AdminProductSection.AdvancedPricing}}" stepKey="OpenAdvancedPricingSetting"/>
+        <waitForPageLoad time="300" stepKey="waitForPageLoad2"/>
+        <fillField selector="{{AdminProductSection.SpecialPrice}}"
+                   userInput="{{cartRule.originPrice}}" stepKey="enterSpecialPrice"/>
+        <waitForPageLoad time="20" stepKey="waitForPageLoad3"/>
+        <click selector="{{AdminProductSection.CloseAdvancedPricing}}" stepKey="CloseAdvancedPricingSetting"/>
+        <waitForPageLoad time="50" stepKey="waitForPageLoad4"/>
+    </actionGroup>
+
+
+    <actionGroup name="SaveAfterChangeProduct">
+        <click selector="{{AdminProductSection.Save}}" stepKey="SaveProductSetting"/>
+        <waitForPageLoad time="100" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+</actionGroups>

@@ -1,0 +1,22 @@
+{
+    "name": "acidgreen/module-googletagmanager",
+    "description": "Customizations to the vendor/magento/module-google-tag-manager module...",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "email": "josephson.eduardo@acidgreen.com.au",
+            "name": "acidgreen"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Acidgreen\\GoogleTagManager\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

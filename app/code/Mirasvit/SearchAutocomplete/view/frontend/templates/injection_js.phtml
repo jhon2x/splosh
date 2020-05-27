@@ -1,0 +1,32 @@
+<?php
+// @codingStandardsIgnoreFile
+
+/** @var \Mirasvit\SearchAutocomplete\Block\Injection $block */
+$config = $block->getJsConfig();
+?>
+    <script>
+        require([
+                'jquery',
+                'Mirasvit_SearchAutocomplete/js/autocomplete',
+                'Mirasvit_SearchAutocomplete/js/typeahead'
+            ], function ($, autocomplete, typeahead) {
+                var selector = 'input#search, input#mobile_search, .minisearch input[type="text"]';
+
+                $(document).ready(function () {
+                    var $input = $(selector);
+
+                    $input.each(function (index, searchInput) {
+                        <?php if ($config['isTypeaheadEnabled']): ?>
+                        new typeahead($(searchInput)).init(<?=\Zend_Json::encode($config)?>);
+                        <?php endif ?>
+
+                        new autocomplete($(searchInput)).init(<?=\Zend_Json::encode($config)?>);
+                    });
+                });
+            }
+        );
+    </script>
+
+<?php if ($block->getCssStyles() != ''): ?>
+    <style><?= $block->getCssStyles() ?></style>
+<?php endif ?>

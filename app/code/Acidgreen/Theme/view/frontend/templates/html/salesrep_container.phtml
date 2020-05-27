@@ -1,0 +1,24 @@
+<?php
+
+/** @var \Acidgreen\Theme\Block\Html\Salesrep\Container $block */
+$customerSession = $block->getCustomerSession();
+/** @var \Magento\Customer\Model\Session $customerSession */
+?>
+<?php if ($customerSession->getCustomer()): ?>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "salesrep": {
+                    "component": "Acidgreen_Theme/js/salesrep"
+                }
+            }
+        }
+    }
+}
+</script>
+<div class="salesrep-container" data-bind="scope: 'salesrep'">
+<span data-bind="html: salesrep().block"></span>
+</div>
+<?php endif; ?>

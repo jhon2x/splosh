@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<body>
+    <referenceContainer name="content">
+        <referenceContainer name="product.info.main">
+            <referenceBlock name="product.info">
+                <referenceBlock name="product.info.form.options">
+                    <!-- see Magento_Catalog::catalog_product_view.xml for structure -->
+                    <!-- referenceBlock name="..." template="something?" or referenceBlock name="..." arguments argument blabla??? -->
+                    <referenceContainer name="product.info.form.content">
+                        <block class="Acidgreen\B2BCustomization\Block\Catalog\Product\View" name="product.info.addtocart" as="addtocart" template="Acidgreen_B2BCustomization::product/view/addtocart.phtml"/>
+                    </referenceContainer>
+                </referenceBlock>
+            </referenceBlock>
+        </referenceContainer>
+    </referenceContainer>
+    <referenceContainer name="content.aside">
+        <!-- cannot add a block inside product.info.upsell, don't know with core Magento layout why.. so catalog.product.related na lang -->
+        <referenceBlock name="product.info.upsell">
+            <block class="Acidgreen\B2BCustomization\Block\ProductList\CartItem"
+                name="cartitem_upsell"
+                template="Acidgreen_B2BCustomization::product/list/cartitem.phtml" />
+        </referenceBlock>
+        <referenceBlock name="catalog.product.related">
+            <block class="Acidgreen\B2BCustomization\Block\ProductList\CartItem"
+                name="cartitem_related"
+                template="Acidgreen_B2BCustomization::product/list/cartitem.phtml" />
+        </referenceBlock>
+        <!--
+        -->
+    </referenceContainer>
+</body>
+</page>

@@ -1,0 +1,33 @@
+diff --git a/vendor/magento/module-ui/view/base/web/js/form/element/multiselect.js b/vendor/magento/module-ui/view/base/web/js/form/element/multiselect.js
+index 0a2d08b..e8c8b7f 100644
+--- a/vendor/magento/module-ui/view/base/web/js/form/element/multiselect.js
++++ b/vendor/magento/module-ui/view/base/web/js/form/element/multiselect.js
+@@ -31,8 +31,8 @@ define([
+          * @inheritdoc
+          */
+         normalizeData: function (value) {
+-            if (utils.isEmpty(value)) {
+-                value = [];
++            if (utils.isEmpty(value) || (!_.isUndefined(this.value()) && this.value().length == 0)) {
++                value = '';
+             }
+ 
+             return _.isString(value) ? value.split(',') : value;
+@@ -83,6 +83,17 @@ define([
+             this.error(false);
+ 
+             return this;
++        },
++
++        /**
++         * @inheritdoc
++         */
++        onUpdate: function () {
++            if (this.value().length == 0) {
++                this.value('');
++            }
++
++            this._super();
+         }
+     });
+ });

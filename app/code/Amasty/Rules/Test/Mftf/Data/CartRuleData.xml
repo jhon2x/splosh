@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:DataGenerator/etc/dataProfileSchema.xsd">
+
+    <entity name="_theCheapestCheckDiscountAmountData" type="cartRule">
+        <data key="name">The cheapest check discount amount</data>
+        <data key="description">The cheapest check discount amount</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">1</data>
+        <data key="discountAmountOne">-$16.00</data>
+        <data key="discountAmountTwo">-$32.00</data>
+    </entity>
+
+    <entity name="_theCheapestCheckDiscountQtyStepData" type="cartRule">
+        <data key="name">The cheapest check discount qty step</data>
+        <data key="description">The cheapest check discount qty step</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">2</data>
+        <data key="discountAmountOne">-$16.00</data>
+    </entity>
+
+    <entity name="_theCheapestCheckMaxAmountOfDiscountData" type="cartRule">
+        <data key="name">The Cheapest Check Max Amount Of Discount</data>
+        <data key="description">The Cheapest Check Max Amount Of Discountt</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">20</data>
+        <data key="discountQtyStep">1</data>
+        <data key="discountAmountOne">-$20.00</data>
+        <data key="discountAmountTwo">-$16.00</data>
+        <data key="productForDelete">Impulse Duffle</data>
+    </entity>
+
+    <entity name="_theCheapestCheckMaxQtyDiscountAppliedToData" type="cartRule">
+        <data key="name">The cheapest check max qty discount applied to</data>
+        <data key="description">The cheapest check max qty discount applied to</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">2</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">1</data>
+        <data key="discountAmountOne">-$16.00</data>
+        <data key="discountAmountTwo">-$32.00</data>
+        <data key="discountAmountThree">-$43.00</data>
+    </entity>
+
+    <entity name="_theCheapestCheckApplyToSkuData" type="cartRule">
+        <data key="name">The cheapest check apply to sku</data>
+        <data key="description">The cheapest check apply to sku (one of)</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">1</data>
+        <data key="discountAmountOne">-$16.00</data>
+        <data key="discountAmountTwo">-$37.00</data>
+        <data key="discountAmountThree">-$43.00</data>
+        <data key="conditions">24-MB04,24-UB02</data>
+    </entity>
+
+    <entity name="_theCheapestCheckMultiCurrencyDiscount" type="cartRule">
+        <data key="name">The cheapest check multicurrency discount</data>
+        <data key="description">The cheapest check multicurrency discount</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">20</data>
+        <data key="discountQtyStep">1</data>
+        <data key="discountAmountOne">-€16.00</data>
+        <data key="rateUSDAndEUR">0.8</data>
+    </entity>
+
+    <entity name="_theCheapestCheckDiscardSubsequentRulesFirst" type="cartRule">
+        <data key="name">The cheapest check discard subsequent discount first</data>
+        <data key="description">The cheapest check discard subsequent discount first</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">1</data>
+        <data key="discountAmountOne">-$16.00</data>
+    </entity>
+
+    <entity name="_theCheapestCheckDiscardSubsequentRulesSecond" type="cartRule">
+        <data key="name">The cheapest check discard subsequent discount second</data>
+        <data key="description">The cheapest check discard subsequent discount second</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">1</data>
+    </entity>
+
+    <entity name="_theCheapestCheckFreeShippingNo" type="cartRule">
+        <data key="name">The cheapest check no free shipping</data>
+        <data key="description">The cheapest check discard subsequent discount</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">1</data>
+        <data key="discountAmountOne">-$16.00</data>
+        <data key="shippingFlatRatePrice">$0.00</data>
+    </entity>
+
+    <entity name="_theCheapestCheckApplyToShippingAmount" type="cartRule">
+        <data key="name">The cheapest check apply to shipping amount</data>
+        <data key="description">The cheapest check apply to shipping amount</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">1</data>
+        <data key="discountAmountOne">-$18.50</data>
+    </entity>
+
+    <entity name="_theCheapestCheckCalculateDiscountBasedOn" type="cartRule">
+        <data key="name">The cheapest check calculate discount based on</data>
+        <data key="description">The cheapest check calculate discount based on</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">1</data>
+        <data key="specialPrice">20</data>
+        <data key="originPrice">45</data>
+        <data key="discountAmountOne">-$10.00</data>
+        <data key="discountAmountTwo">-$16.00</data>
+    </entity>
+
+    <entity name="_theCheapestCheckSkipItemsWithSpecialPrice" type="cartRule">
+        <data key="name">The cheapest check skip items with special price</data>
+        <data key="description">The cheapest check skip items with special price</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">1</data>
+        <data key="specialPrice">20</data>
+        <data key="originPrice">45</data>
+        <data key="discountAmountOne">-$16.00</data>
+        <data key="discountAmountTwo">-$16.00</data>
+    </entity>
+
+    <entity name="_getYForEachXSpent" type="cartRule">
+        <data key="name">Get Y For Each X Spent With Max Amount Of Discount</data>
+        <data key="description">Get Y For Each X Spent With Max Amount Of Discount</data>
+        <data key="discountPercent">10</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">25</data>
+        <data key="discountQtyStep">50</data>
+        <data key="discountAmountOne">-$10.00</data>
+        <data key="discountAmountTwo">-$25.00</data>
+        <data key="discountAmountThree">-$20.00</data>
+    </entity>
+
+    <entity name="_buyXGetYFreePercentDiscount" type="cartRule">
+        <data key="name">Buy X Get Y Free Percent Discount With Promo SKU</data>
+        <data key="description">Buy X Get Y Free Percent Discount With Promo SKU</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">2</data>  <!--Number Of X Products-->
+        <data key="numberOfYProducts">1</data>
+        <data key="conditions">24-MB01,24-MB04</data>
+        <data key="promoSKU">24-UB02</data>
+        <data key="discountAmountOne">-$37.00</data>
+        <data key="discountAmountTwo">-$37.00</data>
+        <data key="discountAmountThree">-$74.00</data>
+    </entity>
+
+    <entity name="_buyXGetYFixedDiscount" type="cartRule">
+        <data key="name">Buy X Get Y Fixed Discount With Promo Categories</data>
+        <data key="description">Buy X Get Y Fixed Discount With Promo Categories</data>
+        <data key="discountPercent">10</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">2</data>  <!--Number Of X Products-->
+        <data key="numberOfYProducts">1</data>
+        <data key="conditions">24-MB01,24-MB04</data>
+        <data key="promoCategories">5</data>
+        <data key="discountAmountOne">-$10.00</data>
+        <data key="discountAmountTwo">-$10.00</data>
+    </entity>
+
+    <entity name="_buyXGetYFixedPrice" type="cartRule">
+        <data key="name">Buy X Get Y Fixed Price With Promo SKU</data>
+        <data key="description">Buy X Get Y Fixed Price With Promo SKU</data>
+        <data key="discountPercent">10</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">2</data>  <!--Number Of X Products-->
+        <data key="numberOfYProducts">1</data>
+        <data key="conditions">24-MB01,24-MB04</data>
+        <data key="promoSKU">24-UB02,24-UG03</data>
+        <data key="discountAmountOne">-$12.00</data>
+        <data key="discountAmountTwo">-$76.00</data>
+        <data key="discountAmountThree">-$24.00</data>
+    </entity>
+
+    <entity name="_eachNAfterNWithPercentDiscount" type="cartRule">
+        <data key="name">Each 1st, 3rd, 5th After 5 Items Added To The Cart With Percent Discount</data>
+        <data key="description">Each 1st, 3rd, 5th After 5 Items Added To The Cart With Percent Discount</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">2</data>  <!--Each N-->
+        <data key="afterN">3</data>
+        <data key="discountAmountOne">-$16.00</data>
+        <data key="discountAmountTwo">-$17.00</data>
+        <data key="discountAmountThree">-$33.00</data>
+    </entity>
+
+    <entity name="_theMostExpensiveCheckDiscountQtyStepData" type="cartRule">
+        <data key="name">The Most Expensive check discount qty step</data>
+        <data key="description">The Most Expensive check discount qty step</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">2</data>
+        <data key="discountAmountOne">-$22.50</data>
+        <data key="discountAmountTwo">-$37.00</data>
+        <data key="discountAmountThree">-$59.50</data>
+    </entity>
+
+    <entity name="_eachNWithPercent0ffCheapestProduct" type="cartRule">
+        <data key="name">Percent Discount: each 2-d, 4-th, 6-th with 15% Off ", Cheapest product</data>
+        <data key="description">Percent Discount: each 2-d, 4-th, 6-th with 15% Off ", Cheapest product</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">2</data>
+        <data key="discountAmountOne">-$27.00</data>
+        <data key="discountAmountTwo">-$22.50</data>
+        <data key="discountAmountThree">-$59.50</data>
+        <data key="discountAmountFour">-$43.00</data>
+    </entity>
+
+    <entity name="_eachNWithPercent0ffMostExpensive" type="cartRule">
+        <data key="name">Percent Discount: each 2-d, 4-th, 6-th with 15% Off ", Most expensive products</data>
+        <data key="description">Percent Discount: each 2-d, 4-th, 6-th with 15% Off ", Most expensive products</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">4</data>
+        <data key="expensiveProducts">Most expensive product</data>
+        <data key="sameProducts">The Same Product in Shopping Cart</data>
+        <data key="discountAmountOne">-$27.00</data>
+        <data key="discountAmountTwo">-$27.00</data>
+        <data key="discountAmountThree">-$43.00</data>
+    </entity>
+
+    <entity name="_eachNWithFixedDiscount" type="cartRule">
+        <data key="name">Fixed Discount: each 3-d, 6-th, 9-th with $15 Off</data>
+        <data key="description">Fixed Discount: each 3-d, 6-th, 9-th with $15 Off</data>
+        <data key="discountPercent">20</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">3</data>
+        <data key="discountAmountOne">-$20.00</data>
+        <data key="discountAmountTwo">-$40.00</data>
+    </entity>
+
+    <entity name="_eachNWithFixedPrice" type="cartRule">
+        <data key="name">Fixed Price: each 5th, 10th, 15th for $49</data>
+        <data key="description">Fixed Price: each 5th, 10th, 15th for $49</data>
+        <data key="discountPercent">10</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">85</data>
+        <data key="discountQtyStep">2</data>
+        <data key="discountAmountOne">-$44.00</data>
+        <data key="discountAmountTwo">-$35.00</data>
+        <data key="discountAmountThree">-$85.00</data>
+    </entity>
+
+    <entity name="_eachNAfterNWithFixedDiscount" type="cartRule">
+        <data key="name">Each 3d, 7th, 11th After 5 Items Added To The Cart With Fixed Discount</data>
+        <data key="description">Each 3d, 7th, 11th After 5 Items Added To The Cart With Fixed Discount</data>
+        <data key="discountPercent">10</data>
+        <data key="maxQtyDiscountAppliedTo">2</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">3</data>  <!--Each N-->
+        <data key="afterN">4</data>
+        <data key="discountAmountOne">-$10.00</data>
+        <data key="discountAmountTwo">-$20.00</data>
+        <data key="discountAmountThree">-$20.00</data>
+    </entity>
+
+    <entity name="_eachNAfterNWithFixedPrice" type="cartRule">
+        <data key="name">Each 5th, 7th, 9th After 5 Items Added To The Cart With Fixed Price</data>
+        <data key="description">Each 5th, 7th, 9th After 5 Items Added To The Cart With Fixed Price</data>
+        <data key="discountPercent">10</data>
+        <data key="maxQtyDiscountAppliedTo">2</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">2</data>  <!--Each N-->
+        <data key="afterN">3</data>
+        <data key="discountAmountOne">-$64.00</data>
+        <data key="discountAmountTwo">-$24.00</data>
+        <data key="discountAmountThree">-$88.00</data>
+    </entity>
+
+    <entity name="_eachGroupOfNPercentDiscount" type="cartRule">
+        <data key="name">Percent Discount: Each 5 items with 10% off</data>
+        <data key="description">Percent Discount: Each 5 items with 10% off</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">3</data>
+        <data key="discountAmountOne">-$81.00</data>
+        <data key="discountAmountTwo">-$157.50</data>
+        <data key="discountAmountThree">-$216.00</data>
+    </entity>
+
+    <entity name="_eachGroupOfNFixedPriceCheapestProduct" type="cartRule">
+        <data key="name">Fixed Price: Each 5 items for $50, Cheapest Product</data>
+        <data key="description">Fixed Price: Each 5 items for $50, Cheapest Product</data>
+        <data key="discountPercent">50</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">3</data>
+        <data key="discountAmountOne">-$46.00</data>
+        <data key="discountAmountTwo">-$46.00</data>
+        <data key="discountAmountThree">-$218.00</data>
+    </entity>
+
+    <entity name="_eachGroupOfNFixedPriceMostExpensive" type="cartRule">
+        <data key="name">Fixed Price: Each 5 items for $50, Most expensive products</data>
+        <data key="description">Fixed Price: Each 5 items for $50, Most expensive products</data>
+        <data key="discountPercent">100</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">4</data>
+        <data key="discountAmountOne">-$36.00</data>
+        <data key="discountAmountTwo">-$36.00</data>
+        <data key="discountAmountThree">-$66.00</data>
+    </entity>
+
+    <entity name="_percentDiscountForProductSetBySKU" type="cartRule">
+        <data key="name">Percent discount for product set и Set Items by SKU</data>
+        <data key="description">Percent discount for product set и Set Items by SKU</data>
+        <data key="discountPercent">50</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="maxQtyDiscountAppliedTo">2</data>
+        <data key="promoSKU">24-MB01,24-MB04</data>
+        <data key="discountAmountOne">-$33.00</data>
+        <data key="discountAmountTwo">-$66.00</data>
+        <data key="discountAmountThree">-$66.00</data>
+    </entity>
+
+    <entity name="_percentDiscountForProductSetBySKUCategory" type="cartRule">
+        <data key="name">Percent discount for product set и Set Items by SKU, Set Items by Category IDs</data>
+        <data key="description">Percent discount for product set и Set Items by SKU, Set Items by Category IDs</data>
+        <data key="discountPercent">50</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="promoSKU">24-MB01,24-MB04</data>
+        <data key="promoCategories">5</data>
+        <data key="discountAmountOne">-$44.00</data>
+        <data key="discountAmountTwo">-$35.50</data>
+    </entity>
+
+    <entity name="_fixedPriceForProductSetByCategory" type="cartRule">
+        <data key="name">Fixed Price for product set и Set Items by Category IDs</data>
+        <data key="description">Fixed Price for product set и Set Items by Category IDs</data>
+        <data key="discountPercent">10</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="promoCategories">4,5</data>
+        <data key="discountAmountOne">-$46.00</data>
+        <data key="discountAmountTwo">-$44.00</data>
+        <data key="discountAmountThree">-$27.00</data>
+    </entity>
+
+    <entity name="_discountBasedOnPriceAfterPreviousDiscount1" type="cartRule">
+        <data key="name">Check Calculate Discount Based On Price After Previous Discount 1</data>
+        <data key="description">Check Calculate Discount Based On Price After Previous Discount 1</data>
+        <data key="discountPercent">20</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">1</data>
+        <data key="priority">1</data>
+        <data key="discountAmountOne">-$28.00</data>
+        <data key="discountAmountTwo">-$47.20</data>
+        <data key="discountAmountThree">-$66.40</data>
+        <data key="discountAmountFour">-$79.60</data>
+    </entity>
+
+    <entity name="_discountBasedOnPriceAfterPreviousDiscount2" type="cartRule">
+        <data key="name">Check Calculate Discount Based On Price After Previous Discount 2</data>
+        <data key="description">Check Calculate Discount Based On Price After Previous Discount 2</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">1</data>
+        <data key="priority">0</data>
+        <data key="conditions">24-UG03,24-MB04</data>
+    </entity>
+
+    <entity name="_discountBasedOnOriginalPrice" type="cartRule">
+        <data key="name">Check Calculate Discount Based On Original Price</data>
+        <data key="description">Check Calculate Discount Based On Original Price</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">1</data>
+        <data key="specialPrice">20</data>
+        <data key="originPrice">32</data>
+        <data key="discountAmountOne">-$16.00</data>
+        <data key="discountAmountTwo">-$27.00</data>
+        <data key="discountAmountThree">-$43.00</data>
+    </entity>
+
+    <entity name="_skipItemsWithSpecialPriceSkipIfDiscounted1" type="cartRule">
+        <data key="name">Check Skip Items With Special Price Skip If Discounted First</data>
+        <data key="description">Check Skip Items With Special Price Skip If Discounted First</data>
+        <data key="discountPercent">20</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">1</data>
+        <data key="priority">1</data>
+        <data key="discountAmountOne">-$25.80</data>
+        <data key="discountAmountTwo">-$41.80</data>
+        <data key="discountAmountThree">-$57.80</data>
+        <data key="discountAmountFour">-$68.80</data>
+    </entity>
+
+    <entity name="_skipItemsWithSpecialPriceSkipIfDiscounted2" type="cartRule">
+        <data key="name">Check Skip Items With Special Price Skip If Discounted Second</data>
+        <data key="description">Check Skip Items With Special Price Skip If Discounted Second</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">1</data>
+        <data key="priority">0</data>
+        <data key="conditions">24-UG03,24-MB04</data>
+    </entity>
+
+    <entity name="_topBannerOnProductPageAndProductSKU" type="cartRule">
+        <data key="name">Check Top Banner On Product Page And Product SKU</data>
+        <data key="description">Check Top Banner On Product Page And Product SKU</data>
+        <data key="discountPercent">30</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">1</data>
+        <data key="bannerProductSKU">24-MB02,24-WB03</data>
+    </entity>
+
+    <entity name="_afterProductDescriptionBannerAndCategories" type="cartRule">
+        <data key="name">Check After Product Description Banner And Categories</data>
+        <data key="description">Check After Product Description Banner And Categories</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">1</data>
+        <data key="categoryOne">Bags</data>
+        <data key="categoryTwo">Watches</data>
+    </entity>
+
+    <entity name="_productLabelBannerAndAllProduct" type="cartRule">
+        <data key="name">Check Product Label Banner And All Product</data>
+        <data key="description">Check Product Label Banner And All Product</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">1</data>
+    </entity>
+
+    <entity name="_configurationSkipItemsWithSpecialPrice" type="cartRule">
+        <data key="name">Check Skip Items with Special Price In Configuration Settings</data>
+        <data key="description">Check Skip Items with Special Price In Configuration Settings</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">2</data>
+        <data key="specialPrice">20</data>
+        <data key="originPrice">32</data>
+        <data key="discountAmountOne">-$37.00</data>
+        <data key="discountAmountTwo">-$2.50</data>
+        <data key="discountAmountThree">-$2.50</data>
+    </entity>
+
+    <entity name="_configurationDontSkipItemsWithSpecialPrice" type="cartRule">
+        <data key="name">Check Dont Skip Items with Special Price In Configuration Settings</data>
+        <data key="description">Check Dont Skip Items with Special Price In Configuration Settings</data>
+        <data key="discountPercent">30</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">1</data>
+        <data key="specialPrice">20</data>
+        <data key="originPrice">32</data>
+        <data key="discountAmountOne">-$6.00</data>
+        <data key="discountAmountTwo">-$28.20</data>
+        <data key="discountAmountThree">-$34.20</data>
+        <data key="discountAmountFour">-$35.70</data>
+    </entity>
+
+    <entity name="_configurationSkipConfigurableItems" type="cartRule">
+        <data key="name">Check Skip Configurable Items when Child has Special Price</data>
+        <data key="description">Check Skip Configurable Items when Child has Special Price</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">2</data>
+        <data key="specialPrice">25</data>
+        <data key="originPrice">52</data>
+        <data key="sizeMH01">XS</data>
+        <data key="2sizeMH01">S</data>
+        <data key="colorMH01">Black</data>
+        <data key="discountAmountOne">-$2.50</data>
+        <data key="discountAmountTwo">-$2.50</data>
+        <data key="discountAmountThree">-$28.50</data>
+    </entity>
+
+    <entity name="_configurationDontSkipConfigurableItems" type="cartRule">
+        <data key="name">Check Dont Skip Configurable Items when Child has Special Price</data>
+        <data key="description">Check Dont Skip Configurable Items when Child has Special Price</data>
+        <data key="discountPercent">30</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">1</data>
+        <data key="specialPrice">25</data>
+        <data key="originPrice">52</data>
+        <data key="sizeMH01">XS</data>
+        <data key="2sizeMH01">S</data>
+        <data key="colorMH01">Black</data>
+        <data key="customSkuMH01">MH01-XS-Black</data>
+        <data key="discountAmountOne">-$7.50</data>
+        <data key="discountAmountTwo">-$23.10</data>
+        <data key="discountAmountThree">-$24.60</data>
+        <data key="discountAmountFour">-$32.10</data>
+    </entity>
+
+    <entity name="_skipItemsWithSpecialPriceInRulesAndConfiguration1" type="cartRule">
+        <data key="name">Check Skip Items with Special Price In Configuration</data>
+        <data key="description">Check Skip Items with Special Price In Configuration</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">1</data>
+        <data key="specialPrice">20</data>
+        <data key="originPrice">32</data>
+        <data key="discountAmountOne">-$74.00</data>
+        <data key="discountAmountTwo">-$84.00</data>
+    </entity>
+
+    <entity name="_skipItemsWithSpecialPriceInRulesAndConfiguration2" type="cartRule">
+        <data key="name">Check Dont Skip Items with Special Price In Rules</data>
+        <data key="description">Check Dont Skip Items with Special Price In Rules</data>
+        <data key="discountPercent">50</data>
+        <data key="maxQtyDiscountAppliedTo">0</data>
+        <data key="maxAmountOfDiscount">0</data>
+        <data key="discountQtyStep">3</data>
+    </entity>
+
+</entities>
+

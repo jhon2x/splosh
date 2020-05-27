@@ -1,0 +1,5 @@
+title: Abandoned Cart Recovery Campaign
+description: Encourage your customers to drive them back to your website and help them complete the abandoned baskets.
+is_active: 1
+triggers:
+    1_abandoned_cart

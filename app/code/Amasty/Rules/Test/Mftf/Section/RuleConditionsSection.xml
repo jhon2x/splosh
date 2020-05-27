@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+
+    <section name="RuleConditionsSection">
+        <element name="conditionsTab" type="text"
+                 selector="//div[@data-index='conditions']//span[contains(.,'Conditions')][1]"/>
+        <element name="createNewConditions" type="text" selector="span.rule-param.rule-param-new-child"/>
+        <element name="createNewActionsConditions" type="text" selector="span.rule-param.rule-param-new-child"/>
+        <element name="rulesDropdown" type="select"
+                 selector="select[data-form-part='sales_rule_form'][data-ui-id='newchild-0-select-rule-conditions-1-new-child']"/>
+        <element name="actionsConditionDropdown" type="select"
+                 selector="select[data-form-part='sales_rule_form'][data-ui-id='newchild-0-select-rule-actions-1-new-child']"/>
+        <element name="Subtotal" type="text"
+                 selector="#conditions__1__children > li:nth-child(1) > span:nth-child(4) > a"/>
+        <element name="SubtotalValue" type="text" selector="#conditions__1--1__value"/>
+    </section>
+
+</sections>

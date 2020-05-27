@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+
+    <section name="StorefrontProductPageSection">
+        <element name="QtyInput" type="input" selector="//input[@name='qty']"/>
+        <element name="AddToCartBtn" type="button" selector="//button[@id='product-addtocart-button']"/>
+        <element name="SuccessMsg" type="text" selector="//div[@data-ui-id='message-success']"/>
+        <element name="AddToWishlist" type="button" selector="//a[@data-action='add-to-wishlist']" timeout="30"/>
+    </section>
+
+</sections>

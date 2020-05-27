@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="salesrep_search" class="Splosh\SalesRep\Block\Widget\Search">
+        <label translate="true">
+            Sales Rep Search
+        </label>
+        <description>Search Page for sales rep</description>
+        <parameters>
+            <parameter name="title" sort_order="10" visible="true" xsi:type="text">
+                <label translate="true">Title</label>
+            </parameter>
+            <parameter name="placeholder" sort_order="20" visible="true" xsi:type="text">
+                <label translate="true">Search field placeholder</label>
+            </parameter>
+            <parameter name="error_msg" sort_order="30" visible="true" xsi:type="text">
+                <label translate="true">Error Message</label>
+            </parameter>
+            <parameter name="error_msg_class" sort_order="40" visible="true" xsi:type="text">
+                <label translate="true">Error Message Element Classes</label>
+            </parameter>
+            <parameter name="item_class" sort_order="50" visible="true" xsi:type="text">
+                <label translate="true">Item Class</label>
+            </parameter>
+            <parameter name="item_image_class" sort_order="60" visible="true" xsi:type="text">
+                <label translate="true">Item Image Class</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

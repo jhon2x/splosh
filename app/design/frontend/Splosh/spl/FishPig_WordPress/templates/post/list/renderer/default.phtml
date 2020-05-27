@@ -1,0 +1,67 @@
+<?php
+/**
+ * @category FishPig
+ * @package FishPig_WordPress
+ * @notes This template is used when there post/list.phtml doesn't have a child block called 'renderer'
+ * @notes This happens when post/list.phtml is called in via PHP rather than via the default layout handles
+ */
+?>
+<?php if ($post = $this->getPost()): ?>
+	<?php if ($image = $post->getImage()): ?>
+		<div class="post-image">
+			<a href="<?php echo $post->getUrl() ?>" title="<?php echo $this->escapeHtml($post->getName()) ?>"><img src="<?php echo $image->getAvailableImage() ?>" alt="<?php echo $this->escapeHtml($post->getName()) ?>"/></a>
+		</div>
+	<?php endif; ?>
+	<div class="post-entry">
+		<?php if ($categoryString = $post->getTermCollectionAsString('category')): ?>
+			<strong class="post-categories"><?php echo $categoryString ?></strong>
+		<?php endif; ?>
+		<h2>
+			<a href="<?php echo $post->getUrl() ?>" title="<?php echo $this->escapeHtml($post->getName()) ?>">
+				<?php echo $this->escapeHtml($post->getName()) ?>
+			</a>
+		</h2>
+		<ul class="post-meta">
+			<li class="post-user post-meta-item">
+				<span><?php echo __('by') ?>:</span> <a href="<?php echo $post->getUser()->getUrl() ?>"><?php echo $post->getUser() ->getDisplayName() ?></a>
+			</li>
+			<li class="post-date post-meta-item">
+				<?php echo $post->getPostDate() ?>
+			</li>
+			<?php /*if ($tagString = $post->getTermCollectionAsString('post_tag')): */?><!--
+				<div class="post-tags post-meta-item">
+					<strong><?php /*echo __('Tags') */?>:</strong> <?php /*echo $tagString */?>
+				</div>
+			--><?php /*endif; */?>
+		</ul>
+		<div class="post-excerpt"><?php echo $post->getExcerpt(40) ?></div>
+		<div class="sharethis-links">
+			<ul>
+				<li>
+					<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $post->getUrl() ?>">
+						<i class="fa fa-facebook"></i>
+						<span class="dt-share">Facebook</span>
+					</a>
+				</li>
+				<li>
+					<a target="_blank" href="https://twitter.com/home?status=Check%20out%20this%20article:%20<?php echo $this->escapeHtml($post->getName()) ?>%20-%20<?php echo $post->getUrl() ?>">
+						<i class="fa fa-twitter"></i>
+						<span class="dt-share">Twitter</span>
+					</a>
+				</li>
+				<li>
+					<a target="_blank" href="https://plus.google.com/share?url=<?php echo $post->getUrl() ?>">
+						<i class="fa fa-google-plus"></i>
+						<span class="dt-share">Google +</span>
+					</a>
+				</li>
+				<li>
+					<a data-pin-do="none" target="_blank" href="https://pinterest.com/pin/create/button/?url=<?php echo $post->getUrl() ?>&amp;media=<?php echo $image->getAvailableImage() ?>&amp;description=<?php echo $this->escapeHtml($post->getName()) ?>">
+						<i class="fa fa-pinterest"></i>
+						<span class="dt-share">Pinterest</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+<?php endif; ?>

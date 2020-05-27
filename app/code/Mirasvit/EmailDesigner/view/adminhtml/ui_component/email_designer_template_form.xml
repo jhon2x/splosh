@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">email_designer_template_form.template_form_data_source</item>
+            <item name="deps" xsi:type="string">email_designer_template_form.template_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">email_designer_template_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="array">
+                <item name="name" xsi:type="string">back</item>
+                <item name="label" xsi:type="string" translate="true">Back</item>
+                <item name="class" xsi:type="string">back</item>
+                <item name="url" xsi:type="url" path="*/*/"/>
+            </item>
+            <item name="delete" xsi:type="string">Mirasvit\EmailDesigner\Ui\Template\Form\Control\DeleteButton</item>
+            <item name="reset" xsi:type="array">
+                <item name="name" xsi:type="string">reset</item>
+                <item name="label" xsi:type="string" translate="true">Reset</item>
+                <item name="id" xsi:type="string">reset</item>
+            </item>
+            <item name="save-split-button" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Save</item>
+                <item name="class_name" xsi:type="string">Magento\Ui\Component\Control\SplitButton</item>
+                <item name="button_class" xsi:type="string">widget-button-update</item>
+                <item name="data_attribute" xsi:type="array">
+                </item>
+                <item name="options" xsi:type="array">
+                    <item name="save-button" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Save</item>
+                        <item name="default" xsi:type="boolean">true</item>
+                        <item name="id_hard" xsi:type="string">save</item>
+                    </item>
+                    <item name="save-continue-button" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Save and Continue Edit</item>
+                        <item name="id_hard" xsi:type="string">save_and_continue</item>
+                    </item>
+                </item>
+            </item>
+        </item>
+    </argument>
+    <dataSource name="template_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Mirasvit\EmailDesigner\Ui\Template\Form\DataProvider</argument>
+            <argument name="name" xsi:type="string">template_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">template_id</argument>
+            <argument name="requestFieldName" xsi:type="string">template_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="*/*/save">
+                        <param name="_current">1</param>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string"/>
+            </item>
+        </argument>
+
+        <field name="template_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">template</item>
+                    <item name="dataScope" xsi:type="string">template_id</item>
+                    <item name="sortOrder" xsi:type="number">0</item>
+                </item>
+            </argument>
+        </field>
+        <field name="title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Name</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">template</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="dataScope" xsi:type="string">title</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="theme_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Mirasvit\EmailDesigner\Model\ResourceModel\Theme\Collection</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Theme</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="showCheckbox" xsi:type="boolean">false</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="multiple" xsi:type="boolean">false</item>
+                    <item name="labelsDecoration" xsi:type="boolean">true</item>
+                    <item name="source" xsi:type="string">template</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="template_subject">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Subject</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">template</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="dataScope" xsi:type="string">template_subject</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <container name="editor">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="template" xsi:type="string">Mirasvit_EmailDesigner/editor</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="showSpinner" xsi:type="boolean">false</item>
+                    <item name="dataScope" xsi:type="string">template_areas</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+
+            <container name="areas">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="component" xsi:type="string">Mirasvit_EmailDesigner/js/areas</item>
+                        <item name="template" xsi:type="string">Mirasvit_EmailDesigner/editor/areas</item>
+                        <item name="sortOrder" xsi:type="number">0</item>
+                        <item name="dropUrl" xsi:type="url" path="*/*/drop">
+                            <param name="_current">1</param>
+                        </item>
+                    </item>
+                </argument>
+            </container>
+
+            <field name="preview">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="component" xsi:type="string">Mirasvit_EmailDesigner/js/preview</item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="template" xsi:type="string">Mirasvit_EmailDesigner/editor/preview</item>
+                        <item name="sortOrder" xsi:type="number">10</item>
+                    </item>
+                </argument>
+            </field>
+        </container>
+    </fieldset>
+</form>

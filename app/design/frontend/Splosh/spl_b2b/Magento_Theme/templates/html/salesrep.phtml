@@ -1,0 +1,15 @@
+<?php
+/**
+* Exo Sales Rep display for B2b
+*/
+?>
+<div class="message global salesrep">
+    <div class="content">
+        <p><b><?php echo __('Stockist Portal') ?></b></p>
+    <?php if ($block->isCustomerLoggedIn()): ?>
+        <?php if ($block->displaySalesrep()): ?>
+        <p><?php echo $block->getJobTitle().': '.$block->getNickname() ?> | <?php echo $block->getEmail() ?> | <?php echo $block->getPhone() ?></p>
+        <?php endif; ?>
+    <?php endif; ?>
+    </div>
+</div>

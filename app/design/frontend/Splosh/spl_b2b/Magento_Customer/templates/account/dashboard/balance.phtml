@@ -1,0 +1,17 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Account\Dashboard\Info $block */
+?>
+<div class="block block-dashboard-balance">
+    <div class="block-title"><strong><?php /* @escapeNotVerified */ echo __('Account Balance') ?></strong></div>
+    <div class="block-content">
+        <?php  ?>
+        <span><?php /* @escapeNotVerified */ echo __('You have an outstanding account balance of ') ?><b><?php echo $block->getBalanceWithCurrency() ?></b><?php //echo __(' available in your account.') ?></span>
+    </div>
+</div>

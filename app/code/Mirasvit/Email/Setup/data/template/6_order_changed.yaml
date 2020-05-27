@@ -1,0 +1,25 @@
+theme: Base Theme
+title: Order status changed
+template_subject: 'Order status changed'
+template_areas:
+  header: <h1>Dear {{ customer_name }}</h1>
+  content: |
+    <p>On {{ order.updated_at | format_date }} an order status has been changed to <b>{{ order.status_label }}</b>.</p>
+    <p>The order contains the following items:</p>
+    <table width="0" border="0" cellspacing="5" cellpadding="10">
+    {% for item in this.all_visible_items %}
+      <tr>
+        <td>
+          <img src="{{ item.image | resize: 'image', 300}}" style="max-width: 15rem"/>
+        </td>
+        <td valign="top">
+          <a href="{{ item.product.product_url }}">Review {{ item.name }}</a>
+          <hr>
+          {{ item.qty_ordered | round }} x {{ item.price | format_price }}
+        </td>
+      </tr>
+    {% endfor %}
+    </table>
+
+  footer: |
+    <p>If you have any questions about our products or services, please <a href="{{ store.store_url }}/contact/">contact with us.</a></p>

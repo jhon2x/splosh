@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\Rules\Api\Data\RuleInterface"
+                type="Amasty\Rules\Model\Rule" />
+    <preference for="Amasty\Rules\Api\RuleProviderInterface"
+                type="Amasty\Rules\Model\RuleProvider" />
+    <type name="Magento\SalesRule\Model\Rule\Action\Discount\CalculatorFactory">
+        <plugin name="Amasty_Rules::CalculatorFactory" type="Amasty\Rules\Plugin\CalculatorFactory" />
+    </type>
+    <type name="Magento\SalesRule\Model\Rule\Condition\Combine">
+        <plugin name="Amasty_Rules::Condition_Combine" type="Amasty\Rules\Plugin\Condition\Combine" />
+    </type>
+    <type name="Magento\SalesRule\Model\Rule\Condition\Product\Combine">
+        <plugin name="Amasty_Rules::Condition_Combine_Product" type="Amasty\Rules\Plugin\Condition\Combine" />
+    </type>
+    <type name="Magento\SalesRule\Model\Rule\Condition\Product">
+        <plugin name="Amasty_Rules::Condition_Product" type="Amasty\Rules\Plugin\Condition\Product" />
+        <!--disable plugin with same functionality for optimization-->
+        <plugin name="Amasty_Conditions::AdditionalConditions" disabled="true" type="Amasty\Conditions\Plugin\SalesRule\Condition\ProductPlugin"/>
+    </type>
+    <type name="Magento\SalesRule\Model\Rule">
+        <plugin name="Amasty_Rules::SalesRule" type="Amasty\Rules\Plugin\SalesRule" />
+    </type>
+
+    <type name="Magento\SalesRule\Model\Rule\Metadata\ValueProvider">
+        <plugin name="Amasty_Rules::SalesRule_ValueProvider" type="Amasty\Rules\Plugin\ValueProvider" />
+    </type>
+    <type name="Magento\SalesRule\Model\Utility">
+        <plugin name="Amasty_Rules::SalesRule_Utility" type="Amasty\Rules\Plugin\SalesRule\Model\Utility" />
+    </type>
+    <type name="Magento\SalesRule\Model\RulesApplier">
+        <plugin name="Amasty_Rules::SalesRule_RulesApplier" type="Amasty\Rules\Plugin\SalesRule\Model\RulesApplier" />
+    </type>
+
+    <type name="Magento\Quote\Model\Cart\CartTotalRepository">
+        <plugin name="Amasty_Rules::cart_total_repository_get" type="Amasty\Rules\Plugin\Cart\CartTotalRepository" />
+    </type>
+    <type name="Magento\Framework\Api\DataObjectHelper">
+        <plugin name="Amasty_Rules::DataObjectHelper" type="Amasty\Rules\Plugin\Framework\Api\DataObjectHelperPlugin"/>
+    </type>
+    <type name="Magento\Framework\EntityManager\Operation\ExtensionPool">
+        <arguments>
+            <argument name="extensionActions" xsi:type="array">
+                <item name="Magento\SalesRule\Api\Data\RuleInterface" xsi:type="array">
+                    <item name="create" xsi:type="array">
+                        <item name="create_amrules" xsi:type="string">Amasty\Rules\Model\SalesRule\SaveHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="update_amrules" xsi:type="string">Amasty\Rules\Model\SalesRule\SaveHandler</item>
+                    </item>
+                    <item name="read" xsi:type="array">
+                        <item name="read_amrules" xsi:type="string">Amasty\Rules\Model\SalesRule\ReadHandler</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\SalesRule\Model\Rule\DataProvider">
+        <plugin name="amastyRulesDataProvider" type="Amasty\Rules\Plugin\SalesRule\Model\DataProviderPlugin"/>
+    </type>
+    <type name="Magento\SalesRule\Model\Converter\ToDataModel">
+        <plugin sortOrder="10" name="Amasty_Rules::ee21_compatibility" type="Amasty\Rules\Plugin\SalesRule\Model\ToDataModelPlugin"/>
+    </type>
+    <type name="Magento\SalesRuleStaging\Model\Rule\Hydrator">
+        <plugin sortOrder="10" name="Amasty_Rules::ee21_compatibility" type="Amasty\Rules\Plugin\SalesRuleStaging\Model\Rule\HydratorPlugin"/>
+    </type>
+    <type name="Magento\CheckoutStaging\Model\ResourceModel\PreviewQuota">
+        <plugin name="AmastyRules::PreviewQuotaFix" type="Amasty\Rules\Plugin\CheckoutStaging\Model\ResourceModel\PreviewQuotaPlugin"/>
+    </type>
+    <type name="Magento\SalesRule\Model\ResourceModel\Rule\Collection">
+        <plugin name="Amasty_Rules::RuleCollection" type="Amasty\Rules\Plugin\SalesRule\Model\ResourceModel\Rule\Collection" />
+    </type>
+    <type name="Magento\Rule\Model\Condition\AbstractCondition">
+        <plugin name="Amasty_Rules::AbstractCondition" type="Amasty\Rules\Plugin\Model\Condition\AbstractConditionPlugin"/>
+    </type>
+    <type name="Amasty\Rules\Setup\UpgradeSchema">
+        <arguments>
+            <argument name="migrateRules" xsi:type="object">\Amasty\Rules\Setup\Operation\MigrateRules\Proxy</argument>
+            <argument name="addAmrulesTable" xsi:type="object">\Amasty\Rules\Setup\Operation\AddAmrulesTable\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Rules\Model\Rule\Action\Discount\AbstractRule">
+        <arguments>
+            <argument name="customerSession" xsi:type="object">\Magento\Customer\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Rules\Plugin\LayoutProcessor">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+</config>

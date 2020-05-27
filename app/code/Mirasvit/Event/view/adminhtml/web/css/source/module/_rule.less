@@ -1,0 +1,52 @@
+.event__rule {
+  .fa-icon {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    text-decoration: none;
+    transition: all .1s ease-in;
+  }
+
+  .rule-param-remove {
+    .fa-icon();
+    color: #f00;
+    opacity: .5;
+
+    &:hover {
+      text-decoration: none;
+      zoom: 1.3;
+      opacity: 1;
+    }
+
+    &:before {
+      content: "\f057";
+    }
+
+    img {
+      display: none;
+    }
+  }
+
+  .rule-param-new-child {
+    .label {
+      .fa-icon();
+      color: #1aa51a;
+
+      &:hover {
+        text-decoration: none;
+        zoom: 1.3;
+        opacity: 1;
+      }
+
+      &:before {
+        content: "\f055";
+      }
+
+      img {
+        display: none;
+      }
+    }
+  }
+}

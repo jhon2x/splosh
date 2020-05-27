@@ -1,0 +1,29 @@
+theme: Base Theme
+title: Welcome
+template_subject: Welcome to {{ store.store_name }}!
+template_areas:
+  header: <h1>Welcome {{ customer.firstname }}!</h1>
+  content: |
+    <p>Thank you for joining <a href="{{ store.store_url }}">{{ store.store_name }}</a>. We are so happy your are here!</p>
+  footer: |
+    {% if coupon.code %}
+    <div class="offer">
+      To show our appreciation, we are giving you a <b>10% discount</b>, enjoy your next purchase with code <span class="coupon">{{ coupon.code }}</span> at checkout.
+    </div>
+
+    <table class="button" width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td>
+          <table class="inner-wrapper" border="0" cellspacing="0" cellpadding="0" align="center">
+            <tr>
+              <td align="center">
+                <a href="{{ store.store_url }}">Shop Now</a>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    {% endif %}
+
+    <p>If you have any questions about our products or services, please <a href="{{ store.store_url }}/contact/">contact with us.</a></p>

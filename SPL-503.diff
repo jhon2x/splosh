@@ -1,0 +1,15 @@
+diff --git a/vendor/magento/module-visual-merchandiser/Model/Category/Products.php b/vendor/magento/module-visual-merchandiser/Model/Category/Products.php
+index 5e91c1fa..fcac1470 100644
+--- a/vendor/magento/module-visual-merchandiser/Model/Category/Products.php
++++ b/vendor/magento/module-visual-merchandiser/Model/Category/Products.php
+@@ -164,7 +164,10 @@ class Products
+
+         $select->reset(\Magento\Framework\DB\Select::LIMIT_COUNT);
+         $select->reset(\Magento\Framework\DB\Select::LIMIT_OFFSET);
+-        $select->columns('e.' . $collection->getEntity()->getIdFieldName());
++        $columns = $select->getPart(\Magento\Framework\DB\Select::COLUMNS);
++        array_unshift($columns, ["e",$collection->getEntity()->getIdFieldName(),null]);
++        $select->reset(\Magento\Framework\DB\Select::COLUMNS);
++        $select->setPart(\Magento\Framework\DB\Select::COLUMNS, $columns);
+
+         $positions = array_flip($collection->getConnection()->fetchCol($select));

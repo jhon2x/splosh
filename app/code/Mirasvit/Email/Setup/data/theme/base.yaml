@@ -1,0 +1,38 @@
+title: Base Theme
+template_type: html
+template_styles:
+template_text: |
+  {{template config_path="design/email/header_template"}}
+
+  <table width="100%">
+    {% if 'header' | area %}
+    <tr class="email-intro">
+      <td>
+  	    {{ 'header' | area: 'Email header here...' }}
+      </td>
+    </tr>
+  	{% endif %}
+    {% if 'content' | area %}
+    <tr class="email-intro">
+      <td>
+  	    {{ 'content' | area: 'Email text here...' }}
+      </td>
+    </tr>
+  	{% endif %}
+    {% if 'footer' | area %}
+    <tr class="email-intro">
+      <td>
+  	    {{ 'footer' | area: 'Email footer here...' }}
+      </td>
+    </tr>
+  	{% endif %}
+    {% if crosssell.cross_sell_html %}
+      <tr>
+        <td class="email-cross-sell">
+          {{ crosssell.cross_sell_html }}
+        </td>
+      </tr>
+    {% endif %}
+  </table>
+
+  {{template config_path="design/email/footer_template"}}

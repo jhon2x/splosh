@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="splosh_product_labels" resource="default" engine="innodb" comment="Splosh Product Labels Table">
+        <column xsi:type="smallint" name="label_id" padding="6" unsigned="false" nullable="false" identity="true"
+                comment="Label ID" />
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Label Name" />
+        <column xsi:type="text" name="image" nullable="true" comment="Label Image" />
+        <column xsi:type="varchar" name="position" length="65" nullable="false" comment="Label Position" />
+        <column xsi:type="smallint" name="is_active" padding="2" nullable="false" default="0"
+                comment="Label Is Active" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="label_id"/>
+        </constraint>
+    </table>
+</schema>

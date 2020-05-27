@@ -1,0 +1,24 @@
+{
+  "name": "mirasvit/module-search",
+  "description": "Search",
+  "require": {
+    "magento/framework": "100.1.*|100.2.*|101.0.*|102.0.*",
+    "mirasvit/module-core": "dev-master|>=1.2.75",
+    "mirasvit/module-search-mysql": "dev-master|1.0.*"
+  },
+  "type": "magento2-module",
+  "version": "1.0.124",
+  "license": [
+    "proprietary"
+  ],
+  "autoload": {
+    "files": [
+        "src/Search/registration.php",
+        "src/SearchElasticNative/registration.php"
+    ],
+    "psr-4": {
+      "Mirasvit\\Search\\": "src/Search",
+      "Mirasvit\\SearchElasticNative\\": "src/SearchElasticNative"
+    }
+  }
+}

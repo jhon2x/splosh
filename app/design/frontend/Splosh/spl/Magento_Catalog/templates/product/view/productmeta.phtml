@@ -1,0 +1,17 @@
+<?php
+
+/** @var $block \Magento\Catalog\Block\Product\View */
+
+$product = $block->getProduct();
+
+//get custom attributes for Google
+$g_title = $product->getGTitle();
+$g_description = $product->getGDescription();
+$g_core = ($product->getGCore()) ? "Yes" : "No";
+$g_promo = $product->getGPromo();
+?>
+
+<meta name="g_title" content="<?php echo $block->escapeHtml($g_title); ?>">
+<meta name="g_description" content="<?php echo $block->escapeHtml($g_description); ?>">
+<meta name="g_core" content="<?php echo $block->escapeHtml($g_core); ?>">
+<meta name="g_promo" content="<?php echo $block->escapeHtml($g_promo); ?>">

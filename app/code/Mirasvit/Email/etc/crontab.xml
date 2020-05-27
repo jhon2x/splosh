@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="follow_up_email">
+        <job name="mst_email_send_queue" instance="Mirasvit\Email\Cron\SendQueueCron" method="execute">
+            <schedule>* * * * *</schedule>
+        </job>
+        <job name="mst_email_handle_events" instance="Mirasvit\Email\Cron\HandleEventsCron" method="execute">
+            <schedule>* * * * *</schedule>
+        </job>
+        <job name="mst_email_clean_history" instance="Mirasvit\Email\Cron\CleanHistoryCron" method="execute">
+            <schedule>0 1 * * *</schedule>
+        </job>
+    </group>
+</config>

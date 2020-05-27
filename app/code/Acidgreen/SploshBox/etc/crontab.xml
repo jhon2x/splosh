@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="acidgreen_exo_cronjob">
+        <job name="exo_carton_sync" instance="Acidgreen\SploshBox\Cron\Synchronise" method="execute">
+            <schedule>1 0 * * *</schedule>
+        </job>
+    </group>
+</config>

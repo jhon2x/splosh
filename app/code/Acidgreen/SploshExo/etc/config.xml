@@ -1,0 +1,10 @@
+ <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+     <default>
+         <acidgreen_exo_apisettings>
+            <sync_settings>
+                <replace_images_enabled>0</replace_images_enabled>
+                <b2b_website_codes>au_web_b2b,nz_web_b2b</b2b_website_codes>
+            </sync_settings>
+         </acidgreen_exo_apisettings>
+     </default>
+ </config>

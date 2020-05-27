@@ -1,0 +1,18 @@
+theme: Base Theme
+title: "Complementary offer: related products"
+template_subject: We have few more related products for you
+template_areas:
+  header: <h1>Hi {{ customer_name }}!</h1>
+  content: |
+    <p>Thanks again for buying with us.</p>
+
+    <p>By using a mixture of magic and science, we've determined that products below will definitely compliment your purchase.</p>
+    <p>Feel free to buy some more goodies at your will :)</p>
+
+    {% if coupon.code %}
+    <div class="offer">
+      Let us offer you a <b>10% discount</b>.<br>
+      Your coupon code: <span class="coupon">{{ coupon.code }}</span>
+    </div>
+    {% endif %}
+  footer:

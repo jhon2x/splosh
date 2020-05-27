@@ -1,0 +1,18 @@
+diff --git a/vendor/magento/module-checkout/Model/PaymentInformationManagement.php b/vendor/magento/module-checkout/Model/PaymentInformationManagement.php
+index 11b00e08..e0321c4c 100644
+--- a/vendor/magento/module-checkout/Model/PaymentInformationManagement.php
++++ b/vendor/magento/module-checkout/Model/PaymentInformationManagement.php
+@@ -123,6 +123,13 @@ class PaymentInformationManagement implements \Magento\Checkout\Api\PaymentInfor
+             if ($shippingAddress && $shippingAddress->getShippingMethod()) {
+                 $shippingDataArray = explode('_', $shippingAddress->getShippingMethod());
+                 $shippingCarrier = array_shift($shippingDataArray);
++                // Start fix for GITHUB-13902
++                $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
++                $scopeConfig = $objectManager->get('\Magento\Framework\App\Config\ScopeConfigInterface');
++                while (empty($scopeConfig->getValue('carriers/' . $shippingCarrier, \Magento\Store\Model\ScopeInterface::SCOPE_STORE))) {
++                    $shippingCarrier .= '_' . array_shift($shippingDataArray);
++                }
++                // End fix for GITHUB-13902
+                 $shippingAddress->setLimitCarrier($shippingCarrier);
+             }
+         }

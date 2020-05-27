@@ -1,0 +1,18 @@
+<?php
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<script>
+    require([
+        "prototype",
+        "Magento_Sales/order/create/form",
+        "jquery",
+        "domReady!"
+    ], function(){
+        jQuery('#group_id').on('change', function () {
+            window.order.resetShippingMethod([])
+        });
+    });
+</script>

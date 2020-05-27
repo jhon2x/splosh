@@ -1,0 +1,30 @@
+.cart-totals tr.totals .title:after,
+.totals.discount .title:after,
+.cart-totals tr.totals .title.negative:after,
+.totals.discount .title.negative:after {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+.title.-enabled {
+    cursor: pointer;
+}
+.cart-summary tr.totals .title.-enabled:after,
+.totals.discount .title.-enabled:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgMjg0LjkyOSAyODQuOTI5Ij48cGF0aCBkPSJNMjgyLjA4MiAxOTUuMjg1TDE0OS4wMjggNjIuMjRjLTEuOTAxLTEuOTAzLTQuMDg4LTIuODU2LTYuNTYyLTIuODU2cy00LjY2NS45NTMtNi41NjcgMi44NTZMMi44NTYgMTk1LjI4NUMuOTUgMTk3LjE5MSAwIDE5OS4zNzggMCAyMDEuODUzYzAgMi40NzQuOTUzIDQuNjY0IDIuODU2IDYuNTY2bDE0LjI3MiAxNC4yNzFjMS45MDMgMS45MDMgNC4wOTMgMi44NTQgNi41NjcgMi44NTRzNC42NjQtLjk1MSA2LjU2Ny0yLjg1NGwxMTIuMjA0LTExMi4yMDIgMTEyLjIwOCAxMTIuMjA5YzEuOTAyIDEuOTAzIDQuMDkzIDIuODQ4IDYuNTYzIDIuODQ4IDIuNDc4IDAgNC42NjgtLjk1MSA2LjU3LTIuODQ4bDE0LjI3NC0xNC4yNzdjMS45MDItMS45MDIgMi44NDctNC4wOTMgMi44NDctNi41NjYuMDAxLTIuNDc2LS45NDQtNC42NjYtMi44NDYtNi41Njl6IiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBjbGFzcz0iYWN0aXZlLXBhdGgiIGRhdGEtb2xkX2NvbG9yPSIjMDAwMDAwIiBmaWxsPSIjODU4NTg1Ii8+PC9zdmc+) no-repeat center;
+    background-size: contain;
+    cursor: pointer;
+}
+.cart-summary tr.totals .title.-enabled.-collapsed:after,
+.totals.discount .title.-enabled.-collapsed:after {
+    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgMjg0LjkyOSAyODQuOTI5Ij48cGF0aCBkPSJNMi44NDcgODkuNjQ0bDEzMy4wNTQgMTMzLjA0NWMxLjkwMSAxLjkwMyA0LjA4OCAyLjg1NiA2LjU2MiAyLjg1NnM0LjY2NS0uOTUzIDYuNTY3LTIuODU2TDI4Mi4wNzMgODkuNjQ0YzEuOTA2LTEuOTA2IDIuODU2LTQuMDkzIDIuODU2LTYuNTY4IDAtMi40NzQtLjk1My00LjY2NC0yLjg1Ni02LjU2NmwtMTQuMjcyLTE0LjI3MWMtMS45MDMtMS45MDMtNC4wOTMtMi44NTQtNi41NjctMi44NTRzLTQuNjY0Ljk1MS02LjU2NyAyLjg1NEwxNDIuNDYzIDE3NC40NDEgMzAuMjU1IDYyLjIzMmMtMS45MDItMS45MDMtNC4wOTMtMi44NDgtNi41NjMtMi44NDgtMi40NzggMC00LjY2OC45NTEtNi41NyAyLjg0OEwyLjg0OCA3Ni41MDlDLjk0NiA3OC40MTEuMDAxIDgwLjYwMi4wMDEgODMuMDc1IDAgODUuNTUxLjk0NSA4Ny43NDEgMi44NDcgODkuNjQ0eiIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgY2xhc3M9ImFjdGl2ZS1wYXRoIiBkYXRhLW9sZF9jb2xvcj0iIzAwMDAwMCIgZmlsbD0iIzg1ODU4NSIvPjwvc3ZnPg==) no-repeat center;
+    background-size: contain;
+}
+.total_coupons,
+.totals.discount .discount.coupon,
+.cart-totals .discount.coupon {
+    display: none;
+}

@@ -1,0 +1,136 @@
+.mst-email__campaign-listing {
+    .campaign {
+        border-bottom: 1px solid #dfe3e8;
+        display: flex;
+        margin-bottom: 4rem;
+        padding-bottom: 4rem;
+
+        .col-info {
+            width: 60%;
+            padding-right: 1rem;
+        }
+
+        .col-overview {
+            width: 40%;
+            padding-left: 1rem;
+        }
+
+        .col-info {
+            border-right: 1px dashed #dfe3e8;
+
+            .status {
+                background: #C4CDD5;
+                width: 1.4rem;
+                height: 1.4rem;
+                border-radius: 100%;
+                display: inline-block;
+                margin-right: .5rem;
+
+                &._active {
+                    background: #50B83C;
+                }
+            }
+
+            .title {
+                font-size: 1.6rem;
+                font-weight: 600;
+                margin-bottom: 1rem;
+                display: inline-block;
+            }
+
+            .description {
+                margin-bottom: 2rem;
+                &:empty {
+                    display: none;
+                }
+            }
+
+            .triggers {
+                display: flex;
+                flex-wrap: wrap;
+                background: #f4f6f8;
+                border-radius: 3px;
+
+                .trigger {
+                    flex-grow: 1;
+                    box-shadow: 0 0 0 1px rgba(63, 63, 68, .05), 0 1px 3px 0 rgba(63, 63, 68, .15);
+                    background: #fff;
+                    margin: .5rem;
+                    border-radius: 3px;
+                    max-width: 15rem;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    color: #637381;
+                    font-size: 13px;
+                    padding: .5rem;
+
+                    .status {
+                        width: 1rem;
+                        height: 1rem;
+                    }
+
+                    &:hover {
+                        text-decoration: none;
+                        background: #eb5202;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+
+        .col-overview {
+            .actions {
+                text-align: right;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                margin-bottom: 2rem;
+
+                > div {
+                    margin: 0 1rem 0 0;
+
+                    &:after {
+                        margin-left: 1rem;
+                        content: "\2022";
+                        color: #e3e3e3;
+                    }
+
+                    &:last-child {
+                        margin-right: 0;
+
+                        &:after {
+                            margin-left: 0;
+                            content: "";
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.mst-email__campaign-listing-listing-report {
+    display: flex;
+
+    .value {
+        flex-grow: 1;
+        text-align: center;
+        position: relative;
+        margin: 1rem;
+        white-space: nowrap;
+
+        strong {
+            font-size: 2rem;
+            font-weight: normal;
+            margin-top: .5rem;
+            display: inline-block;
+        }
+
+        &._revenue {
+            strong {
+                color: #eb5202;
+            }
+        }
+    }
+}

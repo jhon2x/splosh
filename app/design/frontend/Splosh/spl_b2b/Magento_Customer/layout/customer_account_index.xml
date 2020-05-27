@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<body>
+    <referenceContainer name="content">
+        <block class="Acidgreen\Customer\Block\Account\Dashboard\Balance" name="customer_account_dashboard_balance" as="balance" before="info" template="Magento_Customer::account/dashboard/balance.phtml" cacheable="false"/>
+    </referenceContainer>
+</body>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Customer\Controller\Account\LoginPost" type="Acidgreen\Customer\Controller\Account\LoginPost" />
+    <preference for="Magento\Customer\Controller\Account\Logout" type="Acidgreen\Customer\Controller\Account\Logout" />
+    <preference for="Magento\Customer\Model\AccountManagement" type="Acidgreen\Customer\Model\AccountManagement" />
+</config>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Amasty_Rules" setup_version="2.5.1">
+        <sequence>
+            <module name="Magento_SalesRule" />
+            <module name="Magento_SalesRuleStaging" />
+            <module name="Magento_Staging" />
+            <module name="Magento_Reward" />
+            <module name="Amasty_Conditions"/>
+            <module name="Amasty_Promo"/>
+        </sequence>
+    </module>
+</config>

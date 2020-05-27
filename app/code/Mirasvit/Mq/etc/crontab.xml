@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="mq_process" instance="Mirasvit\Mq\Cron\ProcessCron" method="execute">
+            <schedule>*/1 * * * *</schedule>
+        </job>
+        <job name="clean_history" instance="Mirasvit\Mq\Cron\CleanHistory" method="execute">
+            <schedule>0 1 * * *</schedule>
+        </job>
+    </group>
+</config>

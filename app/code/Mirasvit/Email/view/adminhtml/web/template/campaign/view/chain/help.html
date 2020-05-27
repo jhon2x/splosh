@@ -1,0 +1,15 @@
+<div class="help">
+    <h3><!-- ko i18n: 'An email is added to a queue when an event set for a trigger is registered.' --><!-- /ko --></h3>
+
+    <p><!-- ko i18n: 'To add an email follow steps below:' --><!-- /ko --></p>
+    <ul class="instruction">
+        <li class="point"><i class="fa fa-hand-o-right"></i>Click <b>Add Email</b> below</li>
+        <li class="point"><i class="fa fa-hand-o-right"></i><b>Choose template</b> for your email, you can use one of the predefined templates or create your own</li>
+        <li class="point"><i class="fa fa-hand-o-right"></i>Configure the <b>Delivery Settings</b> - that define a delay after which an email is sent to a recipient, e.g. <i>1 day later after the triggering event is registered</i></li>
+        <li class="point"><i class="fa fa-hand-o-right"></i>Activate a <b>coupon</b> and a block with the <b>cross-sell products</b> if needed</li>
+    </ul>
+
+    <button class="new-btn secondary" data-bind="click: showModal.bind($data, 'chain', {trigger_id: $trigger().trigger_id})"><!-- ko i18n: 'Add Email' --><!-- /ko --></button>
+
+    <i class="icon-help fa fa-book"></i>
+</div>

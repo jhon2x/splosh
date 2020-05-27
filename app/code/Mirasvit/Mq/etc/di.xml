@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Interface Implementations -->
+    <preference for="Mirasvit\Mq\Api\PublisherInterface" type="Mirasvit\Mq\Model\Publisher"/>
+    <preference for="Mirasvit\Mq\Api\Data\EnvelopeInterface" type="Mirasvit\Mq\Model\Envelope"/>
+    <preference for="Mirasvit\Mq\Api\ConsumerInterface" type="Mirasvit\Mq\Model\Consumer"/>
+    <preference for="Mirasvit\Mq\Api\Repository\ConsumerRepositoryInterface" type="Mirasvit\Mq\Repository\ConsumerRepository"/>
+    <preference for="Mirasvit\Mq\Api\Service\QueueServiceInterface" type="Mirasvit\Mq\Service\QueueService"/>
+
+    <!-- Validator -->
+    <type name="Mirasvit\Core\Api\Service\ValidationServiceInterface">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="mq_validator" xsi:type="object">Mirasvit\Mq\Service\Validator</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Push available providers to queue repository -->
+    <type name="Mirasvit\Mq\Repository\QueueRepository">
+        <arguments>
+            <argument name="queues" xsi:type="array">
+                <item name="mysql" xsi:type="string">Mirasvit\Mq\Provider\Mysql\Queue</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Entity Manager -->
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Mirasvit\Mq\Provider\Mysql\Api\Data\QueueInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\Mq\Provider\Mysql\Api\Data\QueueInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\Mq\Provider\Mysql\Api\Data\QueueInterface::ID</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Mirasvit\Mq\Provider\Mysql\Api\Data\QueueInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- CLI Commands -->
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="mqCronCommand" xsi:type="object">Mirasvit\Mq\Console\Command\CronCommand</item>
+                <item name="mqSubscribeCommand" xsi:type="object">Mirasvit\Mq\Console\Command\SubscribeCommand</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

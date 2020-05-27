@@ -1,0 +1,109 @@
+diff --git a/vendor/magento/module-quote/Model/QuoteManagement.php b/vendor/magento/module-quote/Model/QuoteManagement.php
+index b2b7b9ea708..d03c111ac3c 100644
+--- a/vendor/magento/module-quote/Model/QuoteManagement.php
++++ b/vendor/magento/module-quote/Model/QuoteManagement.php
+@@ -22,6 +22,7 @@ use Magento\Sales\Api\OrderManagementInterface as OrderManagement;
+ use Magento\Store\Model\StoreManagerInterface;
+ use Magento\Quote\Model\Quote\Address;
+ use Magento\Framework\App\ObjectManager;
++use Magento\Framework\Exception\InputException;
+ 
+ /**
+  * Class QuoteManagement
+@@ -136,6 +137,11 @@ class QuoteManagement implements \Magento\Quote\Api\CartManagementInterface
+      */
+     private $quoteIdMaskFactory;
+ 
++    /**
++     * @var \Magento\Quote\Model\Quote\Validator\MinimumOrderAmount\ValidationMessage
++     */
++    private $minimumAmountMessage;
++
+     /**
+      * @param EventManager $eventManager
+      * @param QuoteValidator $quoteValidator
+@@ -158,6 +164,7 @@ class QuoteManagement implements \Magento\Quote\Api\CartManagementInterface
+      * @param \Magento\Customer\Api\AccountManagementInterface $accountManagement
+      * @param QuoteFactory $quoteFactory
+      * @param QuoteIdMaskFactory|null $quoteIdMaskFactory
++     * @param Quote\Validator\MinimumOrderAmount\ValidationMessage $minimumAmountMessage
+      * @throws \RuntimeException
+      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+      */
+@@ -182,7 +189,8 @@ class QuoteManagement implements \Magento\Quote\Api\CartManagementInterface
+         \Magento\Customer\Model\Session $customerSession,
+         \Magento\Customer\Api\AccountManagementInterface $accountManagement,
+         \Magento\Quote\Model\QuoteFactory $quoteFactory,
+-        \Magento\Quote\Model\QuoteIdMaskFactory $quoteIdMaskFactory = null
++        \Magento\Quote\Model\QuoteIdMaskFactory $quoteIdMaskFactory = null,
++        \Magento\Quote\Model\Quote\Validator\MinimumOrderAmount\ValidationMessage $minimumAmountMessage = null
+     ) {
+         $this->eventManager = $eventManager;
+         $this->quoteValidator = $quoteValidator;
+@@ -206,6 +214,8 @@ class QuoteManagement implements \Magento\Quote\Api\CartManagementInterface
+         $this->quoteFactory = $quoteFactory;
+         $this->quoteIdMaskFactory = $quoteIdMaskFactory ?: ObjectManager::getInstance()
+             ->get(\Magento\Quote\Model\QuoteIdMaskFactory::class);
++        $this->minimumAmountMessage = $minimumAmountMessage ?: \Magento\Framework\App\ObjectManager::getInstance()
++            ->get(\Magento\Quote\Model\Quote\Validator\MinimumOrderAmount\ValidationMessage::class);
+     }
+ 
+     /**
+@@ -327,6 +337,10 @@ class QuoteManagement implements \Magento\Quote\Api\CartManagementInterface
+     public function placeOrder($cartId, PaymentInterface $paymentMethod = null)
+     {
+         $quote = $this->quoteRepository->getActive($cartId);
++        if (!$quote->validateMinimumAmount($quote->getIsMultiShipping())) {
++            throw new InputException($this->minimumAmountMessage->getMessage());
++        }
++
+         if ($paymentMethod) {
+             $paymentMethod->setChecks([
+                 \Magento\Payment\Model\Method\AbstractMethod::CHECK_USE_CHECKOUT,
+diff --git a/vendor/magento/module-quote/Model/ShippingAddressManagement.php b/vendor/magento/module-quote/Model/ShippingAddressManagement.php
+index 76ce1483b15..0e2be5c9e36 100644
+--- a/vendor/magento/module-quote/Model/ShippingAddressManagement.php
++++ b/vendor/magento/module-quote/Model/ShippingAddressManagement.php
+@@ -52,11 +52,6 @@ class ShippingAddressManagement implements \Magento\Quote\Model\ShippingAddressM
+      */
+     protected $totalsCollector;
+ 
+-    /**
+-     * @var \Magento\Quote\Model\Quote\Validator\MinimumOrderAmount\ValidationMessage
+-     */
+-    private $minimumAmountErrorMessage;
+-
+     /**
+      * @param \Magento\Quote\Api\CartRepositoryInterface $quoteRepository
+      * @param QuoteAddressValidator $addressValidator
+@@ -117,10 +112,6 @@ class ShippingAddressManagement implements \Magento\Quote\Model\ShippingAddressM
+         $address->setSaveInAddressBook($saveInAddressBook);
+         $address->setCollectShippingRates(true);
+ 
+-        if (!$quote->validateMinimumAmount($quote->getIsMultiShipping())) {
+-            throw new InputException($this->getMinimumAmountErrorMessage()->getMessage());
+-        }
+-
+         try {
+             $address->save();
+         } catch (\Exception $e) {
+@@ -145,19 +136,4 @@ class ShippingAddressManagement implements \Magento\Quote\Model\ShippingAddressM
+         /** @var \Magento\Quote\Model\Quote\Address $address */
+         return $quote->getShippingAddress();
+     }
+-
+-    /**
+-     * @return \Magento\Quote\Model\Quote\Validator\MinimumOrderAmount\ValidationMessage
+-     * @deprecated
+-     */
+-    private function getMinimumAmountErrorMessage()
+-    {
+-        if ($this->minimumAmountErrorMessage === null) {
+-            $objectManager = ObjectManager::getInstance();
+-            $this->minimumAmountErrorMessage = $objectManager->get(
+-                \Magento\Quote\Model\Quote\Validator\MinimumOrderAmount\ValidationMessage::class
+-            );
+-        }
+-        return $this->minimumAmountErrorMessage;
+-    }
+ }

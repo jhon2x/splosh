@@ -1,0 +1,19 @@
+<script type="text/javascript">
+    require([
+        'jquery'
+    ], function ($) {
+        $('button.action.tocart.primary').click(function () {
+
+            let form = $(this).parents('form[data-role=tocart-form]');
+            let productid = form.find('input[name=product]').attr('value');
+            let price = $('#product-price-' + productid);
+
+            $final_price = parseFloat(price.attr('data-price-amount'));
+
+            dataLayer.push({
+                'event': 'prod_id',
+                'prod': productid
+            });
+        });
+    });
+</script>

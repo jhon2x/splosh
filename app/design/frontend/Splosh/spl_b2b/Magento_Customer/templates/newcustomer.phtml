@@ -1,0 +1,15 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Form\Login\Info $block */
+?>
+<?php // if ($block->getRegistration()->isAllowed()): ?>
+<div class="block block-new-customer">
+    <?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('b2b_new_customer')->toHtml();?>
+</div>
+<?php // endif; ?>

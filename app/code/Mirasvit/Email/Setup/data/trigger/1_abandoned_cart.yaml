@@ -1,0 +1,40 @@
+title: Abandoned Cart
+description:
+store_ids:
+    - 0
+is_active: 0
+event: quote_abandoned
+campaign_id: 1
+cancellation_event:
+    - order_status|pending
+chain:
+    new_0:
+        template_id: 1
+        day: 0
+        hour: 2
+        minute: 0
+    new_1:
+        template_id: 1
+        day: 5
+        hour: 0
+        minute: 0
+    new_2:
+        template_id: 1
+        day: 15
+        hour: 0
+        minute: 0
+rule:
+    conditions:
+        1:
+            type: Mirasvit\Event\Model\Rule\Condition\Combine
+            aggregator: all
+            value: 1
+        1--1:
+            type: Mirasvit\Event\EventData\Condition\QuoteCondition
+            attribute: summary_count
+            operator: '>'
+            value: 0
+ga_source: "follow-up-email"
+ga_medium: email
+ga_name: abandoned shopping cart
+trigger_type: ''

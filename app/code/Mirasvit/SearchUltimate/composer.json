@@ -1,0 +1,24 @@
+{
+    "name": "mirasvit/module-search-ultimate",
+    "description": "Sphinx Search Ultimate",
+    "require": {
+        "mirasvit/module-search-sphinx": "dev-master|1.1.*",
+        "mirasvit/module-search-autocomplete": "dev-master|1.1.*",
+        "mirasvit/module-search-landing": "dev-master|1.0.*",
+        "mirasvit/module-misspell": "dev-master|1.0.*",
+        "mirasvit/module-search-report": "dev-master|1.0.*"
+    },
+    "type": "magento2-module",
+    "version": "1.1.6",
+    "license": [
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "src/SearchUltimate/registration.php"
+        ],
+        "psr-4": {
+            "Mirasvit\\SearchUltimate\\": "src/SearchUltimate"
+        }
+    }
+}

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="EachNWithFixedPrice">
+        <annotations>
+            <features value="Rule Creation"/>
+            <stories value="Create a Rule via the Admin"/>
+            <title value="Fixed Price: each 5th, 10th, 15th for $49"/>
+            <description value="Fixed Price: each 5th, 10th, 15th for $49"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="SP-MFTF-20"/>
+            <group value="Amasty"/>
+            <group value="Rules"/>
+            <group value="Rule"/>
+            <group value="Shipping"/>
+            <group value="EachNFixedPrice"/>
+        </annotations>
+
+       <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
+        </before>
+
+        <after>
+            <!--Delete Rules -->
+            <actionGroup ref="DeleteAllCartRules" stepKey="DeleteAllRules1"/>
+            <amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>
+        </after>
+
+        <!--Create new Price Rule -->
+        <actionGroup ref="CreateCartRule" stepKey="CreateCartRule">
+            <argument name="actionsRule" value="_applyEachNForAmount"/>
+            <argument name="cartRule" value="_eachNWithFixedPrice"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddOneProduct">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagWayfarerMessenger"/>
+        </actionGroup>
+
+        <!-- Check no discount-->
+        <actionGroup ref="CheckNoDiscountAmount" stepKey="CheckNoDiscount">
+            <argument name="cartRule" value="_eachNWithFixedPrice"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddTwoProduct">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theWatchClamberData"/>
+        </actionGroup>
+       
+        <!--Check discount-->
+        <actionGroup ref="CheckDiscountAmount" stepKey="CheckDiscountOne">
+            <argument name="cartRule" value="_eachNWithFixedPrice"/>
+            <argument name="discountAmount" value="_eachNWithFixedPrice.discountAmountOne"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddThreeProduct">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+        </actionGroup>
+       
+        <!--Check discount-->
+        <actionGroup ref="CheckDiscountAmount" stepKey="CheckDiscountTwo">
+            <argument name="cartRule" value="_eachNWithFixedPrice"/>
+            <argument name="discountAmount" value="_eachNWithFixedPrice.discountAmountTwo"/>
+        </actionGroup>
+
+         <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddFourProduct">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagImpulseDuffleData"/>
+        </actionGroup>
+
+        <!--Check discount-->
+        <actionGroup ref="CheckDiscountAmount" stepKey="CheckDiscountThree">
+            <argument name="cartRule" value="_eachNWithFixedPrice"/>
+            <argument name="discountAmount" value="_eachNWithFixedPrice.discountAmountThree"/>
+        </actionGroup>
+
+
+    </test>
+</tests>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+
+    <actionGroup name="CheckNoDiscountAmount">
+        <arguments>
+            <argument name="cartRule"/>
+        </arguments>
+        <amOnPage url="{{FrontCartPage.url}}" stepKey="navigateToShoppingCart1"/>
+        <waitForPageLoad time="100" stepKey="waitForPageLoad1"/>
+        <dontSeeElement selector="//th/span[text()='{{cartRule.name}}']/following::td[1]/span" stepKey="checkNoDiscount"/>
+        <waitForPageLoad time="50" stepKey="waitForPageLoad2"/>
+    </actionGroup>
+
+
+    <actionGroup name="CheckDiscountAmount">
+        <arguments>
+            <argument name="cartRule"/>
+            <argument name="discountAmount"/>
+        </arguments>
+        <amOnPage url="{{FrontCartPage.url}}" stepKey="navigateToShoppingCart1"/>
+        <waitForPageLoad time="100" stepKey="waitForPageLoad1"/>
+        <see selector="//th/span[text()='{{cartRule.name}}']/following::td[1]/span"
+             userInput="{{discountAmount}}" stepKey="checkDiscountOne"/>
+        <waitForPageLoad time="30" stepKey="waitForPageLoad2"/>
+    </actionGroup>
+
+
+    <actionGroup name="CheckDiscountAmountTwoRules">
+        <arguments>
+            <argument name="discountAmount"/>
+        </arguments>
+        <amOnPage url="{{FrontCartPage.url}}" stepKey="navigateToShoppingCart1"/>
+        <waitForPageLoad time="100" stepKey="waitForPageLoad1"/>
+        <see selector="//th/span[text()='Discount']/following::td[1]/span"
+             userInput="{{discountAmount}}" stepKey="checkDiscountOne"/>
+        <waitForPageLoad time="30" stepKey="waitForPageLoad2"/>
+    </actionGroup>
+
+</actionGroups>

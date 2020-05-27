@@ -1,0 +1,58 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+?>
+<?php
+/** @var Magento\Framework\View\Element\Template $block */
+?>
+<script>
+    require([
+        'jquery',
+        'Amasty_Rules/js/form',
+        'uiRegistry',
+        'Magento_Ui/js/lib/view/utils/async',
+        'Magento_Ui/js/modal/modal'
+    ], function($, form, registry, async) {
+        var types = [
+            'sales_rule_form',
+            'salesrulestaging_upcoming_form',
+            'salesrulestaging_update_remove_form',
+            'salesrulestaging_update_form'
+        ];
+
+        typesFormUpdate(form, registry, async, types);
+
+        $('#staging_update_new').on('click', function () {
+            typesFormUpdate(form, registry, async, types);
+        });
+
+        $('body').on(
+            {
+                'click': function(){
+                    typesFormUpdate(form, registry, async, types);
+                }
+            },
+            '.schedule-actions a.action-menu-item'
+        );
+    });
+
+    function typesFormUpdate(form, registry, async, types) {
+        types.map(function (type) {
+            formUpdate(form, registry, async, type);
+        });
+    }
+
+    function formUpdate(form, registry, async, type) {
+        async.async('[data-index="simple_action"] select', type + '.' + type + '.' + 'actions', function () {
+            form.update(type);
+            registry.get(type + '.' + type + '.' + 'actions.simple_action', function (component) {
+                component.on('update', function () {
+                    form.update(type);
+                });
+            });
+        });
+    }
+</script>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="SkipItemsWithSpecialPriceInRulesAndConfiguration">
+        <annotations>
+            <features value="Rule Creation"/>
+            <stories value="Create a Rule via the Admin"/>
+            <title value="Check Skip Items with Special Price In Rules And Configuration"/>
+            <description value="Check Skip Items with Special Price In Rules And Configuration"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="SP-MFTF-36"/>
+            <group value="Amasty"/>
+            <group value="Rules"/>
+            <group value="Rule"/>
+            <group value="Shipping"/>
+            <group value="SkipItemsWithSpecialPriceInRulesAndConfiguration"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
+            <actionGroup ref="EditSkipSettingRules" stepKey="settingGeneralPromoConfiguration">
+                <argument name="settingSkipItemsWithSpecialPrice" value="skipItemsWithSpecialPrice.yes"/>
+                <argument name="settingSkipConfigurableItemsWhenChildHasSpecialPrice" value="skipItemsWithSpecialPrice.no"/>
+            </actionGroup>
+            <actionGroup ref="AdminFindAndOpenProduct" stepKey="OpenProductForSpecialPrice">
+                <argument name="products" value="_theBagStriveShoulderPackData"/>
+            </actionGroup>
+            <actionGroup ref="AddSpecialPriceProduct" stepKey="AddSpecialPriceForProduct">
+                <argument name="cartRule" value="_skipItemsWithSpecialPriceInRulesAndConfiguration1"/>
+            </actionGroup>
+            <actionGroup ref="SaveAfterChangeProduct" stepKey="SaveProductWithOriginPrice"/>
+        </before>
+
+        <after>
+            <!--Open Product for return origin price-->
+            <actionGroup ref="AdminFindAndOpenProduct" stepKey="OpenProductForReturnPrice">
+                <argument name="products" value="_theBagStriveShoulderPackData"/>
+            </actionGroup>
+            <actionGroup ref="ReturnOriginPriceProduct" stepKey="ReturnOriginPriceForProduct">
+                <argument name="cartRule" value="_skipItemsWithSpecialPriceInRulesAndConfiguration1"/>
+            </actionGroup>
+            <actionGroup ref="SaveAfterChangeProduct" stepKey="SaveProductWithOriginPrice"/>
+            <!--Delete Rules -->
+            <actionGroup ref="DeleteAllCartRules" stepKey="DeleteAllRules1"/>
+            <!-- Return default setting Promo-->
+            <actionGroup ref="DefaultSkipSettingRules" stepKey="chooseDefaultConfig"/>
+            <amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>
+        </after>
+
+        <!--Create First Price Rule -->
+        <actionGroup ref="CreateCartRule" stepKey="CreateCartRule1">
+            <argument name="actionsRule" value="_applyTheCheapestAlsoForBuy1Get1Free"/>
+            <argument name="cartRule" value="_skipItemsWithSpecialPriceInRulesAndConfiguration1"/>
+        </actionGroup>
+
+        <!--Create Second Price Rule -->
+        <actionGroup ref="CreateCartRule" stepKey="CreateCartRule2">
+            <argument name="actionsRule" value="_applyEachNWithPercent0ff"/>
+            <argument name="cartRule" value="_skipItemsWithSpecialPriceInRulesAndConfiguration2"/>
+        </actionGroup>
+        <actionGroup ref="OpenRuleForEdit" stepKey="OpenCartRule">
+            <argument name="cartRule" value="_skipItemsWithSpecialPriceInRulesAndConfiguration2"/>
+        </actionGroup>
+        <actionGroup ref="EditRuleSkipItemsWithSpecialPriceNo" stepKey="EditRuleSkipItemsIfDiscounted">
+            <argument name="cartRule" value="_skipItemsWithSpecialPriceInRulesAndConfiguration2"/>
+        </actionGroup>
+        <actionGroup ref="EditRuleFirstApplyDiscountToMost" stepKey="ChooseAtFirstApplyDiscountToMostExpensiveProducts"/>
+        <actionGroup ref="SaveRuleAfterEdit" stepKey="SaveCartRuleAfterChange"/>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddBagWithSpecialPrice">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+        </actionGroup>
+
+        <!--Check discount-->
+        <actionGroup ref="CheckNoDiscountAmount" stepKey="CheckNoDiscountOne">
+            <argument name="cartRule" value="_skipItemsWithSpecialPriceInRulesAndConfiguration1"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddBagImpulse">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagImpulseDuffleData"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddWatchClamber">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theWatchClamberData"/>
+        </actionGroup>
+
+        <!--Check discount-->
+        <actionGroup ref="CheckDiscountAmountTwoRules" stepKey="CheckDiscountOne">
+            <argument name="discountAmount" value="_skipItemsWithSpecialPriceInRulesAndConfiguration1.discountAmountOne"/>
+        </actionGroup>
+
+        <!--Change Qty product in the cart-->
+        <actionGroup ref="ChangeQtyProductInCart" stepKey="ChangeQtyBagStriveShoulderToFour">
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+            <argument name="addProductQty" value="_enterQty4"/>
+        </actionGroup>
+
+        <!--Check discount-->
+        <actionGroup ref="CheckDiscountAmountTwoRules" stepKey="CheckDiscountTwo">
+            <argument name="discountAmount" value="_skipItemsWithSpecialPriceInRulesAndConfiguration1.discountAmountTwo"/>
+        </actionGroup>
+
+    </test>
+</tests>

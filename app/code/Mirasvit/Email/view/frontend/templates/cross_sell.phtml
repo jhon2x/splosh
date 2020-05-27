@@ -1,0 +1,29 @@
+<?php
+//@codingStandardsIgnoreFile
+
+$collection = $block->getItems();
+$idx = 0;
+/** @var \Mirasvit\Core\Helper\Image $imageHelper */
+$imageHelper = $this->helper('Mirasvit\Core\Helper\Image');
+
+?>
+<?php if ($collection->getSize()): ?>
+    <table id="cross_sells_block" width="0" border="0" cellspacing="1" cellpadding="5">
+        <tr>
+            <?php foreach ($collection as $product): ?>
+                <td valign="top" align="center" width="25%">
+                    <a href="<?= $product->getProductUrl() ?>" title="<?= $block->escapeHtml($product->getName()) ?>">
+                        <img
+                            src="<?= $imageHelper->init($product, 'image', 'catalog/product')->resize(160, 160) ?>"
+                            width="100" height="100"/>
+                    </a>
+                    <p>
+                        <a href="<?= $product->getProductUrl() ?>"><?= $product->getName() ?></a>
+                    </p>
+                </td>
+                <?php $idx++ ?>
+                <?php if ($idx >= 4) break; ?>
+            <?php endforeach ?>
+        </tr>
+    </table>
+<?php endif ?>

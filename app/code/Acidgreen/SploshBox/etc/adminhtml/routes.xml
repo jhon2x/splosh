@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+	<router id="admin">
+		<route frontName="acidgreen_sploshbox" id="acidgreen_sploshbox">
+			<module before="Magento_Backend" name="Acidgreen_SploshBox"/>
+		</route>
+		<route frontName="sploshbox" id="sploshbox">
+			<module before="Magento_Backend" name="Acidgreen_SploshBox"/>
+		</route>
+	</router>
+</config>

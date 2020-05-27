@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="ConfigurationSettingsSkipItemsWithSpecialPrice">
+        <annotations>
+            <features value="Rule Creation"/>
+            <stories value="Create a Rule via the Admin"/>
+            <title value="Check Skip Items with Special Price In Configuration Settings"/>
+            <description value="Check Skip Items with Special Price In Configuration Settings"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="SP-MFTF-37"/>
+            <group value="Amasty"/>
+            <group value="Rules"/>
+            <group value="Rule"/>
+            <group value="Shipping"/>
+            <group value="ConfigurationSettingsSkipItemsWithSpecialPrice"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
+            <actionGroup ref="EditSkipSettingRules" stepKey="settingSkipPromoConfiguration">
+                <argument name="settingSkipItemsWithSpecialPrice" value="skipItemsWithSpecialPrice.yes"/>
+                <argument name="settingSkipConfigurableItemsWhenChildHasSpecialPrice" value="skipConfigurableItemsWhenChildHasSpecialPrice.no"/>
+            </actionGroup>
+            <actionGroup ref="AdminFindAndOpenProduct" stepKey="OpenProductForSpecialPrice">
+                <argument name="products" value="_theBagStriveShoulderPackData"/>
+            </actionGroup>
+            <actionGroup ref="AddSpecialPriceProduct" stepKey="AddSpecialPriceForProduct">
+                <argument name="cartRule" value="_configurationSkipItemsWithSpecialPrice"/>
+            </actionGroup>
+            <actionGroup ref="SaveAfterChangeProduct" stepKey="SaveProductWithOriginPrice"/>
+        </before>
+
+        <after>
+            <!--Open Product for return origin price -->
+            <actionGroup ref="AdminFindAndOpenProduct" stepKey="OpenProductForReturnPrice">
+                <argument name="products" value="_theBagStriveShoulderPackData"/>
+            </actionGroup>
+            <actionGroup ref="ReturnOriginPriceProduct" stepKey="ReturnOriginPriceForProduct">
+                <argument name="cartRule" value="_configurationSkipItemsWithSpecialPrice"/>
+            </actionGroup>
+            <actionGroup ref="SaveAfterChangeProduct" stepKey="SaveProductWithOriginPrice"/>
+            <!--Delete Rules -->
+            <actionGroup ref="DeleteAllCartRules" stepKey="DeleteAllRules1"/>
+            <!-- Return default setting Promo-->
+            <actionGroup ref="DefaultSkipSettingRules" stepKey="chooseDefaultConfig"/>
+            <amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>
+        </after>
+
+        <!--Create Price Rule -->
+        <actionGroup ref="CreateCartRule" stepKey="CreateCartRule1">
+            <argument name="actionsRule" value="_applyEachNWithPercent0ff"/>
+            <argument name="cartRule" value="_configurationSkipItemsWithSpecialPrice"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddBagWithSpecialPrice">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddFitnessSprite">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theFitnessSpriteFoamYogaBrick"/>
+        </actionGroup>
+
+        <!-- Check no discount-->
+        <actionGroup ref="CheckNoDiscountAmount" stepKey="CheckNoDiscount1">
+            <argument name="cartRule" value="_configurationSkipItemsWithSpecialPrice"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddBagImpulse">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagImpulseDuffleData"/>
+        </actionGroup>
+
+        <!--Check discount-->
+        <actionGroup ref="CheckDiscountAmount" stepKey="CheckDiscountOne">
+            <argument name="cartRule" value="_configurationSkipItemsWithSpecialPrice"/>
+            <argument name="discountAmount" value="_configurationSkipItemsWithSpecialPrice.discountAmountOne"/>
+        </actionGroup>
+
+        <!--Change Qty product in the cart-->
+        <actionGroup ref="ChangeQtyProductInCart" stepKey="ChangeQtyFitnessSpriteToTwo">
+            <argument name="products" value="_theFitnessSpriteFoamYogaBrick"/>
+            <argument name="addProductQty" value="_enterQty2"/>
+        </actionGroup>
+
+        <!--Check discount-->
+        <actionGroup ref="CheckDiscountAmount" stepKey="CheckDiscountTwo">
+            <argument name="cartRule" value="_configurationSkipItemsWithSpecialPrice"/>
+            <argument name="discountAmount" value="_configurationSkipItemsWithSpecialPrice.discountAmountTwo"/>
+        </actionGroup>
+
+        <!--Change Qty product in the cart-->
+        <actionGroup ref="ChangeQtyProductInCart" stepKey="ChangeQtyBagStriveShoulderToTwo">
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+            <argument name="addProductQty" value="_enterQty2"/>
+        </actionGroup>
+
+        <!--Check discount-->
+        <actionGroup ref="CheckDiscountAmount" stepKey="CheckDiscountThree">
+            <argument name="cartRule" value="_configurationSkipItemsWithSpecialPrice"/>
+            <argument name="discountAmount" value="_configurationSkipItemsWithSpecialPrice.discountAmountThree"/>
+        </actionGroup>
+
+    </test>
+</tests>

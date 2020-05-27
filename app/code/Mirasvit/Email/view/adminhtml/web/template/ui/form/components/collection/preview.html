@@ -1,0 +1,42 @@
+<div>
+    <each args="{
+        data: formatPreviews([
+            {
+                items: 'template_id',
+                prefix: 'Send <b>',
+                suffix: '</b>',
+                fallback: 'Select Email Template'
+            },
+            {
+                items: 'day hour minute',
+                prefix: '',
+                suffix: ' later',
+                callback: 'delay',
+                isAcceptRawValue: true,
+                fallback: 'immediately'
+            },
+            {
+                items: 'coupon_sales_rule_id',
+                depends: 'coupon_enabled',
+                prefix: 'with coupon <b>',
+                suffix: '</b>'
+            },
+            {
+                items: 'cross_sells_type_id',
+                depends: 'cross_sells_enabled',
+                prefix: 'include <b>',
+                suffix: '</b>'
+            }
+        ]),
+        as: '$preview'}"
+    >
+        <if args="$parent.hasPreview($preview)">
+        <!--<if args="$parent.buildPreview($preview)">-->
+            <span html="$parent.buildPreview($preview)"/><br>
+        </if>
+    </each>
+
+    <if args="noPreview">
+        <span text="label"/><br />
+    </if>
+</div>

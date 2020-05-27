@@ -1,0 +1,21 @@
+title: Win-back old customers
+description:
+store_ids:
+    - 0
+is_active: 0
+campaign_id: 3
+event: order_status|complete
+cancellation_event:
+    - order_status|pending
+chain:
+    new_1:
+        template_id: 9
+        day: 60
+        hour: 0
+        minute: 0
+        cross_sells_enabled: 1
+        cross_sells_type_id: mage_related
+ga_source: "follow-up-email"
+ga_medium: email
+ga_name: we miss you
+trigger_type: ''

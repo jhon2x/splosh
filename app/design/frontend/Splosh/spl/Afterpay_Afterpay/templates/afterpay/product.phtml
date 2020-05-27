@@ -1,0 +1,22 @@
+<?php
+/**
+ * Magento 2 extensions for Afterpay Payment
+ *
+ * @author Afterpay <steven.gunarso@touchcorp.com>
+ * @copyright 2016 Afterpay https://www.afterpay.com.au/
+ */
+?>
+<?php if ($block->canShow()) : ?>
+<div style="position: relative; font-style: italic; line-height: 1.4;" class="afterpay-installments afterpay-installments-amount" data-theme="Splosh-spl-Acidgreen">
+    <?php if ($block->isPriceBelowMinOrderLimit()): ?>
+        <?php echo __('Afterpay it on orders over $') . $block->getMinOrderLimit(); ?>
+    <?php else: ?>
+        <?php echo __('or 4 interest-free payments of') ?> <?php echo $block->getInstallmentsAmount(); ?>
+    <?php endif; ?>
+    <br/>
+    
+    <span class="afterpay_instalments_logo" style=""></span>
+
+    <a href="javascript:void(0)" class="afterpay-modal-popup-trigger"><?php echo __('Learn more') ?></a>
+</div>
+<?php endif; ?>

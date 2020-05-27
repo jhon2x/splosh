@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+        <add action="acidgreen_sploshexo/staff/index" id="Acidgreen_SploshExo::staff" module="Acidgreen_SploshBox" parent="Acidgreen::top_level" resource="Magento_Backend::content" sortOrder="3" title="Manage EXO Staff"/>
+		<add action="acidgreen_sploshexo/customergroup/index" id="Acidgreen_SploshExo::customergroup" module="Acidgreen_SploshBox" parent="Acidgreen::top_level" resource="Magento_Backend::content" sortOrder="9" title="Manage Splosh Customer Groups"/>
+	</menu>
+</config>

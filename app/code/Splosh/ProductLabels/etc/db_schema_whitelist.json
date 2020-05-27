@@ -1,0 +1,14 @@
+{
+    "splosh_product_labels": {
+        "column": {
+            "label_id": true,
+            "name": true,
+            "image": true,
+            "position": true,
+            "is_active": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

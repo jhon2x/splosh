@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- SPL-392 -->
+    <preference for="Acidgreen\SploshBackorder\Block\Product\ListProduct" type="Acidgreen\B2BCustomization\Block\Product\ListProduct" />
+</config>

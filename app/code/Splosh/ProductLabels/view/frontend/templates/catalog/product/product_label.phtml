@@ -1,0 +1,11 @@
+<?php
+/** @var $block \Splosh\ProductLabels\Block\ProductLabel */
+
+/** @var \Splosh\ProductLabels\Model\Label $productLabel */
+$productLabel = $block->getLabel();
+/** @var \Splosh\ProductLabels\Helper\Data $helper */
+$helper = $block->productLabelsHelper();
+?>
+
+<img src="<?= $helper->getMediaBaseUrl() . $productLabel->getImage() ?>" alt="<?= $productLabel->getName() ?>" width="90" class="product-labels"/>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+
+    <section name="AdminProductSection">
+        <element name="AdvancedPricing" type="button" selector="//button[@data-index='advanced_pricing_button']" timeout="30"/>
+        <element name="SpecialPrice" type="input" selector="//input[@name='product[special_price]']" timeout="30"/>
+        <element name="CloseAdvancedPricing" type="button" selector="//aside[contains(@class,'advanced_pricing')]//button[@data-role='closeBtn']" timeout="30"/>
+        <element name="Save" type="button" selector="//button[@id='save-button']" timeout="30"/>
+        <element name="Status" type="text" selector="//div[@data-index='status']" timeout="50"/>
+    </section>
+
+</sections>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="ConfigurationSettingsDontSkipConfigurableItems">
+        <annotations>
+            <features value="Rule Creation"/>
+            <stories value="Create a Rule via the Admin"/>
+            <title value="Check Dont Skip Configurable Items when Child has Special Price"/>
+            <description value="Check Dont Skip Configurable Items when Child has Special Price"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="SP-MFTF-40"/>
+            <group value="Amasty"/>
+            <group value="Rules"/>
+            <group value="Rule"/>
+            <group value="Shipping"/>
+            <group value="ConfigurationSettingsDontSkipConfigurableItems"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
+            <actionGroup ref="EditSkipSettingRules" stepKey="settingSkipPromoConfiguration">
+                <argument name="settingSkipItemsWithSpecialPrice" value="skipItemsWithSpecialPrice.no"/>
+                <argument name="settingSkipConfigurableItemsWhenChildHasSpecialPrice" value="skipConfigurableItemsWhenChildHasSpecialPrice.no"/>
+            </actionGroup>
+            <actionGroup ref="AdminFindAndOpenProduct" stepKey="OpenProductForSpecialPrice">
+                <argument name="products" value="_theMenHoodiesChazKangerooHoodieXSBlack"/>
+            </actionGroup>
+            <actionGroup ref="AddSpecialPriceProduct" stepKey="AddSpecialPriceForProduct">
+                <argument name="cartRule" value="_configurationDontSkipConfigurableItems"/>
+            </actionGroup>
+            <actionGroup ref="SaveAfterChangeProduct" stepKey="SaveProductWithOriginPrice"/>
+        </before>
+
+        <after>
+            <!--Open Product for return origin price -->
+            <actionGroup ref="AdminFindAndOpenProduct" stepKey="OpenProductForSpecialPrice">
+                <argument name="products" value="_theMenHoodiesChazKangerooHoodieXSBlack"/>
+            </actionGroup>
+            <actionGroup ref="ReturnOriginPriceProduct" stepKey="ReturnOriginPriceForProduct">
+                <argument name="cartRule" value="_configurationDontSkipConfigurableItems"/>
+            </actionGroup>
+            <actionGroup ref="SaveAfterChangeProduct" stepKey="SaveProductWithOriginPrice"/>
+            <!--Delete Rules -->
+            <actionGroup ref="DeleteAllCartRules" stepKey="DeleteAllRules1"/>
+            <!-- Return default setting Promo-->
+            <actionGroup ref="DefaultSkipSettingRules" stepKey="chooseDefaultConfig"/>
+            <amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>
+        </after>
+
+        <!--Create Price Rule -->
+        <actionGroup ref="CreateCartRule" stepKey="CreateCartRule1">
+            <argument name="actionsRule" value="_applyTheCheapestAlsoForBuy1Get1Free"/>
+            <argument name="cartRule" value="_configurationDontSkipConfigurableItems"/>
+        </actionGroup>
+
+        <!--Add first product to cart-->
+        <actionGroup ref="AddConfigurableProductToCart" stepKey="AddFirstConfigurableProductToCart">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theMenHoodiesChazKangerooHoodie"/>
+            <argument name="size" value="_configurationDontSkipConfigurableItems.sizeMH01"/>
+            <argument name="color" value="_configurationDontSkipConfigurableItems.colorMH01"/>
+        </actionGroup>
+
+        <!--Check discount-->
+        <actionGroup ref="CheckDiscountAmount" stepKey="CheckDiscountOne">
+            <argument name="cartRule" value="_configurationDontSkipConfigurableItems"/>
+            <argument name="discountAmount" value="_configurationDontSkipConfigurableItems.discountAmountOne"/>
+        </actionGroup>
+
+        <!--Add first product to cart-->
+        <actionGroup ref="AddConfigurableProductToCart" stepKey="AddSecondConfigurableProductToCart">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theMenHoodiesChazKangerooHoodie"/>
+            <argument name="size" value="_configurationDontSkipConfigurableItems.2sizeMH01"/>
+            <argument name="color" value="_configurationDontSkipConfigurableItems.colorMH01"/>
+        </actionGroup>
+
+        <!--Check discount-->
+        <actionGroup ref="CheckDiscountAmount" stepKey="CheckDiscountTwo">
+            <argument name="cartRule" value="_configurationDontSkipConfigurableItems"/>
+            <argument name="discountAmount" value="_configurationDontSkipConfigurableItems.discountAmountTwo"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddFitnessSprite">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theFitnessSpriteFoamYogaBrick"/>
+        </actionGroup>
+
+        <!--Check discount-->
+        <actionGroup ref="CheckDiscountAmount" stepKey="CheckDiscountThree">
+            <argument name="cartRule" value="_configurationDontSkipConfigurableItems"/>
+            <argument name="discountAmount" value="_configurationDontSkipConfigurableItems.discountAmountThree"/>
+        </actionGroup>
+
+        <!--Change Qty product in the cart-->
+        <actionGroup ref="ChangeQtyConfigurableProductInCart" stepKey="ChangeQtyHoodiesChazToTwo">
+            <argument name="products" value="_theMenHoodiesChazKangerooHoodie"/>
+            <argument name="addProductQty" value="_enterQty2"/>
+            <argument name="productCustomSKU" value="_configurationDontSkipConfigurableItems.customSkuMH01"/>
+        </actionGroup>
+
+        <!--Check discount-->
+        <actionGroup ref="CheckDiscountAmount" stepKey="CheckDiscountFour">
+            <argument name="cartRule" value="_configurationDontSkipConfigurableItems"/>
+            <argument name="discountAmount" value="_configurationDontSkipConfigurableItems.discountAmountFour"/>
+        </actionGroup>
+
+    </test>
+</tests>

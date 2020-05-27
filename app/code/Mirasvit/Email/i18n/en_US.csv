@@ -1,0 +1,177 @@
+"Event Log","Event Log"
+"Fetch New Events","Fetch New Events"
+ID,ID
+Event,Event
+"Created At","Created At"
+Arguments,Arguments
+Triggers,Triggers
+Actions,Actions
+"Reset & Process","Reset & Process"
+Delete,Delete
+"Manage Triggers","Manage Triggers"
+"Mail Log","Mail Log"
+"Manage Templates","Manage Templates"
+Settings,Settings
+Status,Status
+"Ready to go","Ready to go"
+Sent,Sent
+Canceled,Canceled
+Error,Error
+Missed,Missed
+Unsubcribed,Unsubcribed
+Trigger,Trigger
+"Scheduled At","Scheduled At"
+"Sent At","Sent At"
+"Recipient Email","Recipient Email"
+"Recipient Name","Recipient Name"
+Action,Action
+Cancel,Cancel
+Send,Send
+Reset,Reset
+"Are you sure?","Are you sure?"
+Pending,Pending
+"Change status","Change status"
+"Add Trigger","Add Trigger"
+Save,Save
+"Save & Continue Edit","Save & Continue Edit"
+"Send Test Email","Send Test Email"
+"Generate Email Queue","Generate Email Queue"
+Additional,Additional
+"Generate Email Queue From","Generate Email Queue From"
+"Google Analytics Campaign","Google Analytics Campaign"
+"Campaign Source","Campaign Source"
+"Campaign Medium","Campaign Medium"
+"Campaign Name","Campaign Name"
+"Campaign Term","Campaign Term"
+"Campaign Content","Campaign Content"
+"General Information","General Information"
+Name,Name
+Active,Active
+Inactive,Inactive
+"Active from","Active from"
+"Active to","Active to"
+"Store View","Store View"
+"Cancellation Event","Cancellation Event"
+"Email Chain","Email Chain"
+Coupons,Coupons
+"Include coupon in email","Include coupon in email"
+No,No
+Yes,Yes
+"Shopping Cart Price Rule","Shopping Cart Price Rule"
+"Coupon expires after, days","Coupon expires after, days"
+Cross-sells,Cross-sells
+"Include cross-sells in email","Include cross-sells in email"
+"Cross-sells source","Cross-sells source"
+Options,Options
+"Excluded Weekdays","Excluded Weekdays"
+"Send emails only if the following conditions are met","Send emails only if the following conditions are met"
+Rules,Rules
+"Sender Details","Sender Details"
+"Sender Email","Sender Email"
+"Sender Name","Sender Name"
+"Send copy to email","Send copy to email"
+"These addresses will be added to the BCC. <br> Separate e-mails by commas","These addresses will be added to the BCC. <br> Separate e-mails by commas"
+"Trigger Information","Trigger Information"
+"Google Analytics","Google Analytics"
+Title,Title
+Store,Store
+Information,Information
+Enabled,Enabled
+Disabled,Disabled
+"Send test email","Send test email"
+Email,Email
+"The cart for restore not found.","The cart for restore not found."
+"Wrong unsubscription link","Wrong unsubscription link"
+"You have been successfully unsubscribed from receiving these emails.","You have been successfully unsubscribed from receiving these emails."
+"The email not found.","The email not found."
+"Follow Up Email","Follow Up Email"
+Events,Events
+"The event has been deleted.","The event has been deleted."
+Completed.,Completed.
+Done.,Done.
+"Mail Queue","Mail Queue"
+"The mail was canceled.","The mail was canceled."
+"Local Time: %1","Local Time: %1"
+"A total of %1 record(s) have been canceled.","A total of %1 record(s) have been canceled."
+"A total of %1 record(s) have been sent.","A total of %1 record(s) have been sent."
+"A total of %1 record(s) have been changed.","A total of %1 record(s) have been changed."
+"The mail was changed.","The mail was changed."
+"The mail was sent.","The mail was sent."
+"Email to %1","Email to %1"
+"The trigger has been deleted.","The trigger has been deleted."
+"This trigger no longer exists.","This trigger no longer exists."
+"New Trigger","New Trigger"
+"Please select trigger(s)","Please select trigger(s)"
+"Total of %1 record(s) were deleted","Total of %1 record(s) were deleted"
+"Total of %1 email(s) were sent","Total of %1 email(s) were sent"
+"Total of %1 record(s) were updated","Total of %1 record(s) were updated"
+"Test email was successfully sent","Test email was successfully sent"
+"Trigger was successfully saved","Trigger was successfully saved"
+"Unable to find trigger to save","Unable to find trigger to save"
+after,after
+at,at
+"Cross-sell products","Cross-sell products"
+"Related products","Related products"
+"Upsell products","Upsell products"
+Base,Base
+"Shopping Cart","Shopping Cart"
+"Abandoned Shopping Cart","Abandoned Shopping Cart"
+Customer,Customer
+"Customer Birthday","Customer Birthday"
+"Customer Logged In","Customer Logged In"
+"Customer Logged Out","Customer Logged Out"
+"New Customer Sign up","New Customer Sign up"
+"Newsletter subscription","Newsletter subscription"
+"Newsletter unsubscription","Newsletter unsubscription"
+Order,Order
+"Order obtained new status","Order obtained new status"
+"Order obtained '%1' status","Order obtained '%1' status"
+Wishlist,Wishlist
+"Product was added to wishlist","Product was added to wishlist"
+"Wishlist was shared","Wishlist was shared"
+"[Test Mail. Store #%1 %2]","[Test Mail. Store #%1 %2]"
+"Scheduled at %1, attempt to send after 2 days","Scheduled at %1, attempt to send after 2 days"
+"Customer %1 is unsubscribed","Customer %1 is unsubscribed"
+"Canceled by global limitation settings","Canceled by global limitation settings"
+"Missed Template","Missed Template"
+"Default status","Default status"
+"%1 - status changed to '%2'","%1 - status changed to '%2'"
+"Total quantity of products","Total quantity of products"
+"Total count of products","Total count of products"
+Subtotal,Subtotal
+Group,Group
+"Lifetime Sales","Lifetime Sales"
+"Number of Orders","Number of Orders"
+"Is subscriber of newsletter","Is subscriber of newsletter"
+"Number of reviews","Number of reviews"
+"Grand Total","Grand Total"
+"Shipping Method","Shipping Method"
+"Conditions Combination","Conditions Combination"
+"Product Attribute","Product Attribute"
+"If %s products in cart/order matching these conditions:","If %s products in cart/order matching these conditions:"
+"Shipping Address","Shipping Address"
+Country,Country
+City,City
+State/Province,State/Province
+Region,Region
+Postcode,Postcode
+Loading...,Loading...
+"Please wait...","Please wait..."
+Subject,Subject
+History,History
+Variables,Variables
+"Unique Key","Unique Key"
+"Add New Email","Add New Email"
+After,After
+days,days
+hour(s),hour(s)
+"minute(s) send","minute(s) send"
+email,email
+Remove,Remove
+"Limit number of emails per address","Limit number of emails per address"
+"Send maximum emails","Send maximum emails"
+"Period (hours)","Period (hours)"
+"Facebook Url","Facebook Url"
+"Twitter Url","Twitter Url"
+"Sandbox Mode","Sandbox Mode"
+"Test Recipient Email","Test Recipient Email"

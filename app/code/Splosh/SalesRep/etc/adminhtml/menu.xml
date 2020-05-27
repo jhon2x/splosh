@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Splosh_SalesRep"
+             title="Manage Staff Location"
+             translate="title"
+             module="Splosh_SalesRep"
+             parent="Acidgreen::top_level"
+             action="splosh_salesrep/location/index"
+             resource="Splosh_SalesRep::grid"/>
+    </menu>
+</config>
